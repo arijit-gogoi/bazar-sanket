@@ -88,7 +88,7 @@
     <ul>
       <li><b>The problem, measured</b> (Section A): gaps, renamed markets and patchy reporting in the public Assam record.</li>
       <li><b>User journey and mock-ups</b> (Sections B–C): Assamese and English SMS, WhatsApp card and voice script; Extension Assistant dashboard; AMIU review console; crop-planning card. All mock-ups show real prototype outputs for the week of 16 November 2026.</li>
-      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks, a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
+      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks and other methods (Holt-Winters, volatility pricing), a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
       <li><b>Target architecture, limitations and next steps</b> (Sections I–J).</li>
     </ul>
     <p class="small" style="margin:0">Labels used throughout: <span class="tag built">BUILT + TESTED</span> working code run on real data · <span class="tag mock">MOCK-UP</span> design shown with real prototype numbers, not yet deployed · <span class="tag plan">PLANNED</span> part of the proposal, not yet built.</p>
@@ -99,8 +99,10 @@
 <pre>uv sync
 uv run python -I src/fetch.py pull --state Assam --since 2006-01-01      # optional: refresh data (needs a free data.gov.in API key)
 uv run python -I -X utf8 nb/profile.py      # data profile + selection of pilot series
-uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about 6 min)
-uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre>
+uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about 5 min)
+uv run python -I -X utf8 nb/benchmarks.py   # Holt-Winters and volatility pricing on the same forecasts
+uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF
+uv run python -I src/pipeline.py              # or: all of the above (except the refresh) in one command</pre>
   <p class="src">Data: Agmarknet daily mandi prices, Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare, published on data.gov.in (resource 35985678-0d79-46b4-9ed6-6f13308a1d24) under the Government Open Data License – India. Retrieved 25 November 2026. No departmental (AMIU) data were used.</p>
 </section>
 
@@ -387,6 +389,39 @@ Outlook only, not a guarantee. -AMIU</div>
   <p class="small" style="margin-top:2mm">Each point is the actual weekly price; the band and line show the forecast made two weeks earlier, using only data available then. Breaks in the band are weeks with no reported price at the forecast origin.</p>
 </section>
 
+<section class="page">
+  <h2>E (cont.) Other methods tried: Holt-Winters and volatility pricing <span class="tag built">BUILT + TESTED</span></h2>
+  <p>Two further methods were tried on exactly the same 4,697 out-of-sample forecasts, with settings fixed before testing (code: <code>apa/smoothing.py</code>, <code>apa/volatility.py</code>, notebook <code>nb/benchmarks.py</code>).</p>
+  <img class="fig" src="../out/fig/f7_other_methods.png" alt="Other methods: error by horizon and price of a 90% floor">
+  <div style="display:grid;grid-template-columns:1fr 1.25fr;gap:5mm;align-items:start">
+    <div><table><tr><th>Method (all horizons)</th><th class='n'>MAPE</th><th class='n'>Skill vs no change</th><th class='n'>Direction correct</th></tr>
+<tr><td>Global model (P50)</td><td class='n'>15.4%</td><td class='n'>-0.2%</td><td class='n'>44.0%</td></tr>
+<tr><td>Holt-Winters</td><td class='n'>16.1%</td><td class='n'>-4.2%</td><td class='n'>33.9%</td></tr>
+<tr><td>Holt-Winters, all gaps filled (check)</td><td class='n'>16.4%</td><td class='n'>-6.0%</td><td class='n'>35.0%</td></tr>
+<tr><td><b>Average: global model + Holt-Winters</b></td><td class='n'>15.2%</td><td class='n'>+1.1%</td><td class='n'>40.5%</td></tr>
+<tr><td>No change</td><td class='n'>15.5%</td><td class='n'>+0.0%</td><td class='n'>33.4%</td></tr>
+<tr><td>Seasonal naive</td><td class='n'>19.3%</td><td class='n'>-23.0%</td><td class='n'>33.1%</td></tr>
+</table></div>
+    <div><p class="small" style="margin-top:0">Holt-Winters (triple exponential smoothing, statsmodels, re-estimated at every forecast origin) needs two years of weekly prices per market. Only 84 of 1,290 forecast origins (6.5%) had two years without a reporting gap longer than 26 weeks; elsewhere it fell back to damped Holt (768) or no change (438). Overall it had 4.2% higher absolute error than no change (MAPE 16.1% vs 15.5%). Filling every gap by interpolation (a check added after the first result) allowed seasonal fits at 407 origins but gave 6.0% higher absolute error than no change. Per-market smoothing cannot borrow from other markets, which is the case for the global model. An equal-weight average of the global model and Holt-Winters, fixed before testing, had 1.1% lower absolute error than no change (better than no change at every horizon); the global model alone had 0.2% higher absolute error than no change. It was the most accurate method tried. The gain is small and comes from one test year, so the pilot would confirm it on new data before any switch.</p></div>
+  </div>
+  <h3>80% price ranges and the price of downside risk</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start">
+    <div><table><tr><th>80% range</th><th class='n'>Coverage</th><th class='n'>Width</th><th class='n'>Interval score</th></tr>
+<tr><td>Global model (P10–P90)</td><td class='n'>78.3%</td><td class='n'>42.3%</td><td class='n'>69.4%</td></tr>
+<tr><td>Volatility, around today&#x27;s price</td><td class='n'>81.5%</td><td class='n'>50.0%</td><td class='n'>76.3%</td></tr>
+<tr><td>Volatility, around Holt-Winters</td><td class='n'>80.0%</td><td class='n'>49.7%</td><td class='n'>79.6%</td></tr>
+</table></div>
+    <div><table><tr><th>Weeks ahead</th><th class='n'>Actual shortfall</th><th class='n'>Priced from volatility</th><th class='n'>Priced from model band</th></tr>
+<tr><td>1</td><td class='n'>1.40%</td><td class='n'>1.57%</td><td class='n'>1.24%</td></tr>
+<tr><td>2</td><td class='n'>2.42%</td><td class='n'>3.10%</td><td class='n'>2.94%</td></tr>
+<tr><td>3</td><td class='n'>3.07%</td><td class='n'>4.39%</td><td class='n'>4.43%</td></tr>
+<tr><td>4</td><td class='n'>3.35%</td><td class='n'>5.49%</td><td class='n'>5.47%</td></tr>
+</table></div>
+  </div>
+  <p class="small">Ranges are scored on the 86.0% of forecasts with a volatility estimate (at least 8 past weekly changes). Interval score = width plus a penalty for each miss (lower is better). Shortfall = average amount by which the price h weeks later fell below a floor at 90% of today's price, in % of today's price. Volatility: exponentially weighted (λ = 0.94 per week) standard deviation of weekly log price changes, scaled by √h; prices from the Black-76 put formula.</p>
+  <p class="small">For 80% price ranges, the global model bands scored best: interval score 69.4% of price for the global model vs 76.3% for a volatility band around today's price, with coverage 78.3% vs 81.5% and average width 42.3% vs 50.0% of price. Volatility pricing puts a rupee value on downside risk: the expected shortfall below a price floor, which is the value of a put option. For a floor at 90% of today's price, prices from recent volatility predicted an average shortfall of 3.5% of today's price (3.4% from the global model's band); the shortfall that actually occurred averaged 2.5%. One week ahead the two were close (1.6% vs 1.4%); 4 weeks ahead the price was 1.6 times the outcome, because weekly vegetable prices partly revert after jumps: price changes over 4 weeks varied only 1.6 times as much as over one week, not 4 times as volatility scaled with time assumes. Such prices would be calibrated on backtests like this before any use, for example to cost a price-support scheme. Example for the week of the mock-ups: a floor at 90% of this week's green chilli price at Pamohi(Garchuk) (₹5,000 per quintal), two weeks ahead, is priced at about ₹360 per quintal from recent volatility and ₹180 from the global model's band.</p>
+</section>
+
 <!-- ======================================================= F -->
 <section class="page">
   <h2>F. Stress test: forecasting with incomplete local data <span class="tag built">BUILT + TESTED</span></h2>
@@ -434,7 +469,7 @@ Outlook only, not a guarantee. -AMIU</div>
 <tr><td>Cabbage</td><td class='n'>2015–2026 (7)</td><td class='n'>47</td><td class='n'>24.6</td><td class='n'>43.6</td><td class='n'>0.85</td></tr>
 <tr><td>Pumpkin</td><td class='n'>2015–2026 (6)</td><td class='n'>57</td><td class='n'>17.6</td><td class='n'>21.9</td><td class='n'>0.78</td></tr>
 </table><p class='small'>Error: mean absolute difference, in percentage points, between predicted and actual deviation of each month's price from that year's average; Assam series-years with at least 8 months of data.</p>
-  <p>Season-ahead check: seasonal profiles estimated only from earlier years predicted monthly price deviations with 22.2 points average error versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests). The seasonal shape is therefore a usable basis for crop-planning cards (which months are usually dear or cheap), while the price level a season ahead still needs the additional drivers listed below.</p>
+  <p>Season-ahead check: profiles from earlier years only had 22.2 points average error in monthly price deviations, versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests). The seasonal shape is therefore a usable basis for crop-planning cards (which months are usually dear or cheap), while the price level a season ahead still needs the additional drivers listed below.</p>
   <p class="small">Planned next steps for the long horizon: add trend and year-level drivers (area sown, rainfall, neighbouring-State prices before sowing) to forecast the level, not just the shape, of harvest-window prices; express outlooks as ranges; and score each season's outlook after harvest.</p>
 </section>
 
@@ -449,7 +484,7 @@ Outlook only, not a guarantee. -AMIU</div>
   </div>
   <div class="grid2" style="margin-top:4mm">
     <div class="box small">
-      <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
+      <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · statsmodels · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
       <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about 6 minutes on a laptop, so running costs are low.
     </div>
     <div class="box small">

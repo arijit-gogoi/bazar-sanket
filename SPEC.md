@@ -15,20 +15,25 @@ ship NESFIC-D-35 proposal by 2026-11-25 cutoff: 12 form answers (∀ ≤500 w) +
 - horizons distinct: short 1–4 wk → sell/hold/store; long season-ahead → crop choice.
 - farmer output: plain EN + Assamese; band + signal + reason. ⊥ raw model output.
 - futures optional: describe as method, ⊥ block on data. availability ? (some Indian agri futures suspended since 2021 — verify before any claim).
-- stack locked (user): uv + marimo notebooks (pure `.py`, run as script) + polars LazyFrame + scikit-learn + seaborn (viz). pandas only @ seaborn boundary (`.to_pandas()`), ⊥ pandas for data processing. figures → PNG/SVG for PDF & site. PDF = HTML → `%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe --headless --print-to-pdf`.
+- stack locked (user): uv + marimo notebooks (pure `.py`, run as script) + polars LazyFrame + scikit-learn + seaborn (viz) + statsmodels (user-allowed 2026-11-25, Holt-Winters). pandas only @ seaborn boundary (`.to_pandas()`), ⊥ pandas for data processing.
+- compute (user): ∀ heavy step ! use all CPU cores (joblib loky, 1 thread/worker).
+- licence (user 2026-11-25): none granted now. README + answers §11 → "licence terms to be agreed with the department". ⊥ LICENSE file.
+- other methods (user 2026-11-25): try Holt-Winters + "volatility pricing" (interpreted: EWMA vol → 80% band + put-value price of downside below floor; exploratory). ∀ result reported, win | lose. figures → PNG/SVG for PDF & site. PDF = HTML → `%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe --headless --print-to-pdf`.
 - pace (user): ⊥ hurry; quality > speed. still keep submittable pkg early.
 - downloads → `data/raw/` only. readers run `python -I`. scripts ∉ data dir.
 - voice: SPEC.md caveman. answers, PDF, README, site → formal plain English for govt evaluators.
 - timeline claim: 6 mo → validation-ready, then 1-season pilot (4–6 mo).
 - cost claim: drivers + INR ranges labelled "indicative estimate, to confirm with department".
-- publish: GitHub repo + Pages under `arijit-gogoi`. public visibility ! explicit user yes before `gh repo create`. commits use GitHub noreply email.
+- publish: GitHub repo + Pages under `arijit-gogoi`. public visibility ! explicit user yes before `gh repo create` (yes given 2026-11-25; repo `arijit-gogoi/bazar-sanket` public, Pages from `main:/docs`). commits use GitHub noreply email.
 
 ## §I INTERFACES
 - src: data.gov.in OGD API `https://api.data.gov.in/resource/35985678-0d79-46b4-9ed6-6f13308a1d24` (Agmarknet daily prices, §R.1). key env `DATA_GOV_IN_API_KEY` | git-ignored `.env`; ⊥ commit, ⊥ print.
 - cmd: `uv run python -I src/fetch.py {probe|days|pull|consolidate}` → `data/raw/pages/**.json` (cached, w/ retrieval time) → `data/raw/ogd_prices.parquet`
-- cmd: `uv run python -I nb/pipeline.py` (marimo notebook) → `data/processed/*.parquet`, `out/metrics.json`, `out/fig/*`
-- cmd: `uv run python -I src/render.py` → `answers.md`, `pow/proof-of-work.html` (metrics injected from `out/metrics.json`)
-- cmd: `uv run marimo export html nb/pipeline.py -o docs/notebook.html` → notebook page on site
+- cmd: `uv run python -I -X utf8 nb/profile.py` → `out/selection.json`, `out/metrics_profile.json`, f1–f2
+- cmd: `uv run python -I -X utf8 nb/forecast.py` (all cores) → `out/backtest.parquet`, `out/metrics_forecast.json`, f3–f6
+- cmd: `uv run python -I -X utf8 nb/benchmarks.py` (all cores) → reads `out/backtest.parquet` (same rows) → `out/metrics_benchmarks.json`, f7
+- cmd: `uv run python -I -X utf8 src/render.py [--pdf]` → `out/metrics.json` (merge) → `answers.md`, `pow/proof-of-work.html`, `docs/`, `proof-of-work.pdf`
+- cmd: `uv run python -I src/pipeline.py` → ∀ steps above in order (V15)
 - file: `out/metrics.json` — sole source ∀ number in answers, PDF, site
 - file: `answers.md` — 12 H2 sections, form order & titles, paste-ready prose
 - file: `proof-of-work.pdf` ≤10 MB ← `pow/proof-of-work.html`
@@ -45,7 +50,9 @@ R5|Agmarknet 2.0|agmarknet.gov.in = SPA (go-live 2025-11-07) over internal `api.
 R6|dispersion|same day potato modal ₹850–2100/q across Assam markets (2026-11-23); multiple varieties per market ∴ series key = market × commodity × variety|probe 2026-11-25
 R7|Assam gaps|Assam rows 2005-09 → 2026-11 = 515,000; 109 raw market names → 82 after harmonising (25 renamed, mostly "X" → "X APMC" at Agmarknet 2.0 cut-over); 223 of 1,106 weeks have no Assam price (longest gap 2020-01 → 2021-08, 86 wk; also 2025-09 → 2025-12)|`out/metrics_profile.json`
 R8|selection|rule → Pamohi(Garchuk) × {Green Chilli, Cabbage, Pumpkin}, each 102/156 wk (65.4%); all perishable/semi-perishable vegetables|`out/selection.json`
-R9|comparables|8 neighbour states fetched for 3 commodities since 2016 (WB 195k rows, Tripura 82k, Nagaland 20k, Meghalaya 17k, Bihar 15k, Manipur, Mizoram, Arunachal small)|`data/raw/ogd_prices.parquet`
+R9|comparables|8 neighbour states fetched for 3 commodities, mostly since 2016 (336,760 rows; 17,305 = 5% older, back to 2001) (WB 195k rows, Tripura 82k, Nagaland 20k, Meghalaya 17k, Bihar 15k, Manipur, Mizoram, Arunachal small)|`data/raw/ogd_prices.parquet`
+R10|Holt-Winters feasibility|statsmodels `ExponentialSmoothing` fit ≈ 0.1 s/origin; NaN ⊥ accepted → gaps must be filled. two unbroken yrs (gap ≤ 26 wk) @ only 84 of 1,290 Assam test origins; all gaps interpolated → 407|`out/metrics_benchmarks.json`
+R11|downside pricing|EWMA vol (λ 0.94) √h-scaled overprices 90%-floor shortfall at 2–4 wk (weekly veg prices partly revert); ≈ right @ 1 wk|`out/metrics_benchmarks.json`
 
 ## §V INVARIANTS
 V1: `answers.md` ! exactly 12 H2 sections in form order; ∀ section ≤500 words (script check)
@@ -63,6 +70,8 @@ V12: Assamese text labelled "draft translation, native review pending"; rendered
 V13: fallback mode → ∀ synthetic figure marked "illustrative"; ⊥ accuracy metric
 V14: repo ⊥ secrets, API keys, user email
 V15: one cmd regenerates processed data, metrics, figures from cached raw
+V16: other methods (Holt-Winters, combination, volatility bands & pricing) scored on identical backtest rows; settings fixed before results; post-hoc variants labelled "check"; ∀ tried method reported
+V17: ∀ answer section ≤500 words under whitespace, alnum & hyphen-split counts (portal counter unknown)
 
 ## §T TASKS
 id|status|task|cites
@@ -70,17 +79,23 @@ T1|x|probe data ≤45 min: data.gov.in catalog (historical | variety-wise, Assam
 T2|x|scaffold: `uv init` + deps (marimo, polars, pyarrow, scikit-learn, seaborn, requests); dirs `nb/ src/ data/raw/ data/processed/ out/ pow/ docs/`; `.gitignore`; git init w/ noreply email|V14
 T3|x|fetch Assam all-commodity history + comparable markets (neighbour & major producer states) → `data/raw/`|I.src,V11
 T4|x|clean → weekly series (median modal price, arrivals), gap flags; Assam coverage heatmap; pick top-3 pairs per rule|V6,V11
-T5|.|model: pooled cross-market quantile model (log-return target, h=1..4 wk, NaN-native e.g. HistGradientBoosting) + naive + seasonal-naive|V4,V5
-T6|.|rolling-origin backtest → MAPE, MAE ₹/q, direction hit-rate, P10–P90 coverage → `out/metrics.json`|V3,V4,V5,V8
-T7|.|incomplete-data test: mask/truncate good-coverage market; local-only vs pooled|V7
-T8|.|advisory rule: Hold/Sell/Store from band vs storage cost & shelf life; ? decision backtest vs always-sell-now|V9
-T9|.|long-horizon card: pooled seasonal price calendar + volatility per commodity; labelled prototype|V10,V11
-T10|.|mock-ups HTML/SVG: SMS & WhatsApp card (EN + AS), IVR script, officer dashboard, AMIU data-quality view; user journey & architecture diagrams|V10,V12
-T11|.|figures: coverage heatmap, forecast band vs actual, metric tables|V3,V11
-T12|.|answers template, 12 sections → `src/render.py` → `answers.md`; formal English|V1,V3,V10
-T13|.|proof-of-work HTML → Chrome headless → PDF; check size & pages|V2,V3,V12
+T5|x|model: pooled cross-market quantile model (log-return target, h=1..4 wk, NaN-native e.g. HistGradientBoosting) + naive + seasonal-naive|V4,V5
+T6|x|rolling-origin backtest → MAPE, MAE ₹/q, direction hit-rate, P10–P90 coverage → `out/metrics.json`|V3,V4,V5,V8
+T7|x|incomplete-data test: mask/truncate good-coverage market; local-only vs pooled|V7
+T8|x|advisory rule: Hold/Sell/Store from band vs storage cost & shelf life; ? decision backtest vs always-sell-now|V9
+T9|x|long-horizon card: pooled seasonal price calendar + volatility per commodity; labelled prototype|V10,V11
+T10|x|mock-ups HTML/SVG: SMS & WhatsApp card (EN + AS), IVR script, officer dashboard, AMIU data-quality view; user journey & architecture diagrams|V10,V12
+T11|x|figures: coverage heatmap, forecast band vs actual, metric tables|V3,V11
+T12|x|answers template, 12 sections → `src/render.py` → `answers.md`; formal English|V1,V3,V10
+T13|x|proof-of-work HTML → Chrome headless → PDF; check size & pages|V2,V3,V12
 T14|.|verify: word counts, number trace, PDF size, labels, no secrets; regen from one cmd|V1,V2,V3,V14,V15
 T15|.|git init + Conventional Commits; on user yes → `gh repo create` public + Pages from `docs/`; URLs → form|V14
+T16|x|Holt-Winters (statsmodels, damped add trend + add 52-wk season, log price, re-fit ∀ origin, parallel all cores) + pre-set equal-weight avg w/ global model; same rows → `nb/benchmarks.py`|V5,V6,V16
+T17|x|volatility pricing: EWMA σ → 80% band (interval score vs model quantiles) + Black-76 put value of shortfall below 90% / 100% floor, backtest predicted vs realised|V5,V16
+T18|x|one-cmd runner `src/pipeline.py`; site nav links + `.nojekyll`|V15
 
 ## §B BUGS
 id|date|cause|fix
+B1|2026-11-25|PDF said neighbour data "since 2016"; 5% of rows older (API pages returned earlier records)|wording → "mostly since 2016"; R9 amended
+B2|2026-11-25|decision text 1 sentence/crop → section H spilled onto near-blank page|aggregate sentence when no holds advised; check every PDF page after render
+B3|2026-11-25|polars `interpolate()` skips NaN (fills null only) → statsmodels init crash in probe|`np.interp` over observed weeks

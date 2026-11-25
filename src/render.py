@@ -1,7 +1,7 @@
 """Render the proposal answers and the Proof of Work from generated metrics.
 
 Every number in answers.md and proof-of-work.html comes from out/metrics.json,
-which merges the outputs of nb/profile.py and nb/forecast.py. Templates use
+which merges the outputs of nb/profile.py, nb/forecast.py and nb/benchmarks.py. Templates use
 string.Template placeholders (${name}); a missing value is an error, never a
 silent blank.
 
@@ -123,15 +123,19 @@ def main() -> None:
     args = ap.parse_args()
 
     from apa.report import build_context
+    from apa.report_bench import bench_context
     from apa.report_html import html_context
 
     prof = json.loads((OUT / "metrics_profile.json").read_text(encoding="utf-8"))
     fc = json.loads((OUT / "metrics_forecast.json").read_text(encoding="utf-8"))
-    metrics = {"profile": prof, "forecast": fc, "rendered_at": dt.datetime.now().isoformat(timespec="seconds")}
+    bench = json.loads((OUT / "metrics_benchmarks.json").read_text(encoding="utf-8"))
+    metrics = {"profile": prof, "forecast": fc, "benchmarks": bench,
+               "rendered_at": dt.datetime.now().isoformat(timespec="seconds")}
     (OUT / "metrics.json").write_text(json.dumps(metrics, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
 
     ctx = build_context(metrics)
     ctx.update(html_context(metrics, ctx))
+    ctx.update(bench_context(metrics))
 
     def render(name: str, extra: dict | None = None) -> str:
         t = Template((TPL / name).read_text(encoding="utf-8"))

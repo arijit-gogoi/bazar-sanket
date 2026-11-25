@@ -564,9 +564,9 @@
       "commodity": "Cabbage",
       "n_months": 30,
       "n_series": 3,
-      "mae_profile_pct": 20.79124134205794,
+      "mae_profile_pct": 20.791241342057933,
       "mae_flat_pct": 49.376523063389925,
-      "corr": 0.9068914169197707
+      "corr": 0.9068914169197713
     },
     {
       "year": 2015,
@@ -583,7 +583,7 @@
       "n_months": 22,
       "n_series": 2,
       "mae_profile_pct": 21.59514016693955,
-      "mae_flat_pct": 28.978350593247736,
+      "mae_flat_pct": 28.978350593247733,
       "corr": 0.8532225283993424
     },
     {
@@ -593,16 +593,16 @@
       "n_series": 3,
       "mae_profile_pct": 25.459351471368404,
       "mae_flat_pct": 35.685929522987266,
-      "corr": 0.6538087018498021
+      "corr": 0.6538087018498024
     },
     {
       "year": 2016,
       "commodity": "Green Chilli",
       "n_months": 68,
       "n_series": 6,
-      "mae_profile_pct": 24.749806319768396,
-      "mae_flat_pct": 34.40618943467751,
-      "corr": 0.7334959868442719
+      "mae_profile_pct": 24.7498063197684,
+      "mae_flat_pct": 34.4061894346775,
+      "corr": 0.7334959868442721
     },
     {
       "year": 2016,
@@ -610,15 +610,15 @@
       "n_months": 18,
       "n_series": 2,
       "mae_profile_pct": 20.416976172761643,
-      "mae_flat_pct": 26.098589231416398,
-      "corr": 0.866230153831145
+      "mae_flat_pct": 26.09858923141639,
+      "corr": 0.8662301538311451
     },
     {
       "year": 2017,
       "commodity": "Cabbage",
       "n_months": 11,
       "n_series": 1,
-      "mae_profile_pct": 24.77087216023839,
+      "mae_profile_pct": 24.770872160238387,
       "mae_flat_pct": 57.21579211327605,
       "corr": 0.9497947900659037
     },
@@ -629,16 +629,16 @@
       "n_series": 4,
       "mae_profile_pct": 25.191526404796722,
       "mae_flat_pct": 39.0547941965372,
-      "corr": 0.7534497438302706
+      "corr": 0.753449743830271
     },
     {
       "year": 2018,
       "commodity": "Cabbage",
       "n_months": 29,
       "n_series": 3,
-      "mae_profile_pct": 23.410226826156098,
-      "mae_flat_pct": 41.081841774569405,
-      "corr": 0.8327834166897502
+      "mae_profile_pct": 23.4102268261561,
+      "mae_flat_pct": 41.08184177456941,
+      "corr": 0.8327834166897501
     },
     {
       "year": 2018,
@@ -656,7 +656,7 @@
       "n_series": 1,
       "mae_profile_pct": 15.326918192640306,
       "mae_flat_pct": 19.672976656882902,
-      "corr": 0.7784828441473325
+      "corr": 0.7784828441473324
     },
     {
       "year": 2019,
@@ -672,18 +672,18 @@
       "commodity": "Green Chilli",
       "n_months": 47,
       "n_series": 4,
-      "mae_profile_pct": 19.828747297151768,
-      "mae_flat_pct": 30.341243568582904,
-      "corr": 0.6986787206392552
+      "mae_profile_pct": 19.828747297151764,
+      "mae_flat_pct": 30.34124356858291,
+      "corr": 0.6986787206392557
     },
     {
       "year": 2019,
       "commodity": "Pumpkin",
       "n_months": 23,
       "n_series": 2,
-      "mae_profile_pct": 25.147902284799134,
+      "mae_profile_pct": 25.14790228479913,
       "mae_flat_pct": 29.842551432254755,
-      "corr": 0.6972057613353766
+      "corr": 0.6972057613353767
     },
     {
       "year": 2025,
@@ -692,16 +692,16 @@
       "n_series": 32,
       "mae_profile_pct": 27.361415969216367,
       "mae_flat_pct": 52.42343738332369,
-      "corr": 0.9157256392562074
+      "corr": 0.9157256392562072
     },
     {
       "year": 2025,
       "commodity": "Green Chilli",
       "n_months": 346,
       "n_series": 42,
-      "mae_profile_pct": 17.10634200826067,
+      "mae_profile_pct": 17.106342008260672,
       "mae_flat_pct": 30.822475557019164,
-      "corr": 0.8926064974683046
+      "corr": 0.8926064974683051
     },
     {
       "year": 2025,
@@ -709,25 +709,25 @@
       "n_months": 354,
       "n_series": 43,
       "mae_profile_pct": 10.537205089172208,
-      "mae_flat_pct": 12.07378953345086,
-      "corr": 0.6633408119492462
+      "mae_flat_pct": 12.073789533450862,
+      "corr": 0.663340811949246
     },
     {
       "year": 2026,
       "commodity": "Cabbage",
       "n_months": 37,
       "n_series": 4,
-      "mae_profile_pct": 28.163884871656585,
+      "mae_profile_pct": 28.163884871656574,
       "mae_flat_pct": 25.68980921127929,
-      "corr": 0.4262535541529217
+      "corr": 0.42625355415292177
     },
     {
       "year": 2026,
       "commodity": "Green Chilli",
       "n_months": 71,
       "n_series": 7,
-      "mae_profile_pct": 31.35683043843262,
-      "mae_flat_pct": 31.998733044163124,
+      "mae_profile_pct": 31.356830438432624,
+      "mae_flat_pct": 31.99873304416313,
       "corr": 0.4986552276384505
     },
     {
@@ -737,7 +737,7 @@
       "n_series": 7,
       "mae_profile_pct": 12.442463337828718,
       "mae_flat_pct": 14.58889799317996,
-      "corr": 0.6338925740496915
+      "corr": 0.6338925740496912
     }
   ],
   "season_profile": [
@@ -799,7 +799,7 @@
       "commodity": "Cabbage",
       "month": 7,
       "p50": 0.2828210880479869,
-      "p25": 0.09213451594136668,
+      "p25": 0.0921345159413649,
       "p75": 0.4797711332551655,
       "n": 247,
       "series_years": 247
@@ -1025,7 +1025,7 @@
       "month": 8,
       "p50": 0.079811737692006,
       "p25": 0.0028684406121062267,
-      "p75": 0.19278736588247103,
+      "p75": 0.19278736588246925,
       "n": 242,
       "series_years": 242
     },
@@ -1391,5 +1391,5 @@
     "stress": "out/fig/f5_stress_test.png",
     "season": "out/fig/f6_seasonal_profiles.png"
   },
-  "runtime_min": 5.6
+  "runtime_min": 5.1
 }

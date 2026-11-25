@@ -13,7 +13,8 @@ The prototype uses only public data: Agmarknet daily mandi prices published on d
 5. **stress-tests** forecasting when local history is short, gappy or absent;
 6. converts forecast bands into **Hold / Sell / Store** advice and backtests that rule;
 7. estimates **season-ahead** price profiles and checks them out of sample;
-8. renders the proposal answers and the Proof of Work from the generated metrics, so no number is typed by hand.
+8. tries **other methods** on the same forecasts: Holt-Winters exponential smoothing (statsmodels), an average of the global model and Holt-Winters, and **volatility pricing** of downside risk (the expected shortfall below a price floor);
+9. renders the proposal answers and the Proof of Work from the generated metrics, so no number is typed by hand.
 
 The rendered report is in [`docs/index.html`](docs/index.html) (also published with GitHub Pages) and [`proof-of-work.pdf`](proof-of-work.pdf). The proposal text is in [`answers.md`](answers.md).
 
@@ -29,8 +30,11 @@ uv run python -I src/fetch.py consolidate
 # analysis (marimo notebooks, runnable as scripts or with `uv run marimo edit nb/forecast.py`)
 uv run python -I -X utf8 nb/profile.py
 uv run python -I -X utf8 nb/forecast.py      # uses all CPU cores
+uv run python -I -X utf8 nb/benchmarks.py    # Holt-Winters and volatility pricing, all CPU cores
 # proposal answers, report and PDF
 uv run python -I -X utf8 src/render.py --pdf
+# or everything after the optional refresh, in one command
+uv run python -I src/pipeline.py
 ```
 
 The data snapshot used for the submission is `data/raw/ogd_prices.parquet`.
@@ -45,8 +49,12 @@ The data snapshot used for the submission is `data/raw/ogd_prices.parquet`.
 | `src/apa/model.py` | quantile gradient boosting, parallel task runner, rolling-origin backtest, scores |
 | `src/apa/advisory.py` | Hold / Sell / Store decision rule (illustrative parameters) |
 | `src/apa/seasonal.py` | season-ahead price profiles and their out-of-sample check |
-| `nb/profile.py`, `nb/forecast.py` | marimo notebooks that run the analysis and write `out/metrics_*.json` and figures |
-| `src/render.py`, `src/templates/` | proposal answers and report rendered from `out/metrics.json` |
+| `src/apa/smoothing.py` | Holt-Winters benchmark (statsmodels), re-estimated at every forecast origin, in parallel |
+| `src/apa/volatility.py` | EWMA volatility, volatility bands, pricing of downside risk (Black-76 put value) |
+| `src/apa/compare.py` | scores for point forecasts and 80% ranges on identical rows |
+| `nb/profile.py`, `nb/forecast.py`, `nb/benchmarks.py` | marimo notebooks that run the analysis and write `out/metrics_*.json` and figures |
+| `src/render.py`, `src/templates/`, `src/apa/report*.py` | proposal answers and report rendered from `out/metrics.json` |
+| `src/pipeline.py` | runs every step above in order |
 
 ## Data and licence
 

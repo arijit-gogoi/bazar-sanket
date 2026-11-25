@@ -37,11 +37,11 @@ A State-owned service that every week publishes a one-to-four-week price band wi
 Bazar Sanket is a price-intelligence and advisory service for Assam with two clearly separated horizons, built on data the State already collects.
 
 Main modules
-1. Data hub and quality engine. Ingests AMIU daily prices and arrivals, Agmarknet records for Assam and comparable markets in neighbouring States, and other defensible sources where useful (rainfall, active commodity futures, cold-storage stocks). It harmonises market names, varieties and units, flags outliers and missing weeks, and sends data-quality alerts back to AMIU and AEAs so that gaps are fixed at source.
-2. Short-horizon forecast engine (one to four weeks). A single "global" model learns price behaviour from all markets together instead of fitting a fragile model to each short series, so a market with a patchy history borrows patterns from comparable markets. It outputs a price band (10th, 50th and 90th percentiles), not a single number, and is re-evaluated every week against simple benchmarks. Where it does not beat them for a market, no forecast is published for that market.
+1. Data hub and quality engine. Ingests AMIU daily prices and arrivals, Agmarknet records for Assam and comparable markets in neighbouring States, and, where useful, rainfall, active commodity futures and cold-storage stocks. It harmonises market names, varieties and units, flags outliers and missing weeks, and sends data-quality alerts back to AMIU and AEAs so that gaps are fixed at source.
+2. Short-horizon forecast engine (one to four weeks). A single "global" model learns price behaviour from all markets together instead of fitting a fragile model to each short series, so a market with a patchy history borrows patterns from comparable markets. It outputs a price band (10th, 50th and 90th percentiles), not a single number, and is checked every week against simple benchmarks; where it does not beat them, no forecast is published for that market.
 3. Decision layer. Converts the band into a Hold, Sell or Store signal using the farmer's realistic options: storage cost, shelf life, expected losses and prices in nearby markets. Every signal carries a one-line reason and its assumptions.
 4. Season-ahead crop-planning intelligence. Before each sowing season, a crop card per commodity shows the typical seasonal price path, the likely harvest-window price range and year-to-year price risk. With AAU cost-of-cultivation and yield data, it extends to an indicative ranking of crops by expected margin and risk.
-5. Delivery and feedback. AMIU reviews and approves each weekly batch, which then reaches farmers through existing channels: AEA dashboard and printable sheets, Assamese SMS, WhatsApp cards and outbound voice (IVR) calls for farmers who prefer audio. Farmers and AEAs can report the price actually received.
+5. Delivery and feedback. AMIU approves each weekly batch, which reaches farmers through existing channels: AEA dashboard and printable sheets, Assamese SMS, WhatsApp cards and voice (IVR) calls. Farmers and AEAs can report the price actually received.
 6. Monitoring and transparency. A public scorecard shows forecast versus actual for every published series.
 
 User interaction
@@ -52,7 +52,7 @@ User interaction
 
 What changes versus the current approach
 - From yesterday's prices to a forward view with explicit uncertainty.
-- From numbers to advice: "Prices likely to rise slightly; holding two weeks may add about ₹100 per quintal after losses."
+- From numbers to advice: a price band, a Hold / Sell / Store signal and a one-line reason, in Assamese.
 - From long local histories to learning across markets, so incomplete data no longer block forecasting.
 - From one-off outlooks to continuously measured performance, with silence where there is no skill.
 - From one horizon to two: weekly marketing advice and season-ahead planning.
@@ -81,8 +81,8 @@ Prototype (built and run on real data; PDF, Section D)
 Test results (PDF, Sections E to H)
 - Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.4% for the model, 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 78.5% of actual prices; direction called correctly in 44.0% of cases versus 33.4% for no change.
 - Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts (no change: 12.8%); with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
-- Decision rule: for these perishable vegetables it advised selling promptly in every test week; blind holding would have lost 4.7–8.3% of value, which the rule avoided; perfect foresight shows up to 9.0% available to better forecasts.
-- Season-ahead check: seasonal profiles estimated only from earlier years predicted monthly price deviations with 22.2 points average error versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
+- Decision rule: it advised selling promptly in every test week for these perishables; blind holding would have lost 4.7–8.3%; perfect foresight shows up to 9.0% available to better forecasts.
+- Season-ahead check: profiles from earlier years only had 22.2 points average error in monthly price deviations, versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
 
 Links: code and data https://github.com/arijit-gogoi/bazar-sanket; full report https://arijit-gogoi.github.io/bazar-sanket/
 
@@ -93,23 +93,23 @@ There is no earlier pilot or deployment; the prototype was built for this challe
 Architecture. A weekly batch analytics pipeline with a thin delivery layer, designed to run cheaply on State infrastructure and to be maintainable by AMIU staff.
 
 Data flow
-1. Ingest: AMIU daily prices and arrivals (API, database export or spreadsheet upload, as AMIU prefers) and scheduled pulls from the data.gov.in Open Government Data API (Agmarknet prices for Assam and comparable States). Optional: IMD rainfall, active futures prices, cold-storage stocks.
+1. Ingest: AMIU daily prices and arrivals (API, database export or spreadsheet) and scheduled pulls from the data.gov.in Open Government Data API (Agmarknet prices for Assam and comparable States). Optional: IMD rainfall, active futures prices, cold-storage stocks.
 2. Validate and harmonise: market, commodity, variety and unit mapping; outlier screening against each series' recent median; explicit missing-week flags. Records are never silently changed; corrections are versioned with user and reason.
 3. Weekly series: daily records become weekly median prices per market, commodity and variety, keeping gaps explicit.
-4. Features: price changes over 1 to 52 weeks, volatility, reporting completeness, regional price indices built from comparable markets, the market's price relative to its peers, seasonality and, once AMIU data are connected, arrivals.
+4. Features: price changes over 1 to 52 weeks, volatility, reporting completeness, regional indices from comparable markets, price relative to peers, seasonality and, once AMIU data are connected, arrivals.
 5. Models and rules (below), then the decision layer.
 6. Review: AMIU approves the weekly batch in a web console.
 7. Delivery: SMS, WhatsApp, IVR and AEA dashboard; feedback stored for evaluation.
 
 Models and methods
 - Short horizon: a global gradient-boosted tree model (scikit-learn HistGradientBoostingRegressor) trained with quantile loss to predict one-to-four-week log price changes at the 10th, 50th and 90th percentiles. It handles missing values natively, so incomplete histories need no imputation, and one model shared across markets lets data-poor markets borrow strength from data-rich ones.
-- Benchmarks: no-change and same-weeks-last-year (seasonal naive). Every series is scored weekly with rolling-origin, out-of-sample evaluation; publication is gated on beating the benchmarks.
+- Benchmarks: no change, same weeks last year (seasonal naive) and Holt-Winters exponential smoothing (statsmodels). Every series is scored weekly with rolling-origin, out-of-sample evaluation; publication is gated on beating the benchmarks.
 - Calibration: band coverage is tracked; bands are widened (conformal adjustment) where they prove too narrow.
 - Long horizon: seasonal price profiles pooled across Assam and neighbouring-State markets, with year-to-year ranges; later combined with cost and yield data into margin-and-risk rankings.
-- Decision rules: transparent, versioned rules (expected gain after storage costs and losses versus downside risk), configurable per commodity by AMIU.
+- Decision rules: transparent, versioned rules (expected gain after storage costs and losses versus downside risk), configurable per commodity by AMIU. Downside risk can also be priced in rupees from volatility (tested; needs calibration).
 
 Stack
-- Python 3.13, polars (lazy queries over Parquet), scikit-learn, marimo notebooks for reproducible, auditable analysis, seaborn for charts; uv for reproducible environments. All open source.
+- Python 3.13, polars (lazy queries over Parquet), scikit-learn and statsmodels, marimo notebooks (reproducible, auditable), seaborn charts, uv environments. All open source.
 - Production: PostgreSQL for records and audit logs, Parquet for analytical history, a small REST API (FastAPI) for the dashboard, partner systems and channel gateways, and a mobile-friendly web dashboard in Assamese and English.
 - Integrations: data.gov.in OGD API (working in the prototype); AMIU data feed (to be agreed); SMS via a DLT-registered gateway; WhatsApp Business Platform; an IVR provider; Bhashini services for Assamese translation and speech, subject to evaluation.
 
@@ -267,24 +267,24 @@ Critical specialist skills
 ## 9. Testing, validation & evidence
 
 Development testing
-Data checks (dates, positive prices, duplicates, market-name mapping, a trailing-median outlier rule, cached API pages with retrieval times); no look-ahead (features use only data up to the forecast week, and each refit only outcomes known by then); full reproducibility from one command. The project adds automated tests in continuous integration.
+Data checks (dates, prices, duplicates, market names, outliers, cached API pages with retrieval times); no look-ahead (only data known at the forecast week); one command reproduces every number; automated tests in continuous integration.
 
 Measures
-MAPE and ₹ error against no-change and seasonal-naive benchmarks; direction (down, flat or up by more than 5%); calibration of 80% bands; value realised by following the advice versus selling at once; robustness to short, gappy or absent local history; and, in the pilot, delivery, comprehension, usefulness, decisions taken and prices received.
+MAPE and ₹ error versus no-change and seasonal-naive benchmarks; direction; 80% band calibration; value of advice versus selling at once; robustness to short, gappy or absent history; in the pilot, delivery, comprehension, usefulness, decisions and prices received.
 
 Evidence so far (out of sample, 24 November 2025 to 16 November 2026)
 - Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.4% for the model, 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 78.5% of actual prices; direction called correctly in 44.0% of cases versus 33.4% for no change.
 - Against no change, absolute error was 1.4% lower one week ahead and 0.3–1.2% higher at two to four weeks.
 - Of the three selected Pamohi (Garchuk) series, the model beat no change for green chilli (18.7% vs 20.7%); cabbage (20.9% vs 20.0%) and pumpkin (11.5% vs 9.7%) would be withheld by the skill gate.
 - Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts (no change: 12.8%); with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
-- Decision rule: for these perishable vegetables it advised selling promptly in every test week; blind holding would have lost 4.7–8.3% of value, which the rule avoided; perfect foresight shows up to 9.0% available to better forecasts.
-- Season-ahead check: seasonal profiles estimated only from earlier years predicted monthly price deviations with 22.2 points average error versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
+- Other methods: Holt-Winters 4.2% worse than no change (only 84 of 1,290 origins had two unbroken years); a pre-set average of the global model and Holt-Winters 1.1% better than no change, the best tried; volatility pricing of a 90% price floor overstated shortfalls (3.5% vs 2.5%).
+- Decision rule: it advised selling promptly in every test week for these perishables; blind holding would have lost 4.7–8.3%; perfect foresight shows up to 9.0% available to better forecasts.
+- Season-ahead check: profiles from earlier years only had 22.2 points average error in monthly price deviations, versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
 
 How to read these results
 Weekly vegetable prices are hard to forecast and no change is a strong benchmark. On public data, the model matches the no-change benchmark on average, is better one week ahead, is better for some series, calls the direction of moves more often, gives well-calibrated ranges and keeps working when local history is missing. This is why publication is gated per series. AMIU data with arrivals should add skill, and will be tested the same way.
 
-Prior research
-Global models across related series (Montero-Manso and Hyndman, 2021; M5 competition, 2022) and rolling-origin evaluation (Tashman, 2000), all in the International Journal of Forecasting.
+Prior research: global models across related series (Montero-Manso and Hyndman, 2021; M5 competition, 2022) and rolling-origin evaluation (Tashman, 2000), International Journal of Forecasting.
 
 Validation plan: six to eight weeks of shadow mode; go-live per series only where benchmarks are beaten; public scorecard; pilot thresholds agreed in advance (Section 12).
 
@@ -344,7 +344,7 @@ The combination of (a) learning across markets to overcome incomplete data, (b) 
 
 IP and dependencies
 - Code written by the applicant. Licence terms are to be agreed with the department so the State can run and extend it without lock-in. No patents are claimed.
-- Key open-source dependencies: Python, polars, scikit-learn, marimo, seaborn, uv, PostgreSQL, FastAPI (permissive BSD, MIT and Apache-2.0 licences).
+- Key open-source dependencies: Python, polars, scikit-learn, statsmodels, marimo, seaborn, uv, PostgreSQL, FastAPI (permissive BSD, MIT and Apache-2.0 licences).
 - Data: Agmarknet via data.gov.in under GODL-India. Proprietary services only for delivery (SMS gateway, WhatsApp Business Platform, IVR provider), all replaceable.
 
 ## 12. Resources, risks & pilot validation

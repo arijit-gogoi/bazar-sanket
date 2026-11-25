@@ -88,7 +88,7 @@ ${site_nav}
     <ul>
       <li><b>The problem, measured</b> (Section A): gaps, renamed markets and patchy reporting in the public Assam record.</li>
       <li><b>User journey and mock-ups</b> (Sections B–C): Assamese and English SMS, WhatsApp card and voice script; Extension Assistant dashboard; AMIU review console; crop-planning card. All mock-ups show real prototype outputs for the week of ${end_week}.</li>
-      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks, a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
+      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks and other methods (Holt-Winters, volatility pricing), a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
       <li><b>Target architecture, limitations and next steps</b> (Sections I–J).</li>
     </ul>
     <p class="small" style="margin:0">Labels used throughout: <span class="tag built">BUILT + TESTED</span> working code run on real data · <span class="tag mock">MOCK-UP</span> design shown with real prototype numbers, not yet deployed · <span class="tag plan">PLANNED</span> part of the proposal, not yet built.</p>
@@ -100,7 +100,9 @@ ${site_nav}
 uv run python -I src/fetch.py pull --state Assam --since 2006-01-01      # optional: refresh data (needs a free data.gov.in API key)
 uv run python -I -X utf8 nb/profile.py      # data profile + selection of pilot series
 uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about ${runtime_min} min)
-uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre>
+uv run python -I -X utf8 nb/benchmarks.py   # Holt-Winters and volatility pricing on the same forecasts
+uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF
+uv run python -I src/pipeline.py              # or: all of the above (except the refresh) in one command</pre>
   <p class="src">Data: Agmarknet daily mandi prices, Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare, published on data.gov.in (resource 35985678-0d79-46b4-9ed6-6f13308a1d24) under the Government Open Data License – India. Retrieved ${retrieved}. No departmental (AMIU) data were used.</p>
 </section>
 
@@ -325,6 +327,23 @@ uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre
   <p class="small" style="margin-top:2mm">Each point is the actual weekly price; the band and line show the forecast made two weeks earlier, using only data available then. Breaks in the band are weeks with no reported price at the forecast origin.</p>
 </section>
 
+<section class="page">
+  <h2>E (cont.) Other methods tried: Holt-Winters and volatility pricing <span class="tag built">BUILT + TESTED</span></h2>
+  <p>${other_intro}</p>
+  <img class="fig" src="${figdir}f7_other_methods.png" alt="Other methods: error by horizon and price of a 90% floor">
+  <div style="display:grid;grid-template-columns:1fr 1.25fr;gap:5mm;align-items:start">
+    <div>${table_other_points}</div>
+    <div><p class="small" style="margin-top:0">${other_reading_points}</p></div>
+  </div>
+  <h3>80% price ranges and the price of downside risk</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start">
+    <div>${table_other_bands}</div>
+    <div>${table_other_pricing}</div>
+  </div>
+  <p class="small">Ranges are scored on the ${other_band_rows}% of forecasts with a volatility estimate (at least ${vol_min_changes} past weekly changes). Interval score = width plus a penalty for each miss (lower is better). Shortfall = average amount by which the price h weeks later fell below a floor at 90% of today's price, in % of today's price. Volatility: exponentially weighted (λ = ${vol_lambda} per week) standard deviation of weekly log price changes, scaled by √h; prices from the Black-76 put formula.</p>
+  <p class="small">${other_reading_risk}</p>
+</section>
+
 <!-- ======================================================= F -->
 <section class="page">
   <h2>F. Stress test: forecasting with incomplete local data <span class="tag built">BUILT + TESTED</span></h2>
@@ -370,8 +389,8 @@ uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre
   </div>
   <div class="grid2" style="margin-top:4mm">
     <div class="box small">
-      <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
-      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about ${runtime_min} minutes on a laptop, so running costs are low.
+      <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · statsmodels · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
+      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about ${pipeline_min} minutes on a laptop, so running costs are low.
     </div>
     <div class="box small">
       <b>Governance</b><br>AMIU approves every batch · skill gate per series · versioned code, data and models · model cards · public scorecard · consent-based farmer registry (DPDP Act 2023) · CERT-In-aligned security · DLT-registered SMS templates · open formats and APIs.

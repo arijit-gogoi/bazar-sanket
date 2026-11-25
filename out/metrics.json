@@ -1216,9 +1216,9 @@
         "commodity": "Cabbage",
         "n_months": 30,
         "n_series": 3,
-        "mae_profile_pct": 20.79124134205794,
+        "mae_profile_pct": 20.791241342057933,
         "mae_flat_pct": 49.376523063389925,
-        "corr": 0.9068914169197707
+        "corr": 0.9068914169197713
       },
       {
         "year": 2015,
@@ -1235,7 +1235,7 @@
         "n_months": 22,
         "n_series": 2,
         "mae_profile_pct": 21.59514016693955,
-        "mae_flat_pct": 28.978350593247736,
+        "mae_flat_pct": 28.978350593247733,
         "corr": 0.8532225283993424
       },
       {
@@ -1245,16 +1245,16 @@
         "n_series": 3,
         "mae_profile_pct": 25.459351471368404,
         "mae_flat_pct": 35.685929522987266,
-        "corr": 0.6538087018498021
+        "corr": 0.6538087018498024
       },
       {
         "year": 2016,
         "commodity": "Green Chilli",
         "n_months": 68,
         "n_series": 6,
-        "mae_profile_pct": 24.749806319768396,
-        "mae_flat_pct": 34.40618943467751,
-        "corr": 0.7334959868442719
+        "mae_profile_pct": 24.7498063197684,
+        "mae_flat_pct": 34.4061894346775,
+        "corr": 0.7334959868442721
       },
       {
         "year": 2016,
@@ -1262,15 +1262,15 @@
         "n_months": 18,
         "n_series": 2,
         "mae_profile_pct": 20.416976172761643,
-        "mae_flat_pct": 26.098589231416398,
-        "corr": 0.866230153831145
+        "mae_flat_pct": 26.09858923141639,
+        "corr": 0.8662301538311451
       },
       {
         "year": 2017,
         "commodity": "Cabbage",
         "n_months": 11,
         "n_series": 1,
-        "mae_profile_pct": 24.77087216023839,
+        "mae_profile_pct": 24.770872160238387,
         "mae_flat_pct": 57.21579211327605,
         "corr": 0.9497947900659037
       },
@@ -1281,16 +1281,16 @@
         "n_series": 4,
         "mae_profile_pct": 25.191526404796722,
         "mae_flat_pct": 39.0547941965372,
-        "corr": 0.7534497438302706
+        "corr": 0.753449743830271
       },
       {
         "year": 2018,
         "commodity": "Cabbage",
         "n_months": 29,
         "n_series": 3,
-        "mae_profile_pct": 23.410226826156098,
-        "mae_flat_pct": 41.081841774569405,
-        "corr": 0.8327834166897502
+        "mae_profile_pct": 23.4102268261561,
+        "mae_flat_pct": 41.08184177456941,
+        "corr": 0.8327834166897501
       },
       {
         "year": 2018,
@@ -1308,7 +1308,7 @@
         "n_series": 1,
         "mae_profile_pct": 15.326918192640306,
         "mae_flat_pct": 19.672976656882902,
-        "corr": 0.7784828441473325
+        "corr": 0.7784828441473324
       },
       {
         "year": 2019,
@@ -1324,18 +1324,18 @@
         "commodity": "Green Chilli",
         "n_months": 47,
         "n_series": 4,
-        "mae_profile_pct": 19.828747297151768,
-        "mae_flat_pct": 30.341243568582904,
-        "corr": 0.6986787206392552
+        "mae_profile_pct": 19.828747297151764,
+        "mae_flat_pct": 30.34124356858291,
+        "corr": 0.6986787206392557
       },
       {
         "year": 2019,
         "commodity": "Pumpkin",
         "n_months": 23,
         "n_series": 2,
-        "mae_profile_pct": 25.147902284799134,
+        "mae_profile_pct": 25.14790228479913,
         "mae_flat_pct": 29.842551432254755,
-        "corr": 0.6972057613353766
+        "corr": 0.6972057613353767
       },
       {
         "year": 2025,
@@ -1344,16 +1344,16 @@
         "n_series": 32,
         "mae_profile_pct": 27.361415969216367,
         "mae_flat_pct": 52.42343738332369,
-        "corr": 0.9157256392562074
+        "corr": 0.9157256392562072
       },
       {
         "year": 2025,
         "commodity": "Green Chilli",
         "n_months": 346,
         "n_series": 42,
-        "mae_profile_pct": 17.10634200826067,
+        "mae_profile_pct": 17.106342008260672,
         "mae_flat_pct": 30.822475557019164,
-        "corr": 0.8926064974683046
+        "corr": 0.8926064974683051
       },
       {
         "year": 2025,
@@ -1361,25 +1361,25 @@
         "n_months": 354,
         "n_series": 43,
         "mae_profile_pct": 10.537205089172208,
-        "mae_flat_pct": 12.07378953345086,
-        "corr": 0.6633408119492462
+        "mae_flat_pct": 12.073789533450862,
+        "corr": 0.663340811949246
       },
       {
         "year": 2026,
         "commodity": "Cabbage",
         "n_months": 37,
         "n_series": 4,
-        "mae_profile_pct": 28.163884871656585,
+        "mae_profile_pct": 28.163884871656574,
         "mae_flat_pct": 25.68980921127929,
-        "corr": 0.4262535541529217
+        "corr": 0.42625355415292177
       },
       {
         "year": 2026,
         "commodity": "Green Chilli",
         "n_months": 71,
         "n_series": 7,
-        "mae_profile_pct": 31.35683043843262,
-        "mae_flat_pct": 31.998733044163124,
+        "mae_profile_pct": 31.356830438432624,
+        "mae_flat_pct": 31.99873304416313,
         "corr": 0.4986552276384505
       },
       {
@@ -1389,7 +1389,7 @@
         "n_series": 7,
         "mae_profile_pct": 12.442463337828718,
         "mae_flat_pct": 14.58889799317996,
-        "corr": 0.6338925740496915
+        "corr": 0.6338925740496912
       }
     ],
     "season_profile": [
@@ -1451,7 +1451,7 @@
         "commodity": "Cabbage",
         "month": 7,
         "p50": 0.2828210880479869,
-        "p25": 0.09213451594136668,
+        "p25": 0.0921345159413649,
         "p75": 0.4797711332551655,
         "n": 247,
         "series_years": 247
@@ -1677,7 +1677,7 @@
         "month": 8,
         "p50": 0.079811737692006,
         "p25": 0.0028684406121062267,
-        "p75": 0.19278736588247103,
+        "p75": 0.19278736588246925,
         "n": 242,
         "series_years": 242
       },
@@ -2043,7 +2043,1047 @@
       "stress": "out/fig/f5_stress_test.png",
       "season": "out/fig/f6_seasonal_profiles.png"
     },
-    "runtime_min": 5.6
+    "runtime_min": 5.1
   },
-  "rendered_at": "2026-11-25T19:10:00"
+  "benchmarks": {
+    "retrieved": "2026-11-25",
+    "end_week": "2026-11-16",
+    "n_rows": 4697,
+    "n_origins": 1290,
+    "hw_settings": {
+      "max_gap_weeks": 26,
+      "max_window_weeks": 312,
+      "season_weeks": 52,
+      "min_seasonal_weeks": 104,
+      "min_holt_weeks": 20
+    },
+    "vol_settings": {
+      "lambda": 0.94,
+      "min_changes": 8
+    },
+    "hw_methods": [
+      {
+        "method": "damped Holt (under 2 years of data)",
+        "origins": 768,
+        "converged_pct": 100.0,
+        "variant": "primary"
+      },
+      {
+        "method": "no change (short history)",
+        "origins": 438,
+        "converged_pct": 100.0,
+        "variant": "primary"
+      },
+      {
+        "method": "Holt-Winters",
+        "origins": 84,
+        "converged_pct": 100.0,
+        "variant": "primary"
+      },
+      {
+        "method": "damped Holt (under 2 years of data)",
+        "origins": 626,
+        "converged_pct": 100.0,
+        "variant": "all gaps interpolated"
+      },
+      {
+        "method": "Holt-Winters",
+        "origins": 407,
+        "converged_pct": 100.0,
+        "variant": "all gaps interpolated"
+      },
+      {
+        "method": "no change (short history)",
+        "origins": 257,
+        "converged_pct": 100.0,
+        "variant": "all gaps interpolated"
+      }
+    ],
+    "points_all": [
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 15.358510605441733,
+        "mae": 413.9854075892163,
+        "direction": 43.96423248882265,
+        "method": "Global model (P50)",
+        "skill_vs_naive": -0.2236661828492359
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 16.093513461543246,
+        "mae": 430.262547343657,
+        "direction": 33.85139450713221,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -4.164275178370591
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 16.40759756889584,
+        "mae": 437.9325967961216,
+        "direction": 34.97977432403662,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -6.021153372233257
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 15.216261040742882,
+        "mae": 408.42655667663297,
+        "direction": 40.45135192676177,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 1.1221020689047068
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 15.486305896413082,
+        "mae": 413.06152863529906,
+        "direction": 33.383010432190765,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 19.343560007695775,
+        "mae": 507.86480267828887,
+        "direction": 33.10623802427081,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -22.95136861479388
+      }
+    ],
+    "points_by_h": [
+      {
+        "h": 1,
+        "n": 1290,
+        "mape": 14.329605224994458,
+        "mae": 288.01288877200443,
+        "direction": 47.286821705426355,
+        "method": "Global model (P50)",
+        "skill_vs_naive": 1.3929358876054732
+      },
+      {
+        "h": 1,
+        "n": 1290,
+        "mape": 14.925315724463761,
+        "mae": 301.0044697339188,
+        "direction": 44.18604651162791,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -3.0549958084200135
+      },
+      {
+        "h": 1,
+        "n": 1290,
+        "mape": 15.12397429274737,
+        "mae": 308.4559143538517,
+        "direction": 43.87596899224806,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -5.606149267213056
+      },
+      {
+        "h": 1,
+        "n": 1290,
+        "mape": 14.518577276277197,
+        "mae": 291.2659033938032,
+        "direction": 45.1937984496124,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 0.2792002393921744
+      },
+      {
+        "h": 1,
+        "n": 1290,
+        "mape": 14.483682237696364,
+        "mae": 292.0813953488372,
+        "direction": 45.348837209302324,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "h": 1,
+        "n": 1290,
+        "mape": 17.717734982855752,
+        "mae": 377.55719121939876,
+        "direction": 37.82945736434108,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -29.26437535279389
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 13.194401385338535,
+        "mae": 386.9674932177006,
+        "direction": 41.63197335553705,
+        "method": "Global model (P50)",
+        "skill_vs_naive": -0.40138247844163644
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 13.937947809811636,
+        "mae": 397.99893718063066,
+        "direction": 34.138218151540386,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -3.2635666257507134
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 14.174573117145528,
+        "mae": 406.7861349947861,
+        "direction": 34.388009991673606,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -5.54346564599324
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 13.171342906365439,
+        "mae": 381.6424730344989,
+        "direction": 38.71773522064946,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 0.980230699640694
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 13.383678113222395,
+        "mae": 385.4204829308909,
+        "direction": 34.05495420482931,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 16.988264029239755,
+        "mae": 482.5714749711866,
+        "direction": 32.556203164029974,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -25.206494294626182
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape": 16.235088529850344,
+        "mae": 474.7078760712801,
+        "direction": 42.21635883905013,
+        "method": "Global model (P50)",
+        "skill_vs_naive": -1.1815490201420253
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape": 17.11995872721033,
+        "mae": 492.5291586079622,
+        "direction": 27.96833773087071,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -4.980063987937378
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape": 17.500869798001922,
+        "mae": 501.0222084368694,
+        "direction": 30.167106420404572,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -6.790313998335451
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape": 15.934504523929311,
+        "mae": 462.1202010700426,
+        "direction": 38.698328935795956,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 1.5014493445113741
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape": 16.4169010845318,
+        "mae": 469.16446789797703,
+        "direction": 27.528583992963938,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape": 20.290875712281185,
+        "mae": 565.8245808534338,
+        "direction": 31.310466138962177,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -20.602607309229583
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 18.09912240531857,
+        "mae": 531.7698956811593,
+        "direction": 44.43405051449953,
+        "method": "Global model (P50)",
+        "skill_vs_naive": -0.25166321005922754
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 18.83321520288909,
+        "mae": 556.262901800946,
+        "direction": 27.315247895229188,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -4.869195380392988
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 19.302532899382324,
+        "mae": 562.0663035673118,
+        "direction": 30.028063610851262,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -5.963278900501101
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 17.59167347775419,
+        "mae": 522.790685314375,
+        "direction": 38.54069223573433,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 1.4411380953438635
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 18.068676110132067,
+        "mae": 530.4349859681945,
+        "direction": 24.415341440598688,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 22.944052801012607,
+        "mae": 631.8814889019167,
+        "direction": 29.934518241347053,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -19.125153056892263
+      }
+    ],
+    "points_selected": [
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape": 20.94474217529499,
+        "mae": 330.465251211099,
+        "direction": 40.86021505376344,
+        "method": "Global model (P50)",
+        "skill_vs_naive": -0.9302737689070639
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape": 20.235877699410857,
+        "mae": 339.2941529357348,
+        "direction": 29.03225806451613,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -3.626785625692408
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape": 20.96477543639394,
+        "mae": 337.95383950947127,
+        "direction": 32.25806451612903,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -3.2174288157005737
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape": 20.09645451346504,
+        "mae": 327.20218622841577,
+        "direction": 38.17204301075269,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 0.06632735880898188
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape": 20.005174363910914,
+        "mae": 327.4193548387097,
+        "direction": 27.419354838709676,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape": 30.885583474710916,
+        "mae": 492.7037484472108,
+        "direction": 38.70967741935484,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -50.480947801611165
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape": 18.690827034412077,
+        "mae": 1120.7702776036388,
+        "direction": 44.623655913978496,
+        "method": "Global model (P50)",
+        "skill_vs_naive": 9.599622014624021
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape": 20.56193341449541,
+        "mae": 1257.3689309414765,
+        "direction": 24.193548387096776,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -1.4183092606742553
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape": 20.841869155640943,
+        "mae": 1243.4785294259855,
+        "direction": 33.33333333333333,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -0.2979212806736742
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape": 19.158210058076026,
+        "mae": 1163.7123930255657,
+        "direction": 37.634408602150536,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 6.135947483627313
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape": 20.744177512783832,
+        "mae": 1239.784946236558,
+        "direction": 19.892473118279568,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape": 25.130979630163395,
+        "mae": 1475.6842493803524,
+        "direction": 34.946236559139784,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -19.027437287400616
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape": 11.472060587646304,
+        "mae": 190.39104786942596,
+        "direction": 34.946236559139784,
+        "method": "Global model (P50)",
+        "skill_vs_naive": -15.727891842200092
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape": 9.817639934352233,
+        "mae": 166.28662870634327,
+        "direction": 37.634408602150536,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -1.076186076404717
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape": 9.828259807040435,
+        "mae": 165.67349086044922,
+        "direction": 47.8494623655914,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -0.7034944445867719
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape": 10.371098059067785,
+        "mae": 174.07136714393795,
+        "direction": 37.096774193548384,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": -5.808085911021088
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape": 9.72435181306149,
+        "mae": 164.51612903225808,
+        "direction": 35.483870967741936,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape": 13.893082261426622,
+        "mae": 227.31176005422623,
+        "direction": 32.25806451612903,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -38.169893366294374
+      }
+    ],
+    "points_by_commodity": [
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
+        "mape": 19.48532593248068,
+        "mae": 257.49638969566047,
+        "direction": 45.76627011896431,
+        "method": "Global model (P50)",
+        "skill_vs_naive": 4.147767983875683
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
+        "mape": 20.823770832431833,
+        "mae": 275.95076174354546,
+        "direction": 29.741077676696992,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -2.7218147443965
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
+        "mape": 21.662008807474912,
+        "mae": 290.78490732076057,
+        "direction": 31.70048985304409,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -8.243779403041774
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
+        "mape": 19.567958985040562,
+        "mae": 258.0880319728278,
+        "direction": 39.608117564730584,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 3.927530982150651
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
+        "mape": 20.399561921945054,
+        "mae": 268.6389083275017,
+        "direction": 28.13156053184045,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
+        "mape": 24.709387264054136,
+        "mae": 328.64752015216806,
+        "direction": 32.540237928621416,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -22.338019536436214
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
+        "mape": 18.68597859935827,
+        "mae": 891.4704648751167,
+        "direction": 42.767732962447845,
+        "method": "Global model (P50)",
+        "skill_vs_naive": -1.621067907301188
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
+        "mape": 18.843509670981177,
+        "mae": 913.4488934563642,
+        "direction": 32.5452016689847,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -4.1264469090201095
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
+        "mape": 18.92470615905271,
+        "mae": 920.6429472511786,
+        "direction": 33.72739916550765,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -4.946516062196182
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
+        "mape": 18.11401295148154,
+        "mae": 873.039510493311,
+        "direction": 39.986091794158554,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 0.4799251604750143
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
+        "mape": 18.120531116307035,
+        "mae": 877.2496522948536,
+        "direction": 31.50208623087622,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
+        "mape": 23.066191293060086,
+        "mae": 1077.6919636614966,
+        "direction": 29.13769123783032,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -22.84894737117229
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 9.521287612222807,
+        "mae": 160.97955742132913,
+        "direction": 43.49726775956284,
+        "method": "Global model (P50)",
+        "skill_vs_naive": 0.06357619884920229
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 10.238850984946767,
+        "mae": 171.07652325211964,
+        "direction": 38.087431693989075,
+        "method": "Holt-Winters",
+        "skill_vs_naive": -6.204639918372679
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 10.326638108472313,
+        "mae": 173.52634778296292,
+        "direction": 38.52459016393443,
+        "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
+        "skill_vs_naive": -7.7254957740763075
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 9.54110059809612,
+        "mae": 160.73274477136192,
+        "direction": 41.47540983606557,
+        "method": "Average of global model and Holt-Winters",
+        "skill_vs_naive": 0.2167979742206616
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 9.579716428274999,
+        "mae": 161.08196721311475,
+        "direction": 38.961748633879786,
+        "method": "No change",
+        "skill_vs_naive": 0.0
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 12.228308129176659,
+        "mae": 200.04515198756428,
+        "direction": 36.666666666666664,
+        "method": "Seasonal naive",
+        "skill_vs_naive": -24.18842124202545
+      }
+    ],
+    "band_rows_pct": 85.99105812220566,
+    "bands_all": [
+      {
+        "all": "all",
+        "n": 4039,
+        "coverage": 78.33622183708839,
+        "width_pct": 42.327488216185195,
+        "interval_score_pct": 69.40902798856486,
+        "method": "Global model quantiles (P10-P90)"
+      },
+      {
+        "all": "all",
+        "n": 4039,
+        "coverage": 81.48056449616242,
+        "width_pct": 50.02903598560569,
+        "interval_score_pct": 76.27843074950873,
+        "method": "Volatility band around today's price"
+      },
+      {
+        "all": "all",
+        "n": 4039,
+        "coverage": 80.04456548650656,
+        "width_pct": 49.65236354346952,
+        "interval_score_pct": 79.55742108143238,
+        "method": "Volatility band around Holt-Winters forecast"
+      }
+    ],
+    "bands_by_h": [
+      {
+        "h": 1,
+        "n": 1113,
+        "coverage": 79.42497753818508,
+        "width_pct": 29.101655758419366,
+        "interval_score_pct": 49.06492246366197,
+        "method": "Global model quantiles (P10-P90)"
+      },
+      {
+        "h": 1,
+        "n": 1113,
+        "coverage": 80.68283917340521,
+        "width_pct": 32.834483429226516,
+        "interval_score_pct": 53.022351724446224,
+        "method": "Volatility band around today's price"
+      },
+      {
+        "h": 1,
+        "n": 1113,
+        "coverage": 79.87421383647799,
+        "width_pct": 32.75698448303942,
+        "interval_score_pct": 54.057624522731686,
+        "method": "Volatility band around Holt-Winters forecast"
+      },
+      {
+        "h": 2,
+        "n": 1032,
+        "coverage": 78.29457364341084,
+        "width_pct": 40.31407157707412,
+        "interval_score_pct": 65.8859415791484,
+        "method": "Global model quantiles (P10-P90)"
+      },
+      {
+        "h": 2,
+        "n": 1032,
+        "coverage": 80.62015503875969,
+        "width_pct": 46.73335033594956,
+        "interval_score_pct": 70.10845678746153,
+        "method": "Volatility band around today's price"
+      },
+      {
+        "h": 2,
+        "n": 1032,
+        "coverage": 79.16666666666666,
+        "width_pct": 46.43132898068004,
+        "interval_score_pct": 72.19671292398411,
+        "method": "Volatility band around Holt-Winters forecast"
+      },
+      {
+        "h": 3,
+        "n": 978,
+        "coverage": 78.22085889570552,
+        "width_pct": 48.10393627599904,
+        "interval_score_pct": 78.99228759782531,
+        "method": "Global model quantiles (P10-P90)"
+      },
+      {
+        "h": 3,
+        "n": 978,
+        "coverage": 82.51533742331289,
+        "width_pct": 57.517851377167894,
+        "interval_score_pct": 87.1586733416446,
+        "method": "Volatility band around today's price"
+      },
+      {
+        "h": 3,
+        "n": 978,
+        "coverage": 80.3680981595092,
+        "width_pct": 56.99860872712428,
+        "interval_score_pct": 91.78044349739808,
+        "method": "Volatility band around Holt-Winters forecast"
+      },
+      {
+        "h": 4,
+        "n": 916,
+        "coverage": 77.18340611353712,
+        "width_pct": 54.498701419851194,
+        "interval_score_pct": 87.86578205611727,
+        "method": "Global model quantiles (P10-P90)"
+      },
+      {
+        "h": 4,
+        "n": 916,
+        "coverage": 82.31441048034934,
+        "width_pct": 66.63888656720755,
+        "interval_score_pct": 99.8707362392668,
+        "method": "Volatility band around today's price"
+      },
+      {
+        "h": 4,
+        "n": 916,
+        "coverage": 80.89519650655022,
+        "width_pct": 65.9668141694991,
+        "interval_score_pct": 105.78384953722497,
+        "method": "Volatility band around Holt-Winters forecast"
+      }
+    ],
+    "pricing_all": [
+      {
+        "floor": 1.0,
+        "n": 4039,
+        "realised": 5.756450984487629,
+        "price_ewma": 7.618859028035167,
+        "price_model": 7.380387518031556,
+        "hit": 41.1983164149542,
+        "prob_ewma": 53.80942951401759,
+        "prob_model": 52.65256145581788
+      },
+      {
+        "floor": 0.9,
+        "n": 4039,
+        "realised": 2.507055635798052,
+        "price_ewma": 3.53246708242509,
+        "price_model": 3.4063871815036535,
+        "hit": 21.639019559296855,
+        "prob_ewma": 28.946285006006015,
+        "prob_model": 28.098876066837356
+      }
+    ],
+    "pricing_by_h": [
+      {
+        "floor": 1.0,
+        "h": 1,
+        "n": 1113,
+        "realised": 4.176196477617804,
+        "price_ewma": 5.069335482133921,
+        "price_model": 4.551621489485741,
+        "hit": 38.63432165318958,
+        "prob_ewma": 52.53466774106696,
+        "prob_model": 51.16271128172204
+      },
+      {
+        "floor": 1.0,
+        "h": 2,
+        "n": 1032,
+        "realised": 5.689665193072264,
+        "price_ewma": 7.1564679267329385,
+        "price_model": 6.972925062529491,
+        "hit": 41.763565891472865,
+        "prob_ewma": 53.57823396336647,
+        "prob_model": 53.480512148800685
+      },
+      {
+        "floor": 1.0,
+        "h": 3,
+        "n": 978,
+        "realised": 6.555510242470264,
+        "price_ewma": 8.73738409906017,
+        "price_model": 8.725532096331758,
+        "hit": 42.12678936605317,
+        "prob_ewma": 54.36869204953009,
+        "prob_model": 53.488586519558
+      },
+      {
+        "floor": 1.0,
+        "h": 4,
+        "n": 916,
+        "realised": 6.898663046255919,
+        "price_ewma": 10.04341121544732,
+        "price_model": 9.840394555446435,
+        "hit": 42.685589519650655,
+        "prob_ewma": 55.02170560772365,
+        "prob_model": 52.6374147486919
+      },
+      {
+        "floor": 0.9,
+        "h": 1,
+        "n": 1113,
+        "realised": 1.4014302218683954,
+        "price_ewma": 1.5679394092145205,
+        "price_model": 1.2443872925446706,
+        "hit": 15.543575920934412,
+        "prob_ewma": 20.067940181918004,
+        "prob_model": 18.17193870660653
+      },
+      {
+        "floor": 0.9,
+        "h": 2,
+        "n": 1032,
+        "realised": 2.4242321908495374,
+        "price_ewma": 3.103227936027926,
+        "price_model": 2.936831328660379,
+        "hit": 22.093023255813954,
+        "prob_ewma": 28.321053933073784,
+        "prob_model": 28.210783403081304
+      },
+      {
+        "floor": 0.9,
+        "h": 3,
+        "n": 978,
+        "realised": 3.0677740585419477,
+        "price_ewma": 4.386179909735055,
+        "price_model": 4.43395001589733,
+        "hit": 24.130879345603272,
+        "prob_ewma": 32.983781886878724,
+        "prob_model": 32.78043613139824
+      },
+      {
+        "floor": 0.9,
+        "h": 4,
+        "n": 916,
+        "realised": 3.3451039583384947,
+        "price_ewma": 5.491596945150082,
+        "price_model": 5.465263889482465,
+        "hit": 25.87336244541485,
+        "prob_ewma": 36.12768708786463,
+        "prob_model": 35.03624197054108
+      }
+    ],
+    "pricing_by_commodity": [
+      {
+        "commodity": "Cabbage",
+        "n": 1200,
+        "realised": 4.136808813946022,
+        "price_ewma": 4.967829680316405,
+        "price_model": 5.105858818473921,
+        "hit": 28.166666666666668,
+        "prob_ewma": 34.10090324282346,
+        "prob_model": 35.78795329673326
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1264,
+        "realised": 2.5004184527938804,
+        "price_ewma": 3.8776789670842664,
+        "price_model": 3.739329511889597,
+        "hit": 22.54746835443038,
+        "prob_ewma": 31.705947788224385,
+        "prob_model": 29.148833315928417
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1575,
+        "realised": 1.2706655313788193,
+        "price_ewma": 2.1618112477084073,
+        "price_model": 1.8443522164419706,
+        "hit": 15.936507936507937,
+        "prob_ewma": 22.80421793241557,
+        "prob_model": 21.397899153360424
+      }
+    ],
+    "var_ratio": {
+      "1": 1.0,
+      "2": 0.9384389297880962,
+      "3": 1.3746545892330224,
+      "4": 1.6353709131061926
+    },
+    "current_risk": [
+      {
+        "commodity": "Cabbage",
+        "market": "Pamohi(Garchuk)",
+        "week": "2026-11-16",
+        "price_now": 1200.0,
+        "sigma_week_pct": 19.175996969586233,
+        "floor": 0.9,
+        "by_h": {
+          "1": {
+            "price_ewma_rs": 39.846683994824446,
+            "price_model_rs": 18.31802790578479,
+            "prob_ewma_pct": 32.507292316338166,
+            "prob_model_pct": 22.947857938130984
+          },
+          "2": {
+            "price_ewma_rs": 72.05681037442889,
+            "price_model_rs": 65.30253615141993,
+            "prob_ewma_pct": 40.01659164509483,
+            "prob_model_pct": 43.41379957094909
+          },
+          "3": {
+            "price_ewma_rs": 97.78824010560209,
+            "price_model_rs": 77.69858631332994,
+            "prob_ewma_pct": 43.992866424656754,
+            "prob_model_pct": 44.275918114497166
+          },
+          "4": {
+            "price_ewma_rs": 119.77380438194234,
+            "price_model_rs": 99.223660479974,
+            "prob_ewma_pct": 46.69417457050592,
+            "prob_model_pct": 49.87455160895991
+          }
+        }
+      },
+      {
+        "commodity": "Green Chilli",
+        "market": "Pamohi(Garchuk)",
+        "week": "2026-11-16",
+        "price_now": 5000.0,
+        "sigma_week_pct": 21.39121120207727,
+        "floor": 0.9,
+        "by_h": {
+          "1": {
+            "price_ewma_rs": 202.4555106988273,
+            "price_model_rs": 78.25402221083993,
+            "prob_ewma_pct": 34.99019906608037,
+            "prob_model_pct": 23.24506188681014
+          },
+          "2": {
+            "price_ewma_rs": 355.07464795162286,
+            "price_model_rs": 178.56158013853246,
+            "prob_ewma_pct": 42.19057573066924,
+            "prob_model_pct": 36.28039021462914
+          },
+          "3": {
+            "price_ewma_rs": 475.79227405120423,
+            "price_model_rs": 318.15891783848315,
+            "prob_ewma_pct": 46.05233077573633,
+            "prob_model_pct": 47.21257810894607
+          },
+          "4": {
+            "price_ewma_rs": 578.4561784161867,
+            "price_model_rs": 426.88457417446944,
+            "prob_ewma_pct": 48.70930952942308,
+            "prob_model_pct": 59.50474087661397
+          }
+        }
+      },
+      {
+        "commodity": "Pumpkin",
+        "market": "Pamohi(Garchuk)",
+        "week": "2026-11-16",
+        "price_now": 1800.0,
+        "sigma_week_pct": 12.82915822678694,
+        "floor": 0.9,
+        "by_h": {
+          "1": {
+            "price_ewma_rs": 25.330939022655343,
+            "price_model_rs": 21.35372662950357,
+            "prob_ewma_pct": 22.449125618090086,
+            "prob_model_pct": 21.94668774898251
+          },
+          "2": {
+            "price_ewma_rs": 53.79745496603073,
+            "price_model_rs": 62.85400886341836,
+            "prob_ewma_pct": 31.20664526416208,
+            "prob_model_pct": 41.30582909084994
+          },
+          "3": {
+            "price_ewma_rs": 77.88259761536813,
+            "price_model_rs": 63.16519624901548,
+            "prob_ewma_pct": 35.82838114054038,
+            "prob_model_pct": 39.580479191617336
+          },
+          "4": {
+            "price_ewma_rs": 98.9771963630343,
+            "price_model_rs": 137.0675803929596,
+            "prob_ewma_pct": 38.88423575453957,
+            "prob_model_pct": 58.004052788158425
+          }
+        }
+      }
+    ],
+    "figures": {
+      "other_methods": "out/fig/f7_other_methods.png"
+    },
+    "runtime_min": 0.4
+  },
+  "rendered_at": "2026-11-25T19:27:53"
 }

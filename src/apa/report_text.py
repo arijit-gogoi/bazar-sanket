@@ -154,11 +154,11 @@ def decision_short(f: dict) -> str:
         lo = min(r["hold_max_vs_sell_pct"] for r in rows)
         hi = max(r["hold_max_vs_sell_pct"] for r in rows)
         if hi < 0:
-            blind = f"blind holding would have lost {f1(-hi)}–{f1(-lo)}% of value, which the rule avoided"
+            blind = f"blind holding would have lost {f1(-hi)}–{f1(-lo)}%"
         else:
             blind = f"blind holding would have changed value by {lo:+.1f}% to {hi:+.1f}%"
         return (
-            f"Decision rule: for these perishable vegetables it advised selling promptly in every test week; {blind}; "
+            f"Decision rule: it advised selling promptly in every test week for these perishables; {blind}; "
             f"perfect foresight shows up to {f1(ohi)}% available to better forecasts."
         )
     parts = [f"{r['commodity'].lower()} {r['rule_vs_sell_pct']:+.1f}% (blind holding {r['hold_max_vs_sell_pct']:+.1f}%)" for r in rows]
@@ -206,8 +206,8 @@ def season_short(f: dict) -> str:
     mf = sum(r["mae_flat_pct"] for r in sb) / len(sb)
     better = sum(1 for r in sb if r["mae_profile_pct"] < r["mae_flat_pct"])
     return (
-        f"Season-ahead check: seasonal profiles estimated only from earlier years predicted monthly price deviations with "
-        f"{f1(mp)} points average error versus {f1(mf)} assuming no seasonality (better in {better} of {len(sb)} commodity-year tests)."
+        f"Season-ahead check: profiles from earlier years only had {f1(mp)} points average error in monthly price deviations, "
+        f"versus {f1(mf)} assuming no seasonality (better in {better} of {len(sb)} commodity-year tests)."
     )
 
 
