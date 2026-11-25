@@ -88,8 +88,8 @@ T10|x|mock-ups HTML/SVG: SMS & WhatsApp card (EN + AS), IVR script, officer dash
 T11|x|figures: coverage heatmap, forecast band vs actual, metric tables|V3,V11
 T12|x|answers template, 12 sections → `src/render.py` → `answers.md`; formal English|V1,V3,V10
 T13|x|proof-of-work HTML → Chrome headless → PDF; check size & pages|V2,V3,V12
-T14|.|verify: word counts, number trace, PDF size, labels, no secrets; regen from one cmd|V1,V2,V3,V14,V15
-T15|.|git init + Conventional Commits; on user yes → `gh repo create` public + Pages from `docs/`; URLs → form|V14
+T14|x|verify: word counts, number trace, PDF size, labels, no secrets; regen from one cmd|V1,V2,V3,V14,V15
+T15|x|git init + Conventional Commits; on user yes → `gh repo create` public + Pages from `docs/`; URLs → form|V14
 T16|x|Holt-Winters (statsmodels, damped add trend + add 52-wk season, log price, re-fit ∀ origin, parallel all cores) + pre-set equal-weight avg w/ global model; same rows → `nb/benchmarks.py`|V5,V6,V16
 T17|x|volatility pricing: EWMA σ → 80% band (interval score vs model quantiles) + Black-76 put value of shortfall below 90% / 100% floor, backtest predicted vs realised|V5,V16
 T18|x|one-cmd runner `src/pipeline.py`; site nav links + `.nojekyll`|V15
