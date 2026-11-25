@@ -127,6 +127,24 @@ def _(compare, ev, pl):
 
 
 @app.cell
+def _(compare, ev, pl):
+    # post-hoc check (added after the results): does the average gain from Holt-Winters itself, or from pulling the
+    # global model halfway towards no change? Holt-Winters often fell back to damped Holt or no change.
+    _m = {
+        compare.MODEL: pl.col("q50"),
+        "Global model halved (post-hoc check)": pl.col("q50") * 0.5,
+        compare.COMBO: pl.col("combo"),
+        compare.HW: pl.col("hw"),
+        compare.NAIVE: pl.lit(0.0),
+    }
+    combo_check = compare.point_scores(ev.with_columns(pl.lit("all").alias("all")), ["all"], _m)
+    combo_check_hw_rows = compare.point_scores(
+        ev.filter(pl.col("hw_method") == "Holt-Winters").with_columns(pl.lit("all").alias("all")), ["all"], _m)
+    combo_check
+    return combo_check, combo_check_hw_rows
+
+
+@app.cell
 def _(compare, ev, pl, volatility):
     _z = volatility.Z80
     _s = pl.col("sigma") * pl.col("h").cast(pl.Float64).sqrt()
@@ -225,7 +243,7 @@ def _(end_week, ev, json, np, paths, pl, sigma, volatility):
 
 @app.cell
 def _(
-    RUN_T0, band_rows_pct, bands_all, bands_by_h, current_risk, end_week, ev, fig_bench, hw_methods, json, paths,
+    RUN_T0, band_rows_pct, bands_all, bands_by_h, combo_check, combo_check_hw_rows, current_risk, end_week, ev, fig_bench, hw_methods, json, paths,
     points_all, points_by_commodity, points_by_h, points_selected, pricing_all, pricing_by_commodity, pricing_by_h,
     retrieved, smoothing, time, var_ratio, volatility,
 ):
@@ -250,6 +268,8 @@ def _(
         "pricing_by_h": pricing_by_h.to_dicts(),
         "pricing_by_commodity": pricing_by_commodity.to_dicts(),
         "var_ratio": var_ratio,
+        "combo_check": combo_check.to_dicts(),
+        "combo_check_hw_rows": combo_check_hw_rows.to_dicts(),
         "current_risk": current_risk,
         "figures": {"other_methods": fig_bench},
         "runtime_min": round((time.time() - RUN_T0) / 60, 1),

@@ -398,11 +398,12 @@ Outlook only, not a guarantee. -AMIU</div>
 <tr><td>Global model (P50)</td><td class='n'>15.4%</td><td class='n'>-0.2%</td><td class='n'>44.0%</td></tr>
 <tr><td>Holt-Winters</td><td class='n'>16.1%</td><td class='n'>-4.2%</td><td class='n'>33.9%</td></tr>
 <tr><td>Holt-Winters, all gaps filled (check)</td><td class='n'>16.4%</td><td class='n'>-6.0%</td><td class='n'>35.0%</td></tr>
-<tr><td><b>Average: global model + Holt-Winters</b></td><td class='n'>15.2%</td><td class='n'>+1.1%</td><td class='n'>40.5%</td></tr>
+<tr><td>Average: global model + Holt-Winters</td><td class='n'>15.2%</td><td class='n'>+1.1%</td><td class='n'>40.5%</td></tr>
+<tr><td>Global model, change halved (post-hoc check)</td><td class='n'>15.0%</td><td class='n'>+2.3%</td><td class='n'>40.1%</td></tr>
 <tr><td>No change</td><td class='n'>15.5%</td><td class='n'>+0.0%</td><td class='n'>33.4%</td></tr>
 <tr><td>Seasonal naive</td><td class='n'>19.3%</td><td class='n'>-23.0%</td><td class='n'>33.1%</td></tr>
 </table></div>
-    <div><p class="small" style="margin-top:0">Holt-Winters (triple exponential smoothing, statsmodels, re-estimated at every forecast origin) needs two years of weekly prices per market. Only 84 of 1,290 forecast origins (6.5%) had two years without a reporting gap longer than 26 weeks; elsewhere it fell back to damped Holt (768) or no change (438). Overall it had 4.2% higher absolute error than no change (MAPE 16.1% vs 15.5%). Filling every gap by interpolation (a check added after the first result) allowed seasonal fits at 407 origins but gave 6.0% higher absolute error than no change. Per-market smoothing cannot borrow from other markets, which is the case for the global model. An equal-weight average of the global model and Holt-Winters, fixed before testing, had 1.1% lower absolute error than no change (better than no change at every horizon); the global model alone had 0.2% higher absolute error than no change. It was the most accurate method tried. The gain is small and comes from one test year, so the pilot would confirm it on new data before any switch.</p></div>
+    <div><p class="small" style="margin-top:0">Holt-Winters (triple exponential smoothing, statsmodels, re-estimated at every forecast origin) needs two years of weekly prices per market. Only 84 of 1,290 forecast origins (6.5%) had two years without a reporting gap longer than 26 weeks; elsewhere it fell back to damped Holt (768) or no change (438). Overall it had 4.2% higher absolute error than no change (MAPE 16.1% vs 15.5%). Filling every gap by interpolation (a check added after the first result) allowed seasonal fits at 407 origins but gave 6.0% higher absolute error than no change. Per-market smoothing cannot borrow from other markets, which is the case for the global model. An equal-weight average of the global model and Holt-Winters, fixed before testing, had 1.1% lower absolute error than no change (better than no change at every horizon); the global model alone had 0.2% higher absolute error than no change. A post-hoc check shows where the gain comes from: halving the global model's forecast change, with no Holt-Winters at all, gave 2.3% lower absolute error than no change. The average mostly damps the model towards no change. Where full seasonal Holt-Winters could be fitted (284 forecasts), it had 7.4% higher absolute error than no change, while the global model had 15.5% lower absolute error than no change. Damping is a candidate to test in the pilot, on new data.</p></div>
   </div>
   <h3>80% price ranges and the price of downside risk</h3>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start">
@@ -485,7 +486,7 @@ Outlook only, not a guarantee. -AMIU</div>
   <div class="grid2" style="margin-top:4mm">
     <div class="box small">
       <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · statsmodels · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
-      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about 6 minutes on a laptop, so running costs are low.
+      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about 5 minutes on a laptop, so running costs are low.
     </div>
     <div class="box small">
       <b>Governance</b><br>AMIU approves every batch · skill gate per series · versioned code, data and models · model cards · public scorecard · consent-based farmer registry (DPDP Act 2023) · CERT-In-aligned security · DLT-registered SMS templates · open formats and APIs.

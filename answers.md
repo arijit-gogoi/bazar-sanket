@@ -113,7 +113,7 @@ Stack
 - Production: PostgreSQL for records and audit logs, Parquet for analytical history, a small REST API (FastAPI) for the dashboard, partner systems and channel gateways, and a mobile-friendly web dashboard in Assamese and English.
 - Integrations: data.gov.in OGD API (working in the prototype); AMIU data feed (to be agreed); SMS via a DLT-registered gateway; WhatsApp Business Platform; an IVR provider; Bhashini services for Assamese translation and speech, subject to evaluation.
 
-Hosting. Assam State Data Centre or a MeitY-empanelled cloud region in India. Compute needs are modest: the prototype's complete pipeline, including a year-long backtest with 156 model fits run in parallel on all CPU cores, takes about 6 minutes on a laptop.
+Hosting. Assam State Data Centre or a MeitY-empanelled cloud region in India. Compute needs are modest: the prototype's complete pipeline, including a year-long backtest with 156 model fits run in parallel on all CPU cores, takes about 5 minutes on a laptop.
 
 ## 5. Development methodology & intermediate steps
 
@@ -277,14 +277,14 @@ Evidence so far (out of sample, 24 November 2025 to 16 November 2026)
 - Against no change, absolute error was 1.4% lower one week ahead and 0.3–1.2% higher at two to four weeks.
 - Of the three selected Pamohi (Garchuk) series, the model beat no change for green chilli (18.7% vs 20.7%); cabbage (20.9% vs 20.0%) and pumpkin (11.5% vs 9.7%) would be withheld by the skill gate.
 - Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts (no change: 12.8%); with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
-- Other methods: Holt-Winters 4.2% worse than no change (only 84 of 1,290 origins had two unbroken years); a pre-set average of the global model and Holt-Winters 1.1% better than no change, the best tried; volatility pricing of a 90% price floor overstated shortfalls (3.5% vs 2.5%).
+- Other methods: Holt-Winters 4.2% worse than no change (only 84 of 1,290 origins had two unbroken years); a pre-set average with the global model 1.1% better than no change, though damping the model alone did better (2.3%, post-hoc); volatility pricing of a 90% price floor overstated shortfalls (3.5% vs 2.5%).
 - Decision rule: it advised selling promptly in every test week for these perishables; blind holding would have lost 4.7–8.3%; perfect foresight shows up to 9.0% available to better forecasts.
 - Season-ahead check: profiles from earlier years only had 22.2 points average error in monthly price deviations, versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
 
 How to read these results
 Weekly vegetable prices are hard to forecast and no change is a strong benchmark. On public data, the model matches the no-change benchmark on average, is better one week ahead, is better for some series, calls the direction of moves more often, gives well-calibrated ranges and keeps working when local history is missing. This is why publication is gated per series. AMIU data with arrivals should add skill, and will be tested the same way.
 
-Prior research: global models across related series (Montero-Manso and Hyndman, 2021; M5 competition, 2022) and rolling-origin evaluation (Tashman, 2000), International Journal of Forecasting.
+Prior research: global models (Montero-Manso and Hyndman, 2021; M5 competition, 2022); rolling-origin evaluation (Tashman, 2000).
 
 Validation plan: six to eight weeks of shadow mode; go-live per series only where benchmarks are beaten; public scorecard; pilot thresholds agreed in advance (Section 12).
 

@@ -59,10 +59,16 @@ def bench_context(m: dict) -> dict[str, str]:
     def short(skill: float) -> str:
         return f"{f1(abs(skill))}% {'better' if skill > 0 else 'worse'} than no change"
 
+    chk = {r["method"]: r for r in b["combo_check"]}
+    halved = chk["Global model halved (post-hoc check)"]["skill_vs_naive"]
+    damping_explains = halved >= pa[COMBO]["skill_vs_naive"]
+    combo_clause = (
+        f"a pre-set average with the global model {short(pa[COMBO]['skill_vs_naive'])}"
+        + (f", though damping the model alone did better ({f1(halved)}%, post-hoc)" if damping_explains else "")
+    )
     c["other_short"] = (
         f"Other methods: Holt-Winters {short(pa[HW]['skill_vs_naive'])} (only {num(hw_k)} of {num(n_or)} origins had two "
-        f"unbroken years); a pre-set average of the global model and Holt-Winters {short(pa[COMBO]['skill_vs_naive'])}"
-        f"{', the best tried' if best == COMBO else ''}; volatility pricing of a 90% price floor {pricing_dir} shortfalls "
+        f"unbroken years); {combo_clause}; volatility pricing of a 90% price floor {pricing_dir} shortfalls "
         f"({f1(pr['price_ewma'])}% vs {f1(pr['realised'])}%)."
     )
 
@@ -84,12 +90,23 @@ def bench_context(m: dict) -> dict[str, str]:
         combo_where = f" (better than no change at {hs} week{'s' if combo_h[-1] > 1 else ''} ahead)"
     else:
         combo_where = ""
+    hwr = {r["method"]: r for r in b["combo_check_hw_rows"]}
+    if damping_explains:
+        why = (
+            f"A post-hoc check shows where the gain comes from: halving the global model's forecast change, with no Holt-Winters "
+            f"at all, gave {_vs_naive(halved)}. The average mostly damps the model towards no change. Where full seasonal "
+            f"Holt-Winters could be fitted ({num(hwr[HW]['n'])} forecasts), it had {_vs_naive(hwr[HW]['skill_vs_naive'])}, while "
+            f"the global model had {_vs_naive(hwr[MODEL]['skill_vs_naive'])}. Damping is a candidate to test in the pilot, on new data."
+        )
+    else:
+        why = (
+            f"A post-hoc check: halving the global model's forecast change alone gave {_vs_naive(halved)}, so Holt-Winters adds "
+            f"to the gain. The pilot would confirm this on new data before any switch."
+        )
     combo_txt = (
         f"An equal-weight average of the global model and Holt-Winters, fixed before testing, had "
-        f"{_vs_naive(pa[COMBO]['skill_vs_naive'])}{combo_where}; the global model alone had {_vs_naive(pa[MODEL]['skill_vs_naive'])}. "
-        + ("It was the most accurate method tried. " if best == COMBO else "")
-        + ("The gain is small and comes from one test year, so the pilot would confirm it on new data before any switch."
-           if pa[COMBO]["skill_vs_naive"] > 0 else "It did not beat no change either.")
+        f"{_vs_naive(pa[COMBO]['skill_vs_naive'])}{combo_where}; the global model alone had "
+        f"{_vs_naive(pa[MODEL]['skill_vs_naive'])}. " + why
     )
     c["other_reading_points"] = hw_txt + " " + combo_txt
     band_txt = (
@@ -136,10 +153,12 @@ def bench_context(m: dict) -> dict[str, str]:
              COMBO: "Average: global model + Holt-Winters", NAIVE: "No change", SNAIVE: "Seasonal naive"}
     t = ["<table><tr><th>Method (all horizons)</th><th class='n'>MAPE</th><th class='n'>Skill vs no change</th>"
          "<th class='n'>Direction correct</th></tr>"]
-    for r in b["points_all"]:
+    rows = list(b["points_all"])
+    k = next(i for i, r in enumerate(rows) if r["method"] == COMBO) + 1
+    rows.insert(k, chk["Global model halved (post-hoc check)"])
+    label["Global model halved (post-hoc check)"] = "Global model, change halved (post-hoc check)"
+    for r in rows:
         name = html.escape(label.get(r["method"], r["method"]))
-        if r["method"] == best:
-            name = f"<b>{name}</b>"
         t.append(_tr([f"<td>{name}</td>", f"<td class='n'>{f1(r['mape'])}%</td>",
                       f"<td class='n'>{r['skill_vs_naive']:+.1f}%</td>", f"<td class='n'>{f1(r['direction'])}%</td>"]))
     t.append("</table>")
