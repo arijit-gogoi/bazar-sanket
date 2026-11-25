@@ -1,0 +1,12 @@
+[project]
+name = "assam-price-advisory"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "marimo>=0.26.0",
+    "polars>=2.2.0",
+    "pyarrow>=26.0.1",
+    "requests>=2.34.2",
+    "scikit-learn>=1.9.1",
+    "seaborn>=0.13.2",
+]
