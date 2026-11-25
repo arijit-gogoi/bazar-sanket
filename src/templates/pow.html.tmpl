@@ -142,7 +142,7 @@ uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre
   <p style="margin-top:2mm"><b>Selection rule, fixed before any modelling:</b> the three Assam market × commodity series with the most weeks reported in the last 156 complete weeks (${win_start} to ${win_end}), whatever they are. Result: <b>${sel_market}</b> (${sel_district} district, Guwahati's main wholesale vegetable market) for <b>${sel_commodities}</b>, each reported in ${sel_weeks} of 156 weeks (${sel_cov}%). Even the best-covered Assam series miss a third of weeks, including a three-month gap when Agmarknet moved to its new platform.</p>
   <p>All three are perishable or semi-perishable vegetables, so the prototype focuses on short-horizon timing. Storable crops such as potato, paddy or mustard will be added in the pilot, as agreed with the department, using the same pipeline.</p>
   <h3>Comparable markets used for learning</h3>
-  <p>For the three commodities, the prototype also uses every market reported in ${comp_states} since 2016: ${comp_rows} records. ${comp_note}</p>
+  <p>For the three commodities, the prototype also uses every market reported in ${comp_states}: ${comp_rows} records, mostly from 2016 onward. ${comp_note}</p>
   ${data_summary_table}
 </section>
 
@@ -301,7 +301,7 @@ uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre
   <table>
     <tr><th>Source</th><th>Use</th><th>Status</th></tr>
     <tr><td>Agmarknet prices, Assam (all commodities, since ${assam_first_year})</td><td>Profile, selection, training, evaluation</td><td><span class="ok">used</span></td></tr>
-    <tr><td>Agmarknet prices, ${n_comp_states} neighbouring States (3 commodities, since 2016)</td><td>Training (global model), regional indices, seasonal profiles</td><td><span class="ok">used</span></td></tr>
+    <tr><td>Agmarknet prices, ${n_comp_states} neighbouring States (3 commodities, mostly since 2016)</td><td>Training (global model), regional indices, seasonal profiles</td><td><span class="ok">used</span></td></tr>
     <tr><td>AMIU prices and arrivals</td><td>Training, arrivals features, evaluation</td><td><span class="warn">requested</span> (not assumed)</td></tr>
     <tr><td>Futures prices; rainfall; cold-storage stocks</td><td>Supplementary features</td><td>to be assessed per commodity</td></tr>
   </table>

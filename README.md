@@ -52,7 +52,7 @@ The data snapshot used for the submission is `data/raw/ogd_prices.parquet`.
 
 Data: Agmarknet daily market prices, Directorate of Marketing & Inspection, Ministry of Agriculture & Farmers Welfare, via the data.gov.in Open Government Data API (resource `35985678-0d79-46b4-9ed6-6f13308a1d24`), used under the Government Open Data License – India. No departmental (AMIU) data are included.
 
-Code: Apache License 2.0 (see `LICENSE`).
+Code: no licence is granted at this time. Licence terms will be agreed with the department.
 
 ## Status and limitations
 

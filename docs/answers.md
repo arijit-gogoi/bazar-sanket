@@ -80,7 +80,7 @@ Prototype (built and run on real data; PDF, Section D)
 
 Test results (PDF, Sections E to H)
 - Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.4% for the model, 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 78.5% of actual prices; direction called correctly in 44.0% of cases versus 33.4% for no change.
-- Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts; with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
+- Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts (no change: 12.8%); with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
 - Decision rule: for these perishable vegetables it advised selling promptly in every test week; blind holding would have lost 4.7–8.3% of value, which the rule avoided; perfect foresight shows up to 9.0% available to better forecasts.
 - Season-ahead check: seasonal profiles estimated only from earlier years predicted monthly price deviations with 22.2 points average error versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
 
@@ -113,7 +113,7 @@ Stack
 - Production: PostgreSQL for records and audit logs, Parquet for analytical history, a small REST API (FastAPI) for the dashboard, partner systems and channel gateways, and a mobile-friendly web dashboard in Assamese and English.
 - Integrations: data.gov.in OGD API (working in the prototype); AMIU data feed (to be agreed); SMS via a DLT-registered gateway; WhatsApp Business Platform; an IVR provider; Bhashini services for Assamese translation and speech, subject to evaluation.
 
-Hosting. Assam State Data Centre or a MeitY-empanelled cloud region in India. Compute needs are modest: the prototype's complete pipeline, including a year-long backtest with 156 model fits run in parallel on all CPU cores, takes about 5 minutes on a laptop.
+Hosting. Assam State Data Centre or a MeitY-empanelled cloud region in India. Compute needs are modest: the prototype's complete pipeline, including a year-long backtest with 156 model fits run in parallel on all CPU cores, takes about 6 minutes on a laptop.
 
 ## 5. Development methodology & intermediate steps
 
@@ -276,7 +276,7 @@ Evidence so far (out of sample, 24 November 2025 to 16 November 2026)
 - Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.4% for the model, 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 78.5% of actual prices; direction called correctly in 44.0% of cases versus 33.4% for no change.
 - Against no change, absolute error was 1.4% lower one week ahead and 0.3–1.2% higher at two to four weeks.
 - Of the three selected Pamohi (Garchuk) series, the model beat no change for green chilli (18.7% vs 20.7%); cabbage (20.9% vs 20.0%) and pumpkin (11.5% vs 9.7%) would be withheld by the skill gate.
-- Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts; with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
+- Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts (no change: 12.8%); with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
 - Decision rule: for these perishable vegetables it advised selling promptly in every test week; blind holding would have lost 4.7–8.3% of value, which the rule avoided; perfect foresight shows up to 9.0% available to better forecasts.
 - Season-ahead check: seasonal profiles estimated only from earlier years predicted monthly price deviations with 22.2 points average error versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
 
@@ -343,7 +343,7 @@ Basis of differentiation
 The combination of (a) learning across markets to overcome incomplete data, (b) calibrated bands with public accuracy tracking, (c) farmer-level decision advice in Assamese, and (d) integration into existing AMIU and AEA workflows rather than a parallel app.
 
 IP and dependencies
-- Code written by the applicant, proposed for release under an open-source licence (Apache-2.0) or licensed to the department as agreed, so the State can run and extend it without lock-in. No patents are claimed.
+- Code written by the applicant. Licence terms are to be agreed with the department so the State can run and extend it without lock-in. No patents are claimed.
 - Key open-source dependencies: Python, polars, scikit-learn, marimo, seaborn, uv, PostgreSQL, FastAPI (permissive BSD, MIT and Apache-2.0 licences).
 - Data: Agmarknet via data.gov.in under GODL-India. Proprietary services only for delivery (SMS gateway, WhatsApp Business Platform, IVR provider), all replaceable.
 

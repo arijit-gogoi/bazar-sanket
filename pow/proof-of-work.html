@@ -99,7 +99,7 @@
 <pre>uv sync
 uv run python -I src/fetch.py pull --state Assam --since 2006-01-01      # optional: refresh data (needs a free data.gov.in API key)
 uv run python -I -X utf8 nb/profile.py      # data profile + selection of pilot series
-uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about 5 min)
+uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about 6 min)
 uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre>
   <p class="src">Data: Agmarknet daily mandi prices, Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare, published on data.gov.in (resource 35985678-0d79-46b4-9ed6-6f13308a1d24) under the Government Open Data License – India. Retrieved 25 November 2026. No departmental (AMIU) data were used.</p>
 </section>
@@ -149,7 +149,7 @@ uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre
   <p style="margin-top:2mm"><b>Selection rule, fixed before any modelling:</b> the three Assam market × commodity series with the most weeks reported in the last 156 complete weeks (27 November 2023 to 16 November 2026), whatever they are. Result: <b>Pamohi (Garchuk)</b> (Kamrup district, Guwahati's main wholesale vegetable market) for <b>green chilli, cabbage and pumpkin</b>, each reported in 102 of 156 weeks (65%). Even the best-covered Assam series miss a third of weeks, including a three-month gap when Agmarknet moved to its new platform.</p>
   <p>All three are perishable or semi-perishable vegetables, so the prototype focuses on short-horizon timing. Storable crops such as potato, paddy or mustard will be added in the pilot, as agreed with the department, using the same pipeline.</p>
   <h3>Comparable markets used for learning</h3>
-  <p>For the three commodities, the prototype also uses every market reported in West Bengal, Tripura, Nagaland, Meghalaya, Bihar, Manipur, Mizoram and Arunachal Pradesh since 2016: 3,36,760 records. West Bengal contributes the most (1,95,000 records); several North-Eastern States report only a few markets.</p>
+  <p>For the three commodities, the prototype also uses every market reported in West Bengal, Tripura, Nagaland, Meghalaya, Bihar, Manipur, Mizoram and Arunachal Pradesh: 3,36,760 records, mostly from 2016 onward. West Bengal contributes the most (1,95,000 records); several North-Eastern States report only a few markets.</p>
   <table><tr><th>Region</th><th>Commodity</th><th class='n'>Market series</th><th class='n'>Weeks with a price</th><th>First week</th></tr>
 <tr><td>Assam</td><td>Cabbage</td><td class='n'>78</td><td class='n'>4,179</td><td>2005-09-19</td></tr>
 <tr><td>Assam</td><td>Green Chilli</td><td class='n'>78</td><td class='n'>5,854</td><td>2005-09-19</td></tr>
@@ -253,12 +253,6 @@ Outlook only, not a guarantee. -AMIU</div>
       </div>
     </div>
   </div>
-  <h3>Voice (IVR) script — for farmers who prefer audio <span class="tag mock">MOCK-UP</span></h3>
-  <div class="grid2">
-    <div class="box small as"><b>আৰম্ভণি:</b> নমস্কাৰ। অসম কৃষি বিশ্ববিদ্যালয়ৰ বজাৰ সংকেতলৈ আপোনাক স্বাগতম। কেঁচা জলকীয়াৰ বাবে 1 টিপক, বন্ধাকবিৰ বাবে 2 টিপক, ৰঙালাউৰ বাবে 3 টিপক।<br><b>১ টিপিলে:</b> পামোহী (গৰচুক) বজাৰত কেঁচা জলকীয়াৰ এই সপ্তাহৰ দাম প্ৰতি কুইণ্টল 5,000 টকা। অহা সপ্তাহত দাম 4,170 টকাৰ পৰা 5,930 টকাৰ ভিতৰত থকাৰ সম্ভাৱনা। পৰামৰ্শ: এতিয়াই বিক্ৰী কৰক। এয়া পূৰ্বাভাস, নিশ্চয়তা নহয়।<br><b>শেষত:</b> পুনৰ শুনিবলৈ ৯ টিপক। কৃষি সম্প্ৰসাৰণ সহায়কৰ সৈতে কথা পাতিবলৈ ০ টিপক।<br><span style='font-family:Segoe UI;color:#777'>Draft translation, native review pending</span></div>
-    <div class="box small"><b>Greeting:</b> Namaskar. Welcome to Bazar Sanket from Assam Agricultural University. For green chilli press 1, for cabbage press 2, for pumpkin press 3.<br><b>On 1:</b> At Pamohi(Garchuk) market, green chilli is selling at 5,000 rupees per quintal this week. Next week the price is likely to be between 4,170 and 5,930 rupees. Advice: sell now. This is an outlook, not a guarantee.<br><b>Close:</b> Press 9 to hear again. Press 0 to reach your Agriculture Extension Assistant.</div>
-  </div>
-  <p class="src">SMS cost driver: Assamese needs Unicode (70 characters per SMS, 67 per part when longer), so an Assamese advisory takes several SMS parts; English without the ₹ sign fits GSM's 160 characters. Counts above are computed from the actual text.</p>
 </section>
 
 <section class="page">
@@ -306,8 +300,8 @@ Outlook only, not a guarantee. -AMIU</div>
       <table>
         <tr><th>Draft advisory</th><th>Signal</th><th>Checks</th><th>Action</th></tr>
         <tr><td>Green Chilli, Pamohi(Garchuk): next week ₹4,170–5,930 per quintal</td><td><span class='signal sig-SELL'>SELL NOW</span></td><td class='small'>✓ skill gate (18.7% vs 20.7%)<br>✓ reported this week<br>✓ no event notes</td><td><span class='btn pri'>Approve</span><span class='btn'>Edit</span><span class='btn'>Hold</span></td></tr>
-<tr><td>Cabbage, Pamohi(Garchuk): next week ₹990–1,400 per quintal</td><td><span class='signal sig-SELL'>SELL NOW</span></td><td class='small'>✗ skill gate (20.9% vs 20.0%)<br>✓ reported this week<br>✓ no event notes</td><td><span class='btn pri'>Approve</span><span class='btn'>Edit</span><span class='btn'>Hold</span></td></tr>
-<tr><td>Pumpkin, Pamohi(Garchuk): next week ₹1,480–1,970 per quintal</td><td><span class='signal sig-SELL'>SELL NOW</span></td><td class='small'>✗ skill gate (11.5% vs 9.7%)<br>✓ reported this week<br>✓ no event notes</td><td><span class='btn pri'>Approve</span><span class='btn'>Edit</span><span class='btn'>Hold</span></td></tr>
+<tr><td>Cabbage, Pamohi(Garchuk): this week ₹1,200 per quintal; no forecast sent (below benchmark)</td><td><span class='signal' style='background:#777'>PRICE ONLY</span></td><td class='small'>✗ skill gate (20.9% vs 20.0%)<br>✓ reported this week<br>✓ no event notes</td><td><span class='btn pri'>Approve</span><span class='btn'>Edit</span><span class='btn'>Hold</span></td></tr>
+<tr><td>Pumpkin, Pamohi(Garchuk): this week ₹1,800 per quintal; no forecast sent (below benchmark)</td><td><span class='signal' style='background:#777'>PRICE ONLY</span></td><td class='small'>✗ skill gate (11.5% vs 9.7%)<br>✓ reported this week<br>✓ no event notes</td><td><span class='btn pri'>Approve</span><span class='btn'>Edit</span><span class='btn'>Hold</span></td></tr>
       </table>
       <p class="small" style="margin:0">Every approval, edit and hold is logged with user, time and reason. Event notes (floods, strikes, export bans) can override any signal. A single switch pauses all outgoing messages.</p>
     </div>
@@ -315,13 +309,20 @@ Outlook only, not a guarantee. -AMIU</div>
 </section>
 
 <section class="page">
-  <h2>C (cont.) Season-ahead crop-planning card <span class="tag mock">MOCK-UP</span></h2>
-  <p>Before each sowing season, AEAs and planners receive one card per commodity. The seasonal profiles below are real prototype output (Section H tests them out of sample); the card layout is a mock-up.</p>
-  <img class="fig" src="../out/fig/f6_seasonal_profiles.png" alt="Seasonal price profiles">
+  <h2>C (cont.) Voice script and season-ahead crop-planning card <span class="tag mock">MOCK-UP</span></h2>
+  <h3 style="margin-top:0">Voice (IVR) script — for farmers who prefer audio <span class="tag mock">MOCK-UP</span></h3>
+  <div class="grid2">
+    <div class="box small as"><b>আৰম্ভণি:</b> নমস্কাৰ। অসম কৃষি বিশ্ববিদ্যালয়ৰ বজাৰ সংকেতলৈ আপোনাক স্বাগতম। কেঁচা জলকীয়াৰ বাবে 1 টিপক, বন্ধাকবিৰ বাবে 2 টিপক, ৰঙালাউৰ বাবে 3 টিপক।<br><b>১ টিপিলে:</b> পামোহী (গৰচুক) বজাৰত কেঁচা জলকীয়াৰ এই সপ্তাহৰ দাম প্ৰতি কুইণ্টল 5,000 টকা। অহা সপ্তাহত দাম 4,170 টকাৰ পৰা 5,930 টকাৰ ভিতৰত থকাৰ সম্ভাৱনা। পৰামৰ্শ: এতিয়াই বিক্ৰী কৰক। এয়া পূৰ্বাভাস, নিশ্চয়তা নহয়।<br><b>শেষত:</b> পুনৰ শুনিবলৈ ৯ টিপক। কৃষি সম্প্ৰসাৰণ সহায়কৰ সৈতে কথা পাতিবলৈ ০ টিপক।<br><span style='font-family:Segoe UI;color:#777'>Draft translation, native review pending</span></div>
+    <div class="box small"><b>Greeting:</b> Namaskar. Welcome to Bazar Sanket from Assam Agricultural University. For green chilli press 1, for cabbage press 2, for pumpkin press 3.<br><b>On 1:</b> At Pamohi(Garchuk) market, green chilli is selling at 5,000 rupees per quintal this week. Next week the price is likely to be between 4,170 and 5,930 rupees. Advice: sell now. This is an outlook, not a guarantee.<br><b>Close:</b> Press 9 to hear again. Press 0 to reach your Agriculture Extension Assistant.</div>
+  </div>
+  <p class="src">SMS cost driver: Assamese needs Unicode (70 characters per SMS, 67 per part when longer), so an Assamese advisory takes several SMS parts; English without the ₹ sign fits GSM's 160 characters. Counts above are computed from the actual text.</p>
+  <h3>Season-ahead crop-planning cards</h3>
+  <p>Before each sowing season, AEAs and planners receive one card per commodity. The seasonal profiles are real prototype output (Section H tests them out of sample); the card layout is a mock-up.</p>
+  <img class="fig" style="max-height:62mm;object-fit:contain" src="../out/fig/f6_seasonal_profiles.png" alt="Seasonal price profiles">
   <div class="grid3" style="margin-top:3mm">
-    <div class='box small'><b style='font-size:10pt'>Green Chilli</b> <span class='as'>কেঁচা জলকীয়া</span><br>Usually cheapest: <b>April, January</b><br>Usually dearest: <b>August, October</b><br>Typical swing within a year: about 60 points around the average price<br>Year-to-year spread in a given month (middle half of years): about 39 points<br><span style='color:#555'>Out-of-sample check on 7 past years: monthly error 23.6 points vs 31.5 assuming no seasonality.</span><br><i>Planning use:</i> plan sowing and harvest so that sales fall in dearer months where the crop allows; treat as a range, not a promise.</div>
-<div class='box small'><b style='font-size:10pt'>Cabbage</b> <span class='as'>বন্ধাকবি</span><br>Usually cheapest: <b>March, February</b><br>Usually dearest: <b>October, August</b><br>Typical swing within a year: about 91 points around the average price<br>Year-to-year spread in a given month (middle half of years): about 40 points<br><span style='color:#555'>Out-of-sample check on 7 past years: monthly error 24.6 points vs 43.6 assuming no seasonality.</span><br><i>Planning use:</i> plan sowing and harvest so that sales fall in dearer months where the crop allows; treat as a range, not a promise.</div>
-<div class='box small'><b style='font-size:10pt'>Pumpkin</b> <span class='as'>ৰঙালাউ</span><br>Usually cheapest: <b>April, May</b><br>Usually dearest: <b>October, November</b><br>Typical swing within a year: about 20 points around the average price<br>Year-to-year spread in a given month (middle half of years): about 20 points<br><span style='color:#555'>Out-of-sample check on 6 past years: monthly error 17.6 points vs 21.9 assuming no seasonality.</span><br><i>Planning use:</i> plan sowing and harvest so that sales fall in dearer months where the crop allows; treat as a range, not a promise.</div>
+    <div class='box small'><b style='font-size:10pt'>Green Chilli</b> <span class='as'>কেঁচা জলকীয়া</span><br>Usually cheapest: <b>April, January</b><br>Usually dearest: <b>August, October</b><br>Dearest month is typically about 82% above the cheapest<br>Between years, a given month's price varies by about ±21% (middle half of years)<br><span style='color:#555'>Out-of-sample check on 7 past years: monthly error 23.6 points vs 31.5 assuming no seasonality.</span><br><i>Planning use:</i> plan sowing and harvest so that sales fall in dearer months where the crop allows; treat as a range, not a promise.</div>
+<div class='box small'><b style='font-size:10pt'>Cabbage</b> <span class='as'>বন্ধাকবি</span><br>Usually cheapest: <b>March, February</b><br>Usually dearest: <b>October, August</b><br>Dearest month is typically about 149% above the cheapest<br>Between years, a given month's price varies by about ±22% (middle half of years)<br><span style='color:#555'>Out-of-sample check on 7 past years: monthly error 24.6 points vs 43.6 assuming no seasonality.</span><br><i>Planning use:</i> plan sowing and harvest so that sales fall in dearer months where the crop allows; treat as a range, not a promise.</div>
+<div class='box small'><b style='font-size:10pt'>Pumpkin</b> <span class='as'>ৰঙালাউ</span><br>Usually cheapest: <b>April, May</b><br>Usually dearest: <b>October, November</b><br>Dearest month is typically about 22% above the cheapest<br>Between years, a given month's price varies by about ±10% (middle half of years)<br><span style='color:#555'>Out-of-sample check on 6 past years: monthly error 17.6 points vs 21.9 assuming no seasonality.</span><br><i>Planning use:</i> plan sowing and harvest so that sales fall in dearer months where the crop allows; treat as a range, not a promise.</div>
   </div>
   <p class="small" style="margin-top:2mm">Planned extension: with AAU cost-of-cultivation and yield data, each card adds an indicative margin per bigha and its downside, so crops can be compared on expected income and risk, not price alone.</p>
 </section>
@@ -350,7 +351,7 @@ Outlook only, not a guarantee. -AMIU</div>
   <table>
     <tr><th>Source</th><th>Use</th><th>Status</th></tr>
     <tr><td>Agmarknet prices, Assam (all commodities, since 2005)</td><td>Profile, selection, training, evaluation</td><td><span class="ok">used</span></td></tr>
-    <tr><td>Agmarknet prices, 8 neighbouring States (3 commodities, since 2016)</td><td>Training (global model), regional indices, seasonal profiles</td><td><span class="ok">used</span></td></tr>
+    <tr><td>Agmarknet prices, 8 neighbouring States (3 commodities, mostly since 2016)</td><td>Training (global model), regional indices, seasonal profiles</td><td><span class="ok">used</span></td></tr>
     <tr><td>AMIU prices and arrivals</td><td>Training, arrivals features, evaluation</td><td><span class="warn">requested</span> (not assumed)</td></tr>
     <tr><td>Futures prices; rainfall; cold-storage stocks</td><td>Supplementary features</td><td>to be assessed per commodity</td></tr>
   </table>
@@ -396,17 +397,17 @@ Outlook only, not a guarantee. -AMIU</div>
     <li><b>Global model</b>: trained on all markets in Assam and neighbouring States.</li>
   </ul>
   <img class="fig" src="../out/fig/f5_stress_test.png" alt="Stress test">
-  <table><tr><th>Assam history before the test year</th><th class='n'>Forecasts</th><th class='n'>No change</th><th class='n'>Local model</th><th class='n'>Global model, same forecasts as local</th><th class='n'>Global model, all forecasts</th></tr>
-<tr><td>full history</td><td class='n'>4,697</td><td class='n'>15.5%</td><td class='n'>16.3%</td><td class='n'>14.0%</td><td class='n'>15.3%</td></tr>
-<tr><td>only 26 weeks of local history</td><td class='n'>4,697</td><td class='n'>15.5%</td><td class='n'>20.7%</td><td class='n'>13.8%</td><td class='n'>16.1%</td></tr>
-<tr><td>half of local weeks missing</td><td class='n'>4,697</td><td class='n'>15.5%</td><td class='n'>16.8%</td><td class='n'>13.4%</td><td class='n'>15.2%</td></tr>
-<tr><td>no local history at all</td><td class='n'>4,697</td><td class='n'>15.5%</td><td class='n'>not possible</td><td class='n'>–</td><td class='n'>14.9%</td></tr>
-</table><p class='small'>MAPE over horizons 1–4 weeks. A local model is fitted only for market series with at least 8 usable past weeks; the "same forecasts" column compares the global model on exactly those forecasts.</p>
+  <table><tr><th>Assam history before the test year</th><th class='n'>Forecasts with a local model</th><th class='n'>No change (same)</th><th class='n'>Local model</th><th class='n'>Global model (same)</th><th class='n'>No change, all forecasts</th><th class='n'>Global model, all forecasts</th></tr>
+<tr><td>full history</td><td class='n'>3,393 of 4,697</td><td class='n'>13.9%</td><td class='n'>16.3%</td><td class='n'>14.0%</td><td class='n'>15.5%</td><td class='n'>15.3%</td></tr>
+<tr><td>only 26 weeks of local history</td><td class='n'>1,984 of 4,697</td><td class='n'>12.8%</td><td class='n'>20.7%</td><td class='n'>13.8%</td><td class='n'>15.5%</td><td class='n'>16.1%</td></tr>
+<tr><td>half of local weeks missing</td><td class='n'>2,399 of 4,697</td><td class='n'>13.6%</td><td class='n'>16.8%</td><td class='n'>13.4%</td><td class='n'>15.5%</td><td class='n'>15.2%</td></tr>
+<tr><td>no local history at all</td><td class='n'>0 of 4,697</td><td class='n'>–</td><td class='n'>not possible</td><td class='n'>–</td><td class='n'>15.5%</td><td class='n'>14.9%</td></tr>
+</table><p class='small'>MAPE over horizons 1–4 weeks. A local model is fitted only for market series with at least 8 usable past weeks; (same) columns compare on exactly those forecasts.</p>
   <p>With only 26 weeks of local history, the global model's error (13.8%) was lower than the local model's (20.7%) on the same forecasts. With half of the local weeks removed at random, it was lower than the local model (13.4% vs 16.8%). With no Assam history at all, a local model is impossible; the global model learned only from neighbouring States and forecast Assam prices with 14.9% error, against 15.3% with full history and 15.5% for no change. That old, patchy Assam history added no accuracy here is itself informative: recent and comparable-market data carry most of the signal, so a short but regular AMIU feed can be more valuable than a long, broken archive. In short, learning from comparable markets is what makes forecasting possible where local data are short or missing, and local data refine it as they accumulate.</p>
 </section>
 
 <!-- ======================================================= G -->
-<section class="page">
+<section>
   <h2>G. From forecast to decision: Hold / Sell / Store <span class="tag built">BUILT + TESTED</span></h2>
   <p>The rule advises holding only when the median forecast, after weekly losses, beats today's price by at least 5%, and the pessimistic (P10) outcome after losses is no worse than 10% below today's price. Otherwise: sell now. Holding never exceeds the crop's safe shelf life.</p>
   <table><tr><th>Crop</th><th class='n'>Max. holding (weeks)</th><th class='n'>Loss per week held</th><th>Storable</th><th>Basis (illustrative)</th></tr>
@@ -420,12 +421,12 @@ Outlook only, not a guarantee. -AMIU</div>
 <tr><td>Green Chilli</td><td class='n'>48</td><td class='n'>0</td><td class='n'>+0.0%</td><td class='n'>-8.2%</td><td class='n'>+3.5%</td><td class='n'>0</td></tr>
 <tr><td>Pumpkin</td><td class='n'>45</td><td class='n'>0</td><td class='n'>+0.0%</td><td class='n'>-4.7%</td><td class='n'>+9.0%</td><td class='n'>0</td></tr>
 </table><p class='small'>Average value realised per quintal relative to selling at that week's price, after the assumed weekly losses. Evaluated only in weeks where every allowed holding period has an observed price.</p>
-  <p>For cabbage, the rule never advised holding in 47 test weeks; blindly holding for the maximum period would have changed the value realised by -8.3%. For green chilli, the rule never advised holding in 48 test weeks; blindly holding for the maximum period would have changed the value realised by -8.2%. For pumpkin, the rule never advised holding in 45 test weeks; blindly holding for the maximum period would have changed the value realised by -4.7%. Perfect foresight (last column) shows the value that better forecasts could unlock. For perishable vegetables the right default is to sell promptly unless a rise is both likely and large; the rule's value will be larger for storable crops such as potato or mustard, which the pilot will add.</p>
+  <p>The rule never advised holding in any of the 140 test weeks; blindly holding for the maximum period would have changed the value realised by -8.3% to -4.7%, depending on the crop. Perfect foresight (last column) shows the value that better forecasts could unlock. For perishable vegetables the right default is to sell promptly unless a rise is both likely and large; the rule's value will be larger for storable crops such as potato or mustard, which the pilot will add.</p>
   <div class="note">The parameters above are illustrative placeholders, not agronomic advice. In the project they will be set with AAU post-harvest specialists and AMIU for each crop, storage type and season, and the same backtest will be rerun before any advisory is published.</div>
 </section>
 
 <!-- ======================================================= H -->
-<section class="page">
+<section class="page" style="margin-top:7mm">
   <h2>H. Season-ahead outlook: does the seasonal pattern hold out of sample? <span class="tag built">BUILT + TESTED</span></h2>
   <p>Crop planning needs a view of prices months ahead. The prototype's first step is the seasonal price profile: how far each month's price typically sits above or below the year's average, pooled across Assam and neighbouring markets. To test it honestly, for each year we estimated the profile only from earlier years and compared it with the actual monthly pattern in Assam markets that year.</p>
   <table><tr><th>Commodity</th><th class='n'>Test years</th><th class='n'>Assam series-years</th><th class='n'>Error: profile from earlier years</th><th class='n'>Error: no seasonality</th><th class='n'>Median correlation</th></tr>
@@ -438,7 +439,7 @@ Outlook only, not a guarantee. -AMIU</div>
 </section>
 
 <!-- ======================================================= I -->
-<section class="page">
+<section>
   <h2>I. Target architecture <span class="tag plan">PLANNED</span></h2>
   <div class="arch">
     <div class="c"><b>Sources</b>AMIU daily prices &amp; arrivals (AEA entry)<br>Agmarknet / data.gov.in API<br>Neighbouring-State markets<br>Optional: IMD rainfall, active futures, cold-storage stocks</div>
@@ -449,7 +450,7 @@ Outlook only, not a guarantee. -AMIU</div>
   <div class="grid2" style="margin-top:4mm">
     <div class="box small">
       <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
-      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about 5 minutes on a laptop, so running costs are low.
+      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about 6 minutes on a laptop, so running costs are low.
     </div>
     <div class="box small">
       <b>Governance</b><br>AMIU approves every batch · skill gate per series · versioned code, data and models · model cards · public scorecard · consent-based farmer registry (DPDP Act 2023) · CERT-In-aligned security · DLT-registered SMS templates · open formats and APIs.
@@ -458,7 +459,7 @@ Outlook only, not a guarantee. -AMIU</div>
 </section>
 
 <!-- ======================================================= J -->
-<section class="page">
+<section class="page" style="margin-top:7mm">
   <h2>J. Limitations, assumptions and next steps</h2>
   <h3>Limitations of this prototype (stated plainly)</h3>
   <ul>

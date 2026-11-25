@@ -167,7 +167,16 @@ def decision_short(f: dict) -> str:
 
 def decision_reading(f: dict) -> str:
     txt = []
-    for r in f["decision"]:
+    rows = f["decision"]
+    if all(r["hold_signals"] == 0 for r in rows):
+        lo = min(r["hold_max_vs_sell_pct"] for r in rows)
+        hi = max(r["hold_max_vs_sell_pct"] for r in rows)
+        txt.append(
+            f"The rule never advised holding in any of the {sum(r['weeks'] for r in rows)} test weeks; blindly holding for the maximum "
+            f"period would have changed the value realised by {lo:+.1f}% to {hi:+.1f}%, depending on the crop."
+        )
+        rows = []
+    for r in rows:
         c = r["commodity"].lower()
         if r["hold_signals"] == 0:
             txt.append(
