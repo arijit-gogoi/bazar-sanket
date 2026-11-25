@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import html
 
-from .compare import COMBO, HW, HW_ALL, MODEL, NAIVE, SNAIVE
+from .compare import COMBO, HW, HW_ALL, HW_MUL, MODEL, NAIVE, SNAIVE
 from .report import f0, f1, num
 
 
@@ -67,20 +67,22 @@ def bench_context(m: dict) -> dict[str, str]:
         + (f", though damping the model alone did better ({f1(halved)}%, post-hoc)" if damping_explains else "")
     )
     c["other_short"] = (
-        f"Other methods: Holt-Winters {short(pa[HW]['skill_vs_naive'])} (only {num(hw_k)} of {num(n_or)} origins had two "
-        f"unbroken years); {combo_clause}; volatility pricing of a 90% price floor {pricing_dir} shortfalls "
+        f"Other methods: Holt-Winters {short(pa[HW]['skill_vs_naive'])}; {combo_clause}; volatility pricing of a 90% "
+        f"price floor {pricing_dir} shortfalls "
         f"({f1(pr['price_ewma'])}% vs {f1(pr['realised'])}%)."
     )
 
     # ---------------------------------------------------------------- PDF readings
     hw_txt = (
-        f"Holt-Winters (triple exponential smoothing, statsmodels, re-estimated at every forecast origin) needs two years of weekly "
+        f"Holt-Winters (statsmodels, re-estimated at every forecast origin; additive on the log price, so seasonal effects "
+        f"are multiplicative on the rupee price) needs two years of weekly "
         f"prices per market. Only {num(hw_k)} of {num(n_or)} forecast origins ({f1(100 * hw_k / n_or)}%) had two years without a "
         f"reporting gap longer than {b['hw_settings']['max_gap_weeks']} weeks; elsewhere it fell back to damped Holt ({num(hw_dh)}) or no change ({num(hw_nc)}). "
         f"Overall it had {_vs_naive(pa[HW]['skill_vs_naive'])} (MAPE {f1(pa[HW]['mape'])}% vs {f1(pa[NAIVE]['mape'])}%). "
         f"Filling every gap by interpolation (a check added after the first result) allowed seasonal fits at {num(hwall_k)} "
-        f"origins but gave {_vs_naive(pa[HW_ALL]['skill_vs_naive'])}. Per-market smoothing cannot borrow from other markets, "
-        f"which is the case for the global model."
+        f"origins but gave {_vs_naive(pa[HW_ALL]['skill_vs_naive'])}. The textbook multiplicative form on the rupee price "
+        f"(added on request) gave {_vs_naive(pa[HW_MUL]['skill_vs_naive'])}. Per-market smoothing cannot borrow from other "
+        f"markets; the global model can."
     )
     n_h = len({r["h"] for r in b["points_by_h"]})
     if len(combo_h) == n_h:
@@ -110,11 +112,9 @@ def bench_context(m: dict) -> dict[str, str]:
     )
     c["other_reading_points"] = hw_txt + " " + combo_txt
     band_txt = (
-        f"For 80% price ranges, the {'global model' if best_band.startswith('Global') else 'volatility'} bands scored best: "
-        f"interval score {f1(band_model['interval_score_pct'])}% of price for the global model vs "
-        f"{f1(band_vol['interval_score_pct'])}% for a volatility band around today's price, with coverage "
-        f"{f1(band_model['coverage'])}% vs {f1(band_vol['coverage'])}% and average width {f1(band_model['width_pct'])}% vs "
-        f"{f1(band_vol['width_pct'])}% of price."
+        f"For 80% price ranges, the {'global model' if best_band.startswith('Global') else 'volatility'} bands scored best "
+        f"(interval score {f1(band_model['interval_score_pct'])}% of price vs {f1(band_vol['interval_score_pct'])}% for a "
+        f"volatility band around today's price)."
     )
     r1 = pr_h[1]["price_ewma"] / pr_h[1]["realised"] if pr_h[1]["realised"] > 0 else float("nan")
     if 0.8 <= r1 <= 1.25:
@@ -128,12 +128,10 @@ def bench_context(m: dict) -> dict[str, str]:
     else:
         why = ""
     pricing_txt = (
-        f"Volatility pricing puts a rupee value on downside risk: the expected shortfall below a price floor, which is the value of "
-        f"a put option. For a floor at 90% of today's price, prices from recent volatility predicted an average shortfall of "
+        f"Volatility pricing values downside risk as a put option: the expected shortfall below a price floor. For a floor at 90% of today's price, prices from recent volatility predicted an average shortfall of "
         f"{f1(pr['price_ewma'])}% of today's price ({f1(pr['price_model'])}% from the global model's band); the shortfall that "
         f"actually occurred averaged {f1(pr['realised'])}%. {h1_txt}; {hmax} weeks ahead the price was {ratio_hmax:.1f} times the "
-        f"outcome{why}. Such prices would be calibrated on backtests like this before any use, for example to cost a "
-        f"price-support scheme."
+        f"outcome{why}. Such prices need calibration on backtests like this before any use."
     )
     ex = next((r for r in b["current_risk"] if r["commodity"] == "Green Chilli"), b["current_risk"][0])
     e2 = ex["by_h"]["2"]
@@ -150,6 +148,7 @@ def bench_context(m: dict) -> dict[str, str]:
 
     # ---------------------------------------------------------------- tables
     label = {MODEL: "Global model (P50)", HW: "Holt-Winters", HW_ALL: "Holt-Winters, all gaps filled (check)",
+             HW_MUL: "Holt-Winters, multiplicative (check)",
              COMBO: "Average: global model + Holt-Winters", NAIVE: "No change", SNAIVE: "Seasonal naive"}
     t = ["<table><tr><th>Method (all horizons)</th><th class='n'>MAPE</th><th class='n'>Skill vs no change</th>"
          "<th class='n'>Direction correct</th></tr>"]
@@ -182,7 +181,8 @@ def bench_context(m: dict) -> dict[str, str]:
                       f"<td class='n'>{r['price_model']:.2f}%</td>"]))
     t.append("</table>")
     c["table_other_pricing"] = "\n".join(t)
-    c["pipeline_min"] = f0(max(1, round(m["forecast"]["runtime_min"] + b["runtime_min"])))
+    c["pipeline_min"] = f0(max(1, round(m["forecast"]["runtime_min"] + b["runtime_min"]
+                                        + m.get("extended", {}).get("runtime_min", 0))))
     c["other_band_rows"] = f"{f1(b['band_rows_pct'])}"
     c["vol_lambda"] = f"{b['vol_settings']['lambda']:.2f}"
     c["vol_min_changes"] = str(b["vol_settings"]["min_changes"])

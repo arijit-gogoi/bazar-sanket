@@ -14,6 +14,8 @@ from .volatility import interval_score
 MODEL = "Global model (P50)"
 HW = "Holt-Winters"
 HW_ALL = "Holt-Winters, all gaps interpolated (sensitivity check)"
+HW_MUL = "Holt-Winters, multiplicative on rupee price (check)"
+LGBM = "Global model, LightGBM (P50)"
 COMBO = "Average of global model and Holt-Winters"
 NAIVE = "No change"
 SNAIVE = "Seasonal naive"

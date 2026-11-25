@@ -3,6 +3,7 @@ name = "assam-price-advisory"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "lightgbm>=4.7.0",
     "marimo>=0.26.0",
     "polars>=2.2.0",
     "pyarrow>=26.0.1",

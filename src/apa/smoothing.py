@@ -14,6 +14,13 @@ Method, fixed before any test result was seen:
 * Sensitivity variant (``max_gap=None``), added after the first result showed how
   rarely two unbroken years exist: every gap in the window is interpolated.
 
+Model form. Additive trend and season on the log price (``form="log"``, the primary
+form) is multiplicative on the rupee price: the seasonal effect is a factor and the
+trend a growth rate. The textbook multiplicative Holt-Winters method (``form="mul"``,
+added on request after the first results) fits the rupee price directly with an
+additive damped trend and multiplicative 52-week seasonality; same window and
+fallback rules, with gaps filled by interpolating the log price.
+
 Speed: one task per series, run in parallel worker processes (joblib/loky) on all
 CPU cores, one thread each.
 """
@@ -46,7 +53,7 @@ def fit_window(y: np.ndarray, t: int, max_gap: int | None = MAX_GAP) -> int:
     return max(a, t - MAX_WINDOW + 1)
 
 
-def forecast_origin(y: np.ndarray, t: int, max_gap: int | None = MAX_GAP) -> tuple[np.ndarray, str, bool]:
+def forecast_origin(y: np.ndarray, t: int, max_gap: int | None = MAX_GAP, form: str = "log") -> tuple[np.ndarray, str, bool]:
     """Forecast log-price changes for every horizon from origin t (y[t] must be observed).
 
     Returns (changes, method used, optimiser converged)."""
@@ -62,16 +69,21 @@ def forecast_origin(y: np.ndarray, t: int, max_gap: int | None = MAX_GAP) -> tup
     if seg.size < MIN_HOLT:
         return zero, "no change (short history)", True
     seasonal = seg.size >= MIN_SEASONAL
+    mul = form == "mul"
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         try:
             res = ExponentialSmoothing(
-                seg, trend="add", damped_trend=True,
-                seasonal="add" if seasonal else None,
+                np.exp(seg) if mul else seg, trend="add", damped_trend=True,
+                seasonal=("mul" if mul else "add") if seasonal else None,
                 seasonal_periods=SEASON if seasonal else None,
                 initialization_method="heuristic",
             ).fit()
             path = np.asarray(res.forecast(max(HORIZONS)), dtype=float)
+            if mul:
+                if not np.all(np.isfinite(path)) or np.any(path <= 0):
+                    return zero, "no change (fit failed)", False
+                path = np.log(path)
         except Exception:  # noqa: BLE001 - any numerical failure falls back to no change
             return zero, "no change (fit failed)", False
     f = path[[h - 1 for h in HORIZONS]] - y[t]
@@ -82,18 +94,19 @@ def forecast_origin(y: np.ndarray, t: int, max_gap: int | None = MAX_GAP) -> tup
     return f, "Holt-Winters" if seasonal else "damped Holt (under 2 years of data)", converged
 
 
-def _series_task(key: tuple, y: np.ndarray, idx: np.ndarray, weeks: list, max_gap: int | None) -> list[tuple]:
+def _series_task(key: tuple, y: np.ndarray, idx: np.ndarray, weeks: list, max_gap: int | None, form: str = "log") -> list[tuple]:
     from threadpoolctl import threadpool_limits
 
     out = []
     with threadpool_limits(limits=1):
         for t, w in zip(idx, weeks):
-            f, kind, conv = forecast_origin(y, int(t), max_gap)
+            f, kind, conv = forecast_origin(y, int(t), max_gap, form)
             out.append((key, w, f, kind, conv))
     return out
 
 
-def backtest(grid: pl.DataFrame, origins: pl.DataFrame, max_gap: int | None = MAX_GAP, n_jobs: int = N_JOBS) -> pl.DataFrame:
+def backtest(grid: pl.DataFrame, origins: pl.DataFrame, max_gap: int | None = MAX_GAP, n_jobs: int = N_JOBS,
+             form: str = "log") -> pl.DataFrame:
     """Holt-Winters forecasts from every origin in ``origins`` (KEY + week).
 
     ``grid`` is the complete weekly grid (KEY, week, lp) used by the main model.
@@ -110,7 +123,7 @@ def backtest(grid: pl.DataFrame, origins: pl.DataFrame, max_gap: int | None = MA
         weeks = want_map[key]
         tasks.append((key, y, np.array([pos[w] for w in weeks], dtype=int), weeks))
     tasks.sort(key=lambda tk: -tk[2].size)  # most origins first, for load balance
-    parts = Parallel(n_jobs=n_jobs, backend="loky", batch_size=1)(delayed(_series_task)(*tk, max_gap) for tk in tasks)
+    parts = Parallel(n_jobs=n_jobs, backend="loky", batch_size=1)(delayed(_series_task)(*tk, max_gap, form) for tk in tasks)
     rows = [
         {**dict(zip(KEY, key)), "week": w, "h": h, "hw": float(f[j]), "hw_method": kind, "hw_converged": conv}
         for part in parts
@@ -118,6 +131,6 @@ def backtest(grid: pl.DataFrame, origins: pl.DataFrame, max_gap: int | None = MA
         for j, h in enumerate(HORIZONS)
     ]
     n_fit = sum(tk[2].size for tk in tasks)
-    print(f"holt-winters (max gap {max_gap}): {n_fit} origin fits over {len(tasks)} series on {n_jobs} workers in {time.time() - t0:.0f}s", flush=True)
+    print(f"holt-winters ({form}, max gap {max_gap}): {n_fit} origin fits over {len(tasks)} series on {n_jobs} workers in {time.time() - t0:.0f}s", flush=True)
     return pl.DataFrame(rows).with_columns(pl.col("h").cast(pl.Int32))
 

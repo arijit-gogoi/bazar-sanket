@@ -13,10 +13,11 @@ The prototype uses only public data: Agmarknet daily mandi prices published on d
 5. **stress-tests** forecasting when local history is short, gappy or absent;
 6. converts forecast bands into **Hold / Sell / Store** advice and backtests that rule;
 7. estimates **season-ahead** price profiles and checks them out of sample;
-8. tries **other methods** on the same forecasts: Holt-Winters exponential smoothing (statsmodels), an average of the global model and Holt-Winters, and **volatility pricing** of downside risk (the expected shortfall below a price floor);
-9. renders the proposal answers and the Proof of Work from the generated metrics, so no number is typed by hand.
+8. tries **other methods** on the same forecasts: Holt-Winters exponential smoothing (statsmodels; additive on the log price, plus the textbook multiplicative form as a check), an average of the global model and Holt-Winters, **LightGBM** as the learner of the global model, and **volatility pricing** of downside risk (the expected shortfall below a price floor);
+9. repeats the accuracy test on **every Assam commodity with good data** (a coverage rule fixed in advance: at least 1,000 market-weeks with a price in the last 156 weeks and 100 in the test year);
+10. renders the proposal answers and the Proof of Work from the generated metrics, so no number is typed by hand.
 
-The rendered report is in [`docs/index.html`](docs/index.html) (also published with GitHub Pages) and [`proof-of-work.pdf`](proof-of-work.pdf). The proposal text is in [`answers.md`](answers.md).
+The rendered report is in [`docs/index.html`](docs/index.html) (also published with GitHub Pages) and [`proof-of-work.pdf`](proof-of-work.pdf). The proposal text is in [`answers.md`](answers.md). Every commodity in the downloaded data, and how each is used, is listed in [`COMMODITIES.md`](COMMODITIES.md).
 
 ## Reproduce
 
@@ -31,6 +32,8 @@ uv run python -I src/fetch.py consolidate
 uv run python -I -X utf8 nb/profile.py
 uv run python -I -X utf8 nb/forecast.py      # uses all CPU cores
 uv run python -I -X utf8 nb/benchmarks.py    # Holt-Winters and volatility pricing, all CPU cores
+uv run python -I -X utf8 nb/extended.py      # LightGBM, multiplicative Holt-Winters, more commodities
+uv run python -I -X utf8 src/commodities.py  # COMMODITIES.md
 # proposal answers, report and PDF
 uv run python -I -X utf8 src/render.py --pdf
 # or everything after the optional refresh, in one command
@@ -44,15 +47,16 @@ The data snapshot used for the submission is `data/raw/ogd_prices.parquet`.
 | Path | Contents |
 |---|---|
 | `src/fetch.py` | data.gov.in OGD API client; caches every page with its query and retrieval time |
-| `src/apa/clean.py` | market-name harmonisation, weekly aggregation, outlier flags, coverage, selection rule |
+| `src/apa/clean.py` | market-name harmonisation, weekly aggregation, outlier flags, coverage, selection rule, good-data commodity rule |
 | `src/apa/features.py` | past-only features, regional indices, targets |
-| `src/apa/model.py` | quantile gradient boosting, parallel task runner, rolling-origin backtest, scores |
+| `src/apa/model.py` | quantile gradient boosting (scikit-learn; LightGBM as an option), parallel task runner, rolling-origin backtest, scores |
 | `src/apa/advisory.py` | Hold / Sell / Store decision rule (illustrative parameters) |
 | `src/apa/seasonal.py` | season-ahead price profiles and their out-of-sample check |
-| `src/apa/smoothing.py` | Holt-Winters benchmark (statsmodels), re-estimated at every forecast origin, in parallel |
+| `src/apa/smoothing.py` | Holt-Winters benchmark (statsmodels; log-additive or textbook multiplicative), re-estimated at every forecast origin, in parallel |
 | `src/apa/volatility.py` | EWMA volatility, volatility bands, pricing of downside risk (Black-76 put value) |
 | `src/apa/compare.py` | scores for point forecasts and 80% ranges on identical rows |
-| `nb/profile.py`, `nb/forecast.py`, `nb/benchmarks.py` | marimo notebooks that run the analysis and write `out/metrics_*.json` and figures |
+| `nb/profile.py`, `nb/forecast.py`, `nb/benchmarks.py`, `nb/extended.py` | marimo notebooks that run the analysis and write `out/metrics_*.json` and figures |
+| `src/commodities.py` | writes `COMMODITIES.md` from the data snapshot and the generated metrics |
 | `src/render.py`, `src/templates/`, `src/apa/report*.py` | proposal answers and report rendered from `out/metrics.json` |
 | `src/pipeline.py` | runs every step above in order |
 

@@ -34,8 +34,11 @@ def _(mo):
 
         * **Holt-Winters** (triple exponential smoothing, statsmodels): additive damped
           trend + additive 52-week seasonality on the log price of each market series,
-          re-estimated at every forecast origin. A pre-set equal-weight average of the
-          global model and Holt-Winters is also scored.
+          re-estimated at every forecast origin. On the rupee price this is the
+          multiplicative form (seasonal factors, growth-rate trend). A pre-set equal-weight
+          average of the global model and Holt-Winters is also scored. The textbook
+          multiplicative method on the rupee price (`seasonal="mul"`) was added on request
+          after the first results, as a check.
         * **Volatility pricing:** an exponentially weighted (RiskMetrics-style) estimate of
           weekly price volatility turns into (a) an 80% price band and (b) a rupee price
           for downside risk: the expected shortfall below a floor (the value of a put
@@ -73,25 +76,32 @@ def _(bt, grid, smoothing):
     # sensitivity variant: interpolate every gap (added after seeing how few unbroken windows exist)
     hw_all = smoothing.backtest(grid, _origins, max_gap=None).rename(
         {"hw": "hw_all", "hw_method": "hw_all_method", "hw_converged": "hw_all_converged"})
-    return hw, hw_all
+    # textbook multiplicative Holt-Winters on the rupee price (added on request after the first results)
+    hw_mul = smoothing.backtest(grid, _origins, form="mul").rename(
+        {"hw": "hw_mul", "hw_method": "hw_mul_method", "hw_converged": "hw_mul_converged"})
+    return hw, hw_all, hw_mul
 
 
 @app.cell
-def _(bt, features, grid, hw, hw_all, pl, volatility):
+def _(bt, features, grid, hw, hw_all, hw_mul, pl, volatility):
     sigma = volatility.ewma_sigma(grid)
     ev = (
         bt.join(hw, on=[*features.KEY, "week", "h"], how="left")
         .join(hw_all, on=[*features.KEY, "week", "h"], how="left")
+        .join(hw_mul, on=[*features.KEY, "week", "h"], how="left")
         .join(sigma, on=[*features.KEY, "week"], how="left")
         .with_columns(((pl.col("q50") + pl.col("hw")) / 2).alias("combo"))
     )
     assert ev.height == bt.height and ev.get_column("hw").null_count() == 0 and ev.get_column("hw_all").null_count() == 0
+    assert ev.get_column("hw_mul").null_count() == 0
     _o = ev.filter(pl.col("h") == 1)
     hw_methods = pl.concat([
         _o.group_by(pl.col("hw_method").alias("method")).agg(pl.len().alias("origins"), pl.col("hw_converged").mean().mul(100).alias("converged_pct"))
         .with_columns(pl.lit("primary").alias("variant")),
         _o.group_by(pl.col("hw_all_method").alias("method")).agg(pl.len().alias("origins"), pl.col("hw_all_converged").mean().mul(100).alias("converged_pct"))
         .with_columns(pl.lit("all gaps interpolated").alias("variant")),
+        _o.group_by(pl.col("hw_mul_method").alias("method")).agg(pl.len().alias("origins"), pl.col("hw_mul_converged").mean().mul(100).alias("converged_pct"))
+        .with_columns(pl.lit("multiplicative on rupee price").alias("variant")),
     ]).sort("variant", "origins", descending=[True, True])
     hw_methods
     return ev, hw_methods
@@ -113,6 +123,7 @@ def _(compare, ev, pl):
         compare.MODEL: pl.col("q50"),
         compare.HW: pl.col("hw"),
         compare.HW_ALL: pl.col("hw_all"),
+        compare.HW_MUL: pl.col("hw_mul"),
         compare.COMBO: pl.col("combo"),
         compare.NAIVE: pl.lit(0.0),
         compare.SNAIVE: pl.col("sn").fill_null(0.0),
@@ -178,7 +189,7 @@ def _(ev, pl, volatility):
 
 @app.cell
 def _(compare, mo, pl, plt, points_by_h, pricing_by_h, retrieved, sns, viz):
-    _fig, (_a1, _a2) = plt.subplots(1, 2, figsize=(10.5, 3.5), gridspec_kw={"width_ratios": [1.5, 1]})
+    _fig, (_a1, _a2) = plt.subplots(1, 2, figsize=(10.5, 3.0), gridspec_kw={"width_ratios": [1.5, 1]})
     _pal = {compare.MODEL: viz.PALETTE["model"], compare.HW: "#7b4ea3", compare.HW_ALL: "#b9a3d6",
             compare.COMBO: "#5aa0c8", compare.NAIVE: viz.PALETTE["naive"]}
     _short = {compare.MODEL: "global model", compare.HW: "Holt-Winters", compare.HW_ALL: "Holt-Winters, all gaps filled",

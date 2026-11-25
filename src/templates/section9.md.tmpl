@@ -1,5 +1,5 @@
 Development testing
-Data checks (dates, prices, duplicates, market names, outliers, cached API pages with retrieval times); no look-ahead (only data known at the forecast week); one command reproduces every number; automated tests in continuous integration.
+Data checks (dates, prices, duplicates, market names, outliers, cached API pages with retrieval times); no look-ahead; one command reproduces every number; automated tests in continuous integration.
 
 Measures
 MAPE and ₹ error versus no-change and seasonal-naive benchmarks; direction; 80% band calibration; value of advice versus selling at once; robustness to short, gappy or absent history; in the pilot, delivery, comprehension, usefulness, decisions and prices received.
@@ -10,12 +10,11 @@ Evidence so far (out of sample, ${test_start} to ${end_week})
 - ${res_selected}
 - ${stress_short}
 - ${other_short}
+- ${ext_short}
 - ${decision_short}
 - ${season_short}
 
 How to read these results
 ${reading_short}
-
-Prior research: global models (Montero-Manso and Hyndman, 2021; M5 competition, 2022); rolling-origin evaluation (Tashman, 2000).
 
 Validation plan: six to eight weeks of shadow mode; go-live per series only where benchmarks are beaten; public scorecard; pilot thresholds agreed in advance (Section 12).

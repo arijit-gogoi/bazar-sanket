@@ -1,7 +1,7 @@
 """Regenerate every metric, figure, proposal answer and the PDF from the cached raw data.
 
 Usage (from project root):
-    uv run python -I src/pipeline.py            # profile, forecast, other methods, render + PDF
+    uv run python -I src/pipeline.py            # profile, forecast, other methods, extension, render + PDF
     uv run python -I src/pipeline.py --no-pdf   # skip the Chrome PDF step
 
 Data refresh (src/fetch.py) is separate because it needs a data.gov.in API key.
@@ -22,6 +22,8 @@ def main() -> None:
         ["nb/profile.py"],
         ["nb/forecast.py"],
         ["nb/benchmarks.py"],
+        ["nb/extended.py"],
+        ["src/commodities.py"],
         ["src/render.py"] + ([] if "--no-pdf" in sys.argv else ["--pdf"]),
     ]
     t0 = time.time()

@@ -137,3 +137,36 @@ def select_pairs(cov: pl.DataFrame, k: int = 3) -> pl.DataFrame:
         .first()
     )
     return dom.sort(["weeks", "days", "market_key", "commodity"], descending=[True, True, False, False]).head(k)
+
+
+# --------------------------------------------------------------------------- extended commodity set
+GOOD_DATA_MIN_WEEKS_3Y = 1000  # market-weeks with a price in the last 156 complete weeks
+GOOD_DATA_MIN_WEEKS_1Y = 100   # market-weeks with a price in the last 52 complete weeks (the test year)
+
+
+def commodity_coverage(wk: pl.LazyFrame, end: dt.date, state: str = "Assam") -> pl.DataFrame:
+    """Per commodity (name as published): market-weeks with a reported price in the last
+    156 and the last 52 complete weeks, counting the dominant variety of each market.
+
+    "Good data" rule for the extended test (fixed before any model was run on it):
+    at least GOOD_DATA_MIN_WEEKS_3Y market-weeks in 156 weeks and at least
+    GOOD_DATA_MIN_WEEKS_1Y in the last 52. Coverage only; accuracy plays no part."""
+    out = None
+    for weeks, name in ((156, "weeks_3y"), (52, "weeks_1y")):
+        cov = coverage(wk, end - dt.timedelta(weeks=weeks - 1), end, state=state)
+        dom = (
+            cov.sort(["weeks", "days", "variety"], descending=[True, True, False])
+            .group_by(["state", "market_key", "commodity"], maintain_order=True)
+            .first()
+        )
+        part = dom.group_by("commodity").agg(
+            pl.col("weeks").sum().alias(name), pl.len().alias(name.replace("weeks", "markets"))
+        )
+        out = part if out is None else out.join(part, on="commodity", how="full", coalesce=True)
+    return (
+        out.with_columns(pl.col("^weeks_.*$", "^markets_.*$").fill_null(0))
+        .with_columns(
+            ((pl.col("weeks_3y") >= GOOD_DATA_MIN_WEEKS_3Y) & (pl.col("weeks_1y") >= GOOD_DATA_MIN_WEEKS_1Y)).alias("good_data")
+        )
+        .sort(["good_data", "weeks_3y", "commodity"], descending=[True, True, False])
+    )

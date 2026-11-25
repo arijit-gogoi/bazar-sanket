@@ -4,6 +4,11 @@ Global model: one scikit-learn HistGradientBoostingRegressor per horizon and
 quantile (10th, 50th, 90th percentile), trained on all series together. It
 accepts missing feature values natively, so gaps need no imputation.
 
+Alternative learner (``learner="lgbm"``, added on request after the first
+results): LightGBM with the same quantile loss and settings mirrored from the
+scikit-learn model (iterations, leaves, minimum leaf size, L2 penalty, learning
+rate), fixed before it was run. Not tuned on test data.
+
 Backtest protocol (no lookahead): at each refit week T the model is trained
 only on examples whose target week t+h is <= T, then used for origins
 T .. T+refit_every-1. Features at an origin use only weeks <= that origin.
@@ -33,7 +38,14 @@ QUANTILES = (0.1, 0.5, 0.9)
 N_JOBS = os.cpu_count() or 1
 
 
-def make(q: float, local: bool = False, categorical: list[int] | None = None) -> HistGradientBoostingRegressor:
+def make(q: float, local: bool = False, categorical: list[int] | None = None, learner: str = "hgb"):
+    if learner == "lgbm":
+        from lightgbm import LGBMRegressor
+
+        return LGBMRegressor(
+            objective="quantile", alpha=q, learning_rate=0.05, n_estimators=250, num_leaves=31,
+            min_child_samples=40, reg_lambda=1.0, n_jobs=1, verbose=-1, random_state=0, deterministic=True,
+        )
     if local:  # small-data settings for single-series ("local") models
         return HistGradientBoostingRegressor(
             loss="quantile", quantile=q, learning_rate=0.05, max_iter=100, max_leaf_nodes=8,
@@ -78,7 +90,7 @@ def frame_arrays(g: pl.DataFrame, feats: list[str], store: ArrayStore, tag: str)
     return out
 
 
-def _fit_predict(xpath, ypath, train, test, cols, cat, local):
+def _fit_predict(xpath, ypath, train, test, cols, cat, local, learner="hgb"):
     from threadpoolctl import threadpool_limits
 
     X = np.load(xpath, mmap_mode="r")
@@ -93,18 +105,22 @@ def _fit_predict(xpath, ypath, train, test, cols, cat, local):
         cat_k = [int(np.flatnonzero(kept == c)[0]) for c in (cat or []) if c in kept] if not local else None
         xtr, xte = xtr[:, keep], xte[:, keep]
         ytr = np.asarray(y[train])
-        models = [make(q, local=local, categorical=cat_k).fit(xtr, ytr) for q in QUANTILES]
+        if learner == "lgbm":
+            models = [make(q, learner="lgbm").fit(xtr, ytr, categorical_feature=cat_k or "auto") for q in QUANTILES]
+        else:
+            models = [make(q, local=local, categorical=cat_k).fit(xtr, ytr) for q in QUANTILES]
         p = np.column_stack([m.predict(xte) for m in models])
     return np.sort(p, axis=1), len(train)  # sort guards against quantile crossing
 
 
-def task(arr: dict, h: int, train: np.ndarray, test: np.ndarray, local: bool = False, cols: list[str] | None = None) -> dict:
+def task(arr: dict, h: int, train: np.ndarray, test: np.ndarray, local: bool = False, cols: list[str] | None = None,
+         learner: str = "hgb") -> dict:
     feats = arr["feats"]
     col_idx = [feats.index(c) for c in cols] if cols is not None else None
     space = cols if cols is not None else feats
     cat = [space.index(c) for c in CATEGORICAL if c in space]
     return {"xpath": arr["xpath"], "ypath": arr[f"ypath{h}"], "train": train, "test": test,
-            "cols": col_idx, "cat": cat, "local": local}
+            "cols": col_idx, "cat": cat, "local": local, "learner": learner}
 
 
 def run_tasks(tasks: list[dict], n_jobs: int = N_JOBS) -> list[tuple[np.ndarray, int]]:
@@ -134,6 +150,7 @@ def rolling_backtest(
     last_week: dt.date,
     refit_every: int = 4,
     n_jobs: int = N_JOBS,
+    learner: str = "hgb",
 ) -> pl.DataFrame:
     """Rolling-origin evaluation. Returns one row per (series, origin, horizon)."""
     t0 = time.time()
@@ -160,7 +177,7 @@ def rolling_backtest(
                 )
                 if test.size == 0:
                     continue
-                tasks.append(task(arr, h, train_index(arr, h, T), test))
+                tasks.append(task(arr, h, train_index(arr, h, T), test, learner=learner))
                 meta.append((T, h))
         results = run_tasks(tasks, n_jobs)
     finally:
@@ -180,7 +197,7 @@ def rolling_backtest(
                 pl.lit(n_train).alias("n_train"),
             )
         )
-    print(f"backtest: {len(tasks)} fit tasks x {len(QUANTILES)} quantiles on {n_jobs} workers in {time.time() - t0:.0f}s", flush=True)
+    print(f"backtest ({learner}): {len(tasks)} fit tasks x {len(QUANTILES)} quantiles on {n_jobs} workers in {time.time() - t0:.0f}s", flush=True)
     return pl.concat(out)
 
 

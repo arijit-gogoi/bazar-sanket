@@ -68,7 +68,7 @@
 </style>
 </head>
 <body>
-<nav style="font:10pt sans-serif;padding:3mm 0;border-bottom:1px solid #ccc;margin-bottom:4mm"><a href="proof-of-work.pdf">Proof of Work (PDF)</a> · <a href="answers.md">Proposal answers (text)</a> · <a href="https://github.com/arijit-gogoi/bazar-sanket">Source code and data</a></nav>
+<nav style="font:10pt sans-serif;padding:3mm 0;border-bottom:1px solid #ccc;margin-bottom:4mm"><a href="proof-of-work.pdf">Proof of Work (PDF)</a> · <a href="answers.md">Proposal answers (text)</a> · <a href="https://github.com/arijit-gogoi/bazar-sanket/blob/main/COMMODITIES.md">Commodities downloaded</a> · <a href="https://github.com/arijit-gogoi/bazar-sanket">Source code and data</a></nav>
 <!-- ======================================================= COVER -->
 <section class="page">
   <div class="small">NESFIC 2026 · Challenge NESFIC-D-35 · Agriculture Department, Government of Assam</div>
@@ -88,7 +88,7 @@
     <ul>
       <li><b>The problem, measured</b> (Section A): gaps, renamed markets and patchy reporting in the public Assam record.</li>
       <li><b>User journey and mock-ups</b> (Sections B–C): Assamese and English SMS, WhatsApp card and voice script; Extension Assistant dashboard; AMIU review console; crop-planning card. All mock-ups show real prototype outputs for the week of 16 November 2026.</li>
-      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks and other methods (Holt-Winters, volatility pricing), a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
+      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks and other methods (Holt-Winters, volatility pricing, LightGBM), repeated on all 11 Assam commodities with good data, a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
       <li><b>Target architecture, limitations and next steps</b> (Sections I–J).</li>
     </ul>
     <p class="small" style="margin:0">Labels used throughout: <span class="tag built">BUILT + TESTED</span> working code run on real data · <span class="tag mock">MOCK-UP</span> design shown with real prototype numbers, not yet deployed · <span class="tag plan">PLANNED</span> part of the proposal, not yet built.</p>
@@ -101,6 +101,8 @@ uv run python -I src/fetch.py pull --state Assam --since 2006-01-01      # optio
 uv run python -I -X utf8 nb/profile.py      # data profile + selection of pilot series
 uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about 5 min)
 uv run python -I -X utf8 nb/benchmarks.py   # Holt-Winters and volatility pricing on the same forecasts
+uv run python -I -X utf8 nb/extended.py     # LightGBM, multiplicative Holt-Winters, more commodities
+uv run python -I -X utf8 src/commodities.py # COMMODITIES.md: every downloaded commodity and its use
 uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF
 uv run python -I src/pipeline.py              # or: all of the above (except the refresh) in one command</pre>
   <p class="src">Data: Agmarknet daily mandi prices, Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare, published on data.gov.in (resource 35985678-0d79-46b4-9ed6-6f13308a1d24) under the Government Open Data License – India. Retrieved 25 November 2026. No departmental (AMIU) data were used.</p>
@@ -398,12 +400,13 @@ Outlook only, not a guarantee. -AMIU</div>
 <tr><td>Global model (P50)</td><td class='n'>15.4%</td><td class='n'>-0.2%</td><td class='n'>44.0%</td></tr>
 <tr><td>Holt-Winters</td><td class='n'>16.1%</td><td class='n'>-4.2%</td><td class='n'>33.9%</td></tr>
 <tr><td>Holt-Winters, all gaps filled (check)</td><td class='n'>16.4%</td><td class='n'>-6.0%</td><td class='n'>35.0%</td></tr>
+<tr><td>Holt-Winters, multiplicative (check)</td><td class='n'>16.1%</td><td class='n'>-4.5%</td><td class='n'>33.9%</td></tr>
 <tr><td>Average: global model + Holt-Winters</td><td class='n'>15.2%</td><td class='n'>+1.1%</td><td class='n'>40.5%</td></tr>
 <tr><td>Global model, change halved (post-hoc check)</td><td class='n'>15.0%</td><td class='n'>+2.3%</td><td class='n'>40.1%</td></tr>
 <tr><td>No change</td><td class='n'>15.5%</td><td class='n'>+0.0%</td><td class='n'>33.4%</td></tr>
 <tr><td>Seasonal naive</td><td class='n'>19.3%</td><td class='n'>-23.0%</td><td class='n'>33.1%</td></tr>
 </table></div>
-    <div><p class="small" style="margin-top:0">Holt-Winters (triple exponential smoothing, statsmodels, re-estimated at every forecast origin) needs two years of weekly prices per market. Only 84 of 1,290 forecast origins (6.5%) had two years without a reporting gap longer than 26 weeks; elsewhere it fell back to damped Holt (768) or no change (438). Overall it had 4.2% higher absolute error than no change (MAPE 16.1% vs 15.5%). Filling every gap by interpolation (a check added after the first result) allowed seasonal fits at 407 origins but gave 6.0% higher absolute error than no change. Per-market smoothing cannot borrow from other markets, which is the case for the global model. An equal-weight average of the global model and Holt-Winters, fixed before testing, had 1.1% lower absolute error than no change (better than no change at every horizon); the global model alone had 0.2% higher absolute error than no change. A post-hoc check shows where the gain comes from: halving the global model's forecast change, with no Holt-Winters at all, gave 2.3% lower absolute error than no change. The average mostly damps the model towards no change. Where full seasonal Holt-Winters could be fitted (284 forecasts), it had 7.4% higher absolute error than no change, while the global model had 15.5% lower absolute error than no change. Damping is a candidate to test in the pilot, on new data.</p></div>
+    <div><p class="small" style="margin-top:0">Holt-Winters (statsmodels, re-estimated at every forecast origin; additive on the log price, so seasonal effects are multiplicative on the rupee price) needs two years of weekly prices per market. Only 84 of 1,290 forecast origins (6.5%) had two years without a reporting gap longer than 26 weeks; elsewhere it fell back to damped Holt (768) or no change (438). Overall it had 4.2% higher absolute error than no change (MAPE 16.1% vs 15.5%). Filling every gap by interpolation (a check added after the first result) allowed seasonal fits at 407 origins but gave 6.0% higher absolute error than no change. The textbook multiplicative form on the rupee price (added on request) gave 4.5% higher absolute error than no change. Per-market smoothing cannot borrow from other markets; the global model can. An equal-weight average of the global model and Holt-Winters, fixed before testing, had 1.1% lower absolute error than no change (better than no change at every horizon); the global model alone had 0.2% higher absolute error than no change. A post-hoc check shows where the gain comes from: halving the global model's forecast change, with no Holt-Winters at all, gave 2.3% lower absolute error than no change. The average mostly damps the model towards no change. Where full seasonal Holt-Winters could be fitted (284 forecasts), it had 7.4% higher absolute error than no change, while the global model had 15.5% lower absolute error than no change. Damping is a candidate to test in the pilot, on new data.</p></div>
   </div>
   <h3>80% price ranges and the price of downside risk</h3>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start">
@@ -420,7 +423,55 @@ Outlook only, not a guarantee. -AMIU</div>
 </table></div>
   </div>
   <p class="small">Ranges are scored on the 86.0% of forecasts with a volatility estimate (at least 8 past weekly changes). Interval score = width plus a penalty for each miss (lower is better). Shortfall = average amount by which the price h weeks later fell below a floor at 90% of today's price, in % of today's price. Volatility: exponentially weighted (λ = 0.94 per week) standard deviation of weekly log price changes, scaled by √h; prices from the Black-76 put formula.</p>
-  <p class="small">For 80% price ranges, the global model bands scored best: interval score 69.4% of price for the global model vs 76.3% for a volatility band around today's price, with coverage 78.3% vs 81.5% and average width 42.3% vs 50.0% of price. Volatility pricing puts a rupee value on downside risk: the expected shortfall below a price floor, which is the value of a put option. For a floor at 90% of today's price, prices from recent volatility predicted an average shortfall of 3.5% of today's price (3.4% from the global model's band); the shortfall that actually occurred averaged 2.5%. One week ahead the two were close (1.6% vs 1.4%); 4 weeks ahead the price was 1.6 times the outcome, because weekly vegetable prices partly revert after jumps: price changes over 4 weeks varied only 1.6 times as much as over one week, not 4 times as volatility scaled with time assumes. Such prices would be calibrated on backtests like this before any use, for example to cost a price-support scheme. Example for the week of the mock-ups: a floor at 90% of this week's green chilli price at Pamohi(Garchuk) (₹5,000 per quintal), two weeks ahead, is priced at about ₹360 per quintal from recent volatility and ₹180 from the global model's band.</p>
+  <p class="small">For 80% price ranges, the global model bands scored best (interval score 69.4% of price vs 76.3% for a volatility band around today's price). Volatility pricing values downside risk as a put option: the expected shortfall below a price floor. For a floor at 90% of today's price, prices from recent volatility predicted an average shortfall of 3.5% of today's price (3.4% from the global model's band); the shortfall that actually occurred averaged 2.5%. One week ahead the two were close (1.6% vs 1.4%); 4 weeks ahead the price was 1.6 times the outcome, because weekly vegetable prices partly revert after jumps: price changes over 4 weeks varied only 1.6 times as much as over one week, not 4 times as volatility scaled with time assumes. Such prices need calibration on backtests like this before any use. Example for the week of the mock-ups: a floor at 90% of this week's green chilli price at Pamohi(Garchuk) (₹5,000 per quintal), two weeks ahead, is priced at about ₹360 per quintal from recent volatility and ₹180 from the global model's band.</p>
+</section>
+
+<section class="page">
+  <h2>E (cont.) LightGBM and more commodities <span class="tag built">BUILT + TESTED</span></h2>
+  <p class="small">Added on request after the first results; settings were fixed before each run and the advisory is unchanged. <b>LightGBM</b>, a second gradient-boosting library, replaces scikit-learn as the learner of the global model (same features, quantile loss and refit weeks; tree settings mirrored, not tuned). <b>More commodities</b>: every Assam commodity with good data, by a coverage rule fixed before any model was run on them: at least 1,000 market-weeks with a price in the last 156 weeks and at least 100 in the test year. 11 commodities qualify: Bhindi(Ladies Finger), Bitter gourd, Bottle gourd, Brinjal, Cabbage, Capsicum, Cauliflower, Ginger(Green), Green Chilli, Pumpkin and Tomato. Assam markets only (neighbouring-State prices were fetched for the pilot commodities only); accuracy only, since storage and shelf-life rules exist for the pilot commodities alone. The list of all downloaded commodities, with the reason each was or was not used, is <code>COMMODITIES.md</code> in the repository.</p>
+  <img class="fig" src="fig/f8_more_commodities.png" alt="Accuracy by commodity: global model with scikit-learn and LightGBM, Holt-Winters">
+  <table><tr><th>Commodity (Assam)</th><th class='n'>Forecasts</th><th class='n'>MAPE, no change</th><th class='n'>Global, scikit-learn</th><th class='n'>Global, LightGBM</th><th class='n'>Holt-Winters (log)</th><th class='n'>Holt-Winters (mult.)</th></tr>
+<tr><td><b>All 11 commodities</b></td><td class='n'>12,762</td><td class='n'>17.8%</td><td class='n'>+1.6%</td><td class='n'>+1.4%</td><td class='n'>-4.5%</td><td class='n'>-4.7%</td></tr>
+<tr><td>Pumpkin</td><td class='n'>1,830</td><td class='n'>9.6%</td><td class='n'>-3.9%</td><td class='n'>-4.4%</td><td class='n'>-6.2%</td><td class='n'>-6.7%</td></tr>
+<tr><td>Tomato</td><td class='n'>1,494</td><td class='n'>18.3%</td><td class='n'>+0.2%</td><td class='n'>-0.0%</td><td class='n'>-6.5%</td><td class='n'>-5.0%</td></tr>
+<tr><td>Brinjal</td><td class='n'>1,458</td><td class='n'>19.0%</td><td class='n'>+9.6%</td><td class='n'>+9.5%</td><td class='n'>-4.4%</td><td class='n'>-4.9%</td></tr>
+<tr><td>Green Chilli</td><td class='n'>1,438</td><td class='n'>18.1%</td><td class='n'>+0.7%</td><td class='n'>-0.2%</td><td class='n'>-4.1%</td><td class='n'>-4.6%</td></tr>
+<tr><td>Cabbage</td><td class='n'>1,429</td><td class='n'>20.4%</td><td class='n'>+7.0%</td><td class='n'>+6.7%</td><td class='n'>-2.7%</td><td class='n'>-2.4%</td></tr>
+<tr><td>Bitter gourd</td><td class='n'>1,163</td><td class='n'>15.4%</td><td class='n'>-2.4%</td><td class='n'>-1.6%</td><td class='n'>-6.9%</td><td class='n'>-7.3%</td></tr>
+<tr><td>Cauliflower</td><td class='n'>1,096</td><td class='n'>28.2%</td><td class='n'>+2.7%</td><td class='n'>+2.5%</td><td class='n'>-2.3%</td><td class='n'>-4.0%</td></tr>
+<tr><td>Capsicum</td><td class='n'>859</td><td class='n'>13.2%</td><td class='n'>-3.4%</td><td class='n'>-3.2%</td><td class='n'>-1.0%</td><td class='n'>-1.6%</td></tr>
+<tr><td>Bottle gourd</td><td class='n'>692</td><td class='n'>19.9%</td><td class='n'>+8.1%</td><td class='n'>+8.4%</td><td class='n'>-6.7%</td><td class='n'>-8.4%</td></tr>
+<tr><td>Ginger(Green)</td><td class='n'>687</td><td class='n'>19.7%</td><td class='n'>-4.9%</td><td class='n'>-4.5%</td><td class='n'>-2.1%</td><td class='n'>-1.2%</td></tr>
+<tr><td>Bhindi(Ladies Finger)</td><td class='n'>616</td><td class='n'>18.8%</td><td class='n'>+12.9%</td><td class='n'>+12.5%</td><td class='n'>-9.9%</td><td class='n'>-10.6%</td></tr>
+</table>
+  <p class="small">Skill: % reduction in mean absolute error versus no change (negative = worse), on identical rows for every method. Holt-Winters (log): additive trend and season on the log price; (mult.): textbook multiplicative season on the rupee price. Notebook <code>nb/extended.py</code>.</p>
+</section>
+
+<section class="page">
+  <h2>E (cont.) LightGBM and more commodities: what the results show <span class="tag built">BUILT + TESTED</span></h2>
+  <h3>LightGBM as the learner, on the main backtest rows</h3>
+  <table><tr><th>Main backtest rows</th><th class='n'>MAPE</th><th class='n'>Skill vs no change</th><th class='n'>Direction</th><th class='n'>80% band coverage</th><th class='n'>Interval score</th></tr>
+<tr><td>Global model, scikit-learn (advisory)</td><td class='n'>15.4%</td><td class='n'>-0.2%</td><td class='n'>44.0%</td><td class='n'>78.5%</td><td class='n'>70.8%</td></tr>
+<tr><td>Global model, LightGBM</td><td class='n'>15.4%</td><td class='n'>-0.7%</td><td class='n'>44.2%</td><td class='n'>78.1%</td><td class='n'>71.3%</td></tr>
+<tr><td>No change</td><td class='n'>15.5%</td><td class='n'>+0.0%</td><td class='n'>33.4%</td><td class='n'>–</td><td class='n'>–</td></tr>
+<tr><td>Seasonal naive</td><td class='n'>19.3%</td><td class='n'>-23.0%</td><td class='n'>33.1%</td><td class='n'>–</td><td class='n'>–</td></tr>
+</table>
+  <p>On the main backtest rows (4,697 forecasts), LightGBM had slightly lower accuracy than the scikit-learn model: 0.7% higher absolute error than no change against 0.2% higher absolute error than no change; its 80% bands held 78.1% of actual prices (scikit-learn 78.5%).</p>
+  <h3>More commodities</h3>
+  <p>Across the 11 commodities (12,762 forecasts, 210 market series), the global model had 1.6% lower absolute error than no change with scikit-learn and 1.4% lower absolute error than no change with LightGBM; it beat no change for 7 of 11 commodities with scikit-learn and 5 with LightGBM. Holt-Winters had 4.5% higher absolute error than no change on the log price and 4.7% higher absolute error than no change in the textbook multiplicative form, so the form made little difference. A full seasonal fit was possible at only 221 of 3,523 forecast origins; on those 737 forecasts Holt-Winters did worse still (9.6% higher absolute error than no change), while the global model had 8.2% lower absolute error than no change.</p>
+  <p>On the pilot commodities' rows (the same 4,697 forecasts as Section E), the model trained on the 11 Assam commodities had 1.3% lower absolute error than no change, against 0.2% higher absolute error than no change for the main model (three commodities, with neighbouring-State data). This post-hoc comparison does not separate the effect of more commodities from that of leaving out neighbour-State data. The advisory is unchanged; training on more commodities is a candidate for the pilot's model comparison on new data.</p>
+  <h3>Commodities left out by the good-data rule</h3>
+  <table><tr><th>Not modelled (best covered)</th><th class='n'>Market-weeks, 156 weeks</th><th class='n'>Market-weeks, test year</th><th>Reason</th></tr>
+<tr><td>Lemon</td><td class='n'>1,989</td><td class='n'>49</td><td>under 100 in the test year</td></tr>
+<tr><td>Potato</td><td class='n'>583</td><td class='n'>501</td><td>under 1,000 in 156 weeks (few prices before the test year)</td></tr>
+<tr><td>Beetroot</td><td class='n'>561</td><td class='n'>354</td><td>under 1,000 in 156 weeks (few prices before the test year)</td></tr>
+<tr><td>Beans</td><td class='n'>379</td><td class='n'>96</td><td>under 1,000 in 156 weeks; under 100 in the test year</td></tr>
+<tr><td>Onion</td><td class='n'>377</td><td class='n'>375</td><td>under 1,000 in 156 weeks (few prices before the test year)</td></tr>
+<tr><td>Carrot</td><td class='n'>351</td><td class='n'>349</td><td>under 1,000 in 156 weeks (few prices before the test year)</td></tr>
+<tr><td>French Beans (Frasbean)</td><td class='n'>279</td><td class='n'>0</td><td>under 1,000 in 156 weeks; under 100 in the test year</td></tr>
+<tr><td>Raddish</td><td class='n'>265</td><td class='n'>264</td><td>under 1,000 in 156 weeks (few prices before the test year)</td></tr>
+</table>
+  <p class="small">Interval score as on the Other methods page (lower is better). A market-week is one market reporting a price in one week (main variety). The full list of commodity names downloaded, with row counts, dates and the use of each, is <code>COMMODITIES.md</code> in the repository.</p>
 </section>
 
 <!-- ======================================================= F -->
@@ -486,7 +537,7 @@ Outlook only, not a guarantee. -AMIU</div>
   <div class="grid2" style="margin-top:4mm">
     <div class="box small">
       <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · statsmodels · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
-      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about 5 minutes on a laptop, so running costs are low.
+      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about 11 minutes on a laptop, so running costs are low.
     </div>
     <div class="box small">
       <b>Governance</b><br>AMIU approves every batch · skill gate per series · versioned code, data and models · model cards · public scorecard · consent-based farmer registry (DPDP Act 2023) · CERT-In-aligned security · DLT-registered SMS templates · open formats and APIs.

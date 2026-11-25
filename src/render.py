@@ -1,7 +1,7 @@
 """Render the proposal answers and the Proof of Work from generated metrics.
 
 Every number in answers.md and proof-of-work.html comes from out/metrics.json,
-which merges the outputs of nb/profile.py, nb/forecast.py and nb/benchmarks.py. Templates use
+which merges the outputs of nb/profile.py, nb/forecast.py, nb/benchmarks.py and nb/extended.py. Templates use
 string.Template placeholders (${name}); a missing value is an error, never a
 silent blank.
 
@@ -124,18 +124,21 @@ def main() -> None:
 
     from apa.report import build_context
     from apa.report_bench import bench_context
+    from apa.report_ext import ext_context
     from apa.report_html import html_context
 
     prof = json.loads((OUT / "metrics_profile.json").read_text(encoding="utf-8"))
     fc = json.loads((OUT / "metrics_forecast.json").read_text(encoding="utf-8"))
     bench = json.loads((OUT / "metrics_benchmarks.json").read_text(encoding="utf-8"))
-    metrics = {"profile": prof, "forecast": fc, "benchmarks": bench,
+    ext = json.loads((OUT / "metrics_extended.json").read_text(encoding="utf-8"))
+    metrics = {"profile": prof, "forecast": fc, "benchmarks": bench, "extended": ext,
                "rendered_at": dt.datetime.now().isoformat(timespec="seconds")}
     (OUT / "metrics.json").write_text(json.dumps(metrics, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
 
     ctx = build_context(metrics)
     ctx.update(html_context(metrics, ctx))
     ctx.update(bench_context(metrics))
+    ctx.update(ext_context(metrics))
 
     def render(name: str, extra: dict | None = None) -> str:
         t = Template((TPL / name).read_text(encoding="utf-8"))
@@ -163,6 +166,7 @@ def main() -> None:
     nav = (
         '<nav style="font:10pt sans-serif;padding:3mm 0;border-bottom:1px solid #ccc;margin-bottom:4mm">'
         '<a href="proof-of-work.pdf">Proof of Work (PDF)</a> · <a href="answers.md">Proposal answers (text)</a> · '
+        f'<a href="{ctx["repo_url"]}/blob/main/COMMODITIES.md">Commodities downloaded</a> · '
         f'<a href="{ctx["repo_url"]}">Source code and data</a></nav>'
     )
     (docs / "index.html").write_text(render("pow.html.tmpl", {"figdir": "fig/", "site_nav": nav}), encoding="utf-8")

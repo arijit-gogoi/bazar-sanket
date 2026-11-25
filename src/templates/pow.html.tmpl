@@ -88,7 +88,7 @@ ${site_nav}
     <ul>
       <li><b>The problem, measured</b> (Section A): gaps, renamed markets and patchy reporting in the public Assam record.</li>
       <li><b>User journey and mock-ups</b> (Sections B–C): Assamese and English SMS, WhatsApp card and voice script; Extension Assistant dashboard; AMIU review console; crop-planning card. All mock-ups show real prototype outputs for the week of ${end_week}.</li>
-      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks and other methods (Holt-Winters, volatility pricing), a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
+      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks and other methods (Holt-Winters, volatility pricing, LightGBM), repeated on all ${ext_k} Assam commodities with good data, a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
       <li><b>Target architecture, limitations and next steps</b> (Sections I–J).</li>
     </ul>
     <p class="small" style="margin:0">Labels used throughout: <span class="tag built">BUILT + TESTED</span> working code run on real data · <span class="tag mock">MOCK-UP</span> design shown with real prototype numbers, not yet deployed · <span class="tag plan">PLANNED</span> part of the proposal, not yet built.</p>
@@ -101,6 +101,8 @@ uv run python -I src/fetch.py pull --state Assam --since 2006-01-01      # optio
 uv run python -I -X utf8 nb/profile.py      # data profile + selection of pilot series
 uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about ${runtime_min} min)
 uv run python -I -X utf8 nb/benchmarks.py   # Holt-Winters and volatility pricing on the same forecasts
+uv run python -I -X utf8 nb/extended.py     # LightGBM, multiplicative Holt-Winters, more commodities
+uv run python -I -X utf8 src/commodities.py # COMMODITIES.md: every downloaded commodity and its use
 uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF
 uv run python -I src/pipeline.py              # or: all of the above (except the refresh) in one command</pre>
   <p class="src">Data: Agmarknet daily mandi prices, Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare, published on data.gov.in (resource 35985678-0d79-46b4-9ed6-6f13308a1d24) under the Government Open Data License – India. Retrieved ${retrieved}. No departmental (AMIU) data were used.</p>
@@ -342,6 +344,27 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
   </div>
   <p class="small">Ranges are scored on the ${other_band_rows}% of forecasts with a volatility estimate (at least ${vol_min_changes} past weekly changes). Interval score = width plus a penalty for each miss (lower is better). Shortfall = average amount by which the price h weeks later fell below a floor at 90% of today's price, in % of today's price. Volatility: exponentially weighted (λ = ${vol_lambda} per week) standard deviation of weekly log price changes, scaled by √h; prices from the Black-76 put formula.</p>
   <p class="small">${other_reading_risk}</p>
+</section>
+
+<section class="page">
+  <h2>E (cont.) LightGBM and more commodities <span class="tag built">BUILT + TESTED</span></h2>
+  <p class="small">${ext_intro}</p>
+  <img class="fig" src="${figdir}f8_more_commodities.png" alt="Accuracy by commodity: global model with scikit-learn and LightGBM, Holt-Winters">
+  ${table_ext_commodities}
+  <p class="small">Skill: % reduction in mean absolute error versus no change (negative = worse), on identical rows for every method. Holt-Winters (log): additive trend and season on the log price; (mult.): textbook multiplicative season on the rupee price. Notebook <code>nb/extended.py</code>.</p>
+</section>
+
+<section class="page">
+  <h2>E (cont.) LightGBM and more commodities: what the results show <span class="tag built">BUILT + TESTED</span></h2>
+  <h3>LightGBM as the learner, on the main backtest rows</h3>
+  ${table_ext_main}
+  <p>${ext_reading_lgbm}</p>
+  <h3>More commodities</h3>
+  <p>${ext_reading_comm}</p>
+  <p>${ext_reading_end}</p>
+  <h3>Commodities left out by the good-data rule</h3>
+  ${table_ext_excluded}
+  <p class="small">Interval score as on the Other methods page (lower is better). A market-week is one market reporting a price in one week (main variety). The full list of commodity names downloaded, with row counts, dates and the use of each, is <code>COMMODITIES.md</code> in the repository.</p>
 </section>
 
 <!-- ======================================================= F -->

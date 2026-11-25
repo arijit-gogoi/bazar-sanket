@@ -1216,18 +1216,18 @@
         "commodity": "Cabbage",
         "n_months": 30,
         "n_series": 3,
-        "mae_profile_pct": 20.791241342057933,
+        "mae_profile_pct": 20.791241342057944,
         "mae_flat_pct": 49.376523063389925,
-        "corr": 0.9068914169197713
+        "corr": 0.9068914169197706
       },
       {
         "year": 2015,
         "commodity": "Green Chilli",
         "n_months": 99,
         "n_series": 9,
-        "mae_profile_pct": 21.44384687568391,
+        "mae_profile_pct": 21.443846875683914,
         "mae_flat_pct": 30.322581883286887,
-        "corr": 0.7339504931707145
+        "corr": 0.7339504931707141
       },
       {
         "year": 2015,
@@ -1235,8 +1235,8 @@
         "n_months": 22,
         "n_series": 2,
         "mae_profile_pct": 21.59514016693955,
-        "mae_flat_pct": 28.978350593247733,
-        "corr": 0.8532225283993424
+        "mae_flat_pct": 28.978350593247736,
+        "corr": 0.8532225283993422
       },
       {
         "year": 2016,
@@ -1245,24 +1245,24 @@
         "n_series": 3,
         "mae_profile_pct": 25.459351471368404,
         "mae_flat_pct": 35.685929522987266,
-        "corr": 0.6538087018498024
+        "corr": 0.6538087018498023
       },
       {
         "year": 2016,
         "commodity": "Green Chilli",
         "n_months": 68,
         "n_series": 6,
-        "mae_profile_pct": 24.7498063197684,
-        "mae_flat_pct": 34.4061894346775,
-        "corr": 0.7334959868442721
+        "mae_profile_pct": 24.749806319768393,
+        "mae_flat_pct": 34.406189434677515,
+        "corr": 0.7334959868442719
       },
       {
         "year": 2016,
         "commodity": "Pumpkin",
         "n_months": 18,
         "n_series": 2,
-        "mae_profile_pct": 20.416976172761643,
-        "mae_flat_pct": 26.09858923141639,
+        "mae_profile_pct": 20.416976172761647,
+        "mae_flat_pct": 26.098589231416398,
         "corr": 0.8662301538311451
       },
       {
@@ -1270,7 +1270,7 @@
         "commodity": "Cabbage",
         "n_months": 11,
         "n_series": 1,
-        "mae_profile_pct": 24.770872160238387,
+        "mae_profile_pct": 24.77087216023839,
         "mae_flat_pct": 57.21579211327605,
         "corr": 0.9497947900659037
       },
@@ -1288,8 +1288,8 @@
         "commodity": "Cabbage",
         "n_months": 29,
         "n_series": 3,
-        "mae_profile_pct": 23.4102268261561,
-        "mae_flat_pct": 41.08184177456941,
+        "mae_profile_pct": 23.410226826156098,
+        "mae_flat_pct": 41.0818417745694,
         "corr": 0.8327834166897501
       },
       {
@@ -1297,17 +1297,17 @@
         "commodity": "Green Chilli",
         "n_months": 43,
         "n_series": 4,
-        "mae_profile_pct": 25.716881960978377,
-        "mae_flat_pct": 23.648240389943734,
-        "corr": 0.4377339392002463
+        "mae_profile_pct": 25.716881960978373,
+        "mae_flat_pct": 23.648240389943737,
+        "corr": 0.4377339392002459
       },
       {
         "year": 2018,
         "commodity": "Pumpkin",
         "n_months": 12,
         "n_series": 1,
-        "mae_profile_pct": 15.326918192640306,
-        "mae_flat_pct": 19.672976656882902,
+        "mae_profile_pct": 15.326918192640305,
+        "mae_flat_pct": 19.6729766568829,
         "corr": 0.7784828441473324
       },
       {
@@ -1315,25 +1315,25 @@
         "commodity": "Cabbage",
         "n_months": 12,
         "n_series": 1,
-        "mae_profile_pct": 22.450001347104752,
+        "mae_profile_pct": 22.450001347104774,
         "mae_flat_pct": 44.02233741283727,
-        "corr": 0.8481632371638259
+        "corr": 0.8481632371638257
       },
       {
         "year": 2019,
         "commodity": "Green Chilli",
         "n_months": 47,
         "n_series": 4,
-        "mae_profile_pct": 19.828747297151764,
-        "mae_flat_pct": 30.34124356858291,
-        "corr": 0.6986787206392557
+        "mae_profile_pct": 19.828747297151768,
+        "mae_flat_pct": 30.341243568582897,
+        "corr": 0.6986787206392555
       },
       {
         "year": 2019,
         "commodity": "Pumpkin",
         "n_months": 23,
         "n_series": 2,
-        "mae_profile_pct": 25.14790228479913,
+        "mae_profile_pct": 25.147902284799134,
         "mae_flat_pct": 29.842551432254755,
         "corr": 0.6972057613353767
       },
@@ -1342,18 +1342,18 @@
         "commodity": "Cabbage",
         "n_months": 265,
         "n_series": 32,
-        "mae_profile_pct": 27.361415969216367,
+        "mae_profile_pct": 27.361415969216374,
         "mae_flat_pct": 52.42343738332369,
-        "corr": 0.9157256392562072
+        "corr": 0.9157256392562074
       },
       {
         "year": 2025,
         "commodity": "Green Chilli",
         "n_months": 346,
         "n_series": 42,
-        "mae_profile_pct": 17.106342008260672,
+        "mae_profile_pct": 17.10634200826067,
         "mae_flat_pct": 30.822475557019164,
-        "corr": 0.8926064974683051
+        "corr": 0.8926064974683048
       },
       {
         "year": 2025,
@@ -1361,15 +1361,15 @@
         "n_months": 354,
         "n_series": 43,
         "mae_profile_pct": 10.537205089172208,
-        "mae_flat_pct": 12.073789533450862,
-        "corr": 0.663340811949246
+        "mae_flat_pct": 12.07378953345086,
+        "corr": 0.6633408119492462
       },
       {
         "year": 2026,
         "commodity": "Cabbage",
         "n_months": 37,
         "n_series": 4,
-        "mae_profile_pct": 28.163884871656574,
+        "mae_profile_pct": 28.16388487165657,
         "mae_flat_pct": 25.68980921127929,
         "corr": 0.42625355415292177
       },
@@ -1380,7 +1380,7 @@
         "n_series": 7,
         "mae_profile_pct": 31.356830438432624,
         "mae_flat_pct": 31.99873304416313,
-        "corr": 0.4986552276384505
+        "corr": 0.49865522763845066
       },
       {
         "year": 2026,
@@ -1389,7 +1389,7 @@
         "n_series": 7,
         "mae_profile_pct": 12.442463337828718,
         "mae_flat_pct": 14.58889799317996,
-        "corr": 0.6338925740496912
+        "corr": 0.6338925740496915
       }
     ],
     "season_profile": [
@@ -2043,7 +2043,7 @@
       "stress": "out/fig/f5_stress_test.png",
       "season": "out/fig/f6_seasonal_profiles.png"
     },
-    "runtime_min": 5.1
+    "runtime_min": 5.3
   },
   "benchmarks": {
     "retrieved": "2026-11-25",
@@ -2079,6 +2079,30 @@
         "origins": 84,
         "converged_pct": 100.0,
         "variant": "primary"
+      },
+      {
+        "method": "damped Holt (under 2 years of data)",
+        "origins": 767,
+        "converged_pct": 100.0,
+        "variant": "multiplicative on rupee price"
+      },
+      {
+        "method": "no change (short history)",
+        "origins": 438,
+        "converged_pct": 100.0,
+        "variant": "multiplicative on rupee price"
+      },
+      {
+        "method": "Holt-Winters",
+        "origins": 84,
+        "converged_pct": 100.0,
+        "variant": "multiplicative on rupee price"
+      },
+      {
+        "method": "no change (fit failed)",
+        "origins": 1,
+        "converged_pct": 0.0,
+        "variant": "multiplicative on rupee price"
       },
       {
         "method": "damped Holt (under 2 years of data)",
@@ -2126,6 +2150,15 @@
         "direction": 34.97977432403662,
         "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
         "skill_vs_naive": -6.021153372233257
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 16.123359924848803,
+        "mae": 431.71620440941103,
+        "direction": 33.93655524803066,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -4.516197825477608
       },
       {
         "all": "all",
@@ -2186,6 +2219,15 @@
       {
         "h": 1,
         "n": 1290,
+        "mape": 14.983921342471229,
+        "mae": 303.1814605946331,
+        "direction": 43.95348837209303,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -3.8003328601395214
+      },
+      {
+        "h": 1,
+        "n": 1290,
         "mape": 14.518577276277197,
         "mae": 291.2659033938032,
         "direction": 45.1937984496124,
@@ -2236,6 +2278,15 @@
         "direction": 34.388009991673606,
         "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
         "skill_vs_naive": -5.54346564599324
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 13.934346249005266,
+        "mae": 400.0227323050987,
+        "direction": 34.47127393838468,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -3.788654215563869
       },
       {
         "h": 2,
@@ -2294,6 +2345,15 @@
       {
         "h": 3,
         "n": 1137,
+        "mape": 17.15895380913029,
+        "mae": 494.1923553441538,
+        "direction": 28.49604221635884,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -5.334565841763461
+      },
+      {
+        "h": 3,
+        "n": 1137,
         "mape": 15.934504523929311,
         "mae": 462.1202010700426,
         "direction": 38.698328935795956,
@@ -2344,6 +2404,15 @@
         "direction": 30.028063610851262,
         "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
         "skill_vs_naive": -5.963278900501101
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 18.856204592320374,
+        "mae": 555.9802791573438,
+        "direction": 27.034611786716557,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -4.815914082763961
       },
       {
         "h": 4,
@@ -2404,6 +2473,15 @@
       {
         "commodity": "Cabbage",
         "n": 186,
+        "mape": 19.664080632536393,
+        "mae": 328.23848869733894,
+        "direction": 30.64516129032258,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -0.2501788139655847
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 186,
         "mape": 20.09645451346504,
         "mae": 327.20218622841577,
         "direction": 38.17204301075269,
@@ -2458,6 +2536,15 @@
       {
         "commodity": "Green Chilli",
         "n": 186,
+        "mape": 20.760297939874643,
+        "mae": 1272.7735860653095,
+        "direction": 25.268817204301076,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -2.6608356496738095
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
         "mape": 19.158210058076026,
         "mae": 1163.7123930255657,
         "direction": 37.634408602150536,
@@ -2508,6 +2595,15 @@
         "direction": 47.8494623655914,
         "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
         "skill_vs_naive": -0.7034944445867719
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape": 9.871364987663828,
+        "mae": 167.432262232199,
+        "direction": 37.634408602150536,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -1.772551552905277
       },
       {
         "commodity": "Pumpkin",
@@ -2568,6 +2664,15 @@
       {
         "commodity": "Cabbage",
         "n": 1429,
+        "mape": 20.749576064365826,
+        "mae": 275.168895121547,
+        "direction": 30.160951714485655,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -2.4307673206014124
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
         "mape": 19.567958985040562,
         "mae": 258.0880319728278,
         "direction": 39.608117564730584,
@@ -2622,6 +2727,15 @@
       {
         "commodity": "Green Chilli",
         "n": 1438,
+        "mape": 18.92422893116811,
+        "mae": 917.9047705132031,
+        "direction": 32.33657858136301,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -4.634384078921783
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
         "mape": 18.11401295148154,
         "mae": 873.039510493311,
         "direction": 39.986091794158554,
@@ -2672,6 +2786,15 @@
         "direction": 38.52459016393443,
         "method": "Holt-Winters, all gaps interpolated (sensitivity check)",
         "skill_vs_naive": -7.7254957740763075
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 10.309965119134603,
+        "mae": 171.91672184935902,
+        "direction": 38.142076502732245,
+        "method": "Holt-Winters, multiplicative on rupee price (check)",
+        "skill_vs_naive": -6.726236849286593
       },
       {
         "commodity": "Pumpkin",
@@ -2831,21 +2954,21 @@
         "floor": 1.0,
         "n": 4039,
         "realised": 5.756450984487629,
-        "price_ewma": 7.618859028035166,
+        "price_ewma": 7.618859028035167,
         "price_model": 7.380387518031556,
         "hit": 41.1983164149542,
-        "prob_ewma": 53.809429514017594,
-        "prob_model": 52.65256145581789
+        "prob_ewma": 53.80942951401759,
+        "prob_model": 52.65256145581788
       },
       {
         "floor": 0.9,
         "n": 4039,
         "realised": 2.5070556357980522,
         "price_ewma": 3.5324670824250903,
-        "price_model": 3.406387181503654,
+        "price_model": 3.4063871815036535,
         "hit": 21.639019559296855,
         "prob_ewma": 28.94628500600601,
-        "prob_model": 28.098876066837356
+        "prob_model": 28.098876066837352
       }
     ],
     "pricing_by_h": [
@@ -2901,7 +3024,7 @@
         "price_ewma": 1.5679394092145202,
         "price_model": 1.2443872925446706,
         "hit": 15.543575920934412,
-        "prob_ewma": 20.067940181918004,
+        "prob_ewma": 20.067940181918,
         "prob_model": 18.17193870660652
       },
       {
@@ -2910,9 +3033,9 @@
         "n": 1032,
         "realised": 2.4242321908495374,
         "price_ewma": 3.103227936027926,
-        "price_model": 2.9368313286603795,
+        "price_model": 2.936831328660379,
         "hit": 22.093023255813954,
-        "prob_ewma": 28.321053933073784,
+        "prob_ewma": 28.321053933073788,
         "prob_model": 28.210783403081304
       },
       {
@@ -2920,8 +3043,8 @@
         "h": 3,
         "n": 978,
         "realised": 3.0677740585419477,
-        "price_ewma": 4.386179909735055,
-        "price_model": 4.43395001589733,
+        "price_ewma": 4.386179909735054,
+        "price_model": 4.433950015897331,
         "hit": 24.130879345603272,
         "prob_ewma": 32.983781886878724,
         "prob_model": 32.78043613139824
@@ -2930,9 +3053,9 @@
         "floor": 0.9,
         "h": 4,
         "n": 916,
-        "realised": 3.3451039583384947,
-        "price_ewma": 5.491596945150082,
-        "price_model": 5.465263889482465,
+        "realised": 3.345103958338495,
+        "price_ewma": 5.491596945150081,
+        "price_model": 5.465263889482464,
         "hit": 25.87336244541485,
         "prob_ewma": 36.12768708786463,
         "prob_model": 35.03624197054108
@@ -2942,32 +3065,32 @@
       {
         "commodity": "Cabbage",
         "n": 1200,
-        "realised": 4.136808813946022,
-        "price_ewma": 4.9678296803164015,
+        "realised": 4.136808813946021,
+        "price_ewma": 4.967829680316403,
         "price_model": 5.10585881847392,
         "hit": 28.166666666666668,
-        "prob_ewma": 34.10090324282346,
-        "prob_model": 35.78795329673328
+        "prob_ewma": 34.10090324282347,
+        "prob_model": 35.78795329673327
       },
       {
         "commodity": "Green Chilli",
         "n": 1264,
-        "realised": 2.5004184527938804,
-        "price_ewma": 3.8776789670842646,
-        "price_model": 3.7393295118895944,
+        "realised": 2.5004184527938813,
+        "price_ewma": 3.8776789670842664,
+        "price_model": 3.739329511889598,
         "hit": 22.54746835443038,
-        "prob_ewma": 31.7059477882244,
-        "prob_model": 29.148833315928407
+        "prob_ewma": 31.705947788224385,
+        "prob_model": 29.14883331592842
       },
       {
         "commodity": "Pumpkin",
         "n": 1575,
         "realised": 1.2706655313788195,
-        "price_ewma": 2.1618112477084077,
-        "price_model": 1.8443522164419714,
+        "price_ewma": 2.161811247708407,
+        "price_model": 1.8443522164419708,
         "hit": 15.936507936507937,
-        "prob_ewma": 22.80421793241555,
-        "prob_model": 21.39789915336042
+        "prob_ewma": 22.80421793241557,
+        "prob_model": 21.397899153360424
       }
     ],
     "var_ratio": {
@@ -3177,7 +3300,2149 @@
     "figures": {
       "other_methods": "out/fig/f7_other_methods.png"
     },
-    "runtime_min": 0.3
+    "runtime_min": 0.5
   },
-  "rendered_at": "2026-11-25T19:31:43"
+  "extended": {
+    "retrieved": "2026-11-25",
+    "end_week": "2026-11-16",
+    "test_start": "2025-11-24",
+    "rule": {
+      "min_weeks_3y": 1000,
+      "min_weeks_1y": 100,
+      "window_3y_weeks": 156,
+      "window_1y_weeks": 52
+    },
+    "commodity_coverage": [
+      {
+        "commodity": "Green Chilli",
+        "weeks_3y": 2697,
+        "markets_3y": 70,
+        "weeks_1y": 571,
+        "markets_1y": 28,
+        "good_data": true
+      },
+      {
+        "commodity": "Pumpkin",
+        "weeks_3y": 2646,
+        "markets_3y": 71,
+        "weeks_1y": 565,
+        "markets_1y": 28,
+        "good_data": true
+      },
+      {
+        "commodity": "Tomato",
+        "weeks_3y": 2545,
+        "markets_3y": 70,
+        "weeks_1y": 566,
+        "markets_1y": 29,
+        "good_data": true
+      },
+      {
+        "commodity": "Cabbage",
+        "weeks_3y": 2468,
+        "markets_3y": 71,
+        "weeks_1y": 530,
+        "markets_1y": 30,
+        "good_data": true
+      },
+      {
+        "commodity": "Capsicum",
+        "weeks_3y": 2243,
+        "markets_3y": 59,
+        "weeks_1y": 267,
+        "markets_1y": 18,
+        "good_data": true
+      },
+      {
+        "commodity": "Ginger(Green)",
+        "weeks_3y": 1777,
+        "markets_3y": 57,
+        "weeks_1y": 280,
+        "markets_1y": 17,
+        "good_data": true
+      },
+      {
+        "commodity": "Bitter gourd",
+        "weeks_3y": 1670,
+        "markets_3y": 64,
+        "weeks_1y": 369,
+        "markets_1y": 21,
+        "good_data": true
+      },
+      {
+        "commodity": "Cauliflower",
+        "weeks_3y": 1499,
+        "markets_3y": 71,
+        "weeks_1y": 389,
+        "markets_1y": 30,
+        "good_data": true
+      },
+      {
+        "commodity": "Brinjal",
+        "weeks_3y": 1478,
+        "markets_3y": 63,
+        "weeks_1y": 585,
+        "markets_1y": 30,
+        "good_data": true
+      },
+      {
+        "commodity": "Bottle gourd",
+        "weeks_3y": 1441,
+        "markets_3y": 54,
+        "weeks_1y": 240,
+        "markets_1y": 17,
+        "good_data": true
+      },
+      {
+        "commodity": "Bhindi(Ladies Finger)",
+        "weeks_3y": 1365,
+        "markets_3y": 58,
+        "weeks_1y": 207,
+        "markets_1y": 12,
+        "good_data": true
+      },
+      {
+        "commodity": "Lemon",
+        "weeks_3y": 1989,
+        "markets_3y": 55,
+        "weeks_1y": 49,
+        "markets_1y": 5,
+        "good_data": false
+      },
+      {
+        "commodity": "Potato",
+        "weeks_3y": 583,
+        "markets_3y": 34,
+        "weeks_1y": 501,
+        "markets_1y": 28,
+        "good_data": false
+      },
+      {
+        "commodity": "Beetroot",
+        "weeks_3y": 561,
+        "markets_3y": 32,
+        "weeks_1y": 354,
+        "markets_1y": 17,
+        "good_data": false
+      },
+      {
+        "commodity": "Beans",
+        "weeks_3y": 379,
+        "markets_3y": 36,
+        "weeks_1y": 96,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Onion",
+        "weeks_3y": 377,
+        "markets_3y": 24,
+        "weeks_1y": 375,
+        "markets_1y": 24,
+        "good_data": false
+      },
+      {
+        "commodity": "Carrot",
+        "weeks_3y": 351,
+        "markets_3y": 23,
+        "weeks_1y": 349,
+        "markets_1y": 23,
+        "good_data": false
+      },
+      {
+        "commodity": "French Beans (Frasbean)",
+        "weeks_3y": 279,
+        "markets_3y": 31,
+        "weeks_1y": 0,
+        "markets_1y": 0,
+        "good_data": false
+      },
+      {
+        "commodity": "Raddish",
+        "weeks_3y": 265,
+        "markets_3y": 20,
+        "weeks_1y": 264,
+        "markets_1y": 20,
+        "good_data": false
+      },
+      {
+        "commodity": "Garlic",
+        "weeks_3y": 256,
+        "markets_3y": 13,
+        "weeks_1y": 254,
+        "markets_1y": 13,
+        "good_data": false
+      },
+      {
+        "commodity": "Cucumbar(Kheera)",
+        "weeks_3y": 229,
+        "markets_3y": 13,
+        "weeks_1y": 227,
+        "markets_1y": 13,
+        "good_data": false
+      },
+      {
+        "commodity": "French Beans(Frasbean)",
+        "weeks_3y": 168,
+        "markets_3y": 13,
+        "weeks_1y": 168,
+        "markets_1y": 13,
+        "good_data": false
+      },
+      {
+        "commodity": "Papaya(Raw)",
+        "weeks_3y": 162,
+        "markets_3y": 12,
+        "weeks_1y": 162,
+        "markets_1y": 12,
+        "good_data": false
+      },
+      {
+        "commodity": "Squash(Chappal Kadoo)",
+        "weeks_3y": 160,
+        "markets_3y": 8,
+        "weeks_1y": 160,
+        "markets_1y": 8,
+        "good_data": false
+      },
+      {
+        "commodity": "Ridgeguard(Tori)",
+        "weeks_3y": 114,
+        "markets_3y": 5,
+        "weeks_1y": 112,
+        "markets_1y": 5,
+        "good_data": false
+      },
+      {
+        "commodity": "Green Peas",
+        "weeks_3y": 109,
+        "markets_3y": 5,
+        "weeks_1y": 109,
+        "markets_1y": 5,
+        "good_data": false
+      },
+      {
+        "commodity": "Banana",
+        "weeks_3y": 108,
+        "markets_3y": 6,
+        "weeks_1y": 4,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Knool Khol",
+        "weeks_3y": 104,
+        "markets_3y": 8,
+        "weeks_1y": 102,
+        "markets_1y": 8,
+        "good_data": false
+      },
+      {
+        "commodity": "Cowpea(Veg)",
+        "weeks_3y": 97,
+        "markets_3y": 2,
+        "weeks_1y": 97,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Pointed gourd(Parval)",
+        "weeks_3y": 90,
+        "markets_3y": 6,
+        "weeks_1y": 90,
+        "markets_1y": 6,
+        "good_data": false
+      },
+      {
+        "commodity": "Ashgourd",
+        "weeks_3y": 82,
+        "markets_3y": 6,
+        "weeks_1y": 82,
+        "markets_1y": 6,
+        "good_data": false
+      },
+      {
+        "commodity": "Peas Wet",
+        "weeks_3y": 77,
+        "markets_3y": 7,
+        "weeks_1y": 77,
+        "markets_1y": 7,
+        "good_data": false
+      },
+      {
+        "commodity": "Sponge gourd",
+        "weeks_3y": 77,
+        "markets_3y": 4,
+        "weeks_1y": 77,
+        "markets_1y": 4,
+        "good_data": false
+      },
+      {
+        "commodity": "Apple",
+        "weeks_3y": 64,
+        "markets_3y": 3,
+        "weeks_1y": 64,
+        "markets_1y": 3,
+        "good_data": false
+      },
+      {
+        "commodity": "Corriander seed",
+        "weeks_3y": 56,
+        "markets_3y": 2,
+        "weeks_1y": 56,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Dry Chillies",
+        "weeks_3y": 54,
+        "markets_3y": 2,
+        "weeks_1y": 54,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Betelnuts",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Cummin Seed(Jeera)",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Green Gram Dal(Moong Dal)",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Lentil(Masur)(Whole)",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Maida Atta",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Mustard Oil",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Sugar",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Turmeric(raw)",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Wheat Atta",
+        "weeks_3y": 49,
+        "markets_3y": 1,
+        "weeks_1y": 49,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Spinach",
+        "weeks_3y": 48,
+        "markets_3y": 2,
+        "weeks_1y": 48,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Beaten Rice",
+        "weeks_3y": 46,
+        "markets_3y": 1,
+        "weeks_1y": 46,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Paddy(Common)",
+        "weeks_3y": 46,
+        "markets_3y": 1,
+        "weeks_1y": 46,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Rice",
+        "weeks_3y": 46,
+        "markets_3y": 1,
+        "weeks_1y": 46,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Chili Red",
+        "weeks_3y": 41,
+        "markets_3y": 1,
+        "weeks_1y": 41,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Coriander(Leaves)",
+        "weeks_3y": 41,
+        "markets_3y": 5,
+        "weeks_1y": 41,
+        "markets_1y": 5,
+        "good_data": false
+      },
+      {
+        "commodity": "Indian Beans(Seam)",
+        "weeks_3y": 40,
+        "markets_3y": 7,
+        "weeks_1y": 40,
+        "markets_1y": 7,
+        "good_data": false
+      },
+      {
+        "commodity": "Red gram split/Arhar dal/Tur dal",
+        "weeks_3y": 34,
+        "markets_3y": 1,
+        "weeks_1y": 34,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Little gourd(Kundru)",
+        "weeks_3y": 33,
+        "markets_3y": 2,
+        "weeks_1y": 33,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Maize",
+        "weeks_3y": 33,
+        "markets_3y": 2,
+        "weeks_1y": 33,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Drumstick",
+        "weeks_3y": 28,
+        "markets_3y": 7,
+        "weeks_1y": 13,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Mustard",
+        "weeks_3y": 24,
+        "markets_3y": 2,
+        "weeks_1y": 24,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Other green and fresh vegetables",
+        "weeks_3y": 24,
+        "markets_3y": 1,
+        "weeks_1y": 24,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Spiny Gourd / Kartali(Kantola)",
+        "weeks_3y": 24,
+        "markets_3y": 1,
+        "weeks_1y": 24,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Arhar Dal(Tur Dal)",
+        "weeks_3y": 21,
+        "markets_3y": 1,
+        "weeks_1y": 21,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Cluster beans",
+        "weeks_3y": 17,
+        "markets_3y": 2,
+        "weeks_1y": 17,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Grapes",
+        "weeks_3y": 15,
+        "markets_3y": 2,
+        "weeks_1y": 15,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Masur Dal",
+        "weeks_3y": 13,
+        "markets_3y": 1,
+        "weeks_1y": 13,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Banana - Green",
+        "weeks_3y": 11,
+        "markets_3y": 3,
+        "weeks_1y": 11,
+        "markets_1y": 3,
+        "good_data": false
+      },
+      {
+        "commodity": "Jute",
+        "weeks_3y": 11,
+        "markets_3y": 2,
+        "weeks_1y": 11,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Chow Chow",
+        "weeks_3y": 10,
+        "markets_3y": 1,
+        "weeks_1y": 10,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Field Pea",
+        "weeks_3y": 10,
+        "markets_3y": 2,
+        "weeks_1y": 10,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Duster Beans",
+        "weeks_3y": 8,
+        "markets_3y": 1,
+        "weeks_1y": 8,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Ghee",
+        "weeks_3y": 8,
+        "markets_3y": 1,
+        "weeks_1y": 8,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Ginger(Dry)",
+        "weeks_3y": 8,
+        "markets_3y": 3,
+        "weeks_1y": 8,
+        "markets_1y": 3,
+        "good_data": false
+      },
+      {
+        "commodity": "Peas cod",
+        "weeks_3y": 8,
+        "markets_3y": 2,
+        "weeks_1y": 8,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Pea Pod/Pea Cod/हरी मटर",
+        "weeks_3y": 7,
+        "markets_3y": 1,
+        "weeks_1y": 7,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Coconut",
+        "weeks_3y": 5,
+        "markets_3y": 1,
+        "weeks_1y": 5,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Chilly Capsicum",
+        "weeks_3y": 4,
+        "markets_3y": 2,
+        "weeks_1y": 4,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Pineapple",
+        "weeks_3y": 4,
+        "markets_3y": 4,
+        "weeks_1y": 0,
+        "markets_1y": 0,
+        "good_data": false
+      },
+      {
+        "commodity": "Rat Tail Radish(Mogari)",
+        "weeks_3y": 4,
+        "markets_3y": 4,
+        "weeks_1y": 4,
+        "markets_1y": 4,
+        "good_data": false
+      },
+      {
+        "commodity": "Leafy Vegetable",
+        "weeks_3y": 3,
+        "markets_3y": 2,
+        "weeks_1y": 3,
+        "markets_1y": 2,
+        "good_data": false
+      },
+      {
+        "commodity": "Bengal Gram Dal(Chana Dal)",
+        "weeks_3y": 2,
+        "markets_3y": 1,
+        "weeks_1y": 2,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Colacasia",
+        "weeks_3y": 2,
+        "markets_3y": 1,
+        "weeks_1y": 2,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Mango",
+        "weeks_3y": 2,
+        "markets_3y": 1,
+        "weeks_1y": 2,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Papaya (Raw)",
+        "weeks_3y": 2,
+        "markets_3y": 1,
+        "weeks_1y": 0,
+        "markets_1y": 0,
+        "good_data": false
+      },
+      {
+        "commodity": "Kartali(Kantola)",
+        "weeks_3y": 1,
+        "markets_3y": 1,
+        "weeks_1y": 1,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Kulthi(Horse Gram)",
+        "weeks_3y": 1,
+        "markets_3y": 1,
+        "weeks_1y": 1,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Orange",
+        "weeks_3y": 1,
+        "markets_3y": 1,
+        "weeks_1y": 1,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Papaya",
+        "weeks_3y": 1,
+        "markets_3y": 1,
+        "weeks_1y": 1,
+        "markets_1y": 1,
+        "good_data": false
+      },
+      {
+        "commodity": "Turnip",
+        "weeks_3y": 1,
+        "markets_3y": 1,
+        "weeks_1y": 1,
+        "markets_1y": 1,
+        "good_data": false
+      }
+    ],
+    "ext_commodities": [
+      "Bhindi(Ladies Finger)",
+      "Bitter gourd",
+      "Bottle gourd",
+      "Brinjal",
+      "Cabbage",
+      "Capsicum",
+      "Cauliflower",
+      "Ginger(Green)",
+      "Green Chilli",
+      "Pumpkin",
+      "Tomato"
+    ],
+    "pilot_commodities": [
+      "Cabbage",
+      "Green Chilli",
+      "Pumpkin"
+    ],
+    "lgbm_settings": {
+      "objective": "quantile",
+      "learning_rate": 0.05,
+      "n_estimators": 250,
+      "num_leaves": 31,
+      "min_child_samples": 40,
+      "reg_lambda": 1.0
+    },
+    "main": {
+      "n_rows": 4697,
+      "points_all": [
+        {
+          "all": "all",
+          "n": 4697,
+          "mape": 15.358510605441733,
+          "mae": 413.9854075892163,
+          "direction": 43.96423248882265,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -0.2236661828492359
+        },
+        {
+          "all": "all",
+          "n": 4697,
+          "mape": 15.404918484512322,
+          "mae": 416.01359107258344,
+          "direction": 44.21971471151799,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -0.7146786211336575
+        },
+        {
+          "all": "all",
+          "n": 4697,
+          "mape": 15.486305896413082,
+          "mae": 413.06152863529906,
+          "direction": 33.383010432190765,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "all": "all",
+          "n": 4697,
+          "mape": 19.343560007695775,
+          "mae": 507.86480267828887,
+          "direction": 33.10623802427081,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -22.95136861479388
+        }
+      ],
+      "points_by_h": [
+        {
+          "h": 1,
+          "n": 1290,
+          "mape": 14.329605224994458,
+          "mae": 288.01288877200443,
+          "direction": 47.286821705426355,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 1.3929358876054732
+        },
+        {
+          "h": 1,
+          "n": 1290,
+          "mape": 14.286554747888855,
+          "mae": 290.66477814278517,
+          "direction": 46.51162790697674,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 0.48500768231407587
+        },
+        {
+          "h": 1,
+          "n": 1290,
+          "mape": 14.483682237696364,
+          "mae": 292.0813953488372,
+          "direction": 45.348837209302324,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 1,
+          "n": 1290,
+          "mape": 17.717734982855752,
+          "mae": 377.55719121939876,
+          "direction": 37.82945736434108,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -29.26437535279389
+        },
+        {
+          "h": 2,
+          "n": 1201,
+          "mape": 13.194401385338535,
+          "mae": 386.9674932177006,
+          "direction": 41.63197335553705,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -0.40138247844163644
+        },
+        {
+          "h": 2,
+          "n": 1201,
+          "mape": 13.167753811789435,
+          "mae": 384.3139509566406,
+          "direction": 42.214820982514574,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 0.28709734517371466
+        },
+        {
+          "h": 2,
+          "n": 1201,
+          "mape": 13.383678113222395,
+          "mae": 385.4204829308909,
+          "direction": 34.05495420482931,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 2,
+          "n": 1201,
+          "mape": 16.988264029239755,
+          "mae": 482.5714749711866,
+          "direction": 32.556203164029974,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -25.206494294626182
+        },
+        {
+          "h": 3,
+          "n": 1137,
+          "mape": 16.235088529850344,
+          "mae": 474.7078760712801,
+          "direction": 42.21635883905013,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -1.1815490201420253
+        },
+        {
+          "h": 3,
+          "n": 1137,
+          "mape": 16.436959395312485,
+          "mae": 481.46053167864164,
+          "direction": 42.83201407211961,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -2.6208429286546986
+        },
+        {
+          "h": 3,
+          "n": 1137,
+          "mape": 16.4169010845318,
+          "mae": 469.16446789797703,
+          "direction": 27.528583992963938,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 3,
+          "n": 1137,
+          "mape": 20.290875712281185,
+          "mae": 565.8245808534338,
+          "direction": 31.310466138962177,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -20.602607309229583
+        },
+        {
+          "h": 4,
+          "n": 1069,
+          "mape": 18.09912240531857,
+          "mae": 531.7698956811593,
+          "direction": 44.43405051449953,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -0.25166321005922754
+        },
+        {
+          "h": 4,
+          "n": 1069,
+          "mape": 18.170207050091996,
+          "mae": 533.2802561704309,
+          "direction": 45.182413470533206,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -0.5364031931345936
+        },
+        {
+          "h": 4,
+          "n": 1069,
+          "mape": 18.068676110132067,
+          "mae": 530.4349859681945,
+          "direction": 24.415341440598688,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 4,
+          "n": 1069,
+          "mape": 22.944052801012607,
+          "mae": 631.8814889019167,
+          "direction": 29.934518241347053,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -19.125153056892263
+        }
+      ],
+      "points_by_commodity": [
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 19.48532593248068,
+          "mae": 257.49638969566047,
+          "direction": 45.76627011896431,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 4.147767983875683
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 19.503529580367346,
+          "mae": 258.0816816161161,
+          "direction": 45.62631210636809,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 3.9298948827305225
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 20.399561921945054,
+          "mae": 268.6389083275017,
+          "direction": 28.13156053184045,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 24.709387264054136,
+          "mae": 328.64752015216806,
+          "direction": 32.540237928621416,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -22.338019536436214
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.68597859935827,
+          "mae": 891.4704648751167,
+          "direction": 42.767732962447845,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -1.621067907301188
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.816612706092744,
+          "mae": 897.3325625899271,
+          "direction": 43.184979137691236,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -2.2893038763295293
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.120531116307035,
+          "mae": 877.2496522948536,
+          "direction": 31.50208623087622,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 23.066191293060086,
+          "mae": 1077.6919636614966,
+          "direction": 29.13769123783032,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -22.84894737117229
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 9.521287612222807,
+          "mae": 160.97955742132913,
+          "direction": 43.49726775956284,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 0.06357619884920229
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 9.52353512570933,
+          "mae": 161.12179739572642,
+          "direction": 43.9344262295082,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -0.02472665519348549
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 9.579716428274999,
+          "mae": 161.08196721311475,
+          "direction": 38.961748633879786,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 12.228308129176659,
+          "mae": 200.04515198756428,
+          "direction": 36.666666666666664,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -24.18842124202545
+        }
+      ],
+      "bands_all": [
+        {
+          "all": "all",
+          "n": 4697,
+          "coverage": 78.4543325526932,
+          "width_pct": 43.49068685775007,
+          "interval_score_pct": 70.81433551536134,
+          "method": "Global model (P50)"
+        },
+        {
+          "all": "all",
+          "n": 4697,
+          "coverage": 78.11368958909942,
+          "width_pct": 43.26648426966989,
+          "interval_score_pct": 71.31138448065632,
+          "method": "Global model, LightGBM (P50)"
+        }
+      ]
+    },
+    "ext": {
+      "n_rows": 12762,
+      "n_series": 210,
+      "n_origins": 3523,
+      "points_all": [
+        {
+          "all": "all",
+          "n": 12762,
+          "mape": 16.995542473528342,
+          "mae": 458.53214828992265,
+          "direction": 46.897038081805356,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 1.588643123836786
+        },
+        {
+          "all": "all",
+          "n": 12762,
+          "mape": 17.046237083724037,
+          "mae": 459.41627241779906,
+          "direction": 46.74032283341169,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 1.398890114378748
+        },
+        {
+          "all": "all",
+          "n": 12762,
+          "mape": 18.552172542424792,
+          "mae": 486.68642523731705,
+          "direction": 33.41952671994985,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -4.453900690361601
+        },
+        {
+          "all": "all",
+          "n": 12762,
+          "mape": 18.604207665006516,
+          "mae": 487.95162972365256,
+          "direction": 33.38818367027112,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -4.725442153027726
+        },
+        {
+          "all": "all",
+          "n": 12762,
+          "mape": 17.77828047027267,
+          "mae": 465.93417959567466,
+          "direction": 32.518414041686256,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "all": "all",
+          "n": 12762,
+          "mape": 20.894524898519627,
+          "mae": 549.5535305346814,
+          "direction": 33.35684062059238,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -17.94660160187633
+        }
+      ],
+      "points_by_h": [
+        {
+          "h": 1,
+          "n": 3523,
+          "mape": 16.502513159522184,
+          "mae": 333.26412346085783,
+          "direction": 48.140789100198695,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -0.21394190190557882
+        },
+        {
+          "h": 1,
+          "n": 3523,
+          "mape": 16.552595213272213,
+          "mae": 332.4298366210739,
+          "direction": 47.74340051092818,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 0.036931705560461214
+        },
+        {
+          "h": 1,
+          "n": 3523,
+          "mape": 17.292229704773835,
+          "mae": 344.46324787690725,
+          "direction": 43.31535623048538,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -3.58156633122404
+        },
+        {
+          "h": 1,
+          "n": 3523,
+          "mape": 17.323613110956735,
+          "mae": 345.3572612930721,
+          "direction": 43.457280726653416,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -3.850399974691787
+        },
+        {
+          "h": 1,
+          "n": 3523,
+          "mape": 16.83379244259707,
+          "mae": 332.55265398807825,
+          "direction": 44.19528810672722,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 1,
+          "n": 3523,
+          "mape": 19.279161333773555,
+          "mae": 400.99780133655776,
+          "direction": 39.398240136247516,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -20.581747439890584
+        },
+        {
+          "h": 2,
+          "n": 3284,
+          "mape": 14.662908049559334,
+          "mae": 426.396697918375,
+          "direction": 45.85870889159562,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 2.232021814275831
+        },
+        {
+          "h": 2,
+          "n": 3284,
+          "mape": 14.686514400537169,
+          "mae": 425.8351564578282,
+          "direction": 45.06699147381242,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 2.3607769700571546
+        },
+        {
+          "h": 2,
+          "n": 3284,
+          "mape": 15.911761595226439,
+          "mae": 454.76671999478526,
+          "direction": 33.37393422655298,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -4.272905904526425
+        },
+        {
+          "h": 2,
+          "n": 3284,
+          "mape": 15.918546595184221,
+          "mae": 456.0650380636601,
+          "direction": 33.252131546894034,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -4.5705956691413085
+        },
+        {
+          "h": 2,
+          "n": 3284,
+          "mape": 15.214135919634833,
+          "mae": 436.13124238733246,
+          "direction": 33.13032886723508,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 2,
+          "n": 3284,
+          "mape": 18.29044865412838,
+          "mae": 522.0716223674524,
+          "direction": 32.79537149817296,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -19.705164782438445
+        },
+        {
+          "h": 3,
+          "n": 3073,
+          "mape": 17.358456521649877,
+          "mae": 509.7948517450318,
+          "direction": 46.827204685974614,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 2.762596957343466
+        },
+        {
+          "h": 3,
+          "n": 3073,
+          "mape": 17.44543099595129,
+          "mae": 514.99784019622,
+          "direction": 47.21770257077774,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 1.7701877885912043
+        },
+        {
+          "h": 3,
+          "n": 3073,
+          "mape": 19.33603209962437,
+          "mae": 548.2542038316161,
+          "direction": 28.766677513830135,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -4.573074454012782
+        },
+        {
+          "h": 3,
+          "n": 3073,
+          "mape": 19.41749230400417,
+          "mae": 550.3807459936453,
+          "direction": 28.929384965831435,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -4.978687489508604
+        },
+        {
+          "h": 3,
+          "n": 3073,
+          "mape": 18.45426527546414,
+          "mae": 524.2785551578262,
+          "direction": 27.204685974617636,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 3,
+          "n": 3073,
+          "mape": 21.845768254998905,
+          "mae": 616.4958753211686,
+          "direction": 31.07712333224862,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -17.589374819189718
+        },
+        {
+          "h": 4,
+          "n": 2882,
+          "mape": 19.86926865384772,
+          "mae": 593.619512195338,
+          "direction": 46.63428174878557,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 1.1837633470360376
+        },
+        {
+          "h": 4,
+          "n": 2882,
+          "mape": 19.91289451221574,
+          "mae": 593.6464737853634,
+          "direction": 46.911866759195,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 1.179275214813702
+        },
+        {
+          "h": 4,
+          "n": 2882,
+          "mape": 22.26524948495408,
+          "mae": 631.2661553681002,
+          "direction": 26.33587786259542,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -5.083044809575266
+        },
+        {
+          "h": 4,
+          "n": 2882,
+          "mape": 22.36271629497667,
+          "mae": 632.0289554331122,
+          "direction": 25.988896599583622,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -5.2100235058522015
+        },
+        {
+          "h": 4,
+          "n": 2882,
+          "mape": 21.133860178614928,
+          "mae": 600.7307425399027,
+          "direction": 23.21304649548924,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "h": 4,
+          "n": 2882,
+          "mape": 24.822193666986124,
+          "mae": 691.0867001590027,
+          "direction": 29.04233171408744,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -15.041007762824488
+        }
+      ],
+      "points_by_commodity": [
+        {
+          "commodity": "Bhindi(Ladies Finger)",
+          "n": 616,
+          "mape": 16.712389830410494,
+          "mae": 439.7392570657006,
+          "direction": 48.37662337662338,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 12.94950354222818
+        },
+        {
+          "commodity": "Bhindi(Ladies Finger)",
+          "n": 616,
+          "mape": 16.85914804503878,
+          "mae": 442.12672042502203,
+          "direction": 45.616883116883116,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 12.47688285311691
+        },
+        {
+          "commodity": "Bhindi(Ladies Finger)",
+          "n": 616,
+          "mape": 20.604364155987373,
+          "mae": 555.3583825006995,
+          "direction": 27.92207792207792,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -9.9383831028941
+        },
+        {
+          "commodity": "Bhindi(Ladies Finger)",
+          "n": 616,
+          "mape": 20.83376650572714,
+          "mae": 558.8549478885262,
+          "direction": 31.33116883116883,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -10.630560906027808
+        },
+        {
+          "commodity": "Bhindi(Ladies Finger)",
+          "n": 616,
+          "mape": 18.78234988098983,
+          "mae": 505.15422077922096,
+          "direction": 22.24025974025974,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Bhindi(Ladies Finger)",
+          "n": 616,
+          "mape": 21.670557245470132,
+          "mae": 582.373752513658,
+          "direction": 26.623376623376622,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -15.286328126749638
+        },
+        {
+          "commodity": "Bitter gourd",
+          "n": 1163,
+          "mape": 16.140419425901577,
+          "mae": 469.6942027961776,
+          "direction": 44.11006018916595,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -2.395493294335127
+        },
+        {
+          "commodity": "Bitter gourd",
+          "n": 1163,
+          "mape": 16.03399647088438,
+          "mae": 466.1750000988959,
+          "direction": 46.345657781599314,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -1.6282909442833615
+        },
+        {
+          "commodity": "Bitter gourd",
+          "n": 1163,
+          "mape": 16.72502422447794,
+          "mae": 490.17489646460524,
+          "direction": 44.19604471195185,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -6.860378572254677
+        },
+        {
+          "commodity": "Bitter gourd",
+          "n": 1163,
+          "mape": 16.850150953221295,
+          "mae": 492.239760640464,
+          "direction": 44.45399828030954,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -7.3105284455427855
+        },
+        {
+          "commodity": "Bitter gourd",
+          "n": 1163,
+          "mape": 15.400866802938113,
+          "mae": 458.7059329320724,
+          "direction": 44.28202923473775,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Bitter gourd",
+          "n": 1163,
+          "mape": 16.930760596779436,
+          "mae": 496.64007555801004,
+          "direction": 39.98280309544282,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -8.269817306146576
+        },
+        {
+          "commodity": "Bottle gourd",
+          "n": 692,
+          "mape": 17.818594902157148,
+          "mae": 378.4625363352019,
+          "direction": 44.653179190751445,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 8.054053671412131
+        },
+        {
+          "commodity": "Bottle gourd",
+          "n": 692,
+          "mape": 17.7054565204528,
+          "mae": 377.21067538269375,
+          "direction": 44.797687861271676,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 8.3581882393003
+        },
+        {
+          "commodity": "Bottle gourd",
+          "n": 692,
+          "mape": 21.53327630956992,
+          "mae": 439.14888399007623,
+          "direction": 25.43352601156069,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -6.689449657570079
+        },
+        {
+          "commodity": "Bottle gourd",
+          "n": 692,
+          "mape": 21.791013939838425,
+          "mae": 446.23930031259863,
+          "direction": 22.832369942196532,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -8.412037697461482
+        },
+        {
+          "commodity": "Bottle gourd",
+          "n": 692,
+          "mape": 19.90147959465231,
+          "mae": 411.6141618497108,
+          "direction": 24.421965317919074,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Bottle gourd",
+          "n": 692,
+          "mape": 20.05736010185994,
+          "mae": 413.61621528916487,
+          "direction": 33.09248554913295,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -0.4863908060056099
+        },
+        {
+          "commodity": "Brinjal",
+          "n": 1458,
+          "mape": 16.946829087257214,
+          "mae": 315.70737323616214,
+          "direction": 49.58847736625515,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 9.61900878118077
+        },
+        {
+          "commodity": "Brinjal",
+          "n": 1458,
+          "mape": 16.989413068549393,
+          "mae": 316.0265880070068,
+          "direction": 50.06858710562414,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 9.527623689014908
+        },
+        {
+          "commodity": "Brinjal",
+          "n": 1458,
+          "mape": 19.781007212823194,
+          "mae": 364.69397787582756,
+          "direction": 32.37311385459534,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -4.404920525232514
+        },
+        {
+          "commodity": "Brinjal",
+          "n": 1458,
+          "mape": 19.87262755102028,
+          "mae": 366.26992716745957,
+          "direction": 32.510288065843625,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -4.8560847081537295
+        },
+        {
+          "commodity": "Brinjal",
+          "n": 1458,
+          "mape": 19.019055546874387,
+          "mae": 349.3072702331961,
+          "direction": 33.470507544581615,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Brinjal",
+          "n": 1458,
+          "mape": 20.26035328651627,
+          "mae": 375.8116795412225,
+          "direction": 33.95061728395062,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -7.587706173516562
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 19.04291652584447,
+          "mae": 249.70135481780804,
+          "direction": 50.174947515745274,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 7.049445528049358
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 19.139215184161483,
+          "mae": 250.7542463148651,
+          "direction": 48.775367389783064,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 6.657509935542604
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 20.823770832431833,
+          "mae": 275.95076174354546,
+          "direction": 29.741077676696992,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -2.7218147443965
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 20.749576064365826,
+          "mae": 275.168895121547,
+          "direction": 30.160951714485655,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -2.4307673206014124
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 20.399561921945054,
+          "mae": 268.6389083275017,
+          "direction": 28.13156053184045,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 24.709387264054136,
+          "mae": 328.64752015216806,
+          "direction": 32.540237928621416,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -22.338019536436214
+        },
+        {
+          "commodity": "Capsicum",
+          "n": 859,
+          "mape": 13.018395652632991,
+          "mae": 591.9345767845838,
+          "direction": 45.63445867287544,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -3.3668356931060073
+        },
+        {
+          "commodity": "Capsicum",
+          "n": 859,
+          "mape": 13.019460910878708,
+          "mae": 591.0529751076697,
+          "direction": 45.9837019790454,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -3.2128856127113803
+        },
+        {
+          "commodity": "Capsicum",
+          "n": 859,
+          "mape": 13.372057334476972,
+          "mae": 578.2663048303583,
+          "direction": 32.36321303841677,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -0.9800076943502045
+        },
+        {
+          "commodity": "Capsicum",
+          "n": 859,
+          "mape": 13.501586032471952,
+          "mae": 581.9887883630522,
+          "direction": 32.13038416763679,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -1.630048017698793
+        },
+        {
+          "commodity": "Capsicum",
+          "n": 859,
+          "mape": 13.22008712189099,
+          "mae": 572.6542491268914,
+          "direction": 29.220023282887077,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Capsicum",
+          "n": 859,
+          "mape": 17.38455353950988,
+          "mae": 730.1810551946044,
+          "direction": 36.670547147846335,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -27.508187760396318
+        },
+        {
+          "commodity": "Cauliflower",
+          "n": 1096,
+          "mape": 25.421522374248077,
+          "mae": 512.5540548035331,
+          "direction": 48.26642335766424,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 2.706297519909173
+        },
+        {
+          "commodity": "Cauliflower",
+          "n": 1096,
+          "mape": 25.595889948985935,
+          "mae": 513.7389751484748,
+          "direction": 47.53649635036496,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 2.4813743407382294
+        },
+        {
+          "commodity": "Cauliflower",
+          "n": 1096,
+          "mape": 28.596456924161334,
+          "mae": 538.8480410956541,
+          "direction": 27.37226277372263,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -2.284862447212377
+        },
+        {
+          "commodity": "Cauliflower",
+          "n": 1096,
+          "mape": 28.735827626198635,
+          "mae": 547.7933308914403,
+          "direction": 27.189781021897808,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -3.9828694297598277
+        },
+        {
+          "commodity": "Cauliflower",
+          "n": 1096,
+          "mape": 28.21065192822622,
+          "mae": 526.8111313868611,
+          "direction": 27.37226277372263,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Cauliflower",
+          "n": 1096,
+          "mape": 31.783278359183107,
+          "mae": 591.038008054735,
+          "direction": 24.635036496350367,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -12.191632416496745
+        },
+        {
+          "commodity": "Ginger(Green)",
+          "n": 687,
+          "mape": 19.99873717343501,
+          "mae": 950.7111668593478,
+          "direction": 43.95924308588064,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -4.890686564213409
+        },
+        {
+          "commodity": "Ginger(Green)",
+          "n": 687,
+          "mape": 19.997498389222322,
+          "mae": 946.9189699852172,
+          "direction": 45.99708879184862,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -4.472298574695799
+        },
+        {
+          "commodity": "Ginger(Green)",
+          "n": 687,
+          "mape": 19.980832953097778,
+          "mae": 925.2160598425831,
+          "direction": 44.25036390101892,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -2.077845638140463
+        },
+        {
+          "commodity": "Ginger(Green)",
+          "n": 687,
+          "mape": 19.91788927938087,
+          "mae": 917.5322264206225,
+          "direction": 42.64919941775837,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -1.2300986134189618
+        },
+        {
+          "commodity": "Ginger(Green)",
+          "n": 687,
+          "mape": 19.710536556052176,
+          "mae": 906.3828238719065,
+          "direction": 42.64919941775837,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Ginger(Green)",
+          "n": 687,
+          "mape": 21.08671114445064,
+          "mae": 993.4439510244366,
+          "direction": 37.55458515283843,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -9.605337265838788
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.36794377611019,
+          "mae": 870.8816230101442,
+          "direction": 43.671766342141865,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 0.7259084421465278
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.561714602737613,
+          "mae": 879.0017743301717,
+          "direction": 42.767732962447845,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -0.19972900881004563
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.843509670981177,
+          "mae": 913.4488934563642,
+          "direction": 32.5452016689847,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -4.1264469090201095
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.92422893116811,
+          "mae": 917.9047705132031,
+          "direction": 32.33657858136301,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -4.634384078921783
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.120531116307035,
+          "mae": 877.2496522948536,
+          "direction": 31.50208623087622,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 23.066191293060086,
+          "mae": 1077.6919636614966,
+          "direction": 29.13769123783032,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -22.84894737117229
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 9.844839527039912,
+          "mae": 167.36524789846646,
+          "direction": 45.68306010928962,
+          "method": "Global model (P50)",
+          "skill_vs_naive": -3.900672926994253
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 9.863209504468788,
+          "mae": 168.13176570755635,
+          "direction": 45.95628415300547,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -4.376528680652725
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 10.238850984946767,
+          "mae": 171.07652325211964,
+          "direction": 38.087431693989075,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -6.204639918372679
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 10.309965119134603,
+          "mae": 171.91672184935902,
+          "direction": 38.142076502732245,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -6.726236849286593
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 9.579716428274999,
+          "mae": 161.08196721311475,
+          "direction": 38.961748633879786,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 12.228308129176659,
+          "mae": 200.04515198756428,
+          "direction": 36.666666666666664,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -24.18842124202545
+        },
+        {
+          "commodity": "Tomato",
+          "n": 1494,
+          "mape": 17.64833909765716,
+          "mae": 450.90835355880336,
+          "direction": 49.39759036144578,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 0.24993444582366298
+        },
+        {
+          "commodity": "Tomato",
+          "n": 1494,
+          "mape": 17.685484079648546,
+          "mae": 452.10379889187726,
+          "direction": 48.19277108433735,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": -0.014522287788398813
+        },
+        {
+          "commodity": "Tomato",
+          "n": 1494,
+          "mape": 19.231070792441223,
+          "mae": 481.5450577849112,
+          "direction": 30.72289156626506,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -6.527525387862099
+        },
+        {
+          "commodity": "Tomato",
+          "n": 1494,
+          "mape": 19.03317195232696,
+          "mae": 474.74199990611515,
+          "direction": 30.655957161981256,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -5.022551119758933
+        },
+        {
+          "commodity": "Tomato",
+          "n": 1494,
+          "mape": 18.305506101586612,
+          "mae": 452.0381526104418,
+          "direction": 28.714859437751006,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "commodity": "Tomato",
+          "n": 1494,
+          "mape": 23.484621252294033,
+          "mae": 602.3905701045211,
+          "direction": 33.86880856760375,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -33.26100167116872
+        }
+      ],
+      "points_by_group": [
+        {
+          "group": "other",
+          "n": 8065,
+          "mape": 18.01061696803564,
+          "mae": 488.0790902540067,
+          "direction": 47.16676999380037,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 1.740947611953847
+        },
+        {
+          "group": "other",
+          "n": 8065,
+          "mape": 18.035055198066317,
+          "mae": 487.6698038289392,
+          "direction": 47.26596404215747,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 1.8233442912737763
+        },
+        {
+          "group": "other",
+          "n": 8065,
+          "mape": 19.98407851922586,
+          "mae": 519.5472999386835,
+          "direction": 33.16800991940483,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -4.594165949980389
+        },
+        {
+          "group": "other",
+          "n": 8065,
+          "mape": 20.049036162901217,
+          "mae": 520.7027509513019,
+          "direction": 33.06881587104773,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -4.826778909330076
+        },
+        {
+          "group": "other",
+          "n": 8065,
+          "mape": 19.11311054757192,
+          "mae": 496.7268443893366,
+          "direction": 32.01487910725356,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "group": "other",
+          "n": 8065,
+          "mape": 21.79779608168139,
+          "mae": 573.8327561690863,
+          "direction": 33.50278983261004,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -15.52279943205843
+        },
+        {
+          "group": "pilot",
+          "n": 4697,
+          "mape": 15.252605322538054,
+          "mae": 407.79846999732354,
+          "direction": 46.433893974877584,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 1.274158514680357
+        },
+        {
+          "group": "pilot",
+          "n": 4697,
+          "mape": 15.348383540575117,
+          "mae": 410.90344916234983,
+          "direction": 45.83776878858846,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 0.5224595667573384
+        },
+        {
+          "group": "pilot",
+          "n": 4697,
+          "mape": 16.093513461543242,
+          "mae": 430.262547343657,
+          "direction": 33.85139450713221,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -4.164275178370591
+        },
+        {
+          "group": "pilot",
+          "n": 4697,
+          "mape": 16.123359924848803,
+          "mae": 431.71620440941103,
+          "direction": 33.93655524803066,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -4.516197825477608
+        },
+        {
+          "group": "pilot",
+          "n": 4697,
+          "mape": 15.486305896413082,
+          "mae": 413.06152863529906,
+          "direction": 33.383010432190765,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "group": "pilot",
+          "n": 4697,
+          "mape": 19.343560007695775,
+          "mae": 507.86480267828887,
+          "direction": 33.10623802427081,
+          "method": "Seasonal naive",
+          "skill_vs_naive": -22.95136861479388
+        }
+      ],
+      "points_hw_rows": [
+        {
+          "all": "all",
+          "n": 737,
+          "mape": 17.572729814752154,
+          "mae": 550.8508421557747,
+          "direction": 51.28900949796472,
+          "method": "Global model (P50)",
+          "skill_vs_naive": 8.165566777400679
+        },
+        {
+          "all": "all",
+          "n": 737,
+          "mape": 17.655745025648,
+          "mae": 550.7745595926043,
+          "direction": 50.3392130257802,
+          "method": "Global model, LightGBM (P50)",
+          "skill_vs_naive": 8.178284132839586
+        },
+        {
+          "all": "all",
+          "n": 737,
+          "mape": 21.222130888499592,
+          "mae": 657.3583109402739,
+          "direction": 36.63500678426052,
+          "method": "Holt-Winters",
+          "skill_vs_naive": -9.590697316740805
+        },
+        {
+          "all": "all",
+          "n": 737,
+          "mape": 21.44167556133588,
+          "mae": 663.4080589402519,
+          "direction": 35.82089552238806,
+          "method": "Holt-Winters, multiplicative on rupee price (check)",
+          "skill_vs_naive": -10.599273751957394
+        },
+        {
+          "all": "all",
+          "n": 737,
+          "mape": 18.746301563226094,
+          "mae": 599.8303934871099,
+          "direction": 33.242876526458616,
+          "method": "No change",
+          "skill_vs_naive": 0.0
+        },
+        {
+          "all": "all",
+          "n": 737,
+          "mape": 18.746301563226094,
+          "mae": 599.8303934871099,
+          "direction": 33.242876526458616,
+          "method": "Seasonal naive",
+          "skill_vs_naive": 0.0
+        }
+      ],
+      "bands_all": [
+        {
+          "all": "all",
+          "n": 12762,
+          "coverage": 78.81209841717599,
+          "width_pct": 45.99136121439796,
+          "interval_score_pct": 76.79489680431047,
+          "method": "Global model (P50)"
+        },
+        {
+          "all": "all",
+          "n": 12762,
+          "coverage": 78.86694875411378,
+          "width_pct": 46.19031239496923,
+          "interval_score_pct": 76.77112016615591,
+          "method": "Global model, LightGBM (P50)"
+        }
+      ],
+      "hw_methods": [
+        {
+          "method": "damped Holt (under 2 years of data)",
+          "origins": 1962,
+          "form": "log"
+        },
+        {
+          "method": "no change (short history)",
+          "origins": 1340,
+          "form": "log"
+        },
+        {
+          "method": "Holt-Winters",
+          "origins": 221,
+          "form": "log"
+        },
+        {
+          "method": "damped Holt (under 2 years of data)",
+          "origins": 1959,
+          "form": "mul"
+        },
+        {
+          "method": "no change (short history)",
+          "origins": 1340,
+          "form": "mul"
+        },
+        {
+          "method": "Holt-Winters",
+          "origins": 221,
+          "form": "mul"
+        },
+        {
+          "method": "no change (fit failed)",
+          "origins": 3,
+          "form": "mul"
+        }
+      ]
+    },
+    "figures": {
+      "more_commodities": "out/fig/f8_more_commodities.png"
+    },
+    "runtime_min": 5.3
+  },
+  "rendered_at": "2026-11-25T20:26:34"
 }

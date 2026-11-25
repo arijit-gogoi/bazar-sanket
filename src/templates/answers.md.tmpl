@@ -78,13 +78,13 @@ Data flow
 
 Models and methods
 - Short horizon: a global gradient-boosted tree model (scikit-learn HistGradientBoostingRegressor) trained with quantile loss to predict one-to-four-week log price changes at the 10th, 50th and 90th percentiles. It handles missing values natively, so incomplete histories need no imputation, and one model shared across markets lets data-poor markets borrow strength from data-rich ones.
-- Benchmarks: no change, same weeks last year (seasonal naive) and Holt-Winters exponential smoothing (statsmodels). Every series is scored weekly with rolling-origin, out-of-sample evaluation; publication is gated on beating the benchmarks.
+- Benchmarks: no change, seasonal naive and Holt-Winters (statsmodels); LightGBM was tested as an alternative learner. Every series is scored weekly with rolling-origin, out-of-sample evaluation; publication is gated on beating the benchmarks.
 - Calibration: band coverage is tracked; bands are widened (conformal adjustment) where they prove too narrow.
 - Long horizon: seasonal price profiles pooled across Assam and neighbouring-State markets, with year-to-year ranges; later combined with cost and yield data into margin-and-risk rankings.
 - Decision rules: transparent, versioned rules (expected gain after storage costs and losses versus downside risk), configurable per commodity by AMIU. Downside risk can also be priced in rupees from volatility (tested; needs calibration).
 
 Stack
-- Python 3.13, polars (lazy queries over Parquet), scikit-learn and statsmodels, marimo notebooks (reproducible, auditable), seaborn charts, uv environments. All open source.
+- Python 3.13, polars, scikit-learn, LightGBM and statsmodels, marimo notebooks (reproducible, auditable), seaborn charts, uv environments. All open source.
 - Production: PostgreSQL for records and audit logs, Parquet for analytical history, a small REST API (FastAPI) for the dashboard, partner systems and channel gateways, and a mobile-friendly web dashboard in Assamese and English.
 - Integrations: data.gov.in OGD API (working in the prototype); AMIU data feed (to be agreed); SMS via a DLT-registered gateway; WhatsApp Business Platform; an IVR provider; Bhashini services for Assamese translation and speech, subject to evaluation.
 
@@ -299,7 +299,7 @@ The combination of (a) learning across markets to overcome incomplete data, (b) 
 
 IP and dependencies
 - Code written by the applicant. Licence terms are to be agreed with the department so the State can run and extend it without lock-in. No patents are claimed.
-- Key open-source dependencies: Python, polars, scikit-learn, statsmodels, marimo, seaborn, uv, PostgreSQL, FastAPI (permissive BSD, MIT and Apache-2.0 licences).
+- Key open-source dependencies: Python, polars, scikit-learn, LightGBM, statsmodels, marimo, seaborn, uv, PostgreSQL, FastAPI (permissive BSD, MIT and Apache-2.0 licences).
 - Data: Agmarknet via data.gov.in under GODL-India. Proprietary services only for delivery (SMS gateway, WhatsApp Business Platform, IVR provider), all replaceable.
 
 ## 12. Resources, risks & pilot validation
