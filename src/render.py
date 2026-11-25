@@ -145,7 +145,7 @@ def main() -> None:
     check_answers(answers)
     print("answers.md OK")
 
-    html = render("pow.html.tmpl", {"figdir": "../out/fig/"})
+    html = render("pow.html.tmpl", {"figdir": "../out/fig/", "site_nav": ""})
     pow_dir = ROOT / "pow"
     pow_dir.mkdir(exist_ok=True)
     (pow_dir / "proof-of-work.html").write_text(html, encoding="utf-8")
@@ -156,7 +156,12 @@ def main() -> None:
     (docs / "fig").mkdir(parents=True, exist_ok=True)
     for png in (OUT / "fig").glob("*.png"):
         shutil.copy2(png, docs / "fig" / png.name)
-    (docs / "index.html").write_text(render("pow.html.tmpl", {"figdir": "fig/"}), encoding="utf-8")
+    nav = (
+        '<nav style="font:10pt sans-serif;padding:3mm 0;border-bottom:1px solid #ccc;margin-bottom:4mm">'
+        '<a href="proof-of-work.pdf">Proof of Work (PDF)</a> · <a href="answers.md">Proposal answers (text)</a> · '
+        f'<a href="{ctx["repo_url"]}">Source code and data</a></nav>'
+    )
+    (docs / "index.html").write_text(render("pow.html.tmpl", {"figdir": "fig/", "site_nav": nav}), encoding="utf-8")
     shutil.copy2(ROOT / "answers.md", docs / "answers.md")
     print("docs/index.html written")
 
