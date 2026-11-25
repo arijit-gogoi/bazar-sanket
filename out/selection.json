@@ -1,0 +1,39 @@
+{
+  "rule": "Top 3 Assam market x commodity series by number of weeks with a reported price in the last 156 complete weeks; ties broken by reporting days. Fixed before any modelling.",
+  "window": [
+    "2023-11-27",
+    "2026-11-16"
+  ],
+  "pairs": [
+    {
+      "market_key": "pamohi(garchuk)",
+      "market": "Pamohi(Garchuk)",
+      "district": "Kamrup",
+      "commodity": "Green Chilli",
+      "variety": "Green Chilly",
+      "weeks": 102,
+      "days": 624,
+      "coverage_pct": 65.4
+    },
+    {
+      "market_key": "pamohi(garchuk)",
+      "market": "Pamohi(Garchuk)",
+      "district": "Kamrup",
+      "commodity": "Cabbage",
+      "variety": "Cabbage",
+      "weeks": 102,
+      "days": 615,
+      "coverage_pct": 65.4
+    },
+    {
+      "market_key": "pamohi(garchuk)",
+      "market": "Pamohi(Garchuk)",
+      "district": "Kamrup",
+      "commodity": "Pumpkin",
+      "variety": "Pumpkin",
+      "weeks": 102,
+      "days": 611,
+      "coverage_pct": 65.4
+    }
+  ]
+}

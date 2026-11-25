@@ -43,7 +43,9 @@ R3|keys|public sample key → 10 rows/call & shared rate limit (HTTP 429 seen). 
 R4|current-day API|resource `9ef84268-d588-465a-a308-a864a43d0070` = today only (Assam 111 rows on 2026-11-25), ⊥ history|probe 2026-11-25
 R5|Agmarknet 2.0|agmarknet.gov.in = SPA (go-live 2025-11-07) over internal `api.agmarknet.gov.in/v1/`; ⊥ use: not a published API, call denied by policy|probe 2026-11-25
 R6|dispersion|same day potato modal ₹850–2100/q across Assam markets (2026-11-23); multiple varieties per market ∴ series key = market × commodity × variety|probe 2026-11-25
-
+R7|Assam gaps|Assam rows 2005-09 → 2026-11 = 515,000; 109 raw market names → 82 after harmonising (25 renamed, mostly "X" → "X APMC" at Agmarknet 2.0 cut-over); 223 of 1,106 weeks have no Assam price (longest gap 2020-01 → 2021-08, 86 wk; also 2025-09 → 2025-12)|`out/metrics_profile.json`
+R8|selection|rule → Pamohi(Garchuk) × {Green Chilli, Cabbage, Pumpkin}, each 102/156 wk (65.4%); all perishable/semi-perishable vegetables|`out/selection.json`
+R9|comparables|8 neighbour states fetched for 3 commodities since 2016 (WB 195k rows, Tripura 82k, Nagaland 20k, Meghalaya 17k, Bihar 15k, Manipur, Mizoram, Arunachal small)|`data/raw/ogd_prices.parquet`
 ## §V INVARIANTS
 V1: `answers.md` ! exactly 12 H2 sections in form order; ∀ section ≤500 words (script check)
 V2: `proof-of-work.pdf` ! single file ≤10 MB; ∀ page renders, ⊥ blank page, ⊥ missing-glyph boxes
@@ -64,9 +66,9 @@ V15: one cmd regenerates processed data, metrics, figures from cached raw
 ## §T TASKS
 id|status|task|cites
 T1|x|probe data ≤45 min: data.gov.in catalog (historical | variety-wise, Assam filter) → agmarknet.gov.in date-range export → Kaggle/GitHub mirror; record endpoint, fields (price + arrivals?), Assam coverage; decide real vs fallback|I.src,V13
-T2|.|scaffold: `uv init` + deps (marimo, polars, pyarrow, scikit-learn, seaborn, requests); dirs `nb/ src/ data/raw/ data/processed/ out/ pow/ docs/`; `.gitignore`; git init w/ noreply email|V14
-T3|.|fetch Assam all-commodity history + comparable markets (neighbour & major producer states) → `data/raw/`|I.src,V11
-T4|.|clean → weekly series (median modal price, arrivals), gap flags; Assam coverage heatmap; pick top-3 pairs per rule|V6,V11
+T2|x|scaffold: `uv init` + deps (marimo, polars, pyarrow, scikit-learn, seaborn, requests); dirs `nb/ src/ data/raw/ data/processed/ out/ pow/ docs/`; `.gitignore`; git init w/ noreply email|V14
+T3|x|fetch Assam all-commodity history + comparable markets (neighbour & major producer states) → `data/raw/`|I.src,V11
+T4|x|clean → weekly series (median modal price, arrivals), gap flags; Assam coverage heatmap; pick top-3 pairs per rule|V6,V11
 T5|.|model: pooled cross-market quantile model (log-return target, h=1..4 wk, NaN-native e.g. HistGradientBoosting) + naive + seasonal-naive|V4,V5
 T6|.|rolling-origin backtest → MAPE, MAE ₹/q, direction hit-rate, P10–P90 coverage → `out/metrics.json`|V3,V4,V5,V8
 T7|.|incomplete-data test: mask/truncate good-coverage market; local-only vs pooled|V7

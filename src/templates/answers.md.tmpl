@@ -1,0 +1,327 @@
+# NESFIC-D-35 — Agricultural Commodity Price Intelligence and Forecasting for Farmer Decisions
+
+Applicant: Arijit Gogoi (individual applicant)
+Working name of the solution: Bazar Sanket (বজাৰ সংকেত, "market signal")
+
+## 1. Problem understanding & user workflow
+
+Assam's farmers sell through regulated markets, weekly haats and village traders. Two decisions shape their income. After harvest, they must decide whether to sell now, hold for a few weeks or store. Before each season, they must decide what to sow. Both depend on where prices are likely to go, and today no institution in the State provides that view.
+
+Current workflow. Agriculture Extension Assistants (AEAs) record daily spot prices and arrivals in markets. The Agricultural Market Intelligence Unit (AMIU) of Assam Agricultural University compiles them and makes them available to farmers. Agmarknet also publishes daily prices for many Assam markets, openly available through data.gov.in. All of this describes yesterday. None of it says what is likely next week or next season, and it reaches farmers as numbers rather than advice.
+
+Our analysis of the public Agmarknet record confirms the department's concern about data:
+- ${timeline_sentence}
+- In the last three years, ${n_pairs} Assam market–commodity series were reported at least once, but the median series has a price in only ${median_cov}% of weeks, and only ${n_ge50} series reach half of all weeks.
+- ${renamed_sentence}
+- Prices differ widely between Assam markets on the same day (median gap between highest and lowest market: ${disp_sentence}), so a state average hides real choices.
+
+Conventional single-series forecasting needs long, regular histories, which most Assam markets do not have.
+
+Users and beneficiaries
+- Primary: smallholder farmers and farmer producer organisations (FPOs) deciding when, where and what to sell, and what to grow.
+- Operational: AEAs, who collect prices and meet farmers; AMIU analysts, who curate data and would approve advisories.
+- Planning: the Agriculture Department and ARIAS Society, who need season-ahead price intelligence for crop planning.
+
+Gaps addressed
+1. No forward-looking price information for marketing decisions (one to four weeks ahead).
+2. No season-ahead intelligence to guide sowing choices.
+3. Incomplete, irregular local history that defeats conventional forecasting.
+4. Information is raw and numeric, not decision-ready for a farmer's crop, market and storage options.
+5. No routine measurement of forecast accuracy, so trust cannot be earned.
+
+Intended outcome
+A State-owned forecasting and advisory service that publishes, every week, a one-to-four-week price band with a plain Hold / Sell / Store signal for each covered commodity and market, in Assamese and English, through AEAs, SMS, WhatsApp and voice calls; publishes a season-ahead crop-planning outlook before each sowing season; works with incomplete data by learning from comparable markets in Assam and neighbouring States; and reports its own accuracy openly, staying silent where it has no skill.
+
+## 2. Proposed Solution and key features
+
+Bazar Sanket is a price-intelligence and advisory service for Assam with two clearly separated horizons, built on data the State already collects.
+
+Main modules
+1. Data hub and quality engine. Ingests AMIU daily prices and arrivals, Agmarknet records for Assam and comparable markets in neighbouring States, and other defensible sources where useful (rainfall, active commodity futures, cold-storage stocks). It harmonises market names, varieties and units, flags outliers and missing weeks, and sends data-quality alerts back to AMIU and AEAs so that gaps are fixed at source.
+2. Short-horizon forecast engine (one to four weeks). A single "global" model learns price behaviour from all markets together instead of fitting a fragile model to each short series, so a market with a patchy history borrows patterns from comparable markets. It outputs a price band (10th, 50th and 90th percentiles), not a single number, and is re-evaluated every week against simple benchmarks. Where it does not beat them for a market, no forecast is published for that market.
+3. Decision layer. Converts the band into a Hold, Sell or Store signal using the farmer's realistic options: storage cost, shelf life, expected losses and prices in nearby markets. Every signal carries a one-line reason and its assumptions.
+4. Season-ahead crop-planning intelligence. Before each sowing season, a crop card per commodity shows the typical seasonal price path, the likely price range in the harvest window, year-to-year price risk and comparison with neighbouring States. With AAU cost-of-cultivation and yield data, it extends to an indicative ranking of crops by expected margin and risk.
+5. Delivery and feedback. AMIU reviews and approves each weekly batch, which then reaches farmers through existing channels: AEA dashboard and printable sheets, Assamese SMS, WhatsApp cards and outbound voice (IVR) calls for farmers who prefer audio. Farmers and AEAs can report the price actually received.
+6. Monitoring and transparency. A public scorecard shows forecast versus actual for every published series.
+
+User interaction
+- Farmers register once (through an AEA, a missed call or WhatsApp) with crop, village and preferred market, and receive weekly advisories in Assamese.
+- AEAs see forecasts, signals and data-quality alerts for their markets and share advisories in farmer meetings.
+- AMIU analysts review, edit or withhold advisories and add context (floods, policy changes) before release.
+- Department planners use the seasonal outlook and the scorecard.
+
+What changes versus the current approach
+- From yesterday's prices to a forward view with explicit uncertainty.
+- From numbers to advice, for example: "Prices likely to rise slightly; holding two weeks may add about ₹100 per quintal after losses."
+- From dependence on long local histories to learning across markets, so incomplete data no longer blocks forecasting.
+- From one-off outlooks to continuously measured performance, with silence where there is no skill.
+- From one horizon to two: weekly marketing advice and season-ahead planning.
+
+A working prototype on public Agmarknet data (Section 3 and the attached Proof of Work) already demonstrates modules 1 to 4 for ${sel_market} (${sel_commodities}), including a year-long out-of-sample test across ${n_series_assam} Assam market series.
+
+## 3. Describe user journey, wireframes, prototype & proof of work
+
+${section3}
+
+## 4. Technology & solution architecture
+
+Architecture. A weekly batch analytics pipeline with a thin delivery layer, designed to run cheaply on State infrastructure and to be maintainable by AMIU staff.
+
+Data flow
+1. Ingest: AMIU daily prices and arrivals (API, database export or spreadsheet upload, as AMIU prefers) and scheduled pulls from the data.gov.in Open Government Data API (Agmarknet prices for Assam and comparable States). Optional: IMD rainfall, active futures prices, cold-storage stocks.
+2. Validate and harmonise: market, commodity, variety and unit mapping; outlier screening against each series' recent median; explicit missing-week flags. Records are never silently changed; corrections are versioned with user and reason.
+3. Weekly series: daily records become weekly median prices per market, commodity and variety, keeping gaps explicit.
+4. Features: price changes over 1 to 52 weeks, volatility, reporting completeness, regional price indices built from comparable markets, the market's price relative to its peers, seasonality and, once AMIU data are connected, arrivals.
+5. Models and rules (below), then the decision layer.
+6. Review: AMIU approves the weekly batch in a web console.
+7. Delivery: SMS, WhatsApp, IVR and AEA dashboard; feedback stored for evaluation.
+
+Models and methods
+- Short horizon: a global gradient-boosted tree model (scikit-learn HistGradientBoostingRegressor) trained with quantile loss to predict one-to-four-week log price changes at the 10th, 50th and 90th percentiles. It handles missing values natively, so incomplete histories need no imputation, and one model shared across markets lets data-poor markets borrow strength from data-rich ones.
+- Benchmarks: no-change and same-weeks-last-year (seasonal naive). Every series is scored weekly with rolling-origin, out-of-sample evaluation; publication is gated on beating the benchmarks.
+- Calibration: band coverage is tracked; bands are widened (conformal adjustment) where they prove too narrow.
+- Long horizon: seasonal price profiles pooled across Assam and neighbouring-State markets, with year-to-year ranges; later combined with cost and yield data into margin-and-risk rankings.
+- Decision rules: transparent, versioned rules (expected gain after storage costs and losses versus downside risk), configurable per commodity by AMIU.
+
+Stack
+- Python 3.13, polars (lazy queries over Parquet), scikit-learn, marimo notebooks for reproducible, auditable analysis, seaborn for charts; uv for reproducible environments. All open source.
+- Production: PostgreSQL for records and audit logs, Parquet for analytical history, a small REST API (FastAPI) for the dashboard, partner systems and channel gateways, and a mobile-friendly web dashboard in Assamese and English.
+- Integrations: data.gov.in OGD API (working in the prototype); AMIU data feed (to be agreed); SMS via a DLT-registered gateway; WhatsApp Business Platform; an IVR provider; Bhashini services for Assamese translation and speech, subject to evaluation.
+
+Hosting. Assam State Data Centre or a MeitY-empanelled cloud region in India. Compute needs are modest: the prototype's complete pipeline, including a year-long backtest with ${n_refits} model refits, runs in about ${runtime_min} minutes on a laptop.
+
+## 5. Development methodology & intermediate steps
+
+Evidence first, in short iterations. Every stage ends with an artefact the department can inspect, and a model is promoted only when it beats simple benchmarks out of sample.
+
+1. Discovery and requirements (weeks 1–4)
+- Workshops with the Agriculture Department, AMIU and AAU; interviews with AEAs and farmers in pilot districts.
+- Agree pilot commodities, markets and districts, the decisions to support (sell, hold, store, crop choice) and success measures.
+- Output: requirements and pilot-scope note; data-sharing request to AMIU.
+
+2. Data audit and pipeline (weeks 3–8)
+- Profile AMIU and Agmarknet data: coverage, gaps, units, varieties, renamed markets, outliers.
+- Build ingestion, harmonisation and quality checks; set up data-quality alerts for AEAs.
+- Output: data audit report and reproducible pipeline.
+
+3. Design (weeks 5–10)
+- Co-design advisory formats with AEAs and farmers: SMS, WhatsApp card, voice script, dashboard, printable sheet.
+- Draft Assamese content; native-speaker review; comprehension tests with small farmer groups.
+- Output: validated wireframes and message templates.
+
+4. Prototype (done before submission)
+- On public Agmarknet data: harmonised weekly series, global quantile model, benchmarks, rolling-origin backtest, incomplete-data stress test, decision rules, seasonal crop cards and mock-ups.
+- Output: prototype code, backtest report and Proof of Work (attached).
+
+5. MVP (months 3–5)
+- Retrain on AMIU data and add arrivals features; calibrate decision rules with AAU storage-cost and loss parameters; build AMIU review console, AEA dashboard and SMS, WhatsApp and IVR delivery.
+- Output: MVP running end to end on pilot scope.
+
+6. Testing (months 4–6)
+- Technical: automated tests of data rules, leakage checks and reproducibility checks.
+- Statistical: weekly rolling-origin evaluation against no-change and seasonal-naive benchmarks; band calibration.
+- Shadow mode: forecasts produced and scored for six to eight weeks without being sent to farmers.
+- Usability: comprehension tests of Assamese messages; AEA feedback.
+- Output: test report and validation-readiness review with the department.
+
+7. Pilot validation and refinement (months 7–12)
+- One crop season with continuous monitoring, a mid-pilot review and updates to rules and content from feedback.
+- Output: pilot evaluation report and scale-up recommendation.
+
+Principles
+- Benchmarks first: a model is used only where it beats no-change and seasonal-naive forecasts.
+- Human in the loop: AMIU approves every advisory batch.
+- Reproducibility: every number in a report is generated by versioned code from versioned data (already the case in this proposal).
+- Open, documented code to enable handover to AMIU.
+
+## 6. Development timeline & milestones
+
+Indicative timeline from project start (month 0). The public-data prototype is already complete.
+
+Phase 1 — Discovery and data access (month 1)
+- Deliverables: pilot scope note (commodities, markets, districts), requirements, data-sharing request, risk register.
+- Milestone M1: pilot scope signed off by the department.
+- Dependencies: a nominated department counterpart; AMIU and AAU availability.
+
+Phase 2 — Data foundation (months 1–2)
+- Deliverables: data audit report on AMIU and Agmarknet data; ingestion and harmonisation pipeline; data-quality dashboard.
+- Milestone M2: historical AMIU data loaded and profiled.
+- Dependencies: receipt of AMIU historical data and agreement on the daily feed format.
+
+Phase 3 — Forecast engine v1 (months 2–3)
+- Deliverables: global quantile models for pilot commodities retrained on AMIU and public data; backtest report against benchmarks; seasonal crop cards.
+- Milestone M3: backtest report reviewed by AMIU and AAU experts.
+
+Phase 4 — Decision layer and content (months 3–4)
+- Deliverables: Hold / Sell / Store rules calibrated with AAU storage-cost and loss parameters; Assamese message templates reviewed by native speakers; comprehension-test results.
+- Milestone M4: advisory formats approved.
+- Dependencies: AAU post-harvest parameters; a native-speaker reviewer.
+
+Phase 5 — Delivery MVP (months 4–5)
+- Deliverables: AMIU review console, AEA dashboard, SMS (DLT-registered templates), WhatsApp and IVR integration; security review.
+- Milestone M5: end-to-end dry run on pilot scope.
+- Dependencies: DLT sender ID and template registration, WhatsApp Business verification and the hosting environment, all started in month 1.
+
+Phase 6 — Shadow mode and validation readiness (months 5–6)
+- Deliverables: six to eight weeks of shadow forecasts scored against actual prices; test report; user and operations manuals; AEA training.
+- Milestone M6 (end of month 6): validation-readiness review. The solution is ready for pilot validation.
+
+Phase 7 — Pilot validation (months 7–12; one crop season of four to six months)
+- Live advisories to registered farmers in pilot districts; weekly scorecards; mid-pilot review; final evaluation report with a scale-up plan.
+- Pilot timing will follow the crop calendar of the chosen commodities, agreed in Phase 1.
+
+Critical path: AMIU data access (M2), then model retraining (M3), content approval (M4) and channel registration (M5). Channel registration and hosting run in parallel from month 1, and development continues on public data if AMIU data arrive late, so a delay in data access slows retraining but does not stop the project.
+
+## 7. Data & information requirements
+
+Principle: the prototype uses only public data. No access to departmental data is assumed; every non-public item below is a request.
+
+A. Used in the prototype (public, confirmed)
+- Agmarknet daily market prices through the data.gov.in OGD API: resource "Variety-wise Daily Market Prices Data of Commodity" (Directorate of Marketing & Inspection), Government Open Data License – India. Fields: date, state, district, market, commodity, variety, grade, minimum, maximum and modal price (₹ per quintal).
+- Retrieved ${retrieved}: ${rows_total} rows, covering all Assam commodities from ${assam_first_year} and the three pilot commodities in ${n_comp_states} neighbouring States from 2016.
+- This public dataset has no arrivals field, so arrivals are not yet used.
+
+B. Requested from AMIU / AAU for development and testing
+- Historical daily prices and arrivals collected by AEAs, all available years, with market and commodity codes (CSV, Excel or database export).
+- The daily feed going forward (API, shared database or scheduled export) and its timing.
+- Market master (name variants, location, market type, reporting AEA) and the commodity, variety, grade and unit codebook.
+- Known data issues, such as non-reporting periods or unit changes.
+
+C. Requested from AAU and the Department for decision rules and crop planning
+- Storage costs and practices by crop, post-harvest loss rates and shelf life.
+- Crop calendars by agro-climatic zone; cost of cultivation and yields for candidate crops; district area and production statistics.
+
+D. Supplementary public sources, to be assessed
+- Comparable markets in neighbouring States via the same OGD API (already used).
+- IMD rainfall; commodity futures prices only where trading is active (SEBI suspended futures in several agricultural commodities, including rapeseed-mustard, from December 2021, so availability will be verified per commodity); cold-storage stock reports; festival calendar.
+
+E. Collected during the pilot, with informed consent
+- Farmer registration: mobile number, language, village, crops, preferred market; the minimum needed.
+- Feedback: price received, date and market; usefulness ratings.
+
+Formats and processing
+- Inputs: CSV, Excel, JSON (API); Parquet internally.
+- Processing: name and unit harmonisation, de-duplication, outlier screening, weekly aggregation with explicit gaps. In the prototype, ${outlier_pct}% of weekly prices were flagged as implausible jumps (more than threefold against recent weeks) and excluded.
+- Annotation: AMIU analysts label suspected data errors and add event notes (floods, strikes, policy changes) in the review console. These labels improve both the quality rules and the model.
+
+Dependencies and assumptions
+- AMIU data access depends on a data-sharing agreement. If it is delayed, development continues on public data, which already works.
+- Arrivals data are assumed to exist in AMIU records, as the challenge states, but their format and history length are unknown.
+- Personal data are not needed to build or test models; only aggregated market data are.
+
+## 8. Team, manpower & expertise
+
+Applicant
+Arijit Gogoi, individual applicant and lead developer. A software developer working in Python on data pipelines, statistical modelling and machine learning, and web applications. Built the prototype submitted with this proposal: the data pipeline, forecasting models, backtests, decision rules and mock-ups. Responsible for architecture, data, models and delivery.
+
+The applicant is new to agricultural economics. The plan therefore engages domain specialists from the start instead of relying on the developer's judgement for agronomic and market assumptions.
+
+Roles to be engaged (not yet confirmed)
+- Agricultural market economist (part-time): validates commodity choice, seasonal patterns, decision rules and crop-planning logic. Collaboration with AAU/AMIU will be sought; otherwise an independent consultant.
+- Assamese content and communication specialist (part-time): writes and reviews advisories and voice scripts; runs comprehension tests.
+- Field coordinator (pilot): farmer registration with AEAs, feedback collection and training.
+- Front-end developer (part-time, months 3–5): AEA dashboard and AMIU review console.
+- DevOps and security engineer (short engagements): hosting, security review and monitoring.
+- AMIU data staff (as agreed): labelling data errors and event notes.
+
+Indicative manpower by phase (person-months)
+- Discovery and data foundation (months 1–2): lead developer 2.0, economist 0.5.
+- Forecast engine and decision layer (months 2–4): lead developer 2.0, economist 0.75, content specialist 0.5.
+- Delivery MVP (months 4–5): lead developer 1.5, front-end developer 1.5, DevOps 0.25, content specialist 0.5.
+- Shadow mode and readiness (months 5–6): lead developer 1.0, economist 0.25, field coordinator 0.5.
+- Development total: about 11.25 person-months.
+- Pilot (one season, about five months): lead developer 2.5, field coordinator 5.0, economist 0.5, content specialist 0.5, DevOps 0.25; about 8.75 person-months.
+
+Critical specialist skills
+- Probabilistic time-series forecasting and honest evaluation (rolling-origin backtests, calibration): covered by the applicant, as the prototype shows.
+- Agricultural market economics in the Assam context, including storage and post-harvest economics: to be engaged.
+- Assamese language and rural communication, including voice content: to be engaged.
+- Data engineering for messy administrative data: covered by the applicant.
+- Field extension experience to work with AEAs and farmer groups: field coordinator, with AMIU support.
+
+## 9. Testing, validation & evidence
+
+${section9}
+
+## 10. Security, privacy, safety & compliance
+
+Data protection and privacy
+- Personal data are limited to what delivery needs (mobile number, language, village, crops, preferred market) and collected with informed consent under the Digital Personal Data Protection Act, 2023 and its Rules: notice in Assamese, purpose limitation, easy withdrawal (reply STOP or call), retention limits and a named grievance contact.
+- Forecasting uses only aggregated market data; no personal data enter the models.
+- Contact data are stored separately from analytical data, encrypted at rest and in transit, with role-based access; an AEA sees only their own farmers.
+
+Security
+- Hosting in the Assam State Data Centre or a MeitY-empanelled Indian cloud region; data stay in India.
+- Hardening per CERT-In directions (including log retention and incident reporting), regular patching, secrets kept in a vault and never in code, multi-factor login for staff consoles.
+- Security audit before launch (by a CERT-In-empanelled auditor if the department requires) and automated vulnerability scanning.
+
+Safety of advice
+- Forecasts are shown as ranges, never guarantees; every message says it is an outlook, not a promise.
+- Skill gate: a series is published only if its recent out-of-sample accuracy beats simple benchmarks; otherwise farmers receive current prices without a forecast.
+- Human review: AMIU approves each weekly batch and can edit, hold or withdraw any advisory; an emergency switch pauses all messages.
+- Conservative rules: "Store" is suggested only when the expected gain clearly exceeds storage costs and losses, and never beyond a crop's safe shelf life; perishables default to "Sell".
+- Events such as floods, strikes or export bans trigger analyst review.
+
+Auditability and model governance
+- Every published number is reproducible from versioned code, data snapshot and model version; logs record who approved what and when.
+- Data corrections are versioned, never overwritten.
+- A model card per commodity documents data, features, accuracy and known limits; drift monitoring triggers review.
+- A public scorecard compares forecasts with actual prices.
+
+Regulatory and channel compliance
+- SMS through a DLT-registered sender ID and templates under TRAI's TCCCPR 2018; WhatsApp only to opted-in users per platform policy; IVR calls within permitted hours.
+- Guidelines for Indian Government Websites (GIGW 3.0) and WCAG 2.1 accessibility for dashboards, with Assamese and English interfaces.
+- Agmarknet data used with attribution under the Government Open Data License – India.
+
+Interoperability
+- Open formats (CSV, JSON, Parquet) and documented REST APIs; Agmarknet commodity and market codes to ease future links with Agmarknet, e-NAM or AgriStack registries, subject to departmental approval.
+- No vendor lock-in: open-source stack, with code and documentation handed over to AMIU.
+
+## 11. Innovation & differentiation
+
+Novel elements
+1. Forecasting that works with incomplete data. Instead of one model per market, which fails on short, gappy series, a single global model learns from all markets in Assam and neighbouring States and treats missing weeks as information rather than errors. ${stress_sentence}
+2. Uncertainty first. Farmers see a price band, checked every week for calibration, not a single misleading number.
+3. Skill-gated publication. A forecast is published for a market only where it has beaten simple benchmarks out of sample; elsewhere the system says so.
+4. From forecast to decision. A transparent rule converts bands into Hold / Sell / Store advice using storage costs, losses, shelf life and nearby-market prices.
+5. Two horizons in one system: weekly marketing advice and season-ahead crop cards, kept separate in method and message.
+6. Data quality as a by-product: gaps, renamed markets and suspicious entries are flagged back to AMIU and AEAs, improving the data the State already collects.
+
+Existing alternatives and prior art
+- Agmarknet, e-NAM and farmer apps such as Kisan Suvidha publish current and past prices, not forecasts.
+- Market intelligence centres at some State Agricultural Universities (for example the Domestic and Export Market Intelligence Cell at Tamil Nadu Agricultural University) issue pre-sowing and pre-harvest price outlooks, mainly from econometric models on long local histories and expert surveys, a few times a season.
+- Commercial agri-intelligence services sell forecasts to traders and agribusiness, mostly for major commodities and markets; they are not designed for smallholders in Assam.
+- Published Indian price-forecasting studies (ARIMA, machine learning, hybrids) usually model single series with long histories.
+- In the forecasting literature, models trained across many related series often beat per-series models, especially for short series (Montero-Manso and Hyndman, International Journal of Forecasting, 2021; the M5 competition, 2022). We apply this to Assam's data-poor markets.
+
+Basis of differentiation
+The combination of (a) learning across markets to overcome incomplete data, (b) calibrated bands with public accuracy tracking, (c) farmer-level decision advice in Assamese, and (d) integration into existing AMIU and AEA workflows rather than a parallel app.
+
+IP and dependencies
+- Code written by the applicant, proposed for release under an open-source licence (Apache-2.0) or licensed to the department as agreed, so the State can run and extend it without lock-in. No patents are claimed.
+- Key open-source dependencies: Python, polars, scikit-learn, marimo, seaborn, uv, PostgreSQL, FastAPI (permissive BSD, MIT and Apache-2.0 licences).
+- Data: Agmarknet via data.gov.in under GODL-India. Proprietary services only for delivery (SMS gateway, WhatsApp Business Platform, IVR provider), all replaceable.
+
+## 12. Resources, risks & pilot validation
+
+Indicative resources (estimates in INR, to be confirmed with the department)
+- Development, six months: lead developer ₹6–9 lakh; part-time economist ₹2.4–3.6 lakh; front-end developer ₹1.8–2.4 lakh; Assamese content specialist ₹1.0–1.6 lakh; hosting and tools ₹0.6–1.2 lakh; workshops and travel ₹1–2 lakh. Subtotal about ₹13–20 lakh.
+- Pilot, one season (two to three districts, about 2,000–5,000 farmers): SMS, IVR and WhatsApp usage ₹1.5–3 lakh; field coordinator ₹1.5–2 lakh; travel and farmer meetings ₹1–2 lakh; hosting ₹0.75–1.5 lakh; evaluation survey ₹1–2 lakh; developer support ₹2.5–3.75 lakh. Subtotal about ₹8–14 lakh.
+- Main cost drivers: specialist time, message volume (Assamese SMS needs Unicode, so roughly two to three SMS parts per advisory), field work, and security audit if required.
+
+Key risks and mitigations
+- AMIU data access delayed or limited: start the data-sharing request in month 1; the public-data pipeline already works, so development continues.
+- Poor or inconsistent data: quality engine, harmonisation, analyst labels; skill gate withholds unreliable forecasts.
+- Low forecast skill for some commodities or markets: publish only where benchmarks are beaten; otherwise current prices and seasonal context only.
+- Harm from wrong advice: ranges not promises, conservative storage rules, AMIU approval of every batch, pause switch.
+- Low farmer trust or uptake: co-design with AEAs, Assamese voice messages, public scorecard, feedback loop.
+- Channel registration delays (DLT, WhatsApp): start in month 1; AEA dashboard and printable sheets as fallback.
+- Shocks such as floods, strikes or export bans: event flags and analyst override.
+- Single-developer capacity: early engagement of specialists, documented open code, handover plan with AMIU.
+
+Pilot validation in the stated context
+- Scope agreed with the department: two to three districts, three to five commodities, their main markets and AEAs, for one crop season.
+- Shadow phase (six to eight weeks): forecasts produced and scored but not sent; go-live only if benchmarks are beaten for the series concerned.
+- Live phase: weekly advisories to registered farmers through AEAs, SMS, WhatsApp and IVR.
+- Measures, with thresholds agreed in advance: forecast error against no-change and seasonal-naive benchmarks; band coverage; advisory delivery and reach; farmer comprehension and usefulness ratings; reported decision changes; prices realised by participating farmers compared with similar non-participating farmers; data-quality improvement in AEA reporting.
+- Output: an independent-style evaluation report with a scale-up recommendation for wider use in farmer decision support.

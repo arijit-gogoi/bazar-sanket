@@ -1,0 +1,238 @@
+{
+  "source": "Agmarknet (DMI, MoA&FW) via data.gov.in OGD API, resource 35985678-0d79-46b4-9ed6-6f13308a1d24",
+  "rows_total": 851760,
+  "date_first": "2001-03-12",
+  "date_last": "2026-11-24",
+  "retrieved": "2026-11-25",
+  "states": [
+    "Assam",
+    "West Bengal",
+    "Tripura",
+    "Nagaland",
+    "Meghalaya",
+    "Bihar",
+    "Manipur",
+    "Mizoram",
+    "Arunachal Pradesh"
+  ],
+  "rows_by_state": {
+    "Assam": 515000,
+    "West Bengal": 195000,
+    "Tripura": 82333,
+    "Nagaland": 20116,
+    "Meghalaya": 17237,
+    "Bihar": 15118,
+    "Manipur": 5000,
+    "Mizoram": 1603,
+    "Arunachal Pradesh": 353
+  },
+  "assam_rows": 515000,
+  "assam_first": "2005-09-21",
+  "assam_last": "2026-11-24",
+  "assam_market_names_raw": 109,
+  "assam_markets_harmonised": 82,
+  "assam_markets_renamed": 25,
+  "assam_yearly": {
+    "2005": {
+      "rows": 4249,
+      "markets": 15
+    },
+    "2006": {
+      "rows": 16701,
+      "markets": 15
+    },
+    "2007": {
+      "rows": 12959,
+      "markets": 14
+    },
+    "2008": {
+      "rows": 19919,
+      "markets": 18
+    },
+    "2009": {
+      "rows": 22561,
+      "markets": 18
+    },
+    "2010": {
+      "rows": 20874,
+      "markets": 18
+    },
+    "2011": {
+      "rows": 21909,
+      "markets": 17
+    },
+    "2012": {
+      "rows": 26063,
+      "markets": 17
+    },
+    "2013": {
+      "rows": 33031,
+      "markets": 22
+    },
+    "2014": {
+      "rows": 40143,
+      "markets": 23
+    },
+    "2015": {
+      "rows": 50462,
+      "markets": 23
+    },
+    "2016": {
+      "rows": 46137,
+      "markets": 23
+    },
+    "2017": {
+      "rows": 46218,
+      "markets": 23
+    },
+    "2018": {
+      "rows": 36868,
+      "markets": 22
+    },
+    "2019": {
+      "rows": 29346,
+      "markets": 20
+    },
+    "2021": {
+      "rows": 2,
+      "markets": 1
+    },
+    "2022": {
+      "rows": 1755,
+      "markets": 14
+    },
+    "2023": {
+      "rows": 668,
+      "markets": 1
+    },
+    "2024": {
+      "rows": 13308,
+      "markets": 53
+    },
+    "2025": {
+      "rows": 31775,
+      "markets": 67
+    },
+    "2026": {
+      "rows": 40052,
+      "markets": 32
+    }
+  },
+  "gaps": [
+    {
+      "start": "2020-01-06",
+      "end": "2021-08-23",
+      "weeks": 86
+    },
+    {
+      "start": "2021-09-06",
+      "end": "2021-12-27",
+      "weeks": 17
+    },
+    {
+      "start": "2022-06-06",
+      "end": "2023-04-17",
+      "weeks": 46
+    },
+    {
+      "start": "2023-07-31",
+      "end": "2023-12-04",
+      "weeks": 19
+    },
+    {
+      "start": "2023-12-25",
+      "end": "2024-08-26",
+      "weeks": 36
+    },
+    {
+      "start": "2025-09-01",
+      "end": "2025-12-08",
+      "weeks": 15
+    }
+  ],
+  "gap_stats": {
+    "weeks_total": 1106,
+    "weeks_empty": 223,
+    "weeks_lt5_markets": 263,
+    "max_markets_week": 52,
+    "median_markets_week": 10.0
+  },
+  "window": [
+    "2023-11-27",
+    "2026-11-16"
+  ],
+  "coverage": {
+    "n_pairs": 1170,
+    "median_cov_pct": 13.461538461538462,
+    "n_ge50": 19,
+    "n_ge25": 352,
+    "max_cov_pct": 65.38461538461539
+  },
+  "dispersion": [
+    {
+      "commodity": "Cabbage",
+      "days": 606,
+      "median_spread_pct": 117.15686274509802,
+      "median_markets": 10.0
+    },
+    {
+      "commodity": "Green Chilli",
+      "days": 620,
+      "median_spread_pct": 120.00000000000001,
+      "median_markets": 11.0
+    },
+    {
+      "commodity": "Pumpkin",
+      "days": 612,
+      "median_spread_pct": 87.5,
+      "median_markets": 10.0
+    }
+  ],
+  "outliers": {
+    "n_outlier": 4035,
+    "n_weeks": 245789
+  },
+  "figures": {
+    "timeline": "out/fig/f1_reporting_timeline.png",
+    "coverage": "out/fig/f2_coverage_heatmap.png"
+  },
+  "selection": {
+    "rule": "Top 3 Assam market x commodity series by number of weeks with a reported price in the last 156 complete weeks; ties broken by reporting days. Fixed before any modelling.",
+    "window": [
+      "2023-11-27",
+      "2026-11-16"
+    ],
+    "pairs": [
+      {
+        "market_key": "pamohi(garchuk)",
+        "market": "Pamohi(Garchuk)",
+        "district": "Kamrup",
+        "commodity": "Green Chilli",
+        "variety": "Green Chilly",
+        "weeks": 102,
+        "days": 624,
+        "coverage_pct": 65.4
+      },
+      {
+        "market_key": "pamohi(garchuk)",
+        "market": "Pamohi(Garchuk)",
+        "district": "Kamrup",
+        "commodity": "Cabbage",
+        "variety": "Cabbage",
+        "weeks": 102,
+        "days": 615,
+        "coverage_pct": 65.4
+      },
+      {
+        "market_key": "pamohi(garchuk)",
+        "market": "Pamohi(Garchuk)",
+        "district": "Kamrup",
+        "commodity": "Pumpkin",
+        "variety": "Pumpkin",
+        "weeks": 102,
+        "days": 611,
+        "coverage_pct": 65.4
+      }
+    ]
+  }
+}

@@ -125,10 +125,13 @@ def save_page(dirpath: Path, offset: int, filters: dict, limit: int, data: dict)
     (dirpath / f"{offset:08d}.json").write_text(json.dumps(page, ensure_ascii=False), encoding="utf-8")
 
 
-def load_page(dirpath: Path, offset: int) -> dict | None:
+def load_page(dirpath: Path, offset: int, limit: int | None = None) -> dict | None:
+    """Return a cached page, or None if absent or cached with a different page size."""
     f = dirpath / f"{offset:08d}.json"
     if f.exists():
-        return json.loads(f.read_text(encoding="utf-8"))
+        page = json.loads(f.read_text(encoding="utf-8"))
+        if limit is None or page.get("limit") == limit:
+            return page
     return None
 
 
@@ -185,7 +188,7 @@ def cmd_days(args) -> None:
         d_dir = base / (day.isoformat() + (f"_{args.commodity}" if args.commodity else ""))
         offset = 0
         while True:
-            page = load_page(d_dir, offset)
+            page = load_page(d_dir, offset, limit)
             if page is None:
                 data = client.get(filters, offset, limit, sort_desc=False)
                 save_page(d_dir, offset, filters, limit, data)
@@ -212,7 +215,7 @@ def pull(client: Client, filters: dict[str, str], since: dt.date, limit: int, ma
     reached = False
     total = None
     while offset < max_offset:
-        page = load_page(d_dir, offset)
+        page = load_page(d_dir, offset, limit)
         if page is None:
             t0 = time.time()
             data = client.get(filters, offset, limit, sort_desc=True)
