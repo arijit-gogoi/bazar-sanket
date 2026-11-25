@@ -109,7 +109,7 @@ def stress_short(f: dict) -> str:
             f"with no Assam history at all, learning only from neighbouring States, {f1(s3['mape_pooled'])}% "
             f"(no change: {f1(s3['mape_naive'])}%)"
         )
-    return ("Stress test: " + "; ".join(out) + ".") if out else ""
+    return ("Stress test (pre-set model): " + "; ".join(out) + ".") if out else ""
 
 
 def stress_reading(f: dict) -> str:

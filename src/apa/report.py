@@ -203,12 +203,12 @@ def stress_sentence(st: dict) -> str:
     if s1 and s1["mape_local"] is not None:
         if s1["mape_pooled_same_rows"] < s1["mape_local"]:
             parts.append(
-                f"In the prototype's stress test, with only 26 weeks of local history the global model's error was "
+                f"In the prototype's stress test (pre-set model), with only 26 weeks of local history the global model's error was "
                 f"{f1(s1['mape_pooled_same_rows'])}% against {f1(s1['mape_local'])}% for a model trained on local data alone"
             )
         else:
             parts.append(
-                f"In the prototype's stress test, with only 26 weeks of local history the global model's error "
+                f"In the prototype's stress test (pre-set model), with only 26 weeks of local history the global model's error "
                 f"({f1(s1['mape_pooled_same_rows'])}%) did not beat a local-only model ({f1(s1['mape_local'])}%)"
             )
     if s3:
