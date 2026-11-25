@@ -166,55 +166,77 @@ def _(mo, pl, plt, retrieved, score_assam_h, score_sel, sns, viz):
 
 @app.cell
 def _(G, dt, end_week, features, model, np, pl, test_start):
-    # ---- Incomplete-data stress test (single fit at test start, same evaluation rows) ----
-    rng = np.random.default_rng(7)
+    # ---- Incomplete-data stress test: Assam history before the test year is masked;
+    # one fit at test start; identical evaluation rows in every scenario; all fits in parallel.
     _assam = pl.col("state") == "Assam"
     _pre = pl.col("week") < test_start
-
-    def _mask(df, scenario):
-        if scenario == "S0 full history":
-            return df
-        if scenario == "S1 only 26 weeks of local history":
-            drop = _assam & _pre & (pl.col("week") < test_start - dt.timedelta(weeks=26))
-        elif scenario == "S2 half of local weeks missing":
-            keep = rng.random(df.height) < 0.5
-            drop = _assam & _pre & pl.lit(pl.Series("drop", ~keep))
-        else:  # S3 no local history at all
-            drop = _assam & _pre
-        return df.with_columns(
-            pl.when(drop).then(None).otherwise(pl.col("price")).alias("price"),
-            pl.when(drop).then(None).otherwise(pl.col("pmin")).alias("pmin"),
-            pl.when(drop).then(None).otherwise(pl.col("pmax")).alias("pmax"),
-            pl.when(drop).then(None).otherwise(pl.col("n_days")).alias("n_days"),
-        )
-
-    _base = G.select("state", "market_key", "commodity", "variety", "week", "price", "pmin", "pmax", "n_days", "selected")
+    _scen = ["S0 full history", "S1 only 26 weeks of local history", "S2 half of local weeks missing", "S3 no local history at all"]
+    _base = G.select("state", "market_key", "commodity", "variety", "week", "price", "pmin", "pmax", "n_days").sort(
+        ["state", "market_key", "commodity", "week"])
     _codes = {c: i for i, c in enumerate(sorted(G.get_column("commodity").unique().to_list()))}
+    _keep_half = np.random.default_rng(7).random(_base.height) < 0.5
+    _store = model.ArrayStore("stress")
+    _tasks, _meta, _frames = [], [], {}
+    try:
+        for _sc in _scen:
+            if _sc.startswith("S0"):
+                _drop = pl.lit(False)
+            elif _sc.startswith("S1"):
+                _drop = _assam & _pre & (pl.col("week") < test_start - dt.timedelta(weeks=26))
+            elif _sc.startswith("S2"):
+                _drop = _assam & _pre & pl.lit(pl.Series("drop", ~_keep_half))
+            else:
+                _drop = _assam & _pre
+            _g = _base.with_columns(
+                *[pl.when(_drop).then(None).otherwise(pl.col(_c)).alias(_c) for _c in ("price", "pmin", "pmax", "n_days")]
+            ).with_columns(pl.col("price").log().alias("lp"))
+            _g = features.build(_g, _codes).with_columns(
+                pl.concat_str(["market_key", "commodity"], separator="|").rank("dense").alias("_sid"))
+            _frames[_sc] = _g
+            _arr = model.frame_arrays(_g, features.FEATURES, _store, _sc[:2])
+            _is_as = (_g.get_column("state") == "Assam").to_numpy()
+            _sid = _g.get_column("_sid").to_numpy()
+            _wk = _arr["week"]
+            for _h in features.HORIZONS:
+                _yok = ~np.isnan(_arr[f"y{_h}"])
+                _test = np.flatnonzero(_is_as & _arr["lp_ok"] & _yok & (_wk >= np.datetime64(test_start))
+                                       & (_wk <= np.datetime64(end_week) - np.timedelta64(7 * _h, "D")))
+                _train = model.train_index(_arr, _h, test_start)
+                if _test.size == 0 or _train.size == 0:
+                    continue
+                _tasks.append(model.task(_arr, _h, _train, _test))
+                _meta.append((_sc, _h, "pooled", _test))
+                if _sc.startswith("S3"):
+                    continue
+                _trm = np.zeros(_wk.size, dtype=bool)
+                _trm[_train] = True
+                for _s in np.unique(_sid[_test]):
+                    _own_tr = np.flatnonzero(_trm & _is_as & (_sid == _s))
+                    if _own_tr.size >= 8:
+                        _own_te = _test[_sid[_test] == _s]
+                        _tasks.append(model.task(_arr, _h, _own_tr, _own_te, local=True, cols=features.OWN_FEATURES))
+                        _meta.append((_sc, _h, "local", _own_te))
+        _res = model.run_tasks(_tasks)
+    finally:
+        _store.close()
+    _parts = {}
+    for (_sc, _h, _kind, _idx), (_p, _n) in zip(_meta, _res):
+        if _kind == "pooled":
+            _parts[(_sc, _h)] = {"idx": _idx, "pooled": _p[:, 1], "local": np.full(_idx.size, np.nan)}
+    for (_sc, _h, _kind, _idx), (_p, _n) in zip(_meta, _res):
+        if _kind == "local":
+            _d = _parts[(_sc, _h)]
+            _d["local"][np.searchsorted(_d["idx"], _idx)] = _p[:, 1]
     stress_rows = []
-    for _sc in ["S0 full history", "S1 only 26 weeks of local history", "S2 half of local weeks missing", "S3 no local history at all"]:
-        _g = _mask(_base, _sc).with_columns(pl.col("price").log().alias("lp"))
-        _g = features.build(_g.drop("selected"), _codes).join(
-            _base.select("state", "market_key", "commodity", "week", "selected"), on=["state", "market_key", "commodity", "week"], how="left")
-        for _h in features.HORIZONS:
-            _te = _g.filter(_assam & pl.col("week").is_between(test_start, end_week - dt.timedelta(weeks=_h))
-                            & pl.col("lp").is_not_null() & pl.col(f"y{_h}").is_not_null())
-            _tr = model.train_rows(_g, _h, test_start)
-            if _tr.height == 0 or _te.height == 0:
-                continue
-            _pm = model.fit_quantiles(_tr, features.FEATURES, _h)
-            _pq = model.predict_quantiles(_pm, _te, features.FEATURES)
-            _te = _te.with_columns(pl.Series("q50_pooled", _pq[:, 1]), pl.lit(None, dtype=pl.Float64).alias("q50_local"))
-            if _sc != "S3 no local history at all":
-                _parts = []
-                for (_m, _c), _ser in _te.group_by(["market_key", "commodity"]):
-                    _own = _tr.filter((pl.col("state") == "Assam") & (pl.col("market_key") == _m) & (pl.col("commodity") == _c))
-                    if _own.height >= 8:
-                        _lm = model.QuantileModel(features.OWN_FEATURES, local=True).fit(_own, _h)
-                        _ser = _ser.with_columns(pl.Series("q50_local", _lm.predict(_ser)[:, 1]))
-                    _parts.append(_ser)
-                _te = pl.concat(_parts, how="vertical_relaxed")
-            stress_rows.append(_te.select("market_key", "commodity", "week", "selected", "lp", pl.col(f"y{_h}").alias("y"),
-                                          "q50_pooled", "q50_local", pl.lit(_h).alias("h"), pl.lit(_sc).alias("scenario")))
+    for (_sc, _h), _d in _parts.items():
+        _te = _frames[_sc][_d["idx"]]
+        stress_rows.append(_te.select(
+            "market_key", "commodity", "week", "lp", pl.col(f"y{_h}").alias("y"),
+            pl.lit(_h).alias("h"), pl.lit(_sc).alias("scenario"),
+        ).with_columns(
+            pl.Series("q50_pooled", _d["pooled"]),
+            pl.Series("q50_local", _d["local"]).fill_nan(None),
+        ))
     stress = pl.concat(stress_rows, how="vertical_relaxed")
     return (stress,)
 
@@ -235,6 +257,7 @@ def _(pl, stress):
             _ape(pl.col("q50_pooled")).mean().alias("mape_pooled"),
             _ape(pl.col("q50_local")).filter(pl.col("q50_local").is_not_null()).mean().alias("mape_local"),
             _ape(pl.col("q50_pooled")).filter(pl.col("q50_local").is_not_null()).mean().alias("mape_pooled_same_rows"),
+            _ape(pl.lit(0.0)).filter(pl.col("q50_local").is_not_null()).mean().alias("mape_naive_same_rows"),
             pl.col("q50_local").is_not_null().mean().mul(100).alias("local_available_pct"),
         )
         .sort("scenario")
@@ -248,10 +271,13 @@ def _(mo, pl, plt, retrieved, sns, stress_score, viz):
     _rows = []
     for _r in stress_score.iter_rows(named=True):
         _sc = _r["scenario"].split(" ", 1)[1]
-        _rows.append({"scenario": _sc, "method": "no change", "MAPE": _r["mape_naive"]})
-        if _r["mape_local"] is not None:
+        if _r["mape_local"] is not None:  # compare on the forecasts where a local model exists
+            _rows.append({"scenario": _sc, "method": "no change", "MAPE": _r["mape_naive_same_rows"]})
             _rows.append({"scenario": _sc, "method": "local model (own history only)", "MAPE": _r["mape_local"]})
-        _rows.append({"scenario": _sc, "method": "global model (learns from other markets)", "MAPE": _r["mape_pooled"]})
+            _rows.append({"scenario": _sc, "method": "global model (learns from other markets)", "MAPE": _r["mape_pooled_same_rows"]})
+        else:  # no local history: all forecasts
+            _rows.append({"scenario": _sc, "method": "no change", "MAPE": _r["mape_naive"]})
+            _rows.append({"scenario": _sc, "method": "global model (learns from other markets)", "MAPE": _r["mape_pooled"]})
     _p = pl.DataFrame(_rows)
     _fig, _ax = plt.subplots(figsize=(8.5, 3.4))
     sns.barplot(data=_p.to_pandas(), x="scenario", y="MAPE", hue="method", ax=_ax,
@@ -261,7 +287,7 @@ def _(mo, pl, plt, retrieved, sns, stress_score, viz):
     _ax.set(xlabel="", ylabel="mean absolute % error (1–4 weeks)", title="Stress test: forecasting Assam prices with incomplete local history")
     _ax.tick_params(axis="x", labelsize=7.5)
     _ax.legend(fontsize=7.5, title="")
-    fig_stress = viz.save(_fig, "f5_stress_test", f"Source: Agmarknet via data.gov.in OGD API, retrieved {retrieved}. Local history masked before the test year only; same test weeks in every scenario. Local model absent when no local history.")
+    fig_stress = viz.save(_fig, "f5_stress_test", f"Source: Agmarknet via data.gov.in OGD API, retrieved {retrieved}. Local history masked before the test year only. First three groups: forecasts where a local model could be fitted; last group: all forecasts.")
     mo.image(fig_stress)
     return (fig_stress,)
 
@@ -346,33 +372,37 @@ def _(mo, np, pl, plt, retrieved, season_profile, sns, viz):
 
 @app.cell
 def _(G, advisory, end_week, features, labels, model, np, pl):
-    # ---- Current advisory: fit on all data known at the latest complete week ----
-    _last = G.filter(pl.col("selected") & pl.col("lp").is_not_null()).group_by("market_key", "commodity").agg(pl.col("week").max().alias("asof"))
-    _now = G.filter(pl.col("selected")).join(_last, on=["market_key", "commodity"], how="inner").filter(pl.col("week") == pl.col("asof"))
+    # ---- Current advisory: models fitted on everything known at the latest complete week ----
+    _Gs = G.sort(["state", "market_key", "commodity", "week"])
+    _rows = (
+        _Gs.with_row_index("_r").filter(pl.col("selected") & pl.col("lp").is_not_null())
+        .group_by("market_key", "commodity").agg(pl.col("_r").sort_by("week").last())
+    )
+    _now_idx = np.sort(_rows.get_column("_r").to_numpy())
+    _store = model.ArrayStore("now")
+    try:
+        _arr = model.frame_arrays(_Gs, features.FEATURES, _store, "now")
+        _res = model.run_tasks([model.task(_arr, _h, model.train_index(_arr, _h, end_week), _now_idx) for _h in features.HORIZONS])
+    finally:
+        _store.close()
+    _now = _Gs[_now_idx]
     current = []
-    _bands_all = {}
-    for _h in features.HORIZONS:
-        _tr = model.train_rows(G, _h, end_week)
-        _m = model.fit_quantiles(_tr, features.FEATURES, _h)
-        _q = model.predict_quantiles(_m, _now, features.FEATURES)
-        for _i, _r in enumerate(_now.iter_rows(named=True)):
-            _p0 = float(_r["price"]) if _r["price"] is not None else None
-            if _p0 is None:
-                continue
-            _bands_all.setdefault(_r["commodity"], {"p0": _p0, "market_key": _r["market_key"], "bands": {}})
-            _bands_all[_r["commodity"]]["bands"][_h] = tuple(float(_p0 * np.exp(v)) for v in _q[_i])
-            _bands_all[_r["commodity"]]["asof"] = str(_r["week"])
-    for _c, _v in sorted(_bands_all.items()):
+    for _i, _r in enumerate(_now.iter_rows(named=True)):
+        _c, _p0 = _r["commodity"], float(_r["price"])
+        _bands = {_h: tuple(float(_p0 * np.exp(v)) for v in _res[_k][0][_i]) for _k, _h in enumerate(features.HORIZONS)}
         _rule = advisory.rule_for(_c)
-        _d = advisory.decide(_v["p0"], _v["bands"], _rule)
-        _lab = labels.filter((pl.col("state") == "Assam") & (pl.col("market_key") == _v["market_key"])).row(0, named=True)
+        _d = advisory.decide(_p0, _bands, _rule)
+        _lab = labels.filter((pl.col("state") == "Assam") & (pl.col("market_key") == _r["market_key"])).row(0, named=True)
         current.append({
-            "commodity": _c, "market": _lab["market_label"], "district": _lab["district"], "week": _v["asof"], "trained_to": str(end_week),
-            "price_now": _v["p0"], "bands": {str(h): b for h, b in _v["bands"].items()},
+            "commodity": _c, "market": _lab["market_label"], "district": _lab["district"],
+            "week": str(_r["week"]), "trained_to": str(end_week),
+            "price_now": _p0, "bands": {str(h): b for h, b in _bands.items()},
             "signal": _d["signal"], "hold_weeks": _d["h"],
-            "reason_en": advisory.reason_en(_c, _v["p0"], _d, _rule),
-            "rule": {"max_hold_weeks": _rule.max_hold_weeks, "weekly_loss_pct": 100 * _rule.weekly_loss, "storable": _rule.storable, "note": _rule.note},
+            "reason_en": advisory.reason_en(_c, _p0, _d, _rule),
+            "rule": {"max_hold_weeks": _rule.max_hold_weeks, "weekly_loss_pct": 100 * _rule.weekly_loss,
+                     "storable": _rule.storable, "note": _rule.note},
         })
+    current = sorted(current, key=lambda a: a["commodity"])
     current
     return (current,)
 

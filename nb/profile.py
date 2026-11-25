@@ -104,7 +104,7 @@ def _(assam_daily, pl):
 
 
 @app.cell
-def _(meta, mo, pl, plt, sns, timeline, viz):
+def _(assam_first, max_date, meta, mo, pl, plt, sns, timeline, viz):
     _all_weeks = pl.DataFrame(
         {"week": pl.date_range(timeline["week"].min(), timeline["week"].max(), "1w", eager=True)}
     )
@@ -115,7 +115,7 @@ def _(meta, mo, pl, plt, sns, timeline, viz):
     _ax.set(xlabel="", ylabel="markets reporting", title="Assam markets reporting prices each week, Agmarknet record")
     fig_timeline = viz.save(
         _fig, "f1_reporting_timeline",
-        f"Source: Agmarknet via data.gov.in OGD API (resource 35985678…), {meta['first']}–{meta['last']}, retrieved {meta['retrieved_to'][:10]}. Market names harmonised.",
+        f"Source: Agmarknet via data.gov.in OGD API (resource 35985678…), Assam, {assam_first}–{max_date}, retrieved {meta['retrieved_to'][:10]}. Market names harmonised.",
     )
     mo.image(fig_timeline)
     return (fig_timeline,)
@@ -241,6 +241,27 @@ def _(assam_daily, pl, selected, win_end, win_start):
 
 
 @app.cell
+def _(assam_daily, dt, pl, win_end):
+    # renamed markets (several raw names -> one harmonised market) and markets gone silent
+    renames = (
+        assam_daily.group_by("market_key", "market")
+        .agg(pl.col("date").min().alias("first"), pl.col("date").max().alias("last"), pl.len().alias("rows"))
+        .sort("market_key", "first")
+        .group_by("market_key", maintain_order=True)
+        .agg(pl.col("market"), pl.col("first"), pl.col("last"))
+        .filter(pl.col("market").list.len() > 1)
+        .collect()
+    )
+    _last = assam_daily.group_by("market_key").agg(
+        pl.col("date").max().alias("last"), pl.col("market").last().alias("name")
+    ).collect()
+    _since = win_end - dt.timedelta(weeks=26)
+    silent = _last.filter(pl.col("last").is_between(_since, win_end - dt.timedelta(weeks=3))).sort("last")
+    renames
+    return renames, silent
+
+
+@app.cell
 def _(pl, wk):
     outliers = wk.select(
         pl.col("outlier").sum().alias("n_outlier"), pl.len().alias("n_weeks")
@@ -252,7 +273,8 @@ def _(pl, wk):
 @app.cell
 def _(
     apmc_renamed, assam_first, assam_rows, by_state, cov_stats, daily, dispersion, fig_coverage, fig_timeline,
-    gap_stats, gaps, json, keys, max_date, meta, outliers, paths, pl, raw_names, selected, win_end, win_start, yearly,
+    gap_stats, gaps, json, keys, max_date, meta, outliers, paths, pl, raw_names, renames, selected, silent, win_end,
+    win_start, yearly,
 ):
     from apa.clean import market_labels as _ml2
     _lab = _ml2(daily).collect()
@@ -282,6 +304,8 @@ def _(
         "assam_yearly": _yr,
         "gaps": gaps.to_dicts(),
         "gap_stats": gap_stats,
+        "renames": renames.to_dicts(),
+        "silent_markets": silent.to_dicts(),
         "window": [str(win_start), str(win_end)],
         "coverage": cov_stats,
         "dispersion": dispersion.to_dicts(),

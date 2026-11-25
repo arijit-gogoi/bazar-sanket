@@ -46,6 +46,7 @@ R6|dispersion|same day potato modal ₹850–2100/q across Assam markets (2026-1
 R7|Assam gaps|Assam rows 2005-09 → 2026-11 = 515,000; 109 raw market names → 82 after harmonising (25 renamed, mostly "X" → "X APMC" at Agmarknet 2.0 cut-over); 223 of 1,106 weeks have no Assam price (longest gap 2020-01 → 2021-08, 86 wk; also 2025-09 → 2025-12)|`out/metrics_profile.json`
 R8|selection|rule → Pamohi(Garchuk) × {Green Chilli, Cabbage, Pumpkin}, each 102/156 wk (65.4%); all perishable/semi-perishable vegetables|`out/selection.json`
 R9|comparables|8 neighbour states fetched for 3 commodities since 2016 (WB 195k rows, Tripura 82k, Nagaland 20k, Meghalaya 17k, Bihar 15k, Manipur, Mizoram, Arunachal small)|`data/raw/ogd_prices.parquet`
+
 ## §V INVARIANTS
 V1: `answers.md` ! exactly 12 H2 sections in form order; ∀ section ≤500 words (script check)
 V2: `proof-of-work.pdf` ! single file ≤10 MB; ∀ page renders, ⊥ blank page, ⊥ missing-glyph boxes

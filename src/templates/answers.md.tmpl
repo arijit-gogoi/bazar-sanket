@@ -5,7 +5,7 @@ Working name of the solution: Bazar Sanket (বজাৰ সংকেত, "marke
 
 ## 1. Problem understanding & user workflow
 
-Assam's farmers sell through regulated markets, weekly haats and village traders. Two decisions shape their income. After harvest, they must decide whether to sell now, hold for a few weeks or store. Before each season, they must decide what to sow. Both depend on where prices are likely to go, and today no institution in the State provides that view.
+Assam's farmers sell through regulated markets, weekly haats and village traders. Two decisions shape their income: after harvest, whether to sell now, hold for a few weeks or store; before each season, what to sow. Both depend on where prices are likely to go, and today no institution in the State provides that view.
 
 Current workflow. Agriculture Extension Assistants (AEAs) record daily spot prices and arrivals in markets. The Agricultural Market Intelligence Unit (AMIU) of Assam Agricultural University compiles them and makes them available to farmers. Agmarknet also publishes daily prices for many Assam markets, openly available through data.gov.in. All of this describes yesterday. None of it says what is likely next week or next season, and it reaches farmers as numbers rather than advice.
 
@@ -30,7 +30,7 @@ Gaps addressed
 5. No routine measurement of forecast accuracy, so trust cannot be earned.
 
 Intended outcome
-A State-owned forecasting and advisory service that publishes, every week, a one-to-four-week price band with a plain Hold / Sell / Store signal for each covered commodity and market, in Assamese and English, through AEAs, SMS, WhatsApp and voice calls; publishes a season-ahead crop-planning outlook before each sowing season; works with incomplete data by learning from comparable markets in Assam and neighbouring States; and reports its own accuracy openly, staying silent where it has no skill.
+A State-owned service that every week publishes a one-to-four-week price band with a plain Hold / Sell / Store signal per commodity and market, in Assamese and English, through AEAs, SMS, WhatsApp and voice calls; issues a crop-planning outlook before each sowing season; learns from comparable markets where local data are incomplete; and reports its own accuracy, staying silent where it has no skill.
 
 ## 2. Proposed Solution and key features
 
@@ -40,20 +40,20 @@ Main modules
 1. Data hub and quality engine. Ingests AMIU daily prices and arrivals, Agmarknet records for Assam and comparable markets in neighbouring States, and other defensible sources where useful (rainfall, active commodity futures, cold-storage stocks). It harmonises market names, varieties and units, flags outliers and missing weeks, and sends data-quality alerts back to AMIU and AEAs so that gaps are fixed at source.
 2. Short-horizon forecast engine (one to four weeks). A single "global" model learns price behaviour from all markets together instead of fitting a fragile model to each short series, so a market with a patchy history borrows patterns from comparable markets. It outputs a price band (10th, 50th and 90th percentiles), not a single number, and is re-evaluated every week against simple benchmarks. Where it does not beat them for a market, no forecast is published for that market.
 3. Decision layer. Converts the band into a Hold, Sell or Store signal using the farmer's realistic options: storage cost, shelf life, expected losses and prices in nearby markets. Every signal carries a one-line reason and its assumptions.
-4. Season-ahead crop-planning intelligence. Before each sowing season, a crop card per commodity shows the typical seasonal price path, the likely price range in the harvest window, year-to-year price risk and comparison with neighbouring States. With AAU cost-of-cultivation and yield data, it extends to an indicative ranking of crops by expected margin and risk.
+4. Season-ahead crop-planning intelligence. Before each sowing season, a crop card per commodity shows the typical seasonal price path, the likely harvest-window price range and year-to-year price risk. With AAU cost-of-cultivation and yield data, it extends to an indicative ranking of crops by expected margin and risk.
 5. Delivery and feedback. AMIU reviews and approves each weekly batch, which then reaches farmers through existing channels: AEA dashboard and printable sheets, Assamese SMS, WhatsApp cards and outbound voice (IVR) calls for farmers who prefer audio. Farmers and AEAs can report the price actually received.
 6. Monitoring and transparency. A public scorecard shows forecast versus actual for every published series.
 
 User interaction
-- Farmers register once (through an AEA, a missed call or WhatsApp) with crop, village and preferred market, and receive weekly advisories in Assamese.
-- AEAs see forecasts, signals and data-quality alerts for their markets and share advisories in farmer meetings.
-- AMIU analysts review, edit or withhold advisories and add context (floods, policy changes) before release.
+- Farmers register once (through an AEA, a missed call or WhatsApp) with crop, village and market, and receive weekly advisories in Assamese.
+- AEAs see forecasts, signals and data-quality alerts and share advisories in farmer meetings.
+- AMIU analysts review, edit or withhold advisories and add context (floods, policy changes).
 - Department planners use the seasonal outlook and the scorecard.
 
 What changes versus the current approach
 - From yesterday's prices to a forward view with explicit uncertainty.
-- From numbers to advice, for example: "Prices likely to rise slightly; holding two weeks may add about ₹100 per quintal after losses."
-- From dependence on long local histories to learning across markets, so incomplete data no longer blocks forecasting.
+- From numbers to advice: "Prices likely to rise slightly; holding two weeks may add about ₹100 per quintal after losses."
+- From long local histories to learning across markets, so incomplete data no longer block forecasting.
 - From one-off outlooks to continuously measured performance, with silence where there is no skill.
 - From one horizon to two: weekly marketing advice and season-ahead planning.
 
@@ -88,7 +88,7 @@ Stack
 - Production: PostgreSQL for records and audit logs, Parquet for analytical history, a small REST API (FastAPI) for the dashboard, partner systems and channel gateways, and a mobile-friendly web dashboard in Assamese and English.
 - Integrations: data.gov.in OGD API (working in the prototype); AMIU data feed (to be agreed); SMS via a DLT-registered gateway; WhatsApp Business Platform; an IVR provider; Bhashini services for Assamese translation and speech, subject to evaluation.
 
-Hosting. Assam State Data Centre or a MeitY-empanelled cloud region in India. Compute needs are modest: the prototype's complete pipeline, including a year-long backtest with ${n_refits} model refits, runs in about ${runtime_min} minutes on a laptop.
+Hosting. Assam State Data Centre or a MeitY-empanelled cloud region in India. Compute needs are modest: the prototype's complete pipeline, including a year-long backtest with ${n_fits} model fits run in parallel on all CPU cores, takes about ${runtime_min} minutes on a laptop.
 
 ## 5. Development methodology & intermediate steps
 

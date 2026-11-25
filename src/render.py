@@ -19,7 +19,6 @@ import os
 import re
 import shutil
 import subprocess
-import sys
 from pathlib import Path
 from string import Template
 
@@ -77,13 +76,19 @@ def section_word_counts(md: str) -> list[tuple[str, int]]:
 
 def check_answers(md: str) -> list[tuple[str, int]]:
     counts = section_word_counts(md)
+    problems = []
     if len(counts) != 12:
-        raise SystemExit(f"V1 violated: expected 12 sections, found {len(counts)}")
+        problems.append(f"expected 12 sections, found {len(counts)}")
     for i, (title, n) in enumerate(counts, 1):
+        flag = ""
         if not title.startswith(f"{i}."):
-            raise SystemExit(f"V1 violated: section {i} out of order: {title!r}")
+            problems.append(f"section {i} out of order: {title!r}")
         if n > WORD_LIMIT:
-            raise SystemExit(f"V1 violated: section {title!r} has {n} words > {WORD_LIMIT}")
+            problems.append(f"section {title!r} has {n} words > {WORD_LIMIT}")
+            flag = "  <-- over limit"
+        print(f"  {n:4d}  {title}{flag}")
+    if problems:
+        raise SystemExit("V1 violated: " + "; ".join(problems))
     return counts
 
 
@@ -118,6 +123,7 @@ def main() -> None:
     args = ap.parse_args()
 
     from apa.report import build_context
+    from apa.report_html import html_context
 
     prof = json.loads((OUT / "metrics_profile.json").read_text(encoding="utf-8"))
     fc = json.loads((OUT / "metrics_forecast.json").read_text(encoding="utf-8"))
@@ -125,6 +131,7 @@ def main() -> None:
     (OUT / "metrics.json").write_text(json.dumps(metrics, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
 
     ctx = build_context(metrics)
+    ctx.update(html_context(metrics, ctx))
 
     def render(name: str, extra: dict | None = None) -> str:
         t = Template((TPL / name).read_text(encoding="utf-8"))
@@ -133,17 +140,25 @@ def main() -> None:
     s3 = render("section3.md.tmpl").strip()
     s9 = render("section9.md.tmpl").strip()
     answers = render("answers.md.tmpl", {"section3": s3, "section9": s9})
-    counts = check_answers(answers)
-    (ROOT / "answers.md").write_text(answers, encoding="utf-8")
-    print("answers.md written; words per section:")
-    for t, n in counts:
-        print(f"  {n:4d}  {t}")
+    print("words per section:")
+    (ROOT / "answers.md").write_text(answers, encoding="utf-8")  # written first so it can be inspected
+    check_answers(answers)
+    print("answers.md OK")
 
-    html = render("pow.html.tmpl")
+    html = render("pow.html.tmpl", {"figdir": "../out/fig/"})
     pow_dir = ROOT / "pow"
     pow_dir.mkdir(exist_ok=True)
     (pow_dir / "proof-of-work.html").write_text(html, encoding="utf-8")
     print("pow/proof-of-work.html written")
+
+    # website (GitHub Pages from docs/): same content, figures copied next to it
+    docs = ROOT / "docs"
+    (docs / "fig").mkdir(parents=True, exist_ok=True)
+    for png in (OUT / "fig").glob("*.png"):
+        shutil.copy2(png, docs / "fig" / png.name)
+    (docs / "index.html").write_text(render("pow.html.tmpl", {"figdir": "fig/"}), encoding="utf-8")
+    shutil.copy2(ROOT / "answers.md", docs / "answers.md")
+    print("docs/index.html written")
 
     if args.pdf:
         pdf = ROOT / "proof-of-work.pdf"
@@ -152,8 +167,6 @@ def main() -> None:
         if size > 10:
             raise SystemExit(f"V2 violated: PDF is {size:.1f} MB > 10 MB")
         print(f"proof-of-work.pdf written ({size:.2f} MB)")
-        docs = ROOT / "docs"
-        (docs / "fig").mkdir(parents=True, exist_ok=True)
         shutil.copy2(pdf, docs / "proof-of-work.pdf")
 
 

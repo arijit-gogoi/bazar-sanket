@@ -27,6 +27,8 @@ MARKET_ALIASES = {
     "uparhali pmy": "p.o. uparhali guwahati",
     "gandhimaidan smy, hojai": "gandhimaidan",
     "tinsukia market": "tinsukia",
+    # spelling variant, same Barpeta-district market (confirmed by applicant; AMIU to confirm)
+    "baharihat": "bohorihat",
 }
 SERIES = ["state", "market_key", "commodity", "variety"]
 OUTLIER_LOG_RATIO = math.log(3.0)

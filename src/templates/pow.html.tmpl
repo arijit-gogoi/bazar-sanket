@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Proof of Work — Bazar Sanket (NESFIC-D-35)</title>
+<style>
+  @page { size: A4; margin: 13mm 13mm 14mm 13mm; }
+  :root { --teal:#1f6f8b; --teal2:#9fc5d6; --ink:#1d1d1f; --mute:#5b5b60; --line:#d9dde2; --amber:#b7791f; --green:#2f855a; --grey:#6b7280; --bg:#f6f8fa; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Nirmala UI", "Noto Sans", "Noto Sans Bengali", Arial, sans-serif; color: var(--ink); font-size: 10pt; line-height: 1.42; margin: 0; }
+  .as { font-family: "Nirmala UI", "Noto Sans Bengali", "Vrinda", "Shonar Bangla", sans-serif; }
+  h1 { font-size: 21pt; line-height: 1.15; margin: 0 0 4mm; color: var(--teal); }
+  h2 { font-size: 14pt; color: var(--teal); margin: 0 0 2.5mm; padding-bottom: 1.2mm; border-bottom: 1.5px solid var(--teal); }
+  h3 { font-size: 11pt; margin: 4mm 0 1.5mm; }
+  p { margin: 0 0 2.2mm; }
+  .page { page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; }
+  .lede { font-size: 11pt; color: var(--mute); }
+  .small { font-size: 8.2pt; color: var(--mute); }
+  .src { font-size: 7.4pt; color: var(--mute); margin-top: 1mm; }
+  .box { border: 1px solid var(--line); border-radius: 6px; padding: 3mm 4mm; background: var(--bg); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+  img.fig { width: 100%; border: 1px solid var(--line); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 8.6pt; margin: 1mm 0 2mm; }
+  th, td { border-bottom: 1px solid var(--line); padding: 1.1mm 1.6mm; text-align: left; vertical-align: top; }
+  th { background: #eef3f6; font-weight: 600; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.best td { font-weight: 600; }
+  .tag { display: inline-block; font-size: 7.2pt; font-weight: 700; letter-spacing: .04em; padding: .4mm 1.8mm; border-radius: 3px; color: #fff; vertical-align: middle; margin-left: 2mm; }
+  .tag.built { background: var(--green); }
+  .tag.mock { background: var(--amber); }
+  .tag.plan { background: var(--grey); }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 3mm 0; }
+  .kpi { border: 1px solid var(--line); border-radius: 6px; padding: 2.5mm 3mm; }
+  .kpi b { display: block; font-size: 15pt; color: var(--teal); line-height: 1.1; }
+  .kpi span { font-size: 8pt; color: var(--mute); }
+  ul { margin: 0 0 2mm; padding-left: 5mm; } li { margin-bottom: .8mm; }
+  .phone { width: 62mm; border: 2.2mm solid #222; border-radius: 7mm; padding: 4mm 3mm 6mm; background: #fff; margin: 0 auto; }
+  .phone .bar { font-size: 7pt; color: #888; text-align: center; margin-bottom: 2mm; }
+  .sms { background: #e9e9eb; border-radius: 4mm; padding: 2.5mm 3mm; font-size: 8.4pt; white-space: pre-line; margin-bottom: 2mm; }
+  .wa { background: #e7f6e1; border-radius: 3mm; padding: 3mm; font-size: 8.4pt; border: 1px solid #cfe7c4; }
+  .meta { font-size: 7pt; color: var(--mute); text-align: right; }
+  .signal { display: inline-block; font-weight: 700; padding: .5mm 2.4mm; border-radius: 3mm; font-size: 8pt; color: #fff; }
+  .sig-SELL { background: #c05621; } .sig-HOLD { background: #2b6cb0; } .sig-STORE { background: #2f855a; }
+  .bandbar { position: relative; height: 5mm; background: #eef2f5; border-radius: 2mm; margin: 1.5mm 0 3.5mm; }
+  .bandbar .b { position: absolute; top: 0; bottom: 0; background: var(--teal2); border-radius: 2mm; }
+  .bandbar .m { position: absolute; top: -1mm; bottom: -1mm; width: 1mm; background: var(--teal); }
+  .bandbar .t { position: absolute; top: -1.4mm; bottom: -1.4mm; width: .6mm; background: #222; }
+  .bandbar .lbl { position: absolute; top: 5.4mm; font-size: 6.6pt; color: var(--mute); transform: translateX(-50%); white-space: nowrap; }
+  .screen { border: 1px solid #b8c2cc; border-radius: 5px; overflow: hidden; }
+  .screen .top { background: var(--teal); color: #fff; padding: 1.6mm 3mm; font-size: 8.6pt; display: flex; justify-content: space-between; }
+  .screen .body { padding: 2.5mm 3mm; background: #fff; }
+  .btn { display: inline-block; border: 1px solid var(--line); border-radius: 3px; padding: .3mm 2mm; font-size: 7.4pt; margin-right: 1mm; background: #fff; }
+  .btn.pri { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .lane { display: grid; grid-template-columns: 27mm repeat(5, 1fr); gap: 1.6mm; font-size: 7.9pt; }
+  .lane .h { font-weight: 700; color: var(--teal); padding-top: 2mm; }
+  .lane .s { border: 1px solid var(--line); border-radius: 4px; padding: 1.6mm 2mm; background: #fff; min-height: 13mm; }
+  .lane .s.on { background: #eaf4f8; border-color: var(--teal2); }
+  .lane .day { font-weight: 700; text-align: center; color: var(--mute); }
+  .arch { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm; font-size: 8pt; }
+  .arch .c { border: 1px solid var(--teal2); border-radius: 5px; padding: 2mm; background: #f3f9fb; }
+  .arch .c b { color: var(--teal); display: block; margin-bottom: .6mm; }
+  .note { border-left: 3px solid var(--amber); padding: 1.6mm 3mm; background: #fffaf0; font-size: 8.4pt; margin: 2mm 0; }
+  .ok { color: var(--green); font-weight: 700; } .warn { color: #c05621; font-weight: 700; }
+  code { font-family: Consolas, "Cascadia Mono", monospace; font-size: 8.2pt; background: #f1f3f5; padding: 0 1mm; border-radius: 2px; }
+  pre { font-family: Consolas, "Cascadia Mono", monospace; font-size: 7.8pt; background: #f1f3f5; padding: 2mm 3mm; border-radius: 4px; white-space: pre-wrap; margin: 1mm 0 2mm; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= COVER -->
+<section class="page">
+  <div class="small">NESFIC 2026 · Challenge NESFIC-D-35 · Agriculture Department, Government of Assam</div>
+  <h1 style="margin-top:6mm">Proof of Work<br><span style="font-size:15pt;color:var(--ink)">Bazar Sanket (<span class="as">বজাৰ সংকেত</span>): price intelligence and forecasting for Assam farmers</span></h1>
+  <p class="lede">A working prototype built on real public market data: it measures the data problem, forecasts prices one to four weeks ahead with an honest out-of-sample test, turns forecasts into Hold / Sell / Store advice, and shows how farmers, Extension Assistants and AMIU would use it.</p>
+  <p class="small">Applicant: Arijit Gogoi (individual applicant) · Prepared ${today} · Data retrieved ${retrieved}</p>
+
+  <div class="kpis">
+    <div class="kpi"><b>${rows_total}</b><span>Agmarknet price records used (${assam_rows} for Assam since ${assam_first_year})</span></div>
+    <div class="kpi"><b>${weeks_empty_pct}%</b><span>of weeks since ${assam_first_year} with no Assam price at all in the public record</span></div>
+    <div class="kpi"><b>${all_mape_model}%</b><span>forecast error (MAPE, 1–4 weeks, ${n_series_assam} Assam series, 12 months out of sample); no-change benchmark ${all_mape_naive}%</span></div>
+    <div class="kpi"><b>${S3_pooled}%</b><span>error forecasting Assam with <i>no</i> Assam history, learning only from neighbouring States (no-change: ${S3_naive}%)</span></div>
+  </div>
+
+  <div class="box">
+    <b>What this document shows</b>
+    <ul>
+      <li><b>The problem, measured</b> (Section A): gaps, renamed markets and patchy reporting in the public Assam record.</li>
+      <li><b>User journey and mock-ups</b> (Sections B–C): Assamese and English SMS, WhatsApp card and voice script; Extension Assistant dashboard; AMIU review console; crop-planning card. All mock-ups show real prototype outputs for the week of ${end_week}.</li>
+      <li><b>How the prototype works</b> (Section D) and <b>how well it works</b> (Sections E–H): a rolling-origin backtest against benchmarks, a stress test of incomplete data, a backtest of the Hold / Sell / Store rule and an out-of-sample check of the season-ahead outlook.</li>
+      <li><b>Target architecture, limitations and next steps</b> (Sections I–J).</li>
+    </ul>
+    <p class="small" style="margin:0">Labels used throughout: <span class="tag built">BUILT + TESTED</span> working code run on real data · <span class="tag mock">MOCK-UP</span> design shown with real prototype numbers, not yet deployed · <span class="tag plan">PLANNED</span> part of the proposal, not yet built.</p>
+  </div>
+
+  <h3>Reproduce every number</h3>
+  <p class="small">Code and data snapshot: ${repo_url} · Website: ${site_url}. Every figure and number in this document and in the proposal answers is generated by the code from the data snapshot:</p>
+<pre>uv sync
+uv run python -I src/fetch.py pull --state Assam --since 2006-01-01      # optional: refresh data (needs a free data.gov.in API key)
+uv run python -I -X utf8 nb/profile.py      # data profile + selection of pilot series
+uv run python -I -X utf8 nb/forecast.py     # models, backtests, stress test, advisory (about ${runtime_min} min)
+uv run python -I -X utf8 src/render.py --pdf  # proposal answers + this PDF</pre>
+  <p class="src">Data: Agmarknet daily mandi prices, Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare, published on data.gov.in (resource 35985678-0d79-46b4-9ed6-6f13308a1d24) under the Government Open Data License – India. Retrieved ${retrieved}. No departmental (AMIU) data were used.</p>
+</section>
+
+<!-- ======================================================= A -->
+<section class="page">
+  <h2>A. The problem, measured in the public data <span class="tag built">BUILT + TESTED</span></h2>
+  <p>The challenge states that long-term price data for Assam are incomplete. The public Agmarknet record confirms it, and shows exactly how: whole years are missing, the number of reporting markets swings widely, and markets change names.</p>
+  <img class="fig" src="${figdir}f1_reporting_timeline.png" alt="Weekly number of Assam markets reporting prices">
+  <div class="grid2" style="margin-top:3mm">
+    <div>
+      <table>
+        <tr><th>Measure (Assam, public Agmarknet record)</th><th class="n">Value</th></tr>
+        <tr><td>Price records, ${assam_first} – ${assam_last}</td><td class="n">${assam_rows}</td></tr>
+        <tr><td>Weeks with no Assam price at all</td><td class="n">${weeks_empty} of ${weeks_total}</td></tr>
+        <tr><td>Longest gap</td><td class="n">${longest_gap}</td></tr>
+        <tr><td>Median markets reporting in a week</td><td class="n">${median_markets_week}</td></tr>
+        <tr><td>Raw market names → actual markets after harmonising</td><td class="n">${assam_markets_raw} → ${assam_markets_harm}</td></tr>
+        <tr><td>Market × commodity series reported in last 156 weeks</td><td class="n">${n_pairs}</td></tr>
+        <tr><td>… median share of weeks with a price</td><td class="n">${median_cov}%</td></tr>
+        <tr><td>… series with a price in at least half of weeks</td><td class="n">${n_ge50}</td></tr>
+        <tr><td>Weekly prices flagged as implausible (&gt;3× jump)</td><td class="n">${outlier_pct}%</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Renamed markets break time series</h3>
+      <table>
+        <tr><th>Market</th><th>Names in the record (first → last use)</th></tr>
+        ${renames_rows}
+      </table>
+      <p class="small">${assam_markets_renamed} markets appear under two or three names. A naive analysis would treat each name as a separate, short series. The prototype maps them with a documented rule plus a short alias table.</p>
+    </div>
+  </div>
+  <p class="small"><b>Price dispersion.</b> On a typical day, the highest-priced Assam market reports ${disp_sentence} more than the lowest for the same commodity (median over days with at least three markets reporting; part of the gap reflects quality and variety). A state average hides choices that matter to farmers.</p>
+</section>
+
+<section class="page">
+  <h2>A (cont.) Coverage and choice of pilot series <span class="tag built">BUILT + TESTED</span></h2>
+  <img class="fig" src="${figdir}f2_coverage_heatmap.png" alt="Coverage heatmap">
+  <p style="margin-top:2mm"><b>Selection rule, fixed before any modelling:</b> the three Assam market × commodity series with the most weeks reported in the last 156 complete weeks (${win_start} to ${win_end}), whatever they are. Result: <b>${sel_market}</b> (${sel_district} district, Guwahati's main wholesale vegetable market) for <b>${sel_commodities}</b>, each reported in ${sel_weeks} of 156 weeks (${sel_cov}%). Even the best-covered Assam series miss a third of weeks, including a three-month gap when Agmarknet moved to its new platform.</p>
+  <p>All three are perishable or semi-perishable vegetables, so the prototype focuses on short-horizon timing. Storable crops such as potato, paddy or mustard will be added in the pilot, as agreed with the department, using the same pipeline.</p>
+  <h3>Comparable markets used for learning</h3>
+  <p>For the three commodities, the prototype also uses every market reported in ${comp_states} since 2016: ${comp_rows} records. ${comp_note}</p>
+  ${data_summary_table}
+</section>
+
+<!-- ======================================================= B -->
+<section class="page">
+  <h2>B. User journey: one advisory week <span class="tag mock">MOCK-UP</span></h2>
+  <p>The weekly cycle reuses what already exists: AEAs keep reporting prices; AMIU keeps control of what is published. New steps are highlighted.</p>
+  <div class="lane">
+    <div></div><div class="day">Mon–Sat</div><div class="day">Monday night</div><div class="day">Tuesday</div><div class="day">Wednesday</div><div class="day">Following week</div>
+    <div class="h">Farmer</div>
+    <div class="s">Sells at local market or haat; can call IVR any time for last week's advisory.</div>
+    <div class="s"></div><div class="s"></div>
+    <div class="s on">Receives SMS / WhatsApp / voice call in Assamese: price band, Hold / Sell / Store, reason.</div>
+    <div class="s on">Decides; optionally replies with price received (SMS keyword or AEA).</div>
+    <div class="h">Extension Assistant (AEA)</div>
+    <div class="s">Records daily prices and arrivals (existing duty).</div>
+    <div class="s on">Gets data-quality alerts: missing days, suspicious prices.</div>
+    <div class="s"></div>
+    <div class="s on">Dashboard + printable sheet for farmer meetings; answers questions.</div>
+    <div class="s on">Logs farmer feedback.</div>
+    <div class="h">AMIU analyst</div>
+    <div class="s">Compiles AEA reports (existing).</div>
+    <div class="s"></div>
+    <div class="s on">Reviews draft advisories: approves, edits or withholds; adds event notes (floods, bans).</div>
+    <div class="s"></div>
+    <div class="s on">Reviews scorecard: forecast vs actual.</div>
+    <div class="h">System</div>
+    <div class="s"></div>
+    <div class="s on">Ingests, cleans and harmonises data; flags gaps; retrains; forecasts; applies skill gate and decision rules.</div>
+    <div class="s on">Builds messages in Assamese and English.</div>
+    <div class="s on">Sends approved messages; logs delivery.</div>
+    <div class="s on">Scores last week's forecasts automatically.</div>
+  </div>
+  <h3>Season-ahead journey (before each sowing season)</h3>
+  <div class="grid3">
+    <div class="box"><b>4–6 weeks before sowing</b><br>System produces crop cards: typical seasonal price path, harvest-window price range, year-to-year risk, neighbouring-State comparison.</div>
+    <div class="box"><b>Review</b><br>AAU economist and AMIU review cards; Department planners use them for crop-planning advice and input planning.</div>
+    <div class="box"><b>Delivery</b><br>AEAs present cards at pre-season meetings; farmers receive a short voice/SMS summary; outcomes are scored after harvest.</div>
+  </div>
+  <h3>Design principles from the brief</h3>
+  <ul class="small">
+    <li><b>Existing channels first:</b> AEAs and AMIU stay at the centre; SMS and voice reach farmers without smartphones; no new app is required.</li>
+    <li><b>Advice, not raw forecasts:</b> every message gives a range, a signal and a reason, in Assamese.</li>
+    <li><b>Two horizons, kept apart:</b> weekly marketing advice and season-ahead crop cards use different methods and messages.</li>
+    <li><b>Human in the loop:</b> nothing reaches farmers without AMIU approval.</li>
+  </ul>
+</section>
+
+<!-- ======================================================= C -->
+<section class="page">
+  <h2>C. Farmer-facing mock-ups (real prototype output, week of ${end_week}) <span class="tag mock">MOCK-UP</span></h2>
+  <div class="note">The numbers below are the prototype's actual forecasts for ${sel_market}, made with data up to ${end_week}. Assamese text is a <b>draft translation, pending native-speaker review</b>. Decision parameters (shelf life, weekly losses) are illustrative and must be set with AAU before any farmer sees an advisory.</div>
+  <div class="grid3">
+    <div>
+      <div class="phone"><div class="bar">SMS · Assamese (Unicode)</div>
+        <div class="sms as">${sms_as_1}</div>
+        <div class="meta">${sms_as_1_meta}</div>
+      </div>
+    </div>
+    <div>
+      <div class="phone"><div class="bar">SMS · English (GSM)</div>
+        <div class="sms">${sms_en_1}</div>
+        <div class="meta">${sms_en_1_meta}</div>
+        <div class="sms">${sms_en_2}</div>
+        <div class="meta">${sms_en_2_meta}</div>
+      </div>
+    </div>
+    <div>
+      <div class="phone"><div class="bar">WhatsApp card</div>
+        <div class="wa">
+          <b class="as">${wa_title_as}</b><br><b>${wa_title_en}</b>
+          <div style="margin:2mm 0 1mm" class="small">Price this week: <b>${wa_p0}</b>/quintal</div>
+          ${wa_bars}
+          <div><span class="signal sig-${wa_signal}">${wa_signal_text}</span></div>
+          <p class="small" style="margin-top:1.5mm">${wa_reason}</p>
+          <p class="small as" style="margin:0">${wa_reason_as}</p>
+          <p class="small" style="margin:1mm 0 0;color:#777">Outlook, not a guarantee · Approved by AMIU · Reply 0 to stop</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <h2>C (cont.) Extension Assistant dashboard and AMIU review console <span class="tag mock">MOCK-UP</span></h2>
+  <div class="screen">
+    <div class="top"><span><b>Bazar Sanket</b> · AEA dashboard · ${sel_market}</span><span>Week of ${end_week} · English | <span class="as">অসমীয়া</span></span></div>
+    <div class="body">
+      <table>
+        <tr><th>Commodity</th><th class="n">Price this week</th><th>Next week (P10–P90)</th><th>In 2 weeks</th><th>In 4 weeks</th><th>Advice</th><th>Forecast status (skill gate)</th></tr>
+        ${dash_rows}
+      </table>
+      <div class="grid2">
+        <div>
+          <b class="small">Other Assam markets, same week (₹/quintal)</b>
+          <table>${nearby_rows}</table>
+        </div>
+        <div>
+          <b class="small">Data-quality alerts for AEAs</b>
+          <table>${dq_rows}</table>
+        </div>
+      </div>
+      <p class="small" style="margin:0">Skill gate: a forecast is shown only if, over the last 12 months, the model's error for that series was lower than the no-change benchmark. Otherwise the AEA sees "withheld" and farmers receive the current price only.</p>
+    </div>
+  </div>
+  <div class="screen" style="margin-top:4mm">
+    <div class="top"><span><b>AMIU review console</b> · draft batch for week of ${end_week}</span><span>3 drafts · 0 approved</span></div>
+    <div class="body">
+      <table>
+        <tr><th>Draft advisory</th><th>Signal</th><th>Checks</th><th>Action</th></tr>
+        ${console_rows}
+      </table>
+      <p class="small" style="margin:0">Every approval, edit and hold is logged with user, time and reason. Event notes (floods, strikes, export bans) can override any signal. A single switch pauses all outgoing messages.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <h2>C (cont.) Voice script and season-ahead crop-planning card <span class="tag mock">MOCK-UP</span></h2>
+  <h3 style="margin-top:0">Voice (IVR) script — for farmers who prefer audio <span class="tag mock">MOCK-UP</span></h3>
+  <div class="grid2">
+    <div class="box small as">${ivr_as}</div>
+    <div class="box small">${ivr_en}</div>
+  </div>
+  <p class="src">SMS cost driver: Assamese needs Unicode (70 characters per SMS, 67 per part when longer), so an Assamese advisory takes several SMS parts; English without the ₹ sign fits GSM's 160 characters. Counts above are computed from the actual text.</p>
+  <h3>Season-ahead crop-planning cards</h3>
+  <p>Before each sowing season, AEAs and planners receive one card per commodity. The seasonal profiles are real prototype output (Section H tests them out of sample); the card layout is a mock-up.</p>
+  <img class="fig" style="max-height:62mm;object-fit:contain" src="${figdir}f6_seasonal_profiles.png" alt="Seasonal price profiles">
+  <div class="grid3" style="margin-top:3mm">
+    ${crop_cards}
+  </div>
+  <p class="small" style="margin-top:2mm">Planned extension: with AAU cost-of-cultivation and yield data, each card adds an indicative margin per bigha and its downside, so crops can be compared on expected income and risk, not price alone.</p>
+</section>
+
+<!-- ======================================================= D -->
+<section class="page">
+  <h2>D. How the prototype works <span class="tag built">BUILT + TESTED</span></h2>
+  <div class="arch" style="grid-template-columns: repeat(5, 1fr)">
+    <div class="c"><b>1 · Fetch</b>data.gov.in OGD API; every page cached with query and retrieval time (<code>src/fetch.py</code>).</div>
+    <div class="c"><b>2 · Clean</b>Harmonise market names; weekly median prices; flag &gt;3× jumps against the trailing median; keep gaps explicit (<code>apa/clean.py</code>).</div>
+    <div class="c"><b>3 · Features</b>Own price changes (1–52 weeks), volatility, reporting completeness, Assam and neighbour-State price indices, price vs peers, season (<code>apa/features.py</code>).</div>
+    <div class="c"><b>4 · Model</b>One global gradient-boosted quantile model per horizon (P10, P50, P90), scikit-learn, native handling of missing values (<code>apa/model.py</code>).</div>
+    <div class="c"><b>5 · Decide</b>Hold / Sell / Store rule from band, losses and shelf life; seasonal crop profiles (<code>apa/advisory.py</code>, <code>apa/seasonal.py</code>).</div>
+  </div>
+  <h3>Why a global model?</h3>
+  <p>Fitting one model per market fails when each market has a short, gappy history. A global model is trained on all markets at once: it learns how prices of a commodity typically move after, say, a sharp rise or a regional fall, and applies that to every market, including ones with little history. This is the approach that performs well on large collections of short series in the forecasting literature (Montero-Manso &amp; Hyndman, 2021; M5 competition, 2022). Missing weeks are passed to the model as missing values, not filled in.</p>
+  <h3>Evaluation protocol (no look-ahead)</h3>
+  <ul>
+    <li><b>Rolling origin:</b> test period ${test_start} to ${end_week} (12 months). Every 4 weeks the model is retrained using only examples whose outcome was already known; it then forecasts the next 4 weeks of origins.</li>
+    <li><b>Features</b> at a forecast week use only data up to that week; regional indices are built from markets' past changes only.</li>
+    <li><b>Benchmarks</b> on exactly the same forecasts: <i>no change</i> (next price = this week's) and <i>seasonal naive</i> (this year's change = the same weeks' change last year; falls back to no change when last year is missing, as in ${all_snaive_fallback_pct}% of cases).</li>
+    <li><b>Measures:</b> mean absolute percentage error (MAPE) of the price; direction accuracy over three classes (down &gt;5%, flat, up &gt;5%); share of actual prices inside the P10–P90 band (target 80%).</li>
+    <li><b>Scope:</b> all ${n_series_assam} Assam market series of the three commodities (${all_n} forecasts), with the three selected series reported separately.</li>
+  </ul>
+  <h3>Inputs actually used</h3>
+  <table>
+    <tr><th>Source</th><th>Use</th><th>Status</th></tr>
+    <tr><td>Agmarknet prices, Assam (all commodities, since ${assam_first_year})</td><td>Profile, selection, training, evaluation</td><td><span class="ok">used</span></td></tr>
+    <tr><td>Agmarknet prices, ${n_comp_states} neighbouring States (3 commodities, since 2016)</td><td>Training (global model), regional indices, seasonal profiles</td><td><span class="ok">used</span></td></tr>
+    <tr><td>AMIU prices and arrivals</td><td>Training, arrivals features, evaluation</td><td><span class="warn">requested</span> (not assumed)</td></tr>
+    <tr><td>Futures prices; rainfall; cold-storage stocks</td><td>Supplementary features</td><td>to be assessed per commodity</td></tr>
+  </table>
+</section>
+
+<!-- ======================================================= E -->
+<section class="page">
+  <h2>E. Results: short-horizon forecasts, 12 months out of sample <span class="tag built">BUILT + TESTED</span></h2>
+  <p>${results_reading}</p>
+  <img class="fig" src="${figdir}f4_mape_by_horizon.png" alt="MAPE by horizon">
+  <h3>All ${n_series_assam} Assam series of the three commodities</h3>
+  ${table_by_h}
+  <h3>The three selected series (${sel_market})</h3>
+  ${table_sel}
+  <p class="small">MAPE: mean absolute % error of the forecast price (P50); lower is better. Direction: share of forecasts that called the 3-class move (down &gt;5% / flat / up &gt;5%) correctly; "no change" always predicts flat. Band coverage: share of actual prices inside P10–P90 (target 80%). Skill: reduction in mean absolute error versus no change.</p>
+</section>
+
+<section class="page">
+  <h2>E (cont.) Forecast bands against actual prices <span class="tag built">BUILT + TESTED</span></h2>
+  <img class="fig" src="${figdir}f3_fan_selected.png" alt="Forecast bands vs actual">
+  <p class="small" style="margin-top:2mm">Each point is the actual weekly price; the band and line show the forecast made two weeks earlier, using only data available then. Breaks in the band are weeks with no reported price at the forecast origin.</p>
+</section>
+
+<!-- ======================================================= F -->
+<section class="page">
+  <h2>F. Stress test: forecasting with incomplete local data <span class="tag built">BUILT + TESTED</span></h2>
+  <p>This test answers the challenge's central question directly. We deliberately removed Assam history before the test year and compared three forecasters on exactly the same Assam test weeks (${S0_n} forecasts, horizons 1–4 weeks, one fit at the start of the test year):</p>
+  <ul>
+    <li><b>No change</b>: next price equals this week's price.</li>
+    <li><b>Local model</b>: same method, trained only on the market's own history (what conventional per-market forecasting does).</li>
+    <li><b>Global model</b>: trained on all markets in Assam and neighbouring States.</li>
+  </ul>
+  <img class="fig" src="${figdir}f5_stress_test.png" alt="Stress test">
+  ${table_stress}
+  <p>${stress_reading}</p>
+</section>
+
+<!-- ======================================================= G -->
+<section>
+  <h2>G. From forecast to decision: Hold / Sell / Store <span class="tag built">BUILT + TESTED</span></h2>
+  <p>The rule advises holding only when the median forecast, after weekly losses, beats today's price by at least 5%, and the pessimistic (P10) outcome after losses is no worse than 10% below today's price. Otherwise: sell now. Holding never exceeds the crop's safe shelf life.</p>
+  ${table_rules}
+  <h3>Backtest of the rule on the selected series (12 months, real outcomes)</h3>
+  ${table_decision}
+  <p>${decision_reading}</p>
+  <div class="note">The parameters above are illustrative placeholders, not agronomic advice. In the project they will be set with AAU post-harvest specialists and AMIU for each crop, storage type and season, and the same backtest will be rerun before any advisory is published.</div>
+</section>
+
+<!-- ======================================================= H -->
+<section class="page" style="margin-top:7mm">
+  <h2>H. Season-ahead outlook: does the seasonal pattern hold out of sample? <span class="tag built">BUILT + TESTED</span></h2>
+  <p>Crop planning needs a view of prices months ahead. The prototype's first step is the seasonal price profile: how far each month's price typically sits above or below the year's average, pooled across Assam and neighbouring markets. To test it honestly, for each year we estimated the profile only from earlier years and compared it with the actual monthly pattern in Assam markets that year.</p>
+  ${table_season}
+  <p>${season_reading}</p>
+  <p class="small">Planned next steps for the long horizon: add trend and year-level drivers (area sown, rainfall, neighbouring-State prices before sowing) to forecast the level, not just the shape, of harvest-window prices; express outlooks as ranges; and score each season's outlook after harvest.</p>
+</section>
+
+<!-- ======================================================= I -->
+<section>
+  <h2>I. Target architecture <span class="tag plan">PLANNED</span></h2>
+  <div class="arch">
+    <div class="c"><b>Sources</b>AMIU daily prices &amp; arrivals (AEA entry)<br>Agmarknet / data.gov.in API<br>Neighbouring-State markets<br>Optional: IMD rainfall, active futures, cold-storage stocks</div>
+    <div class="c"><b>Data hub</b>Ingestion jobs · validation &amp; harmonisation · versioned corrections · PostgreSQL (records, audit) · Parquet (history)</div>
+    <div class="c"><b>Analytics (weekly batch)</b>Feature build · global quantile models · benchmarks &amp; skill gate · decision rules · seasonal crop cards · scorecard</div>
+    <div class="c"><b>Review &amp; delivery</b>AMIU review console · AEA dashboard &amp; printable sheets · SMS (DLT) · WhatsApp · IVR · feedback capture</div>
+  </div>
+  <div class="grid2" style="margin-top:4mm">
+    <div class="box small">
+      <b>Stack</b><br>Python 3.13 · polars (lazy queries) · scikit-learn · marimo notebooks (reproducible, auditable analysis) · seaborn · uv · PostgreSQL · FastAPI REST API · mobile-friendly web dashboard in Assamese and English.
+      <br><br><b>Hosting</b><br>Assam State Data Centre or a MeitY-empanelled cloud region in India. The full prototype pipeline runs in about ${runtime_min} minutes on a laptop, so running costs are low.
+    </div>
+    <div class="box small">
+      <b>Governance</b><br>AMIU approves every batch · skill gate per series · versioned code, data and models · model cards · public scorecard · consent-based farmer registry (DPDP Act 2023) · CERT-In-aligned security · DLT-registered SMS templates · open formats and APIs.
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= J -->
+<section class="page" style="margin-top:7mm">
+  <h2>J. Limitations, assumptions and next steps</h2>
+  <h3>Limitations of this prototype (stated plainly)</h3>
+  <ul>
+    <li>Only public Agmarknet prices were used. The public dataset has <b>no arrivals</b>; AMIU arrivals data are requested, not assumed.</li>
+    <li>The three pilot series were chosen by a coverage rule; all are vegetables in one Guwahati market. Results may differ for storable crops and smaller markets; the pilot will test agreed commodities.</li>
+    <li>The test year (${test_start} to ${end_week}) follows a three-month reporting gap at the Agmarknet 2.0 cut-over, which makes early test weeks harder than usual.</li>
+    <li>Decision-rule parameters are illustrative; the decision backtest uses modal market prices, not prices actually received by farmers.</li>
+    <li>The season-ahead component forecasts the seasonal shape, not yet the price level.</li>
+    <li>Assamese text is a draft translation pending native-speaker review.</li>
+  </ul>
+  <h3>Next steps (see proposal timeline)</h3>
+  <ol class="small">
+    <li>Agree pilot commodities, markets and districts with the department; request AMIU historical data and feed.</li>
+    <li>Retrain and re-test on AMIU data, adding arrivals; add storable crops (e.g. potato, mustard, paddy).</li>
+    <li>Calibrate decision rules with AAU; co-design and test Assamese messages with AEAs and farmers.</li>
+    <li>Build review console, dashboard and channels; run 6–8 weeks in shadow mode; validation-readiness review at month 6.</li>
+    <li>Pilot for one season with a public scorecard.</li>
+  </ol>
+  <h3>Data sources and licence</h3>
+  <p class="small">Agmarknet daily mandi prices (Directorate of Marketing &amp; Inspection, Ministry of Agriculture &amp; Farmers Welfare), via the data.gov.in Open Government Data API, resource 35985678-0d79-46b4-9ed6-6f13308a1d24 "Variety-wise Daily Market Prices Data of Commodity", Government Open Data License – India. Retrieved ${retrieved}; ${rows_total} records. References: Montero-Manso, P. &amp; Hyndman, R. J. (2021), Principles and algorithms for forecasting groups of time series: Locality and globality, International Journal of Forecasting 37(4); Makridakis, S., Spiliotis, E. &amp; Assimakopoulos, V. (2022), M5 accuracy competition: Results, findings, and conclusions, International Journal of Forecasting 38(4).</p>
+</section>
+
+</body>
+</html>

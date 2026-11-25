@@ -1,0 +1,26 @@
+User journey (attached Proof of Work, Section B)
+1. AEAs keep recording daily prices and arrivals. The system ingests them nightly and alerts AEAs to missing days or implausible prices.
+2. Each week the system harmonises the data, retrains, forecasts one to four weeks ahead, applies the skill gate and decision rules, and drafts advisories in Assamese and English.
+3. An AMIU analyst approves, edits or holds each advisory in a review console.
+4. Farmers receive an SMS, WhatsApp card or voice call; AEAs get a dashboard and a printable sheet for farmer meetings.
+5. The farmer sells, holds or stores, and may report the price received. Forecasts are scored against actual prices on a public scorecard.
+6. Before each sowing season, AEAs and planners receive crop-planning cards.
+
+Wireframes and mock-ups (PDF, Section C)
+Assamese and English SMS (with computed SMS-part counts), WhatsApp card, voice script, AEA dashboard, AMIU review console and crop-planning cards. All show the prototype's real forecasts for ${sel_market} for the week of ${end_week}.
+
+Prototype (built and run on real data; PDF, Section D)
+- Fetches Agmarknet prices through the data.gov.in API: ${rows_total} records (all Assam commodities since ${assam_first_year}; the three pilot commodities in ${n_comp_states} neighbouring States).
+- Harmonises ${assam_markets_raw} market names into ${assam_markets_harm} markets, builds weekly series with explicit gaps, and selects pilot series by a fixed coverage rule: ${sel_market} for ${sel_commodities}.
+- Trains one global quantile model across all markets and produces price bands, Hold / Sell / Store signals and seasonal crop profiles.
+- One command regenerates every number in this proposal from the data snapshot.
+
+Test results (PDF, Sections E to H)
+- ${res_short}
+- ${stress_short}
+- ${decision_short}
+- ${season_short}
+
+Links: code and data ${repo_url}; full report ${site_url}
+
+There is no earlier pilot or deployment; the prototype was built for this challenge, on public data only.

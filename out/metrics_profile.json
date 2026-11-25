@@ -30,7 +30,7 @@
   "assam_first": "2005-09-21",
   "assam_last": "2026-11-24",
   "assam_market_names_raw": 109,
-  "assam_markets_harmonised": 82,
+  "assam_markets_harmonised": 81,
   "assam_markets_renamed": 25,
   "assam_yearly": {
     "2005": {
@@ -115,7 +115,7 @@
     },
     "2026": {
       "rows": 40052,
-      "markets": 32
+      "markets": 31
     }
   },
   "gaps": [
@@ -157,12 +157,425 @@
     "max_markets_week": 52,
     "median_markets_week": 10.0
   },
+  "renames": [
+    {
+      "market_key": "ambagan",
+      "market": [
+        "Ambagan",
+        "Ambagan APMC"
+      ],
+      "first": [
+        "2024-09-05",
+        "2025-12-20"
+      ],
+      "last": [
+        "2025-08-21",
+        "2026-11-23"
+      ]
+    },
+    {
+      "market_key": "balugaon",
+      "market": [
+        "Balugaon",
+        "Balugaon APMC"
+      ],
+      "first": [
+        "2024-09-05",
+        "2025-12-20"
+      ],
+      "last": [
+        "2025-08-28",
+        "2026-11-23"
+      ]
+    },
+    {
+      "market_key": "barpeta road",
+      "market": [
+        "Barpeta Road",
+        "Barpeta Road APMC"
+      ],
+      "first": [
+        "2024-09-04",
+        "2025-12-17"
+      ],
+      "last": [
+        "2025-08-28",
+        "2026-06-08"
+      ]
+    },
+    {
+      "market_key": "besimari",
+      "market": [
+        "Besimari",
+        "Besimari APMC"
+      ],
+      "first": [
+        "2024-10-28",
+        "2025-12-22"
+      ],
+      "last": [
+        "2025-05-27",
+        "2026-11-23"
+      ]
+    },
+    {
+      "market_key": "bohorihat",
+      "market": [
+        "Bohorihat",
+        "Bohorihat APMC",
+        "Baharihat APMC"
+      ],
+      "first": [
+        "2005-09-30",
+        "2025-12-18",
+        "2026-07-02"
+      ],
+      "last": [
+        "2019-11-22",
+        "2026-01-08",
+        "2026-08-20"
+      ]
+    },
+    {
+      "market_key": "dhekiajuli",
+      "market": [
+        "Dhekiajuli",
+        "Dhekiajuli APMC"
+      ],
+      "first": [
+        "2006-05-30",
+        "2025-12-20"
+      ],
+      "last": [
+        "2025-08-21",
+        "2026-11-24"
+      ]
+    },
+    {
+      "market_key": "dhing",
+      "market": [
+        "Dhing",
+        "Dhing APMC"
+      ],
+      "first": [
+        "2006-09-01",
+        "2025-12-16"
+      ],
+      "last": [
+        "2025-08-27",
+        "2026-11-23"
+      ]
+    },
+    {
+      "market_key": "fatakbazar",
+      "market": [
+        "Fatakbazar",
+        "Fatakbazar APMC"
+      ],
+      "first": [
+        "2024-09-05",
+        "2026-06-24"
+      ],
+      "last": [
+        "2025-08-22",
+        "2026-11-23"
+      ]
+    },
+    {
+      "market_key": "gandhimaidan",
+      "market": [
+        "Gandhimaidan APMC",
+        "Gandhimaidan SMY, Hojai"
+      ],
+      "first": [
+        "2025-12-23",
+        "2026-06-25"
+      ],
+      "last": [
+        "2026-02-19",
+        "2026-08-09"
+      ]
+    },
+    {
+      "market_key": "gauripur",
+      "market": [
+        "Gauripur",
+        "Gauripur APMC"
+      ],
+      "first": [
+        "2005-09-22",
+        "2025-12-19"
+      ],
+      "last": [
+        "2022-02-09",
+        "2026-04-24"
+      ]
+    },
+    {
+      "market_key": "goalpara",
+      "market": [
+        "Goalpara",
+        "Goalpara APMC"
+      ],
+      "first": [
+        "2007-02-20",
+        "2025-12-15"
+      ],
+      "last": [
+        "2022-05-27",
+        "2026-02-15"
+      ]
+    },
+    {
+      "market_key": "gossaigaon",
+      "market": [
+        "Gossaigaon",
+        "Gossaigaon APMC"
+      ],
+      "first": [
+        "2024-09-07",
+        "2025-12-15"
+      ],
+      "last": [
+        "2025-08-26",
+        "2026-02-12"
+      ]
+    },
+    {
+      "market_key": "haibargaon",
+      "market": [
+        "Haibargaon",
+        "Haibargaon APMC"
+      ],
+      "first": [
+        "2024-09-07",
+        "2025-12-20"
+      ],
+      "last": [
+        "2025-08-18",
+        "2026-11-23"
+      ]
+    },
+    {
+      "market_key": "jorhat",
+      "market": [
+        "Jorhat",
+        "Jorhat APMC"
+      ],
+      "first": [
+        "2005-09-21",
+        "2026-02-03"
+      ],
+      "last": [
+        "2025-08-20",
+        "2026-02-03"
+      ]
+    },
+    {
+      "market_key": "kharupetia",
+      "market": [
+        "Kharupetia",
+        "Kharupetia APMC"
+      ],
+      "first": [
+        "2005-09-23",
+        "2025-12-20"
+      ],
+      "last": [
+        "2024-12-04",
+        "2026-06-14"
+      ]
+    },
+    {
+      "market_key": "lanka",
+      "market": [
+        "Lanka",
+        "Lanka APMC"
+      ],
+      "first": [
+        "2005-09-21",
+        "2026-01-20"
+      ],
+      "last": [
+        "2018-07-13",
+        "2026-02-10"
+      ]
+    },
+    {
+      "market_key": "moirabari",
+      "market": [
+        "Moirabari",
+        "Moirabari APMC"
+      ],
+      "first": [
+        "2024-09-07",
+        "2025-12-23"
+      ],
+      "last": [
+        "2025-08-23",
+        "2026-02-07"
+      ]
+    },
+    {
+      "market_key": "nalbari",
+      "market": [
+        "Nalbari",
+        "Nalbari APMC"
+      ],
+      "first": [
+        "2008-04-09",
+        "2025-12-22"
+      ],
+      "last": [
+        "2025-08-22",
+        "2026-02-24"
+      ]
+    },
+    {
+      "market_key": "p.o. uparhali guwahati",
+      "market": [
+        "P.O. Uparhali Guwahati",
+        "P.O. Uparhali Guwahati APMC",
+        "Uparhali Pmy APMC"
+      ],
+      "first": [
+        "2005-09-21",
+        "2025-12-20",
+        "2026-06-09"
+      ],
+      "last": [
+        "2019-12-31",
+        "2026-06-02",
+        "2026-11-21"
+      ]
+    },
+    {
+      "market_key": "pamohi(garchuk)",
+      "market": [
+        "Pamohi(Garchuk)",
+        "Pamohi(Garchuk) APMC"
+      ],
+      "first": [
+        "2018-08-19",
+        "2025-12-15"
+      ],
+      "last": [
+        "2025-08-23",
+        "2026-11-24"
+      ]
+    },
+    {
+      "market_key": "sibsagar",
+      "market": [
+        "Sibsagar",
+        "Sibsagar APMC"
+      ],
+      "first": [
+        "2005-12-19",
+        "2025-12-26"
+      ],
+      "last": [
+        "2025-08-26",
+        "2026-02-19"
+      ]
+    },
+    {
+      "market_key": "silapathar",
+      "market": [
+        "Silapathar",
+        "Silapathar APMC"
+      ],
+      "first": [
+        "2005-09-22",
+        "2025-12-15"
+      ],
+      "last": [
+        "2022-05-31",
+        "2026-03-10"
+      ]
+    },
+    {
+      "market_key": "sonari",
+      "market": [
+        "Sonari",
+        "Sonari APMC"
+      ],
+      "first": [
+        "2024-09-05",
+        "2025-12-26"
+      ],
+      "last": [
+        "2025-08-28",
+        "2026-02-19"
+      ]
+    },
+    {
+      "market_key": "sontoli",
+      "market": [
+        "Sontoli",
+        "Sontoli APMC"
+      ],
+      "first": [
+        "2024-10-29",
+        "2025-12-16"
+      ],
+      "last": [
+        "2025-06-17",
+        "2026-11-17"
+      ]
+    },
+    {
+      "market_key": "tinsukia",
+      "market": [
+        "Tinsukia",
+        "Tinsukia APMC",
+        "Tinsukia Market"
+      ],
+      "first": [
+        "2005-10-07",
+        "2026-03-02",
+        "2026-06-17"
+      ],
+      "last": [
+        "2022-05-23",
+        "2026-03-22",
+        "2026-11-23"
+      ]
+    }
+  ],
+  "silent_markets": [
+    {
+      "market_key": "barpeta road",
+      "last": "2026-06-08",
+      "name": "Barpeta Road APMC"
+    },
+    {
+      "market_key": "kharupetia",
+      "last": "2026-06-14",
+      "name": "Kharupetia"
+    },
+    {
+      "market_key": "biswanath chairaili",
+      "last": "2026-06-19",
+      "name": "Biswanath Chairaili APMC"
+    },
+    {
+      "market_key": "gandhimaidan",
+      "last": "2026-08-09",
+      "name": "Gandhimaidan SMY, Hojai"
+    },
+    {
+      "market_key": "bohorihat",
+      "last": "2026-08-20",
+      "name": "Bohorihat"
+    }
+  ],
   "window": [
     "2023-11-27",
     "2026-11-16"
   ],
   "coverage": {
-    "n_pairs": 1170,
+    "n_pairs": 1165,
     "median_cov_pct": 13.461538461538462,
     "n_ge50": 19,
     "n_ge25": 352,
@@ -189,7 +602,7 @@
     }
   ],
   "outliers": {
-    "n_outlier": 4035,
+    "n_outlier": 4037,
     "n_weeks": 245789
   },
   "figures": {

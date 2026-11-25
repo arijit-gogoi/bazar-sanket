@@ -105,6 +105,7 @@ def _regional(g: pl.DataFrame) -> pl.DataFrame:
 def build(g: pl.DataFrame, commodity_codes: dict[str, int]) -> pl.DataFrame:
     """Add features (past-only) and targets (future labels) to a weekly grid."""
     lp = pl.col("lp")
+    g = g.sort([*KEY, "week"])  # all window expressions below assume week order within a series
     g = g.with_columns(*[(lp - lp.shift(k).over(KEY)).alias(f"d{k}") for k in LAGS])
     g = g.with_columns(
         (lp - lp.rolling_mean(4, min_samples=2).over(KEY)).alias("dev4"),
@@ -120,7 +121,7 @@ def build(g: pl.DataFrame, commodity_codes: dict[str, int]) -> pl.DataFrame:
         (pl.col("state") == "Assam").cast(pl.Float64).alias("is_assam"),
     )
     reg = _regional(g)
-    g = g.join(reg, on=["commodity", "week"], how="left")
+    g = g.join(reg, on=["commodity", "week"], how="left").sort([*KEY, "week"])  # joins need not keep order
     g = g.with_columns((lp - pl.col("as_lvl")).alias("sp"))
     g = g.with_columns((pl.col("sp") - pl.col("sp").rolling_mean(26, min_samples=4).over(KEY)).alias("sp_dev26"))
     # targets (labels only) and seasonal-naive baseline (past-only)

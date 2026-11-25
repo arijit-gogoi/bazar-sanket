@@ -1,0 +1,21 @@
+Development testing
+Data checks (dates, positive prices, duplicates, market-name mapping, a trailing-median outlier rule, cached API pages with retrieval times); no look-ahead (features use only data up to the forecast week, and each refit only outcomes known by then); full reproducibility from one command. The project adds automated tests in continuous integration.
+
+Measures
+MAPE and ₹ error against no-change and seasonal-naive benchmarks; direction (down, flat or up by more than 5%); calibration of 80% bands; value realised by following the advice versus selling at once; robustness to short, gappy or absent local history; and, in the pilot, delivery, comprehension, usefulness, decisions taken and prices received.
+
+Evidence so far (out of sample, ${test_start} to ${end_week})
+- ${res_short}
+- ${res_horizons}
+- ${res_selected}
+- ${stress_short}
+- ${decision_short}
+- ${season_short}
+
+How to read these results
+${reading_short}
+
+Prior research
+Global models across related series (Montero-Manso and Hyndman, 2021; M5 competition, 2022) and rolling-origin evaluation (Tashman, 2000), all in the International Journal of Forecasting.
+
+Validation plan: six to eight weeks of shadow mode; go-live per series only where benchmarks are beaten; public scorecard; pilot thresholds agreed in advance (Section 12).
