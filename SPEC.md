@@ -107,7 +107,7 @@ T19|x|`COMMODITIES.md` generator `src/commodities.py` (in pipeline; README + sit
 T20|x|LightGBM learner (`model.make(learner="lgbm")`), mirrored settings; scored on main rows (identical-row assert) + extended set|V5,V16
 T21|x|textbook multiplicative HW (`smoothing.forecast_origin(form="mul")`) on main rows (benchmarks) + extended set; labelled check|V5,V16
 T22|x|good-data commodity rule (`clean.commodity_coverage`) → `nb/extended.py`, Assam-only, accuracy only; f8 + 2 PDF pages + §4/§9/§11 text|V3,V5,V16,V18
-T23|~|full pipeline rerun, ∀ page checked, word counts, secret scan, commit, push, site hash|V1,V2,V14,V15,V17
+T23|x|full pipeline rerun, ∀ page checked, word counts, secret scan, commit, push, site hash|V1,V2,V14,V15,V17
 
 ## §B BUGS
 id|date|cause|fix
