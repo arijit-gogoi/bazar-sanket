@@ -75,13 +75,13 @@ Assamese and English SMS (with computed SMS-part counts), WhatsApp card, voice s
 Prototype (built and run on real data; PDF, Section D)
 - Fetches Agmarknet prices through the data.gov.in API: 8,51,760 records (all Assam commodities since 2005; the three pilot commodities in 8 neighbouring States).
 - Harmonises 109 market names into 81 markets, builds weekly series with explicit gaps, and selects pilot series by a fixed coverage rule: Pamohi (Garchuk) for green chilli, cabbage and pumpkin.
-- Trains one global quantile model across all markets and produces price bands, Hold / Sell / Store signals and seasonal crop profiles.
+- Trains one global quantile model across all Assam markets of 11 crops with good data and produces price bands, Hold / Sell / Store signals and seasonal crop profiles.
 - One command regenerates every number in this proposal from the data snapshot.
 
 Test results (PDF, Sections E to H)
-- Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.4% for the model, 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 78.5% of actual prices; direction called correctly in 44.0% of cases versus 33.4% for no change.
+- Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.3% for the model (chosen after this test; pre-set model 15.4%), 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 79.3% of actual prices; direction called correctly in 46.4% of cases versus 33.4% for no change.
 - Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts (no change: 12.8%); with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
-- Decision rule: it advised selling promptly in every test week for these perishables; blind holding would have lost 4.7–8.3%; perfect foresight shows up to 9.0% available to better forecasts.
+- Decision rule, value realised versus selling at once: cabbage +0.2% (blind holding -8.3%); green chilli +0.0% (blind holding -8.2%); pumpkin -0.2% (blind holding -4.7%).
 - Season-ahead check: profiles from earlier years only had 22.2 points average error in monthly price deviations, versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
 
 Links: code and data https://github.com/arijit-gogoi/bazar-sanket; full report https://arijit-gogoi.github.io/bazar-sanket/
@@ -273,17 +273,17 @@ Measures
 MAPE and ₹ error versus no-change and seasonal-naive benchmarks; direction; 80% band calibration; value of advice versus selling at once; robustness to short, gappy or absent history; in the pilot, delivery, comprehension, usefulness, decisions and prices received.
 
 Evidence so far (out of sample, 24 November 2025 to 16 November 2026)
-- Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.4% for the model, 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 78.5% of actual prices; direction called correctly in 44.0% of cases versus 33.4% for no change.
-- Against no change, absolute error was 1.4% lower one week ahead and 0.3–1.2% higher at two to four weeks.
-- Of the three selected Pamohi (Garchuk) series, the model beat no change for green chilli (18.7% vs 20.7%); cabbage (20.9% vs 20.0%) and pumpkin (11.5% vs 9.7%) would be withheld by the skill gate.
+- Accuracy over 12 months out of sample (4,697 forecasts, 68 Assam series, one to four weeks ahead): MAPE 15.3% for the model (chosen after this test; pre-set model 15.4%), 15.5% for no change and 19.3% for seasonal naive; 80% bands contained 79.3% of actual prices; direction called correctly in 46.4% of cases versus 33.4% for no change.
+- Against no change, absolute error was 1.0% higher one week ahead but lower at two to four weeks (by up to 3.0%).
+- Of the three selected Pamohi (Garchuk) series, the model beat no change for green chilli (19.2% vs 20.7%); cabbage (21.4% vs 20.0%) and pumpkin (12.1% vs 9.7%) would be withheld by the skill gate.
 - Stress test: with only 26 weeks of local history, MAPE was 13.8% for the global model versus 20.7% for a local-only model on the same forecasts (no change: 12.8%); with half the local weeks missing, 13.4% versus 16.8%; with no Assam history at all, learning only from neighbouring States, 14.9% (no change: 15.5%).
-- Other methods: Holt-Winters 4.2% worse than no change; a pre-set average with the global model 1.1% better than no change, though damping the model alone did better (2.3%, post-hoc); volatility pricing of a 90% price floor overstated shortfalls (3.5% vs 2.5%).
-- More commodities: across 11 Assam commodities with good data, the global model was 1.6% better than no change (better for 7 of the 11); with LightGBM, 1.4% better; Holt-Winters 4.5% worse (multiplicative 4.7%).
-- Decision rule: it advised selling promptly in every test week for these perishables; blind holding would have lost 4.7–8.3%; perfect foresight shows up to 9.0% available to better forecasts.
+- Other methods: Holt-Winters 4.2% worse than no change; a pre-set average with the global model 2.1% better than no change, though damping the model alone did better (3.3%, post-hoc); volatility pricing of a 90% price floor overstated shortfalls (3.5% vs 2.5%).
+- All 11 crops: the model was 1.6% better than no change, better for 7 of 11; LightGBM 1.4% better; Holt-Winters 4.5% worse (multiplicative 4.7%).
+- Decision rule, value realised versus selling at once: cabbage +0.2% (blind holding -8.3%); green chilli +0.0% (blind holding -8.2%); pumpkin -0.2% (blind holding -4.7%).
 - Season-ahead check: profiles from earlier years only had 22.2 points average error in monthly price deviations, versus 32.9 assuming no seasonality (better in 18 of 20 commodity-year tests).
 
 How to read these results
-Weekly vegetable prices are hard to forecast and no change is a strong benchmark. On public data, the model matches the no-change benchmark on average, is better one week ahead, is better for some series, calls the direction of moves more often, gives well-calibrated ranges and keeps working when local history is missing. This is why publication is gated per series. AMIU data with arrivals should add skill, and will be tested the same way.
+Weekly vegetable prices are hard to forecast and no change is a strong benchmark. On public data, the model matches the no-change benchmark on average, is better for some series, calls the direction of moves more often and gives well-calibrated ranges; the global approach keeps working when local history is missing. This is why publication is gated per series. AMIU data with arrivals should add skill, and will be tested the same way.
 
 Validation plan: six to eight weeks of shadow mode; go-live per series only where benchmarks are beaten; public scorecard; pilot thresholds agreed in advance (Section 12).
 
@@ -324,7 +324,7 @@ Interoperability
 ## 11. Innovation & differentiation
 
 Novel elements
-1. Forecasting that works with incomplete data. Instead of one model per market, which fails on short, gappy series, a single global model learns from all markets in Assam and neighbouring States and treats missing weeks as information rather than errors. In the prototype's stress test, with only 26 weeks of local history the global model's error was 13.8% against 20.7% for a model trained on local data alone; with no Assam history at all, it still forecast Assam prices with 14.9% error, below the 15.5% of a no-change forecast.
+1. Forecasting that works with incomplete data. Instead of one model per market, which fails on short, gappy series, a single global model learns from many markets and crops at once and treats missing weeks as information rather than errors. In the prototype's stress test, with only 26 weeks of local history the global model's error was 13.8% against 20.7% for a model trained on local data alone; with no Assam history at all, it still forecast Assam prices with 14.9% error, below the 15.5% of a no-change forecast.
 2. Uncertainty first. Farmers see a price band, checked every week for calibration, not a single misleading number.
 3. Skill-gated publication. A forecast is published for a market only where it has beaten simple benchmarks out of sample; elsewhere the system says so.
 4. From forecast to decision. A transparent rule converts bands into Hold / Sell / Store advice using storage costs, losses, shelf life and nearby-market prices.

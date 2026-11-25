@@ -17,9 +17,10 @@ ship NESFIC-D-35 proposal by 2026-11-25 cutoff: 12 form answers (∀ ≤500 w) +
 - futures optional: describe as method, ⊥ block on data. availability ? (some Indian agri futures suspended since 2021 — verify before any claim).
 - stack locked (user): uv + marimo notebooks (pure `.py`, run as script) + polars LazyFrame + scikit-learn + seaborn (viz) + statsmodels (user-allowed 2026-11-25, Holt-Winters). pandas only @ seaborn boundary (`.to_pandas()`), ⊥ pandas for data processing.
 - libs (user 2026-11-25): any Python library allowed. added: lightgbm.
-- LightGBM (user 2026-11-25): alt learner of global model; settings mirrored from HGB, fixed before run, ⊥ tuned on test. advisory model ⊥ switched after seeing results (V16).
+- LightGBM (user 2026-11-25): alt learner of global model; settings mirrored from HGB, fixed before run, ⊥ tuned on test. not adopted (slightly worse).
+- advisory model (user decision 2026-11-25, after seeing results): HGB global model trained on all Assam markets of the 11 good-data crops (Assam only) replaces pre-set config (3 pilot crops + neighbour States). post-hoc ∴ labelled in PDF §E + §J, answers §3 + §9 (pre-set result beside it). pre-set config still run (`out/backtest_prev.parquet`); stress test + seasonal profiles stay on pre-set config. advice only for pilot 3 (only crops w/ storage/shelf-life rules).
 - Holt-Winters form (user hoped multiplicative): primary = add trend + add season on log price ≡ multiplicative on rupee price. textbook `seasonal="mul"` on rupee price added as labelled check.
-- more commodities (user 2026-11-25: "choose commodities with good data"): rule = Assam market-weeks (dominant variety/market) ≥ 1,000 in last 156 complete wk ∧ ≥ 100 in last 52 (test yr). coverage only, fixed before any fit on them. Assam markets only (neighbour data = 3 pilot commodities only). accuracy only; ⊥ advisory (shelf-life/storage rules exist for pilot 3 only).
+- more commodities (user 2026-11-25: "choose commodities with good data"): rule = Assam market-weeks (dominant variety/market) ≥ 1,000 in last 156 complete wk ∧ ≥ 100 in last 52 (test yr). coverage only, fixed before any fit on them. Assam markets only (neighbour data = 3 pilot commodities only). = training data of advisory model; advice only for pilot 3 (shelf-life/storage rules exist for pilot 3 only).
 - `COMMODITIES.md` (user): ∀ downloaded commodity name as published + rows, dates, markets, use | exclusion reason; generated, ⊥ hand edit.
 - compute (user): ∀ heavy step ! use all CPU cores (joblib loky, 1 thread/worker).
 - licence (user 2026-11-25): none granted now. README + answers §11 → "licence terms to be agreed with the department". ⊥ LICENSE file.
@@ -35,9 +36,9 @@ ship NESFIC-D-35 proposal by 2026-11-25 cutoff: 12 form answers (∀ ≤500 w) +
 - src: data.gov.in OGD API `https://api.data.gov.in/resource/35985678-0d79-46b4-9ed6-6f13308a1d24` (Agmarknet daily prices, §R.1). key env `DATA_GOV_IN_API_KEY` | git-ignored `.env`; ⊥ commit, ⊥ print.
 - cmd: `uv run python -I src/fetch.py {probe|days|pull|consolidate}` → `data/raw/pages/**.json` (cached, w/ retrieval time) → `data/raw/ogd_prices.parquet`
 - cmd: `uv run python -I -X utf8 nb/profile.py` → `out/selection.json`, `out/metrics_profile.json`, f1–f2
-- cmd: `uv run python -I -X utf8 nb/forecast.py` (all cores) → `out/backtest.parquet`, `out/metrics_forecast.json`, f3–f6
+- cmd: `uv run python -I -X utf8 nb/forecast.py` (all cores) → `out/backtest.parquet` (advisory model, 11 crops), `out/backtest_prev.parquet` (pre-set config), `out/metrics_forecast.json`, f3–f6
 - cmd: `uv run python -I -X utf8 nb/benchmarks.py` (all cores) → reads `out/backtest.parquet` (same rows) → `out/metrics_benchmarks.json`, f7
-- cmd: `uv run python -I -X utf8 nb/extended.py` (all cores) → LightGBM on main rows (asserts identical rows) + good-data commodity set (HGB, LightGBM, HW log, HW mul, naive, snaive) → `out/backtest_extended.parquet`, `out/metrics_extended.json`, f8
+- cmd: `uv run python -I -X utf8 nb/extended.py` (all cores) → good-data commodity set (HGB, LightGBM, HW log, HW mul, naive, snaive); main rows: asserts advisory model ≡ its HGB, adds LightGBM + pre-set config → `out/backtest_extended.parquet`, `out/metrics_extended.json`, f8
 - cmd: `uv run python -I -X utf8 src/commodities.py` → `COMMODITIES.md` (reads raw parquet, `out/selection.json`, `out/metrics_extended.json`)
 - cmd: `uv run python -I -X utf8 src/render.py [--pdf]` → `out/metrics.json` (merge) → `answers.md`, `pow/proof-of-work.html`, `docs/`, `proof-of-work.pdf`
 - cmd: `uv run python -I src/pipeline.py` → ∀ steps above in order (V15)
@@ -79,7 +80,7 @@ V12: Assamese text labelled "draft translation, native review pending"; rendered
 V13: fallback mode → ∀ synthetic figure marked "illustrative"; ⊥ accuracy metric
 V14: repo ⊥ secrets, API keys, user email
 V15: one cmd regenerates processed data, metrics, figures from cached raw
-V16: other methods (Holt-Winters log & mul, combination, volatility bands & pricing, LightGBM) scored on identical backtest rows; settings fixed before results; post-hoc variants labelled "check"; ∀ tried method reported; advisory model ⊥ switched on these results
+V16: other methods (Holt-Winters log & mul, combination, volatility bands & pricing, LightGBM) scored on identical backtest rows; settings fixed before results; post-hoc variants labelled "check"; ∀ tried method reported; advisory model switched only by user decision, labelled post-hoc w/ pre-set result beside it
 V17: ∀ answer section ≤500 words under whitespace, alnum & hyphen-split counts (portal counter unknown)
 V18: extended commodity set ← coverage rule only (thresholds in `out/metrics_extended.json`); ∀ commodity name downloaded listed in `COMMODITIES.md` w/ use | exclusion reason
 
@@ -108,6 +109,7 @@ T20|x|LightGBM learner (`model.make(learner="lgbm")`), mirrored settings; scored
 T21|x|textbook multiplicative HW (`smoothing.forecast_origin(form="mul")`) on main rows (benchmarks) + extended set; labelled check|V5,V16
 T22|x|good-data commodity rule (`clean.commodity_coverage`) → `nb/extended.py`, Assam-only, accuracy only; f8 + 2 PDF pages + §4/§9/§11 text|V3,V5,V16,V18
 T23|x|full pipeline rerun, ∀ page checked, word counts, secret scan, commit, push, site hash|V1,V2,V14,V15,V17
+T24|x|switch advisory to 11-crop Assam model (user); pre-set config kept as comparison; post-hoc labels; ∀ text naming neighbour-State training fixed; rerun, verify, push|V3,V5,V10,V16
 
 ## §B BUGS
 id|date|cause|fix

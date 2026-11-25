@@ -79,7 +79,7 @@ ${site_nav}
   <div class="kpis">
     <div class="kpi"><b>${rows_total}</b><span>Agmarknet price records used (${assam_rows} for Assam since ${assam_first_year})</span></div>
     <div class="kpi"><b>${weeks_empty_pct}%</b><span>of weeks since ${assam_first_year} with no Assam price at all in the public record</span></div>
-    <div class="kpi"><b>${all_mape_model}%</b><span>forecast error (MAPE, 1–4 weeks, ${n_series_assam} Assam series, 12 months out of sample); no-change benchmark ${all_mape_naive}%</span></div>
+    <div class="kpi"><b>${all_mape_model}%</b><span>forecast error (MAPE, 1–4 weeks, ${n_series_assam} Assam series, 12 months out of sample; model chosen after the test); no-change benchmark ${all_mape_naive}%</span></div>
     <div class="kpi"><b>${S3_pooled}%</b><span>error forecasting Assam with <i>no</i> Assam history, learning only from neighbouring States (no-change: ${S3_naive}%)</span></div>
   </div>
 
@@ -145,8 +145,8 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
   <img class="fig" src="${figdir}f2_coverage_heatmap.png" alt="Coverage heatmap">
   <p style="margin-top:2mm"><b>Selection rule, fixed before any modelling:</b> the three Assam market × commodity series with the most weeks reported in the last 156 complete weeks (${win_start} to ${win_end}), whatever they are. Result: <b>${sel_market}</b> (${sel_district} district, Guwahati's main wholesale vegetable market) for <b>${sel_commodities}</b>, each reported in ${sel_weeks} of 156 weeks (${sel_cov}%). Even the best-covered Assam series miss a third of weeks, including a three-month gap when Agmarknet moved to its new platform.</p>
   <p>All three are perishable or semi-perishable vegetables, so the prototype focuses on short-horizon timing. Storable crops such as potato, paddy or mustard will be added in the pilot, as agreed with the department, using the same pipeline.</p>
-  <h3>Comparable markets used for learning</h3>
-  <p>For the three commodities, the prototype also uses every market reported in ${comp_states}: ${comp_rows} records, mostly from 2016 onward. ${comp_note}</p>
+  <h3>Comparable markets in neighbouring States</h3>
+  <p>For the three commodities, the prototype also uses every market reported in ${comp_states}: ${comp_rows} records, mostly from 2016 onward. ${comp_note} They feed the seasonal profiles, the stress test and the model set before testing; the advisory model learns from Assam markets of ${adv_k} crops (Section E).</p>
   ${data_summary_table}
 </section>
 
@@ -287,8 +287,8 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
   <div class="arch" style="grid-template-columns: repeat(5, 1fr)">
     <div class="c"><b>1 · Fetch</b>data.gov.in OGD API; every page cached with query and retrieval time (<code>src/fetch.py</code>).</div>
     <div class="c"><b>2 · Clean</b>Harmonise market names; weekly median prices; flag &gt;3× jumps against the trailing median; keep gaps explicit (<code>apa/clean.py</code>).</div>
-    <div class="c"><b>3 · Features</b>Own price changes (1–52 weeks), volatility, reporting completeness, Assam and neighbour-State price indices, price vs peers, season (<code>apa/features.py</code>).</div>
-    <div class="c"><b>4 · Model</b>One global gradient-boosted quantile model per horizon (P10, P50, P90), scikit-learn, native handling of missing values (<code>apa/model.py</code>).</div>
+    <div class="c"><b>3 · Features</b>Own price changes (1–52 weeks), volatility, reporting completeness, Assam-wide (and, where available, neighbour-State) price indices, price vs peers, season (<code>apa/features.py</code>).</div>
+    <div class="c"><b>4 · Model</b>One global gradient-boosted quantile model per horizon (P10, P50, P90), scikit-learn, trained on all Assam markets of ${adv_k} crops with good data; native handling of missing values (<code>apa/model.py</code>).</div>
     <div class="c"><b>5 · Decide</b>Hold / Sell / Store rule from band, losses and shelf life; seasonal crop profiles (<code>apa/advisory.py</code>, <code>apa/seasonal.py</code>).</div>
   </div>
   <h3>Why a global model?</h3>
@@ -305,7 +305,7 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
   <table>
     <tr><th>Source</th><th>Use</th><th>Status</th></tr>
     <tr><td>Agmarknet prices, Assam (all commodities, since ${assam_first_year})</td><td>Profile, selection, training, evaluation</td><td><span class="ok">used</span></td></tr>
-    <tr><td>Agmarknet prices, ${n_comp_states} neighbouring States (3 commodities, mostly since 2016)</td><td>Training (global model), regional indices, seasonal profiles</td><td><span class="ok">used</span></td></tr>
+    <tr><td>Agmarknet prices, ${n_comp_states} neighbouring States (3 commodities, mostly since 2016)</td><td>Seasonal profiles, stress test, model set before testing</td><td><span class="ok">used</span></td></tr>
     <tr><td>AMIU prices and arrivals</td><td>Training, arrivals features, evaluation</td><td><span class="warn">requested</span> (not assumed)</td></tr>
     <tr><td>Futures prices; rainfall; cold-storage stocks</td><td>Supplementary features</td><td>to be assessed per commodity</td></tr>
   </table>
@@ -315,7 +315,8 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
 <section class="page">
   <h2>E. Results: short-horizon forecasts, 12 months out of sample <span class="tag built">BUILT + TESTED</span></h2>
   <p>${results_reading}</p>
-  <img class="fig" src="${figdir}f4_mape_by_horizon.png" alt="MAPE by horizon">
+  <p class="small">${switch_note}</p>
+  <img class="fig" style="width:84%;display:block;margin:0 auto" src="${figdir}f4_mape_by_horizon.png" alt="MAPE by horizon">
   <h3>All ${n_series_assam} Assam series of the three commodities</h3>
   ${table_by_h}
   <h3>The three selected series (${sel_market})</h3>
@@ -374,7 +375,7 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
   <ul>
     <li><b>No change</b>: next price equals this week's price.</li>
     <li><b>Local model</b>: same method, trained only on the market's own history (what conventional per-market forecasting does).</li>
-    <li><b>Global model</b>: trained on all markets in Assam and neighbouring States.</li>
+    <li><b>Global model</b>: trained on all markets of the three crops in Assam and neighbouring States (the configuration set before testing; the advisory model's training data have no neighbouring-State markets).</li>
   </ul>
   <img class="fig" src="${figdir}f5_stress_test.png" alt="Stress test">
   ${table_stress}
@@ -393,8 +394,8 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
 </section>
 
 <!-- ======================================================= H -->
-<section class="page" style="margin-top:7mm">
-  <h2>H. Season-ahead outlook: does the seasonal pattern hold out of sample? <span class="tag built">BUILT + TESTED</span></h2>
+<section class="page" style="margin-top:4mm">
+  <h2>H. Season-ahead outlook, tested out of sample <span class="tag built">BUILT + TESTED</span></h2>
   <p>Crop planning needs a view of prices months ahead. The prototype's first step is the seasonal price profile: how far each month's price typically sits above or below the year's average, pooled across Assam and neighbouring markets. To test it honestly, for each year we estimated the profile only from earlier years and compared it with the actual monthly pattern in Assam markets that year.</p>
   ${table_season}
   <p>${season_reading}</p>
@@ -428,6 +429,7 @@ uv run python -I src/pipeline.py              # or: all of the above (except the
   <ul>
     <li>Only public Agmarknet prices were used. The public dataset has <b>no arrivals</b>; AMIU arrivals data are requested, not assumed.</li>
     <li>The three pilot series were chosen by a coverage rule; all are vegetables in one Guwahati market. Results may differ for storable crops and smaller markets; the pilot will test agreed commodities.</li>
+    <li>${switch_limit}</li>
     <li>The test year (${test_start} to ${end_week}) follows a three-month reporting gap at the Agmarknet 2.0 cut-over, which makes early test weeks harder than usual.</li>
     <li>Decision-rule parameters are illustrative; the decision backtest uses modal market prices, not prices actually received by farmers.</li>
     <li>The season-ahead component forecasts the seasonal shape, not yet the price level.</li>

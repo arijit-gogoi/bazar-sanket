@@ -32,9 +32,11 @@ def overall(f: dict) -> str:
 
 def res_short(f: dict) -> str:
     s = f["score_assam"][0]
+    pv = f["score_prev"][0]
     return (
         f"Accuracy over 12 months out of sample ({num(s['n'])} forecasts, {f['n_series_assam']} Assam series, one to four weeks ahead): "
-        f"MAPE {f1(s['mape_model'])}% for the model, {f1(s['mape_naive'])}% for no change and {f1(s['mape_snaive'])}% for seasonal naive; "
+        f"MAPE {f1(s['mape_model'])}% for the model (chosen after this test; pre-set model {f1(pv['mape_model'])}%), "
+        f"{f1(s['mape_naive'])}% for no change and {f1(s['mape_snaive'])}% for seasonal naive; "
         f"80% bands contained {f1(s['coverage80'])}% of actual prices; direction called correctly in {f1(s['dir_model'])}% of cases "
         f"versus {f1(s['dir_naive'])}% for no change."
     )
@@ -61,7 +63,8 @@ def horizons(f: dict) -> str:
     h1, rest = sk[0], sk[1:]
     txt = f"Against no change, absolute error was {f1(abs(h1))}% {'lower' if h1 > 0 else 'higher'} one week ahead"
     if all(v > 0 for v in rest):
-        txt += f" and lower at two to four weeks too (by {f1(min(rest))}–{f1(max(rest))}%)."
+        by = f"by {f1(min(rest))}–{f1(max(rest))}%" if min(rest) >= 0.05 else f"by up to {f1(max(rest))}%"
+        txt += f" {'and' if h1 > 0 else 'but'} lower at two to four weeks{' too' if h1 > 0 else ''} ({by})."
     elif all(v <= 0 for v in rest):
         txt += f" and {f1(min(abs(v) for v in rest))}–{f1(max(abs(v) for v in rest))}% higher at two to four weeks."
     else:
@@ -226,6 +229,36 @@ def season_reading(f: dict) -> str:
     return season_short(f) + " " + tail
 
 
+def _adv_crops(f: dict) -> int:
+    return len(f["advisory_model"]["commodities"])
+
+
+def switch_note(f: dict) -> str:
+    """Section E: which model gives the advice, and why its test accuracy is optimistic."""
+    s, pv = f["score_assam"][0], f["score_prev"][0]
+    k = _adv_crops(f)
+
+    def err(r: dict) -> str:
+        red = _skill(r["mae_model"], r["mae_naive"])
+        return f"absolute error {f1(abs(red))}% {'lower' if red > 0 else 'higher'} than no change (MAPE {f1(r['mape_model'])}%)"
+
+    return (
+        f"Model choice: the advisory model is trained on every Assam market of the {k} crops with good data (Assam markets only). "
+        f"The applicant chose it after this 12-month test, in which it had {err(s)}; the model set before testing, trained on the "
+        f"three pilot crops with neighbouring-State markets, had {err(pv)}. Because the choice was made after seeing the test, "
+        f"these results are optimistic; shadow mode will check them on new data."
+    )
+
+
+def switch_limit(f: dict) -> str:
+    """Section J bullet."""
+    pv = f["score_prev"][0]
+    return (
+        f"The advisory model ({_adv_crops(f)} Assam crops) was chosen after the 12-month test, so its test accuracy is optimistic; "
+        f"the model set before testing had MAPE {f1(pv['mape_model'])}%. Shadow mode will check the choice on new data."
+    )
+
+
 def reading_short(f: dict) -> str:
     s = f["score_assam"][0]
     red = _skill(s["mae_model"], s["mae_naive"])
@@ -246,9 +279,9 @@ def reading_short(f: dict) -> str:
         claims.append("calls the direction of moves more often")
     if 72 <= s["coverage80"] <= 88:
         claims.append("gives well-calibrated ranges")
-    claims.append("keeps working when local history is missing")
     body = ", ".join(claims[:-1]) + " and " + claims[-1]
     return (
-        f"Weekly vegetable prices are hard to forecast and no change is a strong benchmark. On public data, the model {body}. "
+        f"Weekly vegetable prices are hard to forecast and no change is a strong benchmark. On public data, the model {body}; "
+        f"the global approach keeps working when local history is missing. "
         "This is why publication is gated per series. AMIU data with arrivals should add skill, and will be tested the same way."
     )

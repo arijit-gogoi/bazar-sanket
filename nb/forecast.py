@@ -30,9 +30,12 @@ def _(mo):
         # 2 · Forecasting prototype
 
         * **Short horizon (1–4 weeks):** one global quantile model (scikit-learn
-          `HistGradientBoostingRegressor`, quantile loss) trained on every market of the
-          selected commodities in Assam and neighbouring States. Outputs a 10–50–90
-          percentile band of the price change.
+          `HistGradientBoostingRegressor`, quantile loss) trained on every Assam market of
+          the commodities with good data (coverage rule in `apa/clean.py`). Outputs a
+          10–50–90 percentile band of the price change. This configuration was chosen by
+          the applicant after the 12-month test; the configuration set before testing
+          (the three pilot commodities plus neighbouring-State markets) is still run and
+          reported beside it, and is used for the stress test and seasonal profiles.
         * **Benchmarks:** no-change (naive) and same-weeks-last-year (seasonal naive).
         * **Protocol:** rolling origin, refit every 4 weeks, training only on targets
           observed before the refit week (no lookahead).
@@ -57,12 +60,22 @@ def _(clean, json, paths, pl):
         daily.filter(pl.col("state") == "Assam").select(pl.col("date").max()).collect().item()
     )
     retrieved = pl.scan_parquet(paths.RAW_PARQUET).select(pl.col("retrieved_at").max()).collect().item()[:10]
-    (commodities, end_week, retrieved)
-    return codes, commodities, daily, end_week, labels, retrieved, sel_pairs, selection, wk
+    # advisory model data: every Assam commodity with good data (coverage rule only), Assam markets only
+    _assam_all = clean.load_daily(paths.RAW_PARQUET).filter(pl.col("state") == "Assam")
+    _wk_all = clean.flag_outliers(clean.weekly(_assam_all)).collect().lazy()
+    adv_commodities = sorted(
+        clean.commodity_coverage(_wk_all, end_week).filter(pl.col("good_data")).get_column("commodity").to_list())
+    assert set(commodities) <= set(adv_commodities), "pilot commodities must pass the good-data rule"
+    adv_codes = {c: i for i, c in enumerate(adv_commodities)}
+    wk_adv = clean.flag_outliers(clean.weekly(_assam_all.filter(pl.col("commodity").is_in(adv_commodities)))).collect().lazy()
+    (commodities, adv_commodities, end_week, retrieved)
+    return adv_codes, adv_commodities, codes, commodities, daily, end_week, labels, retrieved, sel_pairs, selection, wk, wk_adv
 
 
 @app.cell
-def _(codes, end_week, features, pl, sel_pairs, wk):
+def _(adv_codes, codes, end_week, features, pl, sel_pairs, wk, wk_adv):
+    # G: pilot commodities, Assam + neighbouring States (configuration set before testing; stress test, seasonal profiles)
+    # G_adv: advisory model, all good-data commodities, Assam markets only
     grid = features.weekly_grid(features.dominant_variety(wk), end_week)
     G = features.build(grid, codes)
     sel_keys = sel_pairs.select(pl.lit("Assam").alias("state"), "market_key", "commodity").with_columns(
@@ -70,7 +83,11 @@ def _(codes, end_week, features, pl, sel_pairs, wk):
     )
     G = G.join(sel_keys, on=["state", "market_key", "commodity"], how="left").with_columns(
         pl.col("selected").fill_null(False)
-    )
+    ).sort(["state", "market_key", "commodity", "week"])  # joins need not keep row order; fits depend on it
+    G_adv = features.build(features.weekly_grid(features.dominant_variety(wk_adv), end_week), adv_codes)
+    G_adv = G_adv.join(sel_keys, on=["state", "market_key", "commodity"], how="left").with_columns(
+        pl.col("selected").fill_null(False)
+    ).sort(["state", "market_key", "commodity", "week"])
     data_summary = (
         G.filter(pl.col("lp").is_not_null())
         .group_by(pl.when(pl.col("state") == "Assam").then(pl.lit("Assam")).otherwise(pl.lit("Neighbouring States")).alias("region"), "commodity")
@@ -79,29 +96,41 @@ def _(codes, end_week, features, pl, sel_pairs, wk):
         .sort("region", "commodity")
     )
     data_summary
-    return G, data_summary
+    return G, G_adv, data_summary
 
 
 @app.cell
-def _(G, dt, end_week, features, model, pl):
+def _(G, G_adv, commodities, dt, end_week, features, model, pl):
     test_start = end_week - dt.timedelta(weeks=51)
     feats = features.FEATURES
-    eval_mask = (pl.col("state") == "Assam")
-    bt = model.rolling_backtest(G, feats, eval_mask, test_start, end_week, refit_every=4)
-    bt = bt.join(G.select("state", "market_key", "commodity", "week", "selected"), on=["state", "market_key", "commodity", "week"], how="left")
-    return bt, eval_mask, feats, test_start
+    _K = ["state", "market_key", "commodity", "week"]
+    # advisory model: trained on all good-data commodities; evaluated on every Assam series of the pilot commodities
+    eval_mask = (pl.col("state") == "Assam") & pl.col("commodity").is_in(commodities)
+    bt = model.rolling_backtest(G_adv, feats, eval_mask, test_start, end_week, refit_every=4)
+    bt = bt.join(G_adv.select(*_K, "selected"), on=_K, how="left")
+    # configuration set before testing: pilot commodities with neighbouring-State markets
+    bt_prev = model.rolling_backtest(G, feats, pl.col("state") == "Assam", test_start, end_week, refit_every=4)
+    bt_prev = bt_prev.join(G.select(*_K, "selected"), on=_K, how="left")
+    _chk = bt.join(bt_prev.select(*_K, "h", pl.col("lp").alias("_lp"), pl.col("y").alias("_y")), on=[*_K, "h"], how="inner")
+    assert _chk.height == bt.height == bt_prev.height, "advisory and earlier model must be scored on identical rows"
+    assert _chk.select((((pl.col("lp") - pl.col("_lp")).abs() < 1e-12) & ((pl.col("y") - pl.col("_y")).abs() < 1e-12)).all()).item()
+    return bt, bt_prev, eval_mask, feats, test_start
 
 
 @app.cell
-def _(bt, model, paths, pl):
+def _(bt, bt_prev, model, paths, pl):
     bt.write_parquet(paths.OUT / "backtest.parquet")
+    bt_prev.write_parquet(paths.OUT / "backtest_prev.parquet")
+    score_prev = model.score(bt_prev.with_columns(pl.lit("all").alias("all")), ["all"])
+    score_prev_h = model.score(bt_prev, ["h"])
+    score_prev_sel = model.score(bt_prev.filter(pl.col("selected")), ["commodity"])
     score_sel = model.score(bt.filter(pl.col("selected")), ["commodity", "h"])
     score_sel_all_h = model.score(bt.filter(pl.col("selected")), ["commodity"])
     score_assam_h = model.score(bt, ["h"])
     score_assam = model.score(bt.with_columns(pl.lit("all").alias("all")), ["all"])
     score_assam_c = model.score(bt, ["commodity"])
     score_sel
-    return score_assam, score_assam_c, score_assam_h, score_sel, score_sel_all_h
+    return score_assam, score_assam_c, score_assam_h, score_prev, score_prev_h, score_prev_sel, score_sel, score_sel_all_h
 
 
 @app.cell
@@ -371,9 +400,9 @@ def _(mo, np, pl, plt, retrieved, season_profile, sns, viz):
 
 
 @app.cell
-def _(G, advisory, end_week, features, labels, model, np, pl):
-    # ---- Current advisory: models fitted on everything known at the latest complete week ----
-    _Gs = G.sort(["state", "market_key", "commodity", "week"])
+def _(G_adv, advisory, end_week, features, labels, model, np, pl):
+    # ---- Current advisory: advisory model fitted on everything known at the latest complete week ----
+    _Gs = G_adv.sort(["state", "market_key", "commodity", "week"])
     _rows = (
         _Gs.with_row_index("_r").filter(pl.col("selected") & pl.col("lp").is_not_null())
         .group_by("market_key", "commodity").agg(pl.col("_r").sort_by("week").last())
@@ -422,11 +451,16 @@ def _(G, end_week, labels, pl):
 
 @app.cell
 def _(
-    RUN_T0, bt, current, data_summary, decision_score, end_week, fig_fan, fig_mape, fig_season, fig_stress, json,
-    nearby, paths, retrieved, score_assam, score_assam_c, score_assam_h, score_sel, score_sel_all_h, season_bt,
-    season_profile, stress_score, test_start, time,
+    RUN_T0, adv_commodities, bt, current, data_summary, decision_score, end_week, fig_fan, fig_mape, fig_season, fig_stress,
+    json, nearby, paths, retrieved, score_assam, score_assam_c, score_assam_h, score_prev, score_prev_h, score_prev_sel,
+    score_sel, score_sel_all_h, season_bt, season_profile, stress_score, test_start, time,
 ):
     forecast_metrics = {
+        "advisory_model": {"commodities": adv_commodities, "states": ["Assam"],
+                           "chosen": "by the applicant after the 12-month test (post-hoc)"},
+        "score_prev": score_prev.to_dicts(),
+        "score_prev_by_h": score_prev_h.to_dicts(),
+        "score_prev_selected": score_prev_sel.to_dicts(),
         "retrieved": retrieved,
         "end_week": str(end_week),
         "test_start": str(test_start),

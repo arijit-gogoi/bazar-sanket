@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import html
 
-from .compare import HW, HW_MUL, LGBM, MODEL, NAIVE, SNAIVE
+from .compare import HW, HW_MUL, LGBM, MODEL, NAIVE, PREV, SNAIVE
 from .report import f1, num
 
 
@@ -55,23 +55,24 @@ def ext_context(m: dict) -> dict[str, str]:
 
     # ---------------------------------------------------------------- intro (PDF)
     c["ext_intro"] = (
-        "Added on request after the first results; settings were fixed before each run and the advisory is unchanged. "
+        "Added on request after the first results; settings were fixed before each run. "
         "<b>LightGBM</b>, a second gradient-boosting library, replaces scikit-learn as the learner of the global model "
         f"(same features, quantile loss and refit weeks; tree settings mirrored, not tuned). <b>More commodities</b>: every "
         f"Assam commodity with good data, by a coverage rule fixed before any model was run on them: at least "
         f"{num(rule['min_weeks_3y'])} market-weeks with a price in the last {rule['window_3y_weeks']} weeks and at least "
         f"{num(rule['min_weeks_1y'])} in the test year. {k} commodities qualify: {html.escape(_join(comms))}. "
-        f"Assam markets only (neighbouring-State prices were fetched for the pilot commodities only); accuracy only, since "
-        f"storage and shelf-life rules exist for the pilot commodities alone. The list of all downloaded commodities, with "
-        f"the reason each was or was not used, is <code>COMMODITIES.md</code> in the repository."
+        f"Assam markets only (neighbouring-State prices were fetched for the pilot commodities only). After these results "
+        f"the applicant chose the scikit-learn model trained on these {k} commodities as the advisory model (Section E); "
+        f"advice is still given only for the pilot commodities, the only ones with storage and shelf-life rules. The list of "
+        f"all downloaded commodities, with the reason each was or was not used, is <code>COMMODITIES.md</code> in the repository."
     )
 
     # ---------------------------------------------------------------- tables
     t = ["<table><tr><th>Main backtest rows</th><th class='n'>MAPE</th><th class='n'>Skill vs no change</th>"
          "<th class='n'>Direction</th><th class='n'>80% band coverage</th><th class='n'>Interval score</th></tr>"]
-    lab = {MODEL: "Global model, scikit-learn (advisory)", LGBM: "Global model, LightGBM", NAIVE: "No change",
-           SNAIVE: "Seasonal naive"}
-    for mm in (MODEL, LGBM, NAIVE, SNAIVE):
+    lab = {MODEL: f"{k} crops, scikit-learn (advisory model)", LGBM: f"{k} crops, LightGBM",
+           PREV: "Set before testing: 3 crops + neighbouring States", NAIVE: "No change", SNAIVE: "Seasonal naive"}
+    for mm in (MODEL, LGBM, PREV, NAIVE, SNAIVE):
         r = main[mm]
         b = mb.get(mm)
         t.append(_tr([f"<td>{lab[mm]}</td>", f"<td class='n'>{f1(r['mape'])}%</td>",
@@ -107,9 +108,10 @@ def ext_context(m: dict) -> dict[str, str]:
     else:
         main_txt = "slightly lower accuracy than" if d_main > -1.5 else "lower accuracy than"
     r1 = (
-        f"On the main backtest rows ({num(e['main']['n_rows'])} forecasts), LightGBM had {main_txt} the scikit-learn model: "
-        f"{_vs(main[LGBM]['skill_vs_naive'])} against {_vs(main[MODEL]['skill_vs_naive'])}; its 80% bands held "
-        f"{f1(mb[LGBM]['coverage'])}% of actual prices (scikit-learn {f1(mb[MODEL]['coverage'])}%)."
+        f"On the main backtest rows ({num(e['main']['n_rows'])} forecasts), trained on the same {k} commodities, LightGBM had "
+        f"{main_txt} scikit-learn: {_vs(main[LGBM]['skill_vs_naive'])} against {_vs(main[MODEL]['skill_vs_naive'])}; its 80% "
+        f"bands held {f1(mb[LGBM]['coverage'])}% of actual prices (scikit-learn {f1(mb[MODEL]['coverage'])}%). The model set "
+        f"before testing, trained on the three pilot crops with neighbouring-State markets, had {_vs(main[PREV]['skill_vs_naive'])}."
     )
     r2 = (
         f"Across the {k} commodities ({num(e['ext']['n_rows'])} forecasts, {num(e['ext']['n_series'])} market series), "
@@ -127,29 +129,16 @@ def ext_context(m: dict) -> dict[str, str]:
         f"Holt-Winters did {'worse still' if worse_still else 'better'} ({_vs(hwr[HW]['skill_vs_naive'])}), while the "
         f"global model had {_vs(hwr[MODEL]['skill_vs_naive'])}."
     )
-    pil = {r["method"]: r for r in e["ext"]["points_by_group"] if r["group"] == "pilot"}
-    same_rows = pil[MODEL]["n"] == e["main"]["n_rows"]
-    d_pool = pil[MODEL]["skill_vs_naive"] - main[MODEL]["skill_vs_naive"]
-    if same_rows and abs(d_pool) >= 0.5:
-        r_pool = (
-            f"On the pilot commodities' rows (the same {num(pil[MODEL]['n'])} forecasts as Section E), the model trained on "
-            f"the {k} Assam commodities had {_vs(pil[MODEL]['skill_vs_naive'])}, against {_vs(main[MODEL]['skill_vs_naive'])} "
-            f"for the main model (three commodities, with neighbouring-State data). This post-hoc comparison does not "
-            f"separate the effect of more commodities from that of leaving out neighbour-State data."
-        )
-    else:
-        r_pool = ""
-    cands = []
-    if main[LGBM]["skill_vs_naive"] > main[MODEL]["skill_vs_naive"] and xa[LGBM]["skill_vs_naive"] > xa[MODEL]["skill_vs_naive"]:
-        cands.append("LightGBM")
-    if r_pool and d_pool > 0:
-        cands.append("training on more commodities")
-    r3 = "The advisory is unchanged" + (
-        f"; {_join(cands)} {'is a candidate' if len(cands) == 1 else 'are candidates'} for the pilot's model comparison on "
-        f"new data." if cands else ".")
+    lgbm_better = main[LGBM]["skill_vs_naive"] > main[MODEL]["skill_vs_naive"] and xa[LGBM]["skill_vs_naive"] > xa[MODEL]["skill_vs_naive"]
+    r3 = (
+        f"After these results the applicant chose the scikit-learn model trained on the {k} commodities as the advisory model. "
+        f"Because it was chosen after seeing this test, its test accuracy is optimistic, and this test cannot separate the effect "
+        f"of more commodities from that of leaving out neighbouring-State data; shadow mode will check it on new data. "
+        + ("LightGBM is a candidate for that comparison." if lgbm_better else "LightGBM was not adopted.")
+    )
     c["ext_reading_lgbm"] = r1
     c["ext_reading_comm"] = r2 + " " + r_hw
-    c["ext_reading_end"] = (r_pool + " " if r_pool else "") + r3
+    c["ext_reading_end"] = r3
 
     # best-covered commodities that the rule left out, with the reason (from the counts)
     exc = sorted((r for r in e["commodity_coverage"] if not r["good_data"]), key=lambda r: -r["weeks_3y"])[:8]
@@ -174,9 +163,8 @@ def ext_context(m: dict) -> dict[str, str]:
     hm = xa[HW_MUL]["skill_vs_naive"]
     hw_mul_txt = f"{f1(abs(hm))}%" if (hm > 0) == (xa[HW]["skill_vs_naive"] > 0) else bw(hm)
     c["ext_short"] = (
-        f"More commodities: across {k} Assam commodities with good data, the global model was "
-        f"{_short(xa[MODEL]['skill_vs_naive'])} (better for {beat[MODEL]} of the {k}); with LightGBM, {bw(xa[LGBM]['skill_vs_naive'])}; "
-        f"Holt-Winters {bw(xa[HW]['skill_vs_naive'])} (multiplicative {hw_mul_txt})."
+        f"All {k} crops: the model was {_short(xa[MODEL]['skill_vs_naive'])}, better for {beat[MODEL]} of {k}; "
+        f"LightGBM {bw(xa[LGBM]['skill_vs_naive'])}; Holt-Winters {bw(xa[HW]['skill_vs_naive'])} (multiplicative {hw_mul_txt})."
     )
     c["ext_k"] = str(k)
     c["ext_rows"] = num(e["ext"]["n_rows"])

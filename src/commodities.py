@@ -78,9 +78,9 @@ def main() -> None:
     def use(c: str) -> tuple[int, str]:
         r = cov.get(c, {"weeks_3y": 0, "weeks_1y": 0})
         if c in pilot:
-            return 0, "Pilot: forecasts and advisory; also extended test"
+            return 0, "Pilot: forecasts and advisory; advisory-model training; extended test"
         if c in extended:
-            return 1, "Extended accuracy test"
+            return 1, "Advisory-model training; extended accuracy test"
         if r["weeks_3y"] == 0 and r["weeks_1y"] == 0:
             return 3, "Not modelled: no price in the last 156 weeks"
         why = []
@@ -110,14 +110,15 @@ def main() -> None:
         f"- **Assam:** all commodities, {_num(n_assam_rows)} daily price rows from {_date(a_first)} to "
         f"{_date(a_last)}, under {len(assam)} commodity names as published.",
         f"- **Neighbouring States** ({_join(o_states)}): the three pilot commodities only ({_join(o_comms)}), "
-        f"{_num(int(others.get_column('rows').sum()))} rows, {o_recent:.0f}% of them since 2016. They are used to train the "
-        f"pilot model and for regional price indices.",
+        f"{_num(int(others.get_column('rows').sum()))} rows, {o_recent:.0f}% of them since 2016. They feed the seasonal "
+        f"profiles, the stress test and the model set before testing.",
         "",
         "## How the commodities are used",
         "",
         f"- **Pilot (forecasts and Hold / Sell / Store advisory):** {_join(pilot)}. These are the commodities of the three "
         f"best-reported Assam market series (rule in `out/selection.json`); every Assam market of these commodities is forecast.",
-        f"- **Extended accuracy test ({len(extended)} commodities):** {_join(extended)}. Rule for good data, fixed before any "
+        f"- **Good-data commodities ({len(extended)}):** {_join(extended)}. They are the training data of the advisory model "
+        f"(chosen by the applicant after the 12-month test) and are scored in the extended accuracy test. Rule for good data, fixed before any "
         f"model was run on them and based on coverage only: at least {_num(rule['min_weeks_3y'])} market-weeks with a "
         f"price in the last {rule['window_3y_weeks']} complete weeks ({_date(w3)} to the week of {_date(end)}) and at least "
         f"{_num(rule['min_weeks_1y'])} in the last {rule['window_1y_weeks']} (the test year, from {_date(w1)}). A market-week "

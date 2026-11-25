@@ -730,20 +730,29 @@
       {
         "all": "all",
         "n": 4697,
-        "mape": 15.358510605441733,
-        "mae": 413.9854075892163,
-        "direction": 43.96423248882265,
+        "mape": 15.252605322538058,
+        "mae": 407.79846999732354,
+        "direction": 46.433893974877584,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.2236661828492359
+        "skill_vs_naive": 1.274158514680357
       },
       {
         "all": "all",
         "n": 4697,
-        "mape": 15.404918484512322,
-        "mae": 416.01359107258344,
-        "direction": 44.21971471151799,
+        "mape": 15.348383540575119,
+        "mae": 410.90344916234983,
+        "direction": 45.83776878858846,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": -0.7146786211336575
+        "skill_vs_naive": 0.5224595667573384
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "mape": 15.358510605441733,
+        "mae": 413.9854075892163,
+        "direction": 43.96423248882265,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": -0.2236661828492359
       },
       {
         "all": "all",
@@ -768,20 +777,29 @@
       {
         "h": 1,
         "n": 1290,
-        "mape": 14.329605224994458,
-        "mae": 288.01288877200443,
-        "direction": 47.286821705426355,
+        "mape": 14.397092581417011,
+        "mae": 294.90766472305427,
+        "direction": 48.68217054263566,
         "method": "Global model (P50)",
-        "skill_vs_naive": 1.3929358876054732
+        "skill_vs_naive": -0.9676307423968744
       },
       {
         "h": 1,
         "n": 1290,
-        "mape": 14.286554747888855,
-        "mae": 290.66477814278517,
-        "direction": 46.51162790697674,
+        "mape": 14.506087379911678,
+        "mae": 295.67899442011543,
+        "direction": 47.82945736434108,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": 0.48500768231407587
+        "skill_vs_naive": -1.231711135514657
+      },
+      {
+        "h": 1,
+        "n": 1290,
+        "mape": 14.329605224994458,
+        "mae": 288.01288877200443,
+        "direction": 47.286821705426355,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": 1.3929358876054732
       },
       {
         "h": 1,
@@ -804,20 +822,29 @@
       {
         "h": 2,
         "n": 1201,
-        "mape": 13.194401385338535,
-        "mae": 386.9674932177006,
-        "direction": 41.63197335553705,
+        "mape": 13.15469768579806,
+        "mae": 375.2314654201022,
+        "direction": 44.712739383846795,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.40138247844163644
+        "skill_vs_naive": 2.643610799640783
       },
       {
         "h": 2,
         "n": 1201,
-        "mape": 13.167753811789435,
-        "mae": 384.3139509566406,
-        "direction": 42.214820982514574,
+        "mape": 13.20304033064737,
+        "mae": 373.41924012802536,
+        "direction": 43.46378018318068,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": 0.28709734517371466
+        "skill_vs_naive": 3.113805138638015
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape": 13.194401385338535,
+        "mae": 386.9674932177006,
+        "direction": 41.63197335553705,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": -0.40138247844163644
       },
       {
         "h": 2,
@@ -840,20 +867,29 @@
       {
         "h": 3,
         "n": 1137,
-        "mape": 16.235088529850344,
-        "mae": 474.7078760712801,
-        "direction": 42.21635883905013,
+        "mape": 15.913244222666755,
+        "mae": 455.18965130724075,
+        "direction": 46.877748460861916,
         "method": "Global model (P50)",
-        "skill_vs_naive": -1.1815490201420253
+        "skill_vs_naive": 2.9786604798416216
       },
       {
         "h": 3,
         "n": 1137,
-        "mape": 16.436959395312485,
-        "mae": 481.46053167864164,
-        "direction": 42.83201407211961,
+        "mape": 16.00655875002894,
+        "mae": 462.86144053093597,
+        "direction": 46.262093227792434,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": -2.6208429286546986
+        "skill_vs_naive": 1.3434579552200288
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape": 16.235088529850344,
+        "mae": 474.7078760712801,
+        "direction": 42.21635883905013,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": -1.1815490201420253
       },
       {
         "h": 3,
@@ -876,20 +912,29 @@
       {
         "h": 4,
         "n": 1069,
-        "mape": 18.09912240531857,
-        "mae": 531.7698956811593,
-        "direction": 44.43405051449953,
+        "mape": 17.939277051560076,
+        "mae": 530.2103859483751,
+        "direction": 45.182413470533206,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.25166321005922754
+        "skill_vs_naive": 0.04234261045383825
       },
       {
         "h": 4,
         "n": 1069,
-        "mape": 18.170207050091996,
-        "mae": 533.2802561704309,
-        "direction": 45.182413470533206,
+        "mape": 18.07501967643112,
+        "mae": 536.7985338037191,
+        "direction": 45.650140318054255,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": -0.5364031931345936
+        "skill_vs_naive": -1.1996847877425276
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape": 18.09912240531857,
+        "mae": 531.7698956811593,
+        "direction": 44.43405051449953,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": -0.25166321005922754
       },
       {
         "h": 4,
@@ -914,20 +959,29 @@
       {
         "commodity": "Cabbage",
         "n": 1429,
-        "mape": 19.48532593248068,
-        "mae": 257.49638969566047,
-        "direction": 45.76627011896431,
+        "mape": 19.04291652584447,
+        "mae": 249.70135481780804,
+        "direction": 50.174947515745274,
         "method": "Global model (P50)",
-        "skill_vs_naive": 4.147767983875683
+        "skill_vs_naive": 7.049445528049358
       },
       {
         "commodity": "Cabbage",
         "n": 1429,
-        "mape": 19.503529580367346,
-        "mae": 258.0816816161161,
-        "direction": 45.62631210636809,
+        "mape": 19.139215184161483,
+        "mae": 250.7542463148651,
+        "direction": 48.775367389783064,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": 3.9298948827305225
+        "skill_vs_naive": 6.657509935542604
+      },
+      {
+        "commodity": "Cabbage",
+        "n": 1429,
+        "mape": 19.48532593248068,
+        "mae": 257.49638969566047,
+        "direction": 45.76627011896431,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": 4.147767983875683
       },
       {
         "commodity": "Cabbage",
@@ -950,20 +1004,29 @@
       {
         "commodity": "Green Chilli",
         "n": 1438,
-        "mape": 18.68597859935827,
-        "mae": 891.4704648751167,
-        "direction": 42.767732962447845,
+        "mape": 18.36794377611019,
+        "mae": 870.8816230101442,
+        "direction": 43.671766342141865,
         "method": "Global model (P50)",
-        "skill_vs_naive": -1.621067907301188
+        "skill_vs_naive": 0.7259084421465278
       },
       {
         "commodity": "Green Chilli",
         "n": 1438,
-        "mape": 18.816612706092744,
-        "mae": 897.3325625899271,
-        "direction": 43.184979137691236,
+        "mape": 18.561714602737613,
+        "mae": 879.0017743301717,
+        "direction": 42.767732962447845,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": -2.2893038763295293
+        "skill_vs_naive": -0.19972900881004563
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 1438,
+        "mape": 18.68597859935827,
+        "mae": 891.4704648751167,
+        "direction": 42.767732962447845,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": -1.621067907301188
       },
       {
         "commodity": "Green Chilli",
@@ -986,20 +1049,29 @@
       {
         "commodity": "Pumpkin",
         "n": 1830,
-        "mape": 9.521287612222807,
-        "mae": 160.97955742132913,
-        "direction": 43.49726775956284,
+        "mape": 9.844839527039912,
+        "mae": 167.36524789846646,
+        "direction": 45.68306010928962,
         "method": "Global model (P50)",
-        "skill_vs_naive": 0.06357619884920229
+        "skill_vs_naive": -3.900672926994253
       },
       {
         "commodity": "Pumpkin",
         "n": 1830,
-        "mape": 9.52353512570933,
-        "mae": 161.12179739572642,
-        "direction": 43.9344262295082,
+        "mape": 9.863209504468788,
+        "mae": 168.13176570755635,
+        "direction": 45.95628415300547,
         "method": "Global model, LightGBM (P50)",
-        "skill_vs_naive": -0.02472665519348549
+        "skill_vs_naive": -4.376528680652725
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 1830,
+        "mape": 9.521287612222807,
+        "mae": 160.97955742132913,
+        "direction": 43.49726775956284,
+        "method": "Global model set before testing (P50)",
+        "skill_vs_naive": 0.06357619884920229
       },
       {
         "commodity": "Pumpkin",
@@ -1024,18 +1096,26 @@
       {
         "all": "all",
         "n": 4697,
-        "coverage": 78.4543325526932,
-        "width_pct": 43.49068685775007,
-        "interval_score_pct": 70.81433551536134,
+        "coverage": 79.26335959122845,
+        "width_pct": 44.062820205226885,
+        "interval_score_pct": 69.78111565138242,
         "method": "Global model (P50)"
       },
       {
         "all": "all",
         "n": 4697,
-        "coverage": 78.11368958909942,
-        "width_pct": 43.26648426966989,
-        "interval_score_pct": 71.31138448065632,
+        "coverage": 79.24206940600384,
+        "width_pct": 44.2650102458579,
+        "interval_score_pct": 69.84472811699057,
         "method": "Global model, LightGBM (P50)"
+      },
+      {
+        "all": "all",
+        "n": 4697,
+        "coverage": 78.4543325526932,
+        "width_pct": 43.49068685775007,
+        "interval_score_pct": 70.81433551536134,
+        "method": "Global model set before testing (P50)"
       }
     ]
   },
@@ -2138,5 +2218,5 @@
   "figures": {
     "more_commodities": "out/fig/f8_more_commodities.png"
   },
-  "runtime_min": 5.3
+  "runtime_min": 3.1
 }

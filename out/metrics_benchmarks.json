@@ -80,11 +80,11 @@
     {
       "all": "all",
       "n": 4697,
-      "mape": 15.358510605441733,
-      "mae": 413.9854075892163,
-      "direction": 43.96423248882265,
+      "mape": 15.252605322538058,
+      "mae": 407.79846999732354,
+      "direction": 46.433893974877584,
       "method": "Global model (P50)",
-      "skill_vs_naive": -0.2236661828492359
+      "skill_vs_naive": 1.274158514680357
     },
     {
       "all": "all",
@@ -116,11 +116,11 @@
     {
       "all": "all",
       "n": 4697,
-      "mape": 15.216261040742882,
-      "mae": 408.42655667663297,
-      "direction": 40.45135192676177,
+      "mape": 15.104745394647164,
+      "mae": 404.4299850273716,
+      "direction": 42.835852671918246,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 1.1221020689047068
+      "skill_vs_naive": 2.089650817021127
     },
     {
       "all": "all",
@@ -145,11 +145,11 @@
     {
       "h": 1,
       "n": 1290,
-      "mape": 14.329605224994458,
-      "mae": 288.01288877200443,
-      "direction": 47.286821705426355,
+      "mape": 14.397092581417011,
+      "mae": 294.90766472305427,
+      "direction": 48.68217054263566,
       "method": "Global model (P50)",
-      "skill_vs_naive": 1.3929358876054732
+      "skill_vs_naive": -0.9676307423968744
     },
     {
       "h": 1,
@@ -181,11 +181,11 @@
     {
       "h": 1,
       "n": 1290,
-      "mape": 14.518577276277197,
-      "mae": 291.2659033938032,
-      "direction": 45.1937984496124,
+      "mape": 14.486937161247775,
+      "mae": 292.9111345224363,
+      "direction": 45.73643410852713,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 0.2792002393921744
+      "skill_vs_naive": -0.28407806413282
     },
     {
       "h": 1,
@@ -208,11 +208,11 @@
     {
       "h": 2,
       "n": 1201,
-      "mape": 13.194401385338535,
-      "mae": 386.9674932177006,
-      "direction": 41.63197335553705,
+      "mape": 13.15469768579806,
+      "mae": 375.2314654201022,
+      "direction": 44.712739383846795,
       "method": "Global model (P50)",
-      "skill_vs_naive": -0.40138247844163644
+      "skill_vs_naive": 2.643610799640783
     },
     {
       "h": 2,
@@ -244,11 +244,11 @@
     {
       "h": 2,
       "n": 1201,
-      "mape": 13.171342906365439,
-      "mae": 381.6424730344989,
-      "direction": 38.71773522064946,
+      "mape": 13.12186958060483,
+      "mae": 376.8231805361241,
+      "direction": 40.38301415487094,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 0.980230699640694
+      "skill_vs_naive": 2.230629345225632
     },
     {
       "h": 2,
@@ -271,11 +271,11 @@
     {
       "h": 3,
       "n": 1137,
-      "mape": 16.235088529850344,
-      "mae": 474.7078760712801,
-      "direction": 42.21635883905013,
+      "mape": 15.913244222666755,
+      "mae": 455.18965130724075,
+      "direction": 46.877748460861916,
       "method": "Global model (P50)",
-      "skill_vs_naive": -1.1815490201420253
+      "skill_vs_naive": 2.9786604798416216
     },
     {
       "h": 3,
@@ -307,11 +307,11 @@
     {
       "h": 3,
       "n": 1137,
-      "mape": 15.934504523929311,
-      "mae": 462.1202010700426,
-      "direction": 38.698328935795956,
+      "mape": 15.78197582946784,
+      "mae": 453.57991655038836,
+      "direction": 42.040457343887425,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 1.5014493445113741
+      "skill_vs_naive": 3.321767186976665
     },
     {
       "h": 3,
@@ -334,11 +334,11 @@
     {
       "h": 4,
       "n": 1069,
-      "mape": 18.09912240531857,
-      "mae": 531.7698956811593,
-      "direction": 44.43405051449953,
+      "mape": 17.939277051560076,
+      "mae": 530.2103859483751,
+      "direction": 45.182413470533206,
       "method": "Global model (P50)",
-      "skill_vs_naive": -0.25166321005922754
+      "skill_vs_naive": 0.04234261045383825
     },
     {
       "h": 4,
@@ -370,11 +370,11 @@
     {
       "h": 4,
       "n": 1069,
-      "mape": 17.59167347775419,
-      "mae": 522.790685314375,
-      "direction": 38.54069223573433,
+      "mape": 17.35768783558163,
+      "mae": 517.743003926983,
+      "direction": 42.937324602432184,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 1.4411380953438635
+      "skill_vs_naive": 2.3927497953486365
     },
     {
       "h": 4,
@@ -399,11 +399,11 @@
     {
       "commodity": "Cabbage",
       "n": 186,
-      "mape": 20.94474217529499,
-      "mae": 330.465251211099,
-      "direction": 40.86021505376344,
+      "mape": 21.36154160980277,
+      "mae": 331.4750096625207,
+      "direction": 45.16129032258064,
       "method": "Global model (P50)",
-      "skill_vs_naive": -0.9302737689070639
+      "skill_vs_naive": -1.2386729018535991
     },
     {
       "commodity": "Cabbage",
@@ -435,11 +435,11 @@
     {
       "commodity": "Cabbage",
       "n": 186,
-      "mape": 20.09645451346504,
-      "mae": 327.20218622841577,
-      "direction": 38.17204301075269,
+      "mape": 20.242775956740683,
+      "mae": 326.49908170950965,
+      "direction": 40.32258064516129,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 0.06632735880898188
+      "skill_vs_naive": 0.28106864044533664
     },
     {
       "commodity": "Cabbage",
@@ -462,11 +462,11 @@
     {
       "commodity": "Green Chilli",
       "n": 186,
-      "mape": 18.690827034412077,
-      "mae": 1120.7702776036388,
-      "direction": 44.623655913978496,
+      "mape": 19.230963647112045,
+      "mae": 1134.7716595937293,
+      "direction": 48.924731182795696,
       "method": "Global model (P50)",
-      "skill_vs_naive": 9.599622014624021
+      "skill_vs_naive": 8.470282443870836
     },
     {
       "commodity": "Green Chilli",
@@ -498,11 +498,11 @@
     {
       "commodity": "Green Chilli",
       "n": 186,
-      "mape": 19.158210058076026,
-      "mae": 1163.7123930255657,
-      "direction": 37.634408602150536,
+      "mape": 19.57202130011268,
+      "mae": 1178.0312177682058,
+      "direction": 33.87096774193548,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 6.135947483627313
+      "skill_vs_naive": 4.981003250266047
     },
     {
       "commodity": "Green Chilli",
@@ -525,11 +525,11 @@
     {
       "commodity": "Pumpkin",
       "n": 186,
-      "mape": 11.472060587646304,
-      "mae": 190.39104786942596,
-      "direction": 34.946236559139784,
+      "mape": 12.092316218168905,
+      "mae": 198.40690798000983,
+      "direction": 38.70967741935484,
       "method": "Global model (P50)",
-      "skill_vs_naive": -15.727891842200092
+      "skill_vs_naive": -20.60027739961381
     },
     {
       "commodity": "Pumpkin",
@@ -561,11 +561,11 @@
     {
       "commodity": "Pumpkin",
       "n": 186,
-      "mape": 10.371098059067785,
-      "mae": 174.07136714393795,
-      "direction": 37.096774193548384,
+      "mape": 10.633952295994261,
+      "mae": 177.35496476423185,
+      "direction": 40.32258064516129,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": -5.808085911021088
+      "skill_vs_naive": -7.803998190023265
     },
     {
       "commodity": "Pumpkin",
@@ -590,11 +590,11 @@
     {
       "commodity": "Cabbage",
       "n": 1429,
-      "mape": 19.48532593248068,
-      "mae": 257.49638969566047,
-      "direction": 45.76627011896431,
+      "mape": 19.04291652584447,
+      "mae": 249.70135481780804,
+      "direction": 50.174947515745274,
       "method": "Global model (P50)",
-      "skill_vs_naive": 4.147767983875683
+      "skill_vs_naive": 7.049445528049358
     },
     {
       "commodity": "Cabbage",
@@ -626,11 +626,11 @@
     {
       "commodity": "Cabbage",
       "n": 1429,
-      "mape": 19.567958985040562,
-      "mae": 258.0880319728278,
-      "direction": 39.608117564730584,
+      "mape": 19.22941705247348,
+      "mae": 252.78248914067154,
+      "direction": 45.6962911126662,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 3.927530982150651
+      "skill_vs_naive": 5.902502837563417
     },
     {
       "commodity": "Cabbage",
@@ -653,11 +653,11 @@
     {
       "commodity": "Green Chilli",
       "n": 1438,
-      "mape": 18.68597859935827,
-      "mae": 891.4704648751167,
-      "direction": 42.767732962447845,
+      "mape": 18.36794377611019,
+      "mae": 870.8816230101442,
+      "direction": 43.671766342141865,
       "method": "Global model (P50)",
-      "skill_vs_naive": -1.621067907301188
+      "skill_vs_naive": 0.7259084421465278
     },
     {
       "commodity": "Green Chilli",
@@ -689,11 +689,11 @@
     {
       "commodity": "Green Chilli",
       "n": 1438,
-      "mape": 18.11401295148154,
-      "mae": 873.039510493311,
-      "direction": 39.986091794158554,
+      "mape": 18.01975343956953,
+      "mae": 864.2634422508911,
+      "direction": 40.26425591098749,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 0.4799251604750143
+      "skill_vs_naive": 1.4803323101914123
     },
     {
       "commodity": "Green Chilli",
@@ -716,11 +716,11 @@
     {
       "commodity": "Pumpkin",
       "n": 1830,
-      "mape": 9.521287612222807,
-      "mae": 160.97955742132913,
-      "direction": 43.49726775956284,
+      "mape": 9.844839527039912,
+      "mae": 167.36524789846646,
+      "direction": 45.68306010928962,
       "method": "Global model (P50)",
-      "skill_vs_naive": 0.06357619884920229
+      "skill_vs_naive": -3.900672926994253
     },
     {
       "commodity": "Pumpkin",
@@ -752,11 +752,11 @@
     {
       "commodity": "Pumpkin",
       "n": 1830,
-      "mape": 9.54110059809612,
-      "mae": 160.73274477136192,
-      "direction": 41.47540983606557,
+      "mape": 9.59330421014871,
+      "mae": 161.514006958887,
+      "direction": 42.62295081967213,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 0.2167979742206616
+      "skill_vs_naive": -0.26821111838088996
     },
     {
       "commodity": "Pumpkin",
@@ -782,9 +782,9 @@
     {
       "all": "all",
       "n": 4039,
-      "coverage": 78.33622183708839,
-      "width_pct": 42.327488216185195,
-      "interval_score_pct": 69.40902798856486,
+      "coverage": 79.20277296360484,
+      "width_pct": 43.045107501067825,
+      "interval_score_pct": 68.29453336553311,
       "method": "Global model quantiles (P10-P90)"
     },
     {
@@ -808,9 +808,9 @@
     {
       "h": 1,
       "n": 1113,
-      "coverage": 79.42497753818508,
-      "width_pct": 29.101655758419366,
-      "interval_score_pct": 49.06492246366197,
+      "coverage": 78.70619946091644,
+      "width_pct": 29.261598111683067,
+      "interval_score_pct": 50.059004291062216,
       "method": "Global model quantiles (P10-P90)"
     },
     {
@@ -832,9 +832,9 @@
     {
       "h": 2,
       "n": 1032,
-      "coverage": 78.29457364341084,
-      "width_pct": 40.31407157707412,
-      "interval_score_pct": 65.8859415791484,
+      "coverage": 80.32945736434108,
+      "width_pct": 41.045933204948554,
+      "interval_score_pct": 63.98681412253991,
       "method": "Global model quantiles (P10-P90)"
     },
     {
@@ -856,9 +856,9 @@
     {
       "h": 3,
       "n": 978,
-      "coverage": 78.22085889570552,
-      "width_pct": 48.10393627599904,
-      "interval_score_pct": 78.99228759782531,
+      "coverage": 79.55010224948876,
+      "width_pct": 49.381665450699614,
+      "interval_score_pct": 76.57072671277858,
       "method": "Global model quantiles (P10-P90)"
     },
     {
@@ -880,9 +880,9 @@
     {
       "h": 4,
       "n": 916,
-      "coverage": 77.18340611353712,
-      "width_pct": 54.498701419851194,
-      "interval_score_pct": 87.86578205611727,
+      "coverage": 78.16593886462883,
+      "width_pct": 55.279867489321596,
+      "interval_score_pct": 86.46876155881809,
       "method": "Global model quantiles (P10-P90)"
     },
     {
@@ -908,20 +908,20 @@
       "n": 4039,
       "realised": 5.756450984487629,
       "price_ewma": 7.618859028035167,
-      "price_model": 7.380387518031556,
+      "price_model": 6.988824801282725,
       "hit": 41.1983164149542,
       "prob_ewma": 53.80942951401759,
-      "prob_model": 52.65256145581788
+      "prob_model": 50.6308207779337
     },
     {
       "floor": 0.9,
       "n": 4039,
       "realised": 2.5070556357980522,
       "price_ewma": 3.5324670824250903,
-      "price_model": 3.4063871815036535,
+      "price_model": 3.165988153223851,
       "hit": 21.639019559296855,
       "prob_ewma": 28.94628500600601,
-      "prob_model": 28.098876066837352
+      "prob_model": 26.91182811574877
     }
   ],
   "pricing_by_h": [
@@ -931,10 +931,10 @@
       "n": 1113,
       "realised": 4.176196477617804,
       "price_ewma": 5.069335482133921,
-      "price_model": 4.551621489485741,
+      "price_model": 4.738566079554696,
       "hit": 38.63432165318958,
       "prob_ewma": 52.53466774106696,
-      "prob_model": 51.16271128172204
+      "prob_model": 51.59068351989302
     },
     {
       "floor": 1.0,
@@ -942,10 +942,10 @@
       "n": 1032,
       "realised": 5.689665193072264,
       "price_ewma": 7.1564679267329385,
-      "price_model": 6.972925062529491,
+      "price_model": 6.732966581790631,
       "hit": 41.763565891472865,
       "prob_ewma": 53.57823396336647,
-      "prob_model": 53.480512148800685
+      "prob_model": 51.22503812603945
     },
     {
       "floor": 1.0,
@@ -953,10 +953,10 @@
       "n": 978,
       "realised": 6.555510242470264,
       "price_ewma": 8.73738409906017,
-      "price_model": 8.725532096331758,
+      "price_model": 7.896506330756181,
       "hit": 42.12678936605317,
       "prob_ewma": 54.36869204953009,
-      "prob_model": 53.488586519558
+      "prob_model": 49.97847653439654
     },
     {
       "floor": 1.0,
@@ -964,10 +964,10 @@
       "n": 916,
       "realised": 6.898663046255919,
       "price_ewma": 10.04341121544732,
-      "price_model": 9.840394555446435,
+      "price_model": 9.042177534878903,
       "hit": 42.685589519650655,
       "prob_ewma": 55.02170560772365,
-      "prob_model": 52.6374147486919
+      "prob_model": 49.49155564161655
     },
     {
       "floor": 0.9,
@@ -975,10 +975,10 @@
       "n": 1113,
       "realised": 1.4014302218683954,
       "price_ewma": 1.5679394092145202,
-      "price_model": 1.2443872925446706,
+      "price_model": 1.326367469630785,
       "hit": 15.543575920934412,
       "prob_ewma": 20.067940181918,
-      "prob_model": 18.17193870660652
+      "prob_model": 19.153493950232498
     },
     {
       "floor": 0.9,
@@ -986,10 +986,10 @@
       "n": 1032,
       "realised": 2.4242321908495374,
       "price_ewma": 3.103227936027926,
-      "price_model": 2.936831328660379,
+      "price_model": 2.863083973054997,
       "hit": 22.093023255813954,
       "prob_ewma": 28.321053933073788,
-      "prob_model": 28.210783403081304
+      "prob_model": 27.05911434842498
     },
     {
       "floor": 0.9,
@@ -997,10 +997,10 @@
       "n": 978,
       "realised": 3.0677740585419477,
       "price_ewma": 4.386179909735054,
-      "price_model": 4.433950015897331,
+      "price_model": 3.898894396690878,
       "hit": 24.130879345603272,
       "prob_ewma": 32.983781886878724,
-      "prob_model": 32.78043613139824
+      "prob_model": 30.37835508374032
     },
     {
       "floor": 0.9,
@@ -1008,10 +1008,10 @@
       "n": 916,
       "realised": 3.345103958338495,
       "price_ewma": 5.491596945150081,
-      "price_model": 5.465263889482464,
+      "price_model": 4.959997573161174,
       "hit": 25.87336244541485,
       "prob_ewma": 36.12768708786463,
-      "prob_model": 35.03624197054108
+      "prob_model": 32.47161322426627
     }
   ],
   "pricing_by_commodity": [
@@ -1020,30 +1020,30 @@
       "n": 1200,
       "realised": 4.136808813946021,
       "price_ewma": 4.967829680316403,
-      "price_model": 5.10585881847392,
+      "price_model": 4.773004938199095,
       "hit": 28.166666666666668,
       "prob_ewma": 34.10090324282347,
-      "prob_model": 35.78795329673327
+      "prob_model": 33.21365113426746
     },
     {
       "commodity": "Green Chilli",
       "n": 1264,
       "realised": 2.5004184527938813,
       "price_ewma": 3.8776789670842664,
-      "price_model": 3.739329511889598,
+      "price_model": 3.283436463258851,
       "hit": 22.54746835443038,
       "prob_ewma": 31.705947788224385,
-      "prob_model": 29.14883331592842
+      "prob_model": 27.976223258604755
     },
     {
       "commodity": "Pumpkin",
       "n": 1575,
       "realised": 1.2706655313788195,
       "price_ewma": 2.161811247708407,
-      "price_model": 1.8443522164419708,
+      "price_model": 1.84733748284002,
       "hit": 15.936507936507937,
       "prob_ewma": 22.80421793241557,
-      "prob_model": 21.397899153360424
+      "prob_model": 21.256219809213935
     }
   ],
   "var_ratio": {
@@ -1056,29 +1056,29 @@
     {
       "all": "all",
       "n": 4697,
-      "mape": 15.358510605441733,
-      "mae": 413.9854075892163,
-      "direction": 43.96423248882265,
+      "mape": 15.252605322538058,
+      "mae": 407.79846999732354,
+      "direction": 46.433893974877584,
       "method": "Global model (P50)",
-      "skill_vs_naive": -0.2236661828492359
+      "skill_vs_naive": 1.274158514680357
     },
     {
       "all": "all",
       "n": 4697,
-      "mape": 15.034440649425093,
-      "mae": 403.5688790941315,
-      "direction": 40.06812859271876,
+      "mape": 14.91387633245837,
+      "mae": 399.4815038297474,
+      "direction": 43.36810730253353,
       "method": "Global model halved (post-hoc check)",
-      "skill_vs_naive": 2.298119985303404
+      "skill_vs_naive": 3.287651805874603
     },
     {
       "all": "all",
       "n": 4697,
-      "mape": 15.216261040742882,
-      "mae": 408.42655667663297,
-      "direction": 40.45135192676177,
+      "mape": 15.104745394647164,
+      "mae": 404.4299850273716,
+      "direction": 42.835852671918246,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 1.1221020689047068
+      "skill_vs_naive": 2.089650817021127
     },
     {
       "all": "all",
@@ -1103,29 +1103,29 @@
     {
       "all": "all",
       "n": 284,
-      "mape": 13.815105904485456,
-      "mae": 505.8697425277181,
-      "direction": 48.59154929577465,
+      "mape": 14.983037020262524,
+      "mae": 539.7836123751496,
+      "direction": 51.76056338028169,
       "method": "Global model (P50)",
-      "skill_vs_naive": 15.477566184514268
+      "skill_vs_naive": 9.811121685811198
     },
     {
       "all": "all",
       "n": 284,
-      "mape": 14.464947941431467,
-      "mae": 540.4344219899416,
-      "direction": 44.014084507042256,
+      "mape": 14.836955666827317,
+      "mae": 542.7249746418976,
+      "direction": 42.6056338028169,
       "method": "Global model halved (post-hoc check)",
-      "skill_vs_naive": 9.702382206122461
+      "skill_vs_naive": 9.319668893485012
     },
     {
       "all": "all",
       "n": 284,
-      "mape": 14.556407141142724,
-      "mae": 557.6111781532301,
-      "direction": 39.436619718309856,
+      "mape": 14.79973223547408,
+      "mae": 554.9382367891616,
+      "direction": 41.54929577464789,
       "method": "Average of global model and Holt-Winters",
-      "skill_vs_naive": 6.832431477854229
+      "skill_vs_naive": 7.2790355945746015
     },
     {
       "all": "all",
@@ -1157,27 +1157,27 @@
       "by_h": {
         "1": {
           "price_ewma_rs": 39.846683994824446,
-          "price_model_rs": 18.31802790578479,
+          "price_model_rs": 31.19227051238113,
           "prob_ewma_pct": 32.507292316338166,
-          "prob_model_pct": 22.947857938130984
+          "prob_model_pct": 31.948155194153227
         },
         "2": {
           "price_ewma_rs": 72.05681037442889,
-          "price_model_rs": 65.30253615141993,
+          "price_model_rs": 67.92327533471206,
           "prob_ewma_pct": 40.01659164509483,
-          "prob_model_pct": 43.41379957094909
+          "prob_model_pct": 49.58789586341114
         },
         "3": {
           "price_ewma_rs": 97.78824010560209,
-          "price_model_rs": 77.69858631332994,
+          "price_model_rs": 97.81546964698595,
           "prob_ewma_pct": 43.992866424656754,
-          "prob_model_pct": 44.275918114497166
+          "prob_model_pct": 51.190174361465836
         },
         "4": {
           "price_ewma_rs": 119.77380438194234,
-          "price_model_rs": 99.223660479974,
+          "price_model_rs": 162.90069075080316,
           "prob_ewma_pct": 46.69417457050592,
-          "prob_model_pct": 49.87455160895991
+          "prob_model_pct": 64.86429437535782
         }
       }
     },
@@ -1191,27 +1191,27 @@
       "by_h": {
         "1": {
           "price_ewma_rs": 202.4555106988273,
-          "price_model_rs": 78.25402221083993,
+          "price_model_rs": 108.08849666595052,
           "prob_ewma_pct": 34.99019906608037,
-          "prob_model_pct": 23.24506188681014
+          "prob_model_pct": 32.52964507125555
         },
         "2": {
           "price_ewma_rs": 355.07464795162286,
-          "price_model_rs": 178.56158013853246,
+          "price_model_rs": 274.19788372195035,
           "prob_ewma_pct": 42.19057573066924,
-          "prob_model_pct": 36.28039021462914
+          "prob_model_pct": 50.879531492941744
         },
         "3": {
           "price_ewma_rs": 475.79227405120423,
-          "price_model_rs": 318.15891783848315,
+          "price_model_rs": 383.4807072470087,
           "prob_ewma_pct": 46.05233077573633,
-          "prob_model_pct": 47.21257810894607
+          "prob_model_pct": 53.13422195354606
         },
         "4": {
           "price_ewma_rs": 578.4561784161867,
-          "price_model_rs": 426.88457417446944,
+          "price_model_rs": 673.8471591889775,
           "prob_ewma_pct": 48.70930952942308,
-          "prob_model_pct": 59.50474087661397
+          "prob_model_pct": 73.79408839753214
         }
       }
     },
@@ -1225,27 +1225,27 @@
       "by_h": {
         "1": {
           "price_ewma_rs": 25.330939022655343,
-          "price_model_rs": 21.35372662950357,
+          "price_model_rs": 49.076861404147394,
           "prob_ewma_pct": 22.449125618090086,
-          "prob_model_pct": 21.94668774898251
+          "prob_model_pct": 38.668600415212175
         },
         "2": {
           "price_ewma_rs": 53.79745496603073,
-          "price_model_rs": 62.85400886341836,
+          "price_model_rs": 101.67243153020672,
           "prob_ewma_pct": 31.20664526416208,
-          "prob_model_pct": 41.30582909084994
+          "prob_model_pct": 53.72741828959897
         },
         "3": {
           "price_ewma_rs": 77.88259761536813,
-          "price_model_rs": 63.16519624901548,
+          "price_model_rs": 87.66769480520202,
           "prob_ewma_pct": 35.82838114054038,
-          "prob_model_pct": 39.580479191617336
+          "prob_model_pct": 52.20710639520587
         },
         "4": {
           "price_ewma_rs": 98.9771963630343,
-          "price_model_rs": 137.0675803929596,
+          "price_model_rs": 179.00767792932197,
           "prob_ewma_pct": 38.88423575453957,
-          "prob_model_pct": 58.004052788158425
+          "prob_model_pct": 67.41620223537815
         }
       }
     }
@@ -1253,5 +1253,5 @@
   "figures": {
     "other_methods": "out/fig/f7_other_methods.png"
   },
-  "runtime_min": 0.5
+  "runtime_min": 0.4
 }

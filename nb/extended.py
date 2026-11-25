@@ -29,13 +29,14 @@ def _(mo):
         """
         # 4 · LightGBM, multiplicative Holt-Winters and more commodities
 
-        Added on request after the first results. Settings were fixed before each run;
-        nothing here changes the advisory, which still uses the global model of
-        `nb/forecast.py`.
+        Added on request after the first results. Settings were fixed before each run.
+        After seeing these results the applicant chose part B's scikit-learn model (trained
+        on all Assam markets of the good-data commodities) as the advisory model of
+        `nb/forecast.py`; this notebook checks that the two are identical.
 
-        * **A. LightGBM on the main backtest rows:** the same data, features, refit weeks and
-          out-of-sample rows as the global model (scikit-learn), with LightGBM as the learner
-          (quantile loss, settings mirrored from the scikit-learn model).
+        * **A. Main backtest rows (pilot commodities):** the advisory model, LightGBM on the
+          same data and tasks, and the configuration set before testing (pilot commodities plus
+          neighbouring-State markets, `out/backtest_prev.parquet`), on identical rows.
         * **B. More commodities:** every Assam commodity with good data, by a coverage rule
           fixed before any model was run on them: at least 1,000 market-weeks with a price in
           the last 156 complete weeks and at least 100 in the last 52 (the test year).
@@ -63,35 +64,34 @@ def _(clean, paths, pl):
 
 
 @app.cell
-def _(clean, dt, features, json, model, paths, pl):
-    # ---- A. LightGBM on exactly the main backtest rows (G rebuilt as in nb/forecast.py)
+def _(ext_bt, ext_commodities, features, json, paths, pl):
+    # ---- A. main backtest rows (pilot commodities). The advisory model of nb/forecast.py must be exactly
+    # part B's scikit-learn model; LightGBM comes from part B; the earlier configuration from backtest_prev.parquet
+    _fc = json.loads((paths.OUT / "metrics_forecast.json").read_text(encoding="utf-8"))
+    assert _fc["advisory_model"]["commodities"] == ext_commodities, "advisory model uses other commodities"
     _sel = json.loads((paths.OUT / "selection.json").read_text(encoding="utf-8"))
     pilot_commodities = sorted({p["commodity"] for p in _sel["pairs"]})
-    _codes = {c: i for i, c in enumerate(pilot_commodities)}
-    _daily = clean.load_daily(paths.RAW_PARQUET).filter(pl.col("commodity").is_in(pilot_commodities))
-    _wk = clean.flag_outliers(clean.weekly(_daily)).collect().lazy()
-    _end = clean.last_full_week(_daily.filter(pl.col("state") == "Assam").select(pl.col("date").max()).collect().item())
-    _G = features.build(features.weekly_grid(features.dominant_variety(_wk), _end), _codes)
-    _ts = _end - dt.timedelta(weeks=51)
-    _lgb = model.rolling_backtest(_G, features.FEATURES, pl.col("state") == "Assam", _ts, _end, refit_every=4, learner="lgbm")
     _K = [*features.KEY, "week", "h"]
     _bt = pl.read_parquet(paths.OUT / "backtest.parquet").with_columns(pl.col("h").cast(pl.Int32))
-    _lgb = _lgb.with_columns(pl.col("h").cast(pl.Int32)).select(
-        *_K, pl.col("lp").alias("_lp"), pl.col("y").alias("_y"),
-        pl.col("q10").alias("l10"), pl.col("q50").alias("l50"), pl.col("q90").alias("l90"))
-    main_ev = _bt.join(_lgb, on=_K, how="inner")
-    assert main_ev.height == _bt.height == _lgb.height, "LightGBM rows differ from the main backtest"
-    assert main_ev.select((((pl.col("lp") - pl.col("_lp")).abs() < 1e-12) & ((pl.col("y") - pl.col("_y")).abs() < 1e-12)).all()).item()
-    main_ev = main_ev.drop("_lp", "_y")
+    _prev = pl.read_parquet(paths.OUT / "backtest_prev.parquet").with_columns(pl.col("h").cast(pl.Int32)).select(
+        *_K, pl.col("q10").alias("p10"), pl.col("q50").alias("p50"), pl.col("q90").alias("p90"))
+    _x = ext_bt.filter(pl.col("commodity").is_in(pilot_commodities)).select(
+        *_K, pl.col("q10").alias("x10"), pl.col("q50").alias("x50"), pl.col("q90").alias("x90"), "l10", "l50", "l90")
+    main_ev = _bt.join(_x, on=_K, how="inner").join(_prev, on=_K, how="inner")
+    assert main_ev.height == _bt.height == _x.height == _prev.height, "rows differ between models"
+    _d = main_ev.select(*[(pl.col(f"q{q}") - pl.col(f"x{q}")).abs().max().alias(f"d{q}") for q in (10, 50, 90)]).row(0)
+    assert max(_d) < 1e-9, f"advisory model differs from the tested 11-commodity model: {_d}"
+    main_ev = main_ev.drop("x10", "x50", "x90")
     main_ev.height
     return main_ev, pilot_commodities
 
 
 @app.cell
 def _(compare, main_ev, pl):
-    _M = {compare.MODEL: pl.col("q50"), compare.LGBM: pl.col("l50"), compare.NAIVE: pl.lit(0.0),
-          compare.SNAIVE: pl.col("sn").fill_null(0.0)}
-    _B = {compare.MODEL: (pl.col("q10"), pl.col("q90")), compare.LGBM: (pl.col("l10"), pl.col("l90"))}
+    _M = {compare.MODEL: pl.col("q50"), compare.LGBM: pl.col("l50"), compare.PREV: pl.col("p50"),
+          compare.NAIVE: pl.lit(0.0), compare.SNAIVE: pl.col("sn").fill_null(0.0)}
+    _B = {compare.MODEL: (pl.col("q10"), pl.col("q90")), compare.LGBM: (pl.col("l10"), pl.col("l90")),
+          compare.PREV: (pl.col("p10"), pl.col("p90"))}
     _all = main_ev.with_columns(pl.lit("all").alias("all"))
     main_points = compare.point_scores(_all, ["all"], _M)
     main_points_h = compare.point_scores(main_ev, ["h"], _M)

@@ -651,342 +651,46 @@
     }
   },
   "forecast": {
-    "retrieved": "2026-11-25",
-    "end_week": "2026-11-16",
-    "test_start": "2025-11-24",
-    "n_forecasts_assam": 4697,
-    "n_series_assam": 68,
-    "data_summary": [
+    "advisory_model": {
+      "commodities": [
+        "Bhindi(Ladies Finger)",
+        "Bitter gourd",
+        "Bottle gourd",
+        "Brinjal",
+        "Cabbage",
+        "Capsicum",
+        "Cauliflower",
+        "Ginger(Green)",
+        "Green Chilli",
+        "Pumpkin",
+        "Tomato"
+      ],
+      "states": [
+        "Assam"
+      ],
+      "chosen": "by the applicant after the 12-month test (post-hoc)"
+    },
+    "score_prev": [
       {
-        "region": "Assam",
-        "commodity": "Cabbage",
-        "series": 78,
-        "observed_weeks": 4179,
-        "first_week": "2005-09-19"
-      },
-      {
-        "region": "Assam",
-        "commodity": "Green Chilli",
-        "series": 78,
-        "observed_weeks": 5854,
-        "first_week": "2005-09-19"
-      },
-      {
-        "region": "Assam",
-        "commodity": "Pumpkin",
-        "series": 75,
-        "observed_weeks": 3704,
-        "first_week": "2005-09-19"
-      },
-      {
-        "region": "Neighbouring States",
-        "commodity": "Cabbage",
-        "series": 194,
-        "observed_weeks": 19251,
-        "first_week": "2004-07-26"
-      },
-      {
-        "region": "Neighbouring States",
-        "commodity": "Green Chilli",
-        "series": 194,
-        "observed_weeks": 41955,
-        "first_week": "2001-03-12"
-      },
-      {
-        "region": "Neighbouring States",
-        "commodity": "Pumpkin",
-        "series": 99,
-        "observed_weeks": 9309,
-        "first_week": "2003-03-03"
+        "all": "all",
+        "n": 4697,
+        "mape_model": 15.358510605441733,
+        "mape_naive": 15.486305896413082,
+        "mape_snaive": 19.343560007695775,
+        "mae_model": 413.9854075892163,
+        "mae_naive": 413.06152863529906,
+        "mae_snaive": 507.86480267828887,
+        "dir_model": 43.96423248882265,
+        "dir_naive": 33.383010432190765,
+        "dir_snaive": 33.10623802427081,
+        "coverage80": 78.4543325526932,
+        "band_width_pct": 43.49068685775007,
+        "snaive_fallback_pct": 58.249946774536944,
+        "skill_vs_naive": -0.2236661828492359,
+        "skill_vs_snaive": 18.485115446864555
       }
     ],
-    "score_selected_by_h": [
-      {
-        "commodity": "Cabbage",
-        "h": 1,
-        "n": 48,
-        "mape_model": 13.509274005150873,
-        "mape_naive": 12.967668831086845,
-        "mape_snaive": 16.514320240328935,
-        "mae_model": 220.78284377667856,
-        "mae_naive": 214.5833333333333,
-        "mae_snaive": 277.5873055435834,
-        "dir_model": 35.41666666666667,
-        "dir_naive": 31.25,
-        "dir_snaive": 45.83333333333333,
-        "coverage80": 75.0,
-        "band_width_pct": 36.087732724175964,
-        "snaive_fallback_pct": 27.083333333333332,
-        "skill_vs_naive": -2.8890922454424484,
-        "skill_vs_snaive": 20.463638153649676
-      },
-      {
-        "commodity": "Cabbage",
-        "h": 2,
-        "n": 47,
-        "mape_model": 20.669045866628096,
-        "mape_naive": 19.83432402436715,
-        "mape_snaive": 26.856553707068485,
-        "mae_model": 327.58134122948144,
-        "mae_naive": 325.53191489361706,
-        "mae_snaive": 437.57229630074227,
-        "dir_model": 36.17021276595745,
-        "dir_naive": 25.53191489361702,
-        "dir_snaive": 40.42553191489361,
-        "coverage80": 68.08510638297872,
-        "band_width_pct": 49.58555487029956,
-        "snaive_fallback_pct": 27.659574468085108,
-        "skill_vs_naive": -0.629562338468137,
-        "skill_vs_snaive": 25.136635934479802
-      },
-      {
-        "commodity": "Cabbage",
-        "h": 3,
-        "n": 46,
-        "mape_model": 22.635544503293307,
-        "mape_naive": 21.985275410263526,
-        "mape_snaive": 36.074155494173525,
-        "mae_model": 358.3015432875834,
-        "mae_naive": 358.69565217391306,
-        "mae_snaive": 565.0203516239756,
-        "dir_model": 45.65217391304348,
-        "dir_naive": 32.608695652173914,
-        "dir_snaive": 36.95652173913043,
-        "coverage80": 63.04347826086957,
-        "band_width_pct": 55.63523495637309,
-        "snaive_fallback_pct": 28.26086956521739,
-        "skill_vs_naive": 0.10987278043129711,
-        "skill_vs_snaive": 36.586081853909
-      },
-      {
-        "commodity": "Cabbage",
-        "h": 4,
-        "n": 45,
-        "mape_model": 27.43548198832476,
-        "mape_naive": 25.6661873283974,
-        "mape_snaive": 45.11915506213867,
-        "mae_model": 422.01702655487503,
-        "mae_naive": 417.7777777777777,
-        "mae_snaive": 705.819387650032,
-        "dir_model": 46.666666666666664,
-        "dir_naive": 20.0,
-        "dir_snaive": 31.11111111111111,
-        "coverage80": 66.66666666666666,
-        "band_width_pct": 64.44733640243821,
-        "snaive_fallback_pct": 28.888888888888886,
-        "skill_vs_naive": -1.0147138030286218,
-        "skill_vs_snaive": 40.2089211575859
-      },
-      {
-        "commodity": "Green Chilli",
-        "h": 1,
-        "n": 48,
-        "mape_model": 12.358434881676338,
-        "mape_naive": 12.678016018434276,
-        "mape_snaive": 16.365778979322673,
-        "mae_model": 753.8059081100367,
-        "mae_naive": 772.9166666666653,
-        "mae_snaive": 1008.4102465124762,
-        "dir_model": 41.66666666666667,
-        "dir_naive": 37.5,
-        "dir_snaive": 35.41666666666667,
-        "coverage80": 75.0,
-        "band_width_pct": 33.414786754072885,
-        "snaive_fallback_pct": 27.083333333333332,
-        "skill_vs_naive": 2.4725509722861694,
-        "skill_vs_snaive": 25.248091169538654
-      },
-      {
-        "commodity": "Green Chilli",
-        "h": 2,
-        "n": 47,
-        "mape_model": 19.024977604890708,
-        "mape_naive": 19.850827878596945,
-        "mape_snaive": 25.513506137497927,
-        "mae_model": 1138.5374179306666,
-        "mae_naive": 1185.1063829787224,
-        "mae_snaive": 1527.9070760960483,
-        "dir_model": 36.17021276595745,
-        "dir_naive": 21.27659574468085,
-        "dir_snaive": 27.659574468085108,
-        "coverage80": 70.2127659574468,
-        "band_width_pct": 48.16159240695794,
-        "snaive_fallback_pct": 27.659574468085108,
-        "skill_vs_naive": 3.9295176970531864,
-        "skill_vs_snaive": 25.483857248718234
-      },
-      {
-        "commodity": "Green Chilli",
-        "h": 3,
-        "n": 46,
-        "mape_model": 21.811405390128623,
-        "mape_naive": 24.17309325105601,
-        "mape_snaive": 29.837292016740747,
-        "mae_model": 1301.6155638071175,
-        "mae_naive": 1439.1304347826074,
-        "mae_snaive": 1727.723794794525,
-        "dir_model": 47.82608695652174,
-        "dir_naive": 13.043478260869565,
-        "dir_snaive": 34.78260869565217,
-        "coverage80": 78.26086956521739,
-        "band_width_pct": 60.27764778982174,
-        "snaive_fallback_pct": 28.26086956521739,
-        "skill_vs_naive": 9.55541399527574,
-        "skill_vs_snaive": 24.66298330041138
-      },
-      {
-        "commodity": "Green Chilli",
-        "h": 4,
-        "n": 45,
-        "mape_model": 21.90645241565338,
-        "mape_naive": 26.776023303340317,
-        "mape_snaive": 29.2701021993428,
-        "mae_model": 1308.7780770472516,
-        "mae_naive": 1591.1111111111097,
-        "mae_snaive": 1661.9255870018726,
-        "dir_model": 53.333333333333336,
-        "dir_naive": 6.666666666666667,
-        "dir_snaive": 42.22222222222222,
-        "coverage80": 77.77777777777779,
-        "band_width_pct": 66.09484553434115,
-        "snaive_fallback_pct": 28.888888888888886,
-        "skill_vs_naive": 17.744394598985515,
-        "skill_vs_snaive": 21.24929736425215
-      },
-      {
-        "commodity": "Pumpkin",
-        "h": 1,
-        "n": 48,
-        "mape_model": 8.201544380444128,
-        "mape_naive": 8.147536950386215,
-        "mape_snaive": 11.772085322741606,
-        "mae_model": 134.22586138632445,
-        "mae_naive": 133.33333333333334,
-        "mae_snaive": 193.07943275048538,
-        "dir_model": 45.83333333333333,
-        "dir_naive": 45.83333333333333,
-        "dir_snaive": 27.083333333333332,
-        "coverage80": 68.75,
-        "band_width_pct": 24.77358321741294,
-        "snaive_fallback_pct": 27.083333333333332,
-        "skill_vs_naive": -0.6693960397433418,
-        "skill_vs_snaive": 30.481533183400643
-      },
-      {
-        "commodity": "Pumpkin",
-        "h": 2,
-        "n": 47,
-        "mape_model": 10.203736736885324,
-        "mape_naive": 10.47796510609402,
-        "mape_snaive": 13.4560864267004,
-        "mae_model": 170.52758981125825,
-        "mae_naive": 174.46808510638297,
-        "mae_snaive": 222.3051365394591,
-        "dir_model": 38.297872340425535,
-        "dir_naive": 29.78723404255319,
-        "dir_snaive": 27.659574468085108,
-        "coverage80": 70.2127659574468,
-        "band_width_pct": 33.68603525091795,
-        "snaive_fallback_pct": 27.659574468085108,
-        "skill_vs_naive": 2.2585765715958717,
-        "skill_vs_snaive": 23.291205742792343
-      },
-      {
-        "commodity": "Pumpkin",
-        "h": 3,
-        "n": 46,
-        "mape_model": 12.028949440028027,
-        "mape_naive": 9.135049803847759,
-        "mape_snaive": 14.666968390098514,
-        "mae_model": 201.28910971232673,
-        "mae_naive": 158.69565217391303,
-        "mae_snaive": 238.6525574762133,
-        "dir_model": 28.26086956521739,
-        "dir_naive": 34.78260869565217,
-        "dir_snaive": 34.78260869565217,
-        "coverage80": 84.78260869565217,
-        "band_width_pct": 37.687286856088676,
-        "snaive_fallback_pct": 28.26086956521739,
-        "skill_vs_naive": -26.839712969411366,
-        "skill_vs_snaive": 15.656001410171616
-      },
-      {
-        "commodity": "Pumpkin",
-        "h": 4,
-        "n": 45,
-        "mape_model": 15.716040848133222,
-        "mape_naive": 11.22157805883296,
-        "mape_snaive": 15.820813269651216,
-        "mae_model": 259.9066175394108,
-        "mae_naive": 193.33333333333334,
-        "mae_snaive": 257.46256748449747,
-        "dir_model": 26.666666666666668,
-        "dir_naive": 31.11111111111111,
-        "dir_snaive": 40.0,
-        "coverage80": 75.55555555555556,
-        "band_width_pct": 43.912079321896314,
-        "snaive_fallback_pct": 28.888888888888886,
-        "skill_vs_naive": -34.43445734797108,
-        "skill_vs_snaive": -0.9492836488008916
-      }
-    ],
-    "score_selected": [
-      {
-        "commodity": "Cabbage",
-        "n": 186,
-        "mape_model": 20.94474217529499,
-        "mape_naive": 20.005174363910914,
-        "mape_snaive": 30.885583474710916,
-        "mae_model": 330.465251211099,
-        "mae_naive": 327.4193548387097,
-        "mae_snaive": 492.7037484472108,
-        "dir_model": 40.86021505376344,
-        "dir_naive": 27.419354838709676,
-        "dir_snaive": 38.70967741935484,
-        "coverage80": 68.27956989247312,
-        "band_width_pct": 51.19399567616886,
-        "snaive_fallback_pct": 27.956989247311824,
-        "skill_vs_naive": -0.9302737689070639,
-        "skill_vs_snaive": 32.92820437177867
-      },
-      {
-        "commodity": "Green Chilli",
-        "n": 186,
-        "mape_model": 18.690827034412077,
-        "mape_naive": 20.744177512783832,
-        "mape_snaive": 25.130979630163395,
-        "mae_model": 1120.7702776036388,
-        "mae_naive": 1239.784946236558,
-        "mae_snaive": 1475.6842493803524,
-        "dir_model": 44.623655913978496,
-        "dir_naive": 19.892473118279568,
-        "dir_snaive": 34.946236559139784,
-        "coverage80": 75.26881720430107,
-        "band_width_pct": 51.69109921881545,
-        "snaive_fallback_pct": 27.956989247311824,
-        "skill_vs_naive": 9.599622014624021,
-        "skill_vs_snaive": 24.05080706971996
-      },
-      {
-        "commodity": "Pumpkin",
-        "n": 186,
-        "mape_model": 11.472060587646304,
-        "mape_naive": 9.72435181306149,
-        "mape_snaive": 13.893082261426622,
-        "mae_model": 190.39104786942596,
-        "mae_naive": 164.51612903225808,
-        "mae_snaive": 227.31176005422623,
-        "dir_model": 34.946236559139784,
-        "dir_naive": 35.483870967741936,
-        "dir_snaive": 32.25806451612903,
-        "coverage80": 74.73118279569893,
-        "band_width_pct": 34.84964739835687,
-        "snaive_fallback_pct": 27.956989247311824,
-        "skill_vs_naive": -15.727891842200092,
-        "skill_vs_snaive": 16.24232383577192
-      }
-    ],
-    "score_assam_by_h": [
+    "score_prev_by_h": [
       {
         "h": 1,
         "n": 1290,
@@ -1060,80 +764,545 @@
         "skill_vs_snaive": 15.84341288343979
       }
     ],
+    "score_prev_selected": [
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape_model": 20.94474217529499,
+        "mape_naive": 20.005174363910914,
+        "mape_snaive": 30.885583474710916,
+        "mae_model": 330.465251211099,
+        "mae_naive": 327.4193548387097,
+        "mae_snaive": 492.7037484472108,
+        "dir_model": 40.86021505376344,
+        "dir_naive": 27.419354838709676,
+        "dir_snaive": 38.70967741935484,
+        "coverage80": 68.27956989247312,
+        "band_width_pct": 51.19399567616886,
+        "snaive_fallback_pct": 27.956989247311824,
+        "skill_vs_naive": -0.9302737689070639,
+        "skill_vs_snaive": 32.92820437177867
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape_model": 18.690827034412077,
+        "mape_naive": 20.744177512783832,
+        "mape_snaive": 25.130979630163395,
+        "mae_model": 1120.7702776036388,
+        "mae_naive": 1239.784946236558,
+        "mae_snaive": 1475.6842493803524,
+        "dir_model": 44.623655913978496,
+        "dir_naive": 19.892473118279568,
+        "dir_snaive": 34.946236559139784,
+        "coverage80": 75.26881720430107,
+        "band_width_pct": 51.69109921881545,
+        "snaive_fallback_pct": 27.956989247311824,
+        "skill_vs_naive": 9.599622014624021,
+        "skill_vs_snaive": 24.05080706971996
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape_model": 11.472060587646304,
+        "mape_naive": 9.72435181306149,
+        "mape_snaive": 13.893082261426622,
+        "mae_model": 190.39104786942596,
+        "mae_naive": 164.51612903225808,
+        "mae_snaive": 227.31176005422623,
+        "dir_model": 34.946236559139784,
+        "dir_naive": 35.483870967741936,
+        "dir_snaive": 32.25806451612903,
+        "coverage80": 74.73118279569893,
+        "band_width_pct": 34.84964739835687,
+        "snaive_fallback_pct": 27.956989247311824,
+        "skill_vs_naive": -15.727891842200092,
+        "skill_vs_snaive": 16.24232383577192
+      }
+    ],
+    "retrieved": "2026-11-25",
+    "end_week": "2026-11-16",
+    "test_start": "2025-11-24",
+    "n_forecasts_assam": 4697,
+    "n_series_assam": 68,
+    "data_summary": [
+      {
+        "region": "Assam",
+        "commodity": "Cabbage",
+        "series": 78,
+        "observed_weeks": 4179,
+        "first_week": "2005-09-19"
+      },
+      {
+        "region": "Assam",
+        "commodity": "Green Chilli",
+        "series": 78,
+        "observed_weeks": 5854,
+        "first_week": "2005-09-19"
+      },
+      {
+        "region": "Assam",
+        "commodity": "Pumpkin",
+        "series": 75,
+        "observed_weeks": 3704,
+        "first_week": "2005-09-19"
+      },
+      {
+        "region": "Neighbouring States",
+        "commodity": "Cabbage",
+        "series": 194,
+        "observed_weeks": 19251,
+        "first_week": "2004-07-26"
+      },
+      {
+        "region": "Neighbouring States",
+        "commodity": "Green Chilli",
+        "series": 194,
+        "observed_weeks": 41955,
+        "first_week": "2001-03-12"
+      },
+      {
+        "region": "Neighbouring States",
+        "commodity": "Pumpkin",
+        "series": 99,
+        "observed_weeks": 9309,
+        "first_week": "2003-03-03"
+      }
+    ],
+    "score_selected_by_h": [
+      {
+        "commodity": "Cabbage",
+        "h": 1,
+        "n": 48,
+        "mape_model": 14.15361414109508,
+        "mape_naive": 12.967668831086845,
+        "mape_snaive": 16.514320240328935,
+        "mae_model": 231.66834196784563,
+        "mae_naive": 214.5833333333333,
+        "mae_snaive": 277.5873055435834,
+        "dir_model": 29.166666666666668,
+        "dir_naive": 31.25,
+        "dir_snaive": 45.83333333333333,
+        "coverage80": 66.66666666666666,
+        "band_width_pct": 36.41852211444809,
+        "snaive_fallback_pct": 27.083333333333332,
+        "skill_vs_naive": -7.96194577142324,
+        "skill_vs_snaive": 16.542169853847344
+      },
+      {
+        "commodity": "Cabbage",
+        "h": 2,
+        "n": 47,
+        "mape_model": 20.795014002782743,
+        "mape_naive": 19.83432402436715,
+        "mape_snaive": 26.856553707068485,
+        "mae_model": 326.712380943622,
+        "mae_naive": 325.53191489361706,
+        "mae_snaive": 437.57229630074227,
+        "dir_model": 42.5531914893617,
+        "dir_naive": 25.53191489361702,
+        "dir_snaive": 40.42553191489361,
+        "coverage80": 65.95744680851064,
+        "band_width_pct": 49.212780334849484,
+        "snaive_fallback_pct": 27.659574468085108,
+        "skill_vs_naive": -0.3626268258185128,
+        "skill_vs_snaive": 25.335222612202703
+      },
+      {
+        "commodity": "Cabbage",
+        "h": 3,
+        "n": 46,
+        "mape_model": 23.565083006811975,
+        "mape_naive": 21.985275410263526,
+        "mape_snaive": 36.074155494173525,
+        "mae_model": 365.5845897126316,
+        "mae_naive": 358.69565217391306,
+        "mae_snaive": 565.0203516239756,
+        "dir_model": 54.347826086956516,
+        "dir_naive": 32.608695652173914,
+        "dir_snaive": 36.95652173913043,
+        "coverage80": 65.21739130434783,
+        "band_width_pct": 59.27851290635671,
+        "snaive_fallback_pct": 28.26086956521739,
+        "skill_vs_naive": -1.920552283521526,
+        "skill_vs_snaive": 35.2970935185127
+      },
+      {
+        "commodity": "Cabbage",
+        "h": 4,
+        "n": 45,
+        "mape_model": 27.38919520459137,
+        "mape_naive": 25.6661873283974,
+        "mape_snaive": 45.11915506213867,
+        "mae_model": 408.04218559202144,
+        "mae_naive": 417.7777777777777,
+        "mae_snaive": 705.819387650032,
+        "dir_model": 55.55555555555556,
+        "dir_naive": 20.0,
+        "dir_snaive": 31.11111111111111,
+        "coverage80": 68.88888888888889,
+        "band_width_pct": 65.44006259448513,
+        "snaive_fallback_pct": 28.888888888888886,
+        "skill_vs_naive": 2.3303279168033653,
+        "skill_vs_snaive": 42.18886690679261
+      },
+      {
+        "commodity": "Green Chilli",
+        "h": 1,
+        "n": 48,
+        "mape_model": 12.564011908330095,
+        "mape_naive": 12.678016018434276,
+        "mape_snaive": 16.365778979322673,
+        "mae_model": 754.6856081932415,
+        "mae_naive": 772.9166666666653,
+        "mae_snaive": 1008.4102465124762,
+        "dir_model": 47.91666666666667,
+        "dir_naive": 37.5,
+        "dir_snaive": 35.41666666666667,
+        "coverage80": 77.08333333333334,
+        "band_width_pct": 33.63296568277019,
+        "snaive_fallback_pct": 27.083333333333332,
+        "skill_vs_naive": 2.3587353280979606,
+        "skill_vs_snaive": 25.160854840252323
+      },
+      {
+        "commodity": "Green Chilli",
+        "h": 2,
+        "n": 47,
+        "mape_model": 18.32041772439899,
+        "mape_naive": 19.850827878596945,
+        "mape_snaive": 25.513506137497927,
+        "mae_model": 1083.894880469722,
+        "mae_naive": 1185.1063829787224,
+        "mae_snaive": 1527.9070760960483,
+        "dir_model": 44.680851063829785,
+        "dir_naive": 21.27659574468085,
+        "dir_snaive": 27.659574468085108,
+        "coverage80": 74.46808510638297,
+        "band_width_pct": 49.73066733808681,
+        "snaive_fallback_pct": 27.659574468085108,
+        "skill_vs_naive": 8.540288362518888,
+        "skill_vs_snaive": 29.060157032639754
+      },
+      {
+        "commodity": "Green Chilli",
+        "h": 3,
+        "n": 46,
+        "mape_model": 21.831973806721628,
+        "mape_naive": 24.17309325105601,
+        "mape_snaive": 29.837292016740747,
+        "mae_model": 1283.149004880084,
+        "mae_naive": 1439.1304347826074,
+        "mae_snaive": 1727.723794794525,
+        "dir_model": 50.0,
+        "dir_naive": 13.043478260869565,
+        "dir_snaive": 34.78260869565217,
+        "coverage80": 71.73913043478261,
+        "band_width_pct": 57.26209590567875,
+        "snaive_fallback_pct": 28.26086956521739,
+        "skill_vs_naive": 10.838588784767488,
+        "skill_vs_snaive": 25.731820749005397
+      },
+      {
+        "commodity": "Green Chilli",
+        "h": 4,
+        "n": 45,
+        "mape_model": 24.63458308015664,
+        "mape_naive": 26.776023303340317,
+        "mape_snaive": 29.2701021993428,
+        "mae_model": 1441.6601307688272,
+        "mae_naive": 1591.1111111111097,
+        "mae_snaive": 1661.9255870018726,
+        "dir_model": 53.333333333333336,
+        "dir_naive": 6.666666666666667,
+        "dir_snaive": 42.22222222222222,
+        "coverage80": 73.33333333333333,
+        "band_width_pct": 67.18819843162115,
+        "snaive_fallback_pct": 28.888888888888886,
+        "skill_vs_naive": 9.392868876260785,
+        "skill_vs_snaive": 13.253629281345026
+      },
+      {
+        "commodity": "Pumpkin",
+        "h": 1,
+        "n": 48,
+        "mape_model": 8.393153423193162,
+        "mape_naive": 8.147536950386215,
+        "mape_snaive": 11.772085322741606,
+        "mae_model": 137.94637233085408,
+        "mae_naive": 133.33333333333334,
+        "mae_snaive": 193.07943275048538,
+        "dir_model": 47.91666666666667,
+        "dir_naive": 45.83333333333333,
+        "dir_snaive": 27.083333333333332,
+        "coverage80": 70.83333333333334,
+        "band_width_pct": 25.306840070930114,
+        "snaive_fallback_pct": 27.083333333333332,
+        "skill_vs_naive": -3.45977924814056,
+        "skill_vs_snaive": 28.554600370552784
+      },
+      {
+        "commodity": "Pumpkin",
+        "h": 2,
+        "n": 47,
+        "mape_model": 10.480146711594983,
+        "mape_naive": 10.47796510609402,
+        "mape_snaive": 13.4560864267004,
+        "mae_model": 175.1691219925221,
+        "mae_naive": 174.46808510638297,
+        "mae_snaive": 222.3051365394591,
+        "dir_model": 40.42553191489361,
+        "dir_naive": 29.78723404255319,
+        "dir_snaive": 27.659574468085108,
+        "coverage80": 74.46808510638297,
+        "band_width_pct": 33.17049939711792,
+        "snaive_fallback_pct": 27.659574468085108,
+        "skill_vs_naive": -0.401813824982189,
+        "skill_vs_snaive": 21.203295290736747
+      },
+      {
+        "commodity": "Pumpkin",
+        "h": 3,
+        "n": 46,
+        "mape_model": 12.444499023791083,
+        "mape_naive": 9.135049803847759,
+        "mape_snaive": 14.666968390098514,
+        "mae_model": 204.76903335357684,
+        "mae_naive": 158.69565217391303,
+        "mae_snaive": 238.6525574762133,
+        "dir_model": 39.130434782608695,
+        "dir_naive": 34.78260869565217,
+        "dir_snaive": 34.78260869565217,
+        "coverage80": 78.26086956521739,
+        "band_width_pct": 38.80129304438479,
+        "snaive_fallback_pct": 28.26086956521739,
+        "skill_vs_naive": -29.0325415652676,
+        "skill_vs_snaive": 14.197846644075318
+      },
+      {
+        "commodity": "Pumpkin",
+        "h": 4,
+        "n": 45,
+        "mape_model": 17.361902260595347,
+        "mape_naive": 11.22157805883296,
+        "mape_snaive": 15.820813269651216,
+        "mae_model": 280.66521654417244,
+        "mae_naive": 193.33333333333334,
+        "mae_snaive": 257.46256748449747,
+        "dir_model": 26.666666666666668,
+        "dir_naive": 31.11111111111111,
+        "dir_snaive": 40.0,
+        "coverage80": 62.22222222222222,
+        "band_width_pct": 42.607937644287304,
+        "snaive_fallback_pct": 28.888888888888886,
+        "skill_vs_naive": -45.17166372974435,
+        "skill_vs_snaive": -9.012047571176375
+      }
+    ],
+    "score_selected": [
+      {
+        "commodity": "Cabbage",
+        "n": 186,
+        "mape_model": 21.36154160980277,
+        "mape_naive": 20.005174363910914,
+        "mape_snaive": 30.885583474710916,
+        "mae_model": 331.4750096625207,
+        "mae_naive": 327.4193548387097,
+        "mae_snaive": 492.7037484472108,
+        "dir_model": 45.16129032258064,
+        "dir_naive": 27.419354838709676,
+        "dir_snaive": 38.70967741935484,
+        "coverage80": 66.66666666666666,
+        "band_width_pct": 52.32636638535308,
+        "snaive_fallback_pct": 27.956989247311824,
+        "skill_vs_naive": -1.2386729018535991,
+        "skill_vs_snaive": 32.7232620601758
+      },
+      {
+        "commodity": "Green Chilli",
+        "n": 186,
+        "mape_model": 19.230963647112045,
+        "mape_naive": 20.744177512783832,
+        "mape_snaive": 25.130979630163395,
+        "mae_model": 1134.7716595937293,
+        "mae_naive": 1239.784946236558,
+        "mae_snaive": 1475.6842493803524,
+        "dir_model": 48.924731182795696,
+        "dir_naive": 19.892473118279568,
+        "dir_snaive": 34.946236559139784,
+        "coverage80": 74.19354838709677,
+        "band_width_pct": 51.66262934810335,
+        "snaive_fallback_pct": 27.956989247311824,
+        "skill_vs_naive": 8.470282443870836,
+        "skill_vs_snaive": 23.102000982240888
+      },
+      {
+        "commodity": "Pumpkin",
+        "n": 186,
+        "mape_model": 12.092316218168905,
+        "mape_naive": 9.72435181306149,
+        "mape_snaive": 13.893082261426622,
+        "mae_model": 198.40690798000983,
+        "mae_naive": 164.51612903225808,
+        "mae_snaive": 227.31176005422623,
+        "dir_model": 38.70967741935484,
+        "dir_naive": 35.483870967741936,
+        "dir_snaive": 32.25806451612903,
+        "coverage80": 71.50537634408603,
+        "band_width_pct": 34.81698101668719,
+        "snaive_fallback_pct": 27.956989247311824,
+        "skill_vs_naive": -20.60027739961381,
+        "skill_vs_snaive": 12.715951021329042
+      }
+    ],
+    "score_assam_by_h": [
+      {
+        "h": 1,
+        "n": 1290,
+        "mape_model": 14.397092581417011,
+        "mape_naive": 14.483682237696364,
+        "mape_snaive": 17.717734982855752,
+        "mae_model": 294.90766472305427,
+        "mae_naive": 292.0813953488372,
+        "mae_snaive": 377.55719121939876,
+        "dir_model": 48.68217054263566,
+        "dir_naive": 45.348837209302324,
+        "dir_snaive": 37.82945736434108,
+        "coverage80": 78.75968992248062,
+        "band_width_pct": 30.093228978371204,
+        "snaive_fallback_pct": 57.751937984496124,
+        "skill_vs_naive": -0.9676307423968744,
+        "skill_vs_snaive": 21.890597879863126
+      },
+      {
+        "h": 2,
+        "n": 1201,
+        "mape_model": 13.15469768579806,
+        "mape_naive": 13.383678113222395,
+        "mape_snaive": 16.988264029239755,
+        "mae_model": 375.2314654201022,
+        "mae_naive": 385.4204829308909,
+        "mae_snaive": 482.5714749711866,
+        "dir_model": 44.712739383846795,
+        "dir_naive": 34.05495420482931,
+        "dir_snaive": 32.556203164029974,
+        "coverage80": 80.43297252289759,
+        "band_width_pct": 42.01693488087137,
+        "snaive_fallback_pct": 58.368026644462944,
+        "skill_vs_naive": 2.643610799640783,
+        "skill_vs_snaive": 22.243339094482007
+      },
+      {
+        "h": 3,
+        "n": 1137,
+        "mape_model": 15.913244222666755,
+        "mape_naive": 16.4169010845318,
+        "mape_snaive": 20.290875712281185,
+        "mae_model": 455.18965130724075,
+        "mae_naive": 469.16446789797703,
+        "mae_snaive": 565.8245808534338,
+        "dir_model": 46.877748460861916,
+        "dir_naive": 27.528583992963938,
+        "dir_snaive": 31.310466138962177,
+        "coverage80": 79.68337730870712,
+        "band_width_pct": 50.54738648654424,
+        "snaive_fallback_pct": 58.487247141600704,
+        "skill_vs_naive": 2.9786604798416216,
+        "skill_vs_snaive": 19.552867317874778
+      },
+      {
+        "h": 4,
+        "n": 1069,
+        "mape_model": 17.939277051560076,
+        "mape_naive": 18.068676110132067,
+        "mape_snaive": 22.944052801012607,
+        "mae_model": 530.2103859483751,
+        "mae_naive": 530.4349859681945,
+        "mae_snaive": 631.8814889019167,
+        "dir_model": 45.182413470533206,
+        "dir_naive": 24.415341440598688,
+        "dir_snaive": 29.934518241347053,
+        "coverage80": 78.11038353601496,
+        "band_width_pct": 56.32187455072453,
+        "snaive_fallback_pct": 58.465855940130965,
+        "skill_vs_naive": 0.04234261045383825,
+        "skill_vs_snaive": 16.090217032663123
+      }
+    ],
     "score_assam": [
       {
         "all": "all",
         "n": 4697,
-        "mape_model": 15.358510605441733,
+        "mape_model": 15.252605322538058,
         "mape_naive": 15.486305896413082,
         "mape_snaive": 19.343560007695775,
-        "mae_model": 413.9854075892163,
+        "mae_model": 407.79846999732354,
         "mae_naive": 413.06152863529906,
         "mae_snaive": 507.86480267828887,
-        "dir_model": 43.96423248882265,
+        "dir_model": 46.433893974877584,
         "dir_naive": 33.383010432190765,
         "dir_snaive": 33.10623802427081,
-        "coverage80": 78.4543325526932,
-        "band_width_pct": 43.49068685775007,
+        "coverage80": 79.26335959122845,
+        "band_width_pct": 44.062820205226885,
         "snaive_fallback_pct": 58.249946774536944,
-        "skill_vs_naive": -0.2236661828492359,
-        "skill_vs_snaive": 18.485115446864555
+        "skill_vs_naive": 1.274158514680357,
+        "skill_vs_snaive": 19.703340761803723
       }
     ],
     "score_assam_by_commodity": [
       {
         "commodity": "Cabbage",
         "n": 1429,
-        "mape_model": 19.48532593248068,
+        "mape_model": 19.04291652584447,
         "mape_naive": 20.399561921945054,
         "mape_snaive": 24.709387264054136,
-        "mae_model": 257.49638969566047,
+        "mae_model": 249.70135481780804,
         "mae_naive": 268.6389083275017,
         "mae_snaive": 328.64752015216806,
-        "dir_model": 45.76627011896431,
+        "dir_model": 50.174947515745274,
         "dir_naive": 28.13156053184045,
         "dir_snaive": 32.540237928621416,
-        "coverage80": 76.8369489153254,
-        "band_width_pct": 48.574359447804845,
+        "coverage80": 79.28621413575927,
+        "band_width_pct": 49.95885958004293,
         "snaive_fallback_pct": 61.30160951714486,
-        "skill_vs_naive": 4.147767983875683,
-        "skill_vs_snaive": 21.64967817909099
+        "skill_vs_naive": 7.049445528049358,
+        "skill_vs_snaive": 24.02153081751748
       },
       {
         "commodity": "Green Chilli",
         "n": 1438,
-        "mape_model": 18.68597859935827,
+        "mape_model": 18.36794377611019,
         "mape_naive": 18.120531116307035,
         "mape_snaive": 23.066191293060086,
-        "mae_model": 891.4704648751167,
+        "mae_model": 870.8816230101442,
         "mae_naive": 877.2496522948536,
         "mae_snaive": 1077.6919636614966,
-        "dir_model": 42.767732962447845,
+        "dir_model": 43.671766342141865,
         "dir_naive": 31.50208623087622,
         "dir_snaive": 29.13769123783032,
-        "coverage80": 77.19054242002782,
-        "band_width_pct": 51.20014780899842,
+        "coverage80": 77.74687065368568,
+        "band_width_pct": 51.27514098372404,
         "snaive_fallback_pct": 50.834492350486784,
-        "skill_vs_naive": -1.621067907301188,
-        "skill_vs_snaive": 17.27965922225919
+        "skill_vs_naive": 0.7259084421465278,
+        "skill_vs_snaive": 19.1901162507241
       },
       {
         "commodity": "Pumpkin",
         "n": 1830,
-        "mape_model": 9.521287612222807,
+        "mape_model": 9.844839527039912,
         "mape_naive": 9.579716428274999,
         "mape_snaive": 12.228308129176659,
-        "mae_model": 160.97955742132913,
+        "mae_model": 167.36524789846646,
         "mae_naive": 161.08196721311475,
         "mae_snaive": 200.04515198756428,
-        "dir_model": 43.49726775956284,
+        "dir_model": 45.68306010928962,
         "dir_naive": 38.961748633879786,
         "dir_snaive": 36.666666666666664,
-        "coverage80": 80.7103825136612,
-        "band_width_pct": 33.46294206043673,
+        "coverage80": 80.43715846994536,
+        "band_width_pct": 33.791367994248176,
         "snaive_fallback_pct": 61.693989071038246,
-        "skill_vs_naive": 0.06357619884920229,
-        "skill_vs_snaive": 19.528388555331567
+        "skill_vs_naive": -3.900672926994253,
+        "skill_vs_snaive": 16.336263970610666
       }
     ],
     "stress": [
@@ -1182,11 +1351,11 @@
       {
         "commodity": "Cabbage",
         "weeks": 47,
-        "hold_signals": 0,
-        "rule_vs_sell_pct": 0.0,
+        "hold_signals": 1,
+        "rule_vs_sell_pct": 0.20458265139116205,
         "hold_max_vs_sell_pct": -8.348008566633071,
         "oracle_vs_sell_pct": 7.456866640645787,
-        "rule_vs_sell_rs": 0.0,
+        "rule_vs_sell_rs": 2.6595744680851063,
         "hold_regrets": 0
       },
       {
@@ -1202,12 +1371,12 @@
       {
         "commodity": "Pumpkin",
         "weeks": 45,
-        "hold_signals": 0,
-        "rule_vs_sell_pct": 0.0,
+        "hold_signals": 5,
+        "rule_vs_sell_pct": -0.237730135076254,
         "hold_max_vs_sell_pct": -4.6587932353313635,
         "oracle_vs_sell_pct": 9.041472748583876,
-        "rule_vs_sell_rs": 0.0,
-        "hold_regrets": 0
+        "rule_vs_sell_rs": -3.0624533333333552,
+        "hold_regrets": 2
       }
     ],
     "season_backtest": [
@@ -1217,17 +1386,17 @@
         "n_months": 30,
         "n_series": 3,
         "mae_profile_pct": 20.791241342057944,
-        "mae_flat_pct": 49.376523063389925,
-        "corr": 0.9068914169197706
+        "mae_flat_pct": 49.37652306338992,
+        "corr": 0.9068914169197708
       },
       {
         "year": 2015,
         "commodity": "Green Chilli",
         "n_months": 99,
         "n_series": 9,
-        "mae_profile_pct": 21.443846875683914,
+        "mae_profile_pct": 21.44384687568391,
         "mae_flat_pct": 30.322581883286887,
-        "corr": 0.7339504931707141
+        "corr": 0.7339504931707146
       },
       {
         "year": 2015,
@@ -1236,25 +1405,25 @@
         "n_series": 2,
         "mae_profile_pct": 21.59514016693955,
         "mae_flat_pct": 28.978350593247736,
-        "corr": 0.8532225283993422
+        "corr": 0.8532225283993423
       },
       {
         "year": 2016,
         "commodity": "Cabbage",
         "n_months": 28,
         "n_series": 3,
-        "mae_profile_pct": 25.459351471368404,
+        "mae_profile_pct": 25.459351471368407,
         "mae_flat_pct": 35.685929522987266,
-        "corr": 0.6538087018498023
+        "corr": 0.6538087018498021
       },
       {
         "year": 2016,
         "commodity": "Green Chilli",
         "n_months": 68,
         "n_series": 6,
-        "mae_profile_pct": 24.749806319768393,
-        "mae_flat_pct": 34.406189434677515,
-        "corr": 0.7334959868442719
+        "mae_profile_pct": 24.749806319768396,
+        "mae_flat_pct": 34.40618943467751,
+        "corr": 0.7334959868442722
       },
       {
         "year": 2016,
@@ -1262,8 +1431,8 @@
         "n_months": 18,
         "n_series": 2,
         "mae_profile_pct": 20.416976172761647,
-        "mae_flat_pct": 26.098589231416398,
-        "corr": 0.8662301538311451
+        "mae_flat_pct": 26.09858923141639,
+        "corr": 0.8662301538311453
       },
       {
         "year": 2017,
@@ -1272,7 +1441,7 @@
         "n_series": 1,
         "mae_profile_pct": 24.77087216023839,
         "mae_flat_pct": 57.21579211327605,
-        "corr": 0.9497947900659037
+        "corr": 0.949794790065904
       },
       {
         "year": 2017,
@@ -1280,16 +1449,16 @@
         "n_months": 42,
         "n_series": 4,
         "mae_profile_pct": 25.191526404796722,
-        "mae_flat_pct": 39.0547941965372,
-        "corr": 0.753449743830271
+        "mae_flat_pct": 39.05479419653719,
+        "corr": 0.7534497438302705
       },
       {
         "year": 2018,
         "commodity": "Cabbage",
         "n_months": 29,
         "n_series": 3,
-        "mae_profile_pct": 23.410226826156098,
-        "mae_flat_pct": 41.0818417745694,
+        "mae_profile_pct": 23.4102268261561,
+        "mae_flat_pct": 41.08184177456941,
         "corr": 0.8327834166897501
       },
       {
@@ -1306,8 +1475,8 @@
         "commodity": "Pumpkin",
         "n_months": 12,
         "n_series": 1,
-        "mae_profile_pct": 15.326918192640305,
-        "mae_flat_pct": 19.6729766568829,
+        "mae_profile_pct": 15.326918192640306,
+        "mae_flat_pct": 19.672976656882902,
         "corr": 0.7784828441473324
       },
       {
@@ -1325,16 +1494,16 @@
         "n_months": 47,
         "n_series": 4,
         "mae_profile_pct": 19.828747297151768,
-        "mae_flat_pct": 30.341243568582897,
-        "corr": 0.6986787206392555
+        "mae_flat_pct": 30.341243568582904,
+        "corr": 0.6986787206392553
       },
       {
         "year": 2019,
         "commodity": "Pumpkin",
         "n_months": 23,
         "n_series": 2,
-        "mae_profile_pct": 25.147902284799134,
-        "mae_flat_pct": 29.842551432254755,
+        "mae_profile_pct": 25.14790228479914,
+        "mae_flat_pct": 29.84255143225476,
         "corr": 0.6972057613353767
       },
       {
@@ -1342,7 +1511,7 @@
         "commodity": "Cabbage",
         "n_months": 265,
         "n_series": 32,
-        "mae_profile_pct": 27.361415969216374,
+        "mae_profile_pct": 27.361415969216367,
         "mae_flat_pct": 52.42343738332369,
         "corr": 0.9157256392562074
       },
@@ -1353,25 +1522,25 @@
         "n_series": 42,
         "mae_profile_pct": 17.10634200826067,
         "mae_flat_pct": 30.822475557019164,
-        "corr": 0.8926064974683048
+        "corr": 0.8926064974683051
       },
       {
         "year": 2025,
         "commodity": "Pumpkin",
         "n_months": 354,
         "n_series": 43,
-        "mae_profile_pct": 10.537205089172208,
+        "mae_profile_pct": 10.537205089172206,
         "mae_flat_pct": 12.07378953345086,
-        "corr": 0.6633408119492462
+        "corr": 0.6633408119492463
       },
       {
         "year": 2026,
         "commodity": "Cabbage",
         "n_months": 37,
         "n_series": 4,
-        "mae_profile_pct": 28.16388487165657,
+        "mae_profile_pct": 28.16388487165658,
         "mae_flat_pct": 25.68980921127929,
-        "corr": 0.42625355415292177
+        "corr": 0.42625355415292154
       },
       {
         "year": 2026,
@@ -1379,17 +1548,17 @@
         "n_months": 71,
         "n_series": 7,
         "mae_profile_pct": 31.356830438432624,
-        "mae_flat_pct": 31.99873304416313,
-        "corr": 0.49865522763845066
+        "mae_flat_pct": 31.998733044163117,
+        "corr": 0.49865522763845055
       },
       {
         "year": 2026,
         "commodity": "Pumpkin",
         "n_months": 75,
         "n_series": 7,
-        "mae_profile_pct": 12.442463337828718,
+        "mae_profile_pct": 12.44246333782872,
         "mae_flat_pct": 14.58889799317996,
-        "corr": 0.6338925740496915
+        "corr": 0.6338925740496911
       }
     ],
     "season_profile": [
@@ -1477,7 +1646,7 @@
       {
         "commodity": "Cabbage",
         "month": 10,
-        "p50": 0.39742635868971554,
+        "p50": 0.397426358689716,
         "p25": 0.16130195226346444,
         "p75": 0.6278952907914848,
         "n": 256,
@@ -1677,7 +1846,7 @@
         "month": 8,
         "p50": 0.079811737692006,
         "p25": 0.0028684406121062267,
-        "p75": 0.19278736588246925,
+        "p75": 0.19278736588247103,
         "n": 242,
         "series_years": 242
       },
@@ -1728,29 +1897,29 @@
         "price_now": 1200.0,
         "bands": {
           "1": [
-            991.7489747536977,
-            1194.2243130822048,
-            1404.4843309091245
+            968.0550580970518,
+            1159.0279703858992,
+            1423.837496068931
           ],
           "2": [
-            877.6814848833927,
-            1118.6680162388195,
-            1511.6176911253906
+            883.149401286772,
+            1081.9844663916956,
+            1392.6845201122842
           ],
           "3": [
-            771.8973708856031,
-            1119.6500801499635,
-            1466.6120866912865
+            762.4576702437136,
+            1071.8184325194807,
+            1465.2394468483628
           ],
           "4": [
-            711.1453965874134,
-            1080.9221907956019,
-            1425.9263019415166
+            622.1302535272275,
+            964.0705034897181,
+            1333.7210825580742
           ]
         },
         "signal": "SELL",
         "hold_weeks": 0,
-        "reason_en": "Next week's price is likely between ₹990 and ₹1,400 per quintal (most likely ₹1,190). Holding is unlikely to pay after losses of about 5% a week, so selling now is advised.",
+        "reason_en": "Next week's price is likely between ₹970 and ₹1,420 per quintal (most likely ₹1,160). Holding is unlikely to pay after losses of about 5% a week, so selling now is advised.",
         "rule": {
           "max_hold_weeks": 2,
           "weekly_loss_pct": 5.0,
@@ -1767,29 +1936,29 @@
         "price_now": 5000.0,
         "bands": {
           "1": [
-            4170.840261729696,
-            4973.778017448307,
-            5925.1261017930365
+            4122.336291081565,
+            4751.985143924354,
+            5611.071900019348
           ],
           "2": [
-            3850.3931495955053,
-            4786.794731091324,
-            6045.840289295204
+            3529.923863428369,
+            4483.734307961837,
+            5377.541568512829
           ],
           "3": [
-            3286.3470743893113,
-            4569.871544170591,
-            5780.719522153481
+            3081.055191306308,
+            4422.0392201665445,
+            5445.821133425039
           ],
           "4": [
-            3459.661674161975,
-            4284.372741395626,
-            5837.940964474262
+            3005.475896326303,
+            3907.0485492980993,
+            5306.633066424392
           ]
         },
         "signal": "SELL",
         "hold_weeks": 0,
-        "reason_en": "Next week's price is likely between ₹4,170 and ₹5,930 per quintal (most likely ₹4,970). Holding is unlikely to pay after losses of about 10% a week, so selling now is advised.",
+        "reason_en": "Next week's price is likely between ₹4,120 and ₹5,610 per quintal (most likely ₹4,750). Holding is unlikely to pay after losses of about 10% a week, so selling now is advised.",
         "rule": {
           "max_hold_weeks": 1,
           "weekly_loss_pct": 10.0,
@@ -1806,29 +1975,29 @@
         "price_now": 1800.0,
         "bands": {
           "1": [
-            1483.3666525326025,
-            1764.5323963423384,
-            1968.5863952331706
+            1441.660003669177,
+            1676.6039919253813,
+            1957.1352272099323
           ],
           "2": [
-            1390.0266519883403,
-            1670.833738905452,
-            1993.315035383809
+            1319.8705412955383,
+            1596.7508430140067,
+            1961.0958203934083
           ],
           "3": [
-            1331.2604331137675,
-            1685.976752435642,
-            1960.82190840406
+            1275.0067341016884,
+            1607.6748065446866,
+            1815.9272592058492
           ],
           "4": [
-            1259.8237272053789,
-            1559.6400632944788,
-            2039.6527800532306
+            1147.1327313079794,
+            1486.886316287259,
+            1866.5290895696576
           ]
         },
         "signal": "SELL",
         "hold_weeks": 0,
-        "reason_en": "Next week's price is likely between ₹1,480 and ₹1,970 per quintal (most likely ₹1,760). Holding is unlikely to pay after losses of about 2% a week, so selling now is advised.",
+        "reason_en": "Next week's price is likely between ₹1,440 and ₹1,960 per quintal (most likely ₹1,680). Holding is unlikely to pay after losses of about 2% a week, so selling now is advised.",
         "rule": {
           "max_hold_weeks": 4,
           "weekly_loss_pct": 2.0,
@@ -2043,7 +2212,7 @@
       "stress": "out/fig/f5_stress_test.png",
       "season": "out/fig/f6_seasonal_profiles.png"
     },
-    "runtime_min": 5.3
+    "runtime_min": 7.7
   },
   "benchmarks": {
     "retrieved": "2026-11-25",
@@ -2127,11 +2296,11 @@
       {
         "all": "all",
         "n": 4697,
-        "mape": 15.358510605441733,
-        "mae": 413.9854075892163,
-        "direction": 43.96423248882265,
+        "mape": 15.252605322538058,
+        "mae": 407.79846999732354,
+        "direction": 46.433893974877584,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.2236661828492359
+        "skill_vs_naive": 1.274158514680357
       },
       {
         "all": "all",
@@ -2163,11 +2332,11 @@
       {
         "all": "all",
         "n": 4697,
-        "mape": 15.216261040742882,
-        "mae": 408.42655667663297,
-        "direction": 40.45135192676177,
+        "mape": 15.104745394647164,
+        "mae": 404.4299850273716,
+        "direction": 42.835852671918246,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 1.1221020689047068
+        "skill_vs_naive": 2.089650817021127
       },
       {
         "all": "all",
@@ -2192,11 +2361,11 @@
       {
         "h": 1,
         "n": 1290,
-        "mape": 14.329605224994458,
-        "mae": 288.01288877200443,
-        "direction": 47.286821705426355,
+        "mape": 14.397092581417011,
+        "mae": 294.90766472305427,
+        "direction": 48.68217054263566,
         "method": "Global model (P50)",
-        "skill_vs_naive": 1.3929358876054732
+        "skill_vs_naive": -0.9676307423968744
       },
       {
         "h": 1,
@@ -2228,11 +2397,11 @@
       {
         "h": 1,
         "n": 1290,
-        "mape": 14.518577276277197,
-        "mae": 291.2659033938032,
-        "direction": 45.1937984496124,
+        "mape": 14.486937161247775,
+        "mae": 292.9111345224363,
+        "direction": 45.73643410852713,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 0.2792002393921744
+        "skill_vs_naive": -0.28407806413282
       },
       {
         "h": 1,
@@ -2255,11 +2424,11 @@
       {
         "h": 2,
         "n": 1201,
-        "mape": 13.194401385338535,
-        "mae": 386.9674932177006,
-        "direction": 41.63197335553705,
+        "mape": 13.15469768579806,
+        "mae": 375.2314654201022,
+        "direction": 44.712739383846795,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.40138247844163644
+        "skill_vs_naive": 2.643610799640783
       },
       {
         "h": 2,
@@ -2291,11 +2460,11 @@
       {
         "h": 2,
         "n": 1201,
-        "mape": 13.171342906365439,
-        "mae": 381.6424730344989,
-        "direction": 38.71773522064946,
+        "mape": 13.12186958060483,
+        "mae": 376.8231805361241,
+        "direction": 40.38301415487094,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 0.980230699640694
+        "skill_vs_naive": 2.230629345225632
       },
       {
         "h": 2,
@@ -2318,11 +2487,11 @@
       {
         "h": 3,
         "n": 1137,
-        "mape": 16.235088529850344,
-        "mae": 474.7078760712801,
-        "direction": 42.21635883905013,
+        "mape": 15.913244222666755,
+        "mae": 455.18965130724075,
+        "direction": 46.877748460861916,
         "method": "Global model (P50)",
-        "skill_vs_naive": -1.1815490201420253
+        "skill_vs_naive": 2.9786604798416216
       },
       {
         "h": 3,
@@ -2354,11 +2523,11 @@
       {
         "h": 3,
         "n": 1137,
-        "mape": 15.934504523929311,
-        "mae": 462.1202010700426,
-        "direction": 38.698328935795956,
+        "mape": 15.78197582946784,
+        "mae": 453.57991655038836,
+        "direction": 42.040457343887425,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 1.5014493445113741
+        "skill_vs_naive": 3.321767186976665
       },
       {
         "h": 3,
@@ -2381,11 +2550,11 @@
       {
         "h": 4,
         "n": 1069,
-        "mape": 18.09912240531857,
-        "mae": 531.7698956811593,
-        "direction": 44.43405051449953,
+        "mape": 17.939277051560076,
+        "mae": 530.2103859483751,
+        "direction": 45.182413470533206,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.25166321005922754
+        "skill_vs_naive": 0.04234261045383825
       },
       {
         "h": 4,
@@ -2417,11 +2586,11 @@
       {
         "h": 4,
         "n": 1069,
-        "mape": 17.59167347775419,
-        "mae": 522.790685314375,
-        "direction": 38.54069223573433,
+        "mape": 17.35768783558163,
+        "mae": 517.743003926983,
+        "direction": 42.937324602432184,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 1.4411380953438635
+        "skill_vs_naive": 2.3927497953486365
       },
       {
         "h": 4,
@@ -2446,11 +2615,11 @@
       {
         "commodity": "Cabbage",
         "n": 186,
-        "mape": 20.94474217529499,
-        "mae": 330.465251211099,
-        "direction": 40.86021505376344,
+        "mape": 21.36154160980277,
+        "mae": 331.4750096625207,
+        "direction": 45.16129032258064,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.9302737689070639
+        "skill_vs_naive": -1.2386729018535991
       },
       {
         "commodity": "Cabbage",
@@ -2482,11 +2651,11 @@
       {
         "commodity": "Cabbage",
         "n": 186,
-        "mape": 20.09645451346504,
-        "mae": 327.20218622841577,
-        "direction": 38.17204301075269,
+        "mape": 20.242775956740683,
+        "mae": 326.49908170950965,
+        "direction": 40.32258064516129,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 0.06632735880898188
+        "skill_vs_naive": 0.28106864044533664
       },
       {
         "commodity": "Cabbage",
@@ -2509,11 +2678,11 @@
       {
         "commodity": "Green Chilli",
         "n": 186,
-        "mape": 18.690827034412077,
-        "mae": 1120.7702776036388,
-        "direction": 44.623655913978496,
+        "mape": 19.230963647112045,
+        "mae": 1134.7716595937293,
+        "direction": 48.924731182795696,
         "method": "Global model (P50)",
-        "skill_vs_naive": 9.599622014624021
+        "skill_vs_naive": 8.470282443870836
       },
       {
         "commodity": "Green Chilli",
@@ -2545,11 +2714,11 @@
       {
         "commodity": "Green Chilli",
         "n": 186,
-        "mape": 19.158210058076026,
-        "mae": 1163.7123930255657,
-        "direction": 37.634408602150536,
+        "mape": 19.57202130011268,
+        "mae": 1178.0312177682058,
+        "direction": 33.87096774193548,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 6.135947483627313
+        "skill_vs_naive": 4.981003250266047
       },
       {
         "commodity": "Green Chilli",
@@ -2572,11 +2741,11 @@
       {
         "commodity": "Pumpkin",
         "n": 186,
-        "mape": 11.472060587646304,
-        "mae": 190.39104786942596,
-        "direction": 34.946236559139784,
+        "mape": 12.092316218168905,
+        "mae": 198.40690798000983,
+        "direction": 38.70967741935484,
         "method": "Global model (P50)",
-        "skill_vs_naive": -15.727891842200092
+        "skill_vs_naive": -20.60027739961381
       },
       {
         "commodity": "Pumpkin",
@@ -2608,11 +2777,11 @@
       {
         "commodity": "Pumpkin",
         "n": 186,
-        "mape": 10.371098059067785,
-        "mae": 174.07136714393795,
-        "direction": 37.096774193548384,
+        "mape": 10.633952295994261,
+        "mae": 177.35496476423185,
+        "direction": 40.32258064516129,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": -5.808085911021088
+        "skill_vs_naive": -7.803998190023265
       },
       {
         "commodity": "Pumpkin",
@@ -2637,11 +2806,11 @@
       {
         "commodity": "Cabbage",
         "n": 1429,
-        "mape": 19.48532593248068,
-        "mae": 257.49638969566047,
-        "direction": 45.76627011896431,
+        "mape": 19.04291652584447,
+        "mae": 249.70135481780804,
+        "direction": 50.174947515745274,
         "method": "Global model (P50)",
-        "skill_vs_naive": 4.147767983875683
+        "skill_vs_naive": 7.049445528049358
       },
       {
         "commodity": "Cabbage",
@@ -2673,11 +2842,11 @@
       {
         "commodity": "Cabbage",
         "n": 1429,
-        "mape": 19.567958985040562,
-        "mae": 258.0880319728278,
-        "direction": 39.608117564730584,
+        "mape": 19.22941705247348,
+        "mae": 252.78248914067154,
+        "direction": 45.6962911126662,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 3.927530982150651
+        "skill_vs_naive": 5.902502837563417
       },
       {
         "commodity": "Cabbage",
@@ -2700,11 +2869,11 @@
       {
         "commodity": "Green Chilli",
         "n": 1438,
-        "mape": 18.68597859935827,
-        "mae": 891.4704648751167,
-        "direction": 42.767732962447845,
+        "mape": 18.36794377611019,
+        "mae": 870.8816230101442,
+        "direction": 43.671766342141865,
         "method": "Global model (P50)",
-        "skill_vs_naive": -1.621067907301188
+        "skill_vs_naive": 0.7259084421465278
       },
       {
         "commodity": "Green Chilli",
@@ -2736,11 +2905,11 @@
       {
         "commodity": "Green Chilli",
         "n": 1438,
-        "mape": 18.11401295148154,
-        "mae": 873.039510493311,
-        "direction": 39.986091794158554,
+        "mape": 18.01975343956953,
+        "mae": 864.2634422508911,
+        "direction": 40.26425591098749,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 0.4799251604750143
+        "skill_vs_naive": 1.4803323101914123
       },
       {
         "commodity": "Green Chilli",
@@ -2763,11 +2932,11 @@
       {
         "commodity": "Pumpkin",
         "n": 1830,
-        "mape": 9.521287612222807,
-        "mae": 160.97955742132913,
-        "direction": 43.49726775956284,
+        "mape": 9.844839527039912,
+        "mae": 167.36524789846646,
+        "direction": 45.68306010928962,
         "method": "Global model (P50)",
-        "skill_vs_naive": 0.06357619884920229
+        "skill_vs_naive": -3.900672926994253
       },
       {
         "commodity": "Pumpkin",
@@ -2799,11 +2968,11 @@
       {
         "commodity": "Pumpkin",
         "n": 1830,
-        "mape": 9.54110059809612,
-        "mae": 160.73274477136192,
-        "direction": 41.47540983606557,
+        "mape": 9.59330421014871,
+        "mae": 161.514006958887,
+        "direction": 42.62295081967213,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 0.2167979742206616
+        "skill_vs_naive": -0.26821111838088996
       },
       {
         "commodity": "Pumpkin",
@@ -2829,9 +2998,9 @@
       {
         "all": "all",
         "n": 4039,
-        "coverage": 78.33622183708839,
-        "width_pct": 42.327488216185195,
-        "interval_score_pct": 69.40902798856486,
+        "coverage": 79.20277296360484,
+        "width_pct": 43.045107501067825,
+        "interval_score_pct": 68.29453336553311,
         "method": "Global model quantiles (P10-P90)"
       },
       {
@@ -2855,9 +3024,9 @@
       {
         "h": 1,
         "n": 1113,
-        "coverage": 79.42497753818508,
-        "width_pct": 29.101655758419366,
-        "interval_score_pct": 49.06492246366197,
+        "coverage": 78.70619946091644,
+        "width_pct": 29.261598111683067,
+        "interval_score_pct": 50.059004291062216,
         "method": "Global model quantiles (P10-P90)"
       },
       {
@@ -2879,9 +3048,9 @@
       {
         "h": 2,
         "n": 1032,
-        "coverage": 78.29457364341084,
-        "width_pct": 40.31407157707412,
-        "interval_score_pct": 65.8859415791484,
+        "coverage": 80.32945736434108,
+        "width_pct": 41.045933204948554,
+        "interval_score_pct": 63.98681412253991,
         "method": "Global model quantiles (P10-P90)"
       },
       {
@@ -2903,9 +3072,9 @@
       {
         "h": 3,
         "n": 978,
-        "coverage": 78.22085889570552,
-        "width_pct": 48.10393627599904,
-        "interval_score_pct": 78.99228759782531,
+        "coverage": 79.55010224948876,
+        "width_pct": 49.381665450699614,
+        "interval_score_pct": 76.57072671277858,
         "method": "Global model quantiles (P10-P90)"
       },
       {
@@ -2927,9 +3096,9 @@
       {
         "h": 4,
         "n": 916,
-        "coverage": 77.18340611353712,
-        "width_pct": 54.498701419851194,
-        "interval_score_pct": 87.86578205611727,
+        "coverage": 78.16593886462883,
+        "width_pct": 55.279867489321596,
+        "interval_score_pct": 86.46876155881809,
         "method": "Global model quantiles (P10-P90)"
       },
       {
@@ -2955,20 +3124,20 @@
         "n": 4039,
         "realised": 5.756450984487629,
         "price_ewma": 7.618859028035167,
-        "price_model": 7.380387518031556,
+        "price_model": 6.988824801282725,
         "hit": 41.1983164149542,
         "prob_ewma": 53.80942951401759,
-        "prob_model": 52.65256145581788
+        "prob_model": 50.6308207779337
       },
       {
         "floor": 0.9,
         "n": 4039,
         "realised": 2.5070556357980522,
         "price_ewma": 3.5324670824250903,
-        "price_model": 3.4063871815036535,
+        "price_model": 3.165988153223851,
         "hit": 21.639019559296855,
         "prob_ewma": 28.94628500600601,
-        "prob_model": 28.098876066837352
+        "prob_model": 26.91182811574877
       }
     ],
     "pricing_by_h": [
@@ -2978,10 +3147,10 @@
         "n": 1113,
         "realised": 4.176196477617804,
         "price_ewma": 5.069335482133921,
-        "price_model": 4.551621489485741,
+        "price_model": 4.738566079554696,
         "hit": 38.63432165318958,
         "prob_ewma": 52.53466774106696,
-        "prob_model": 51.16271128172204
+        "prob_model": 51.59068351989302
       },
       {
         "floor": 1.0,
@@ -2989,10 +3158,10 @@
         "n": 1032,
         "realised": 5.689665193072264,
         "price_ewma": 7.1564679267329385,
-        "price_model": 6.972925062529491,
+        "price_model": 6.732966581790631,
         "hit": 41.763565891472865,
         "prob_ewma": 53.57823396336647,
-        "prob_model": 53.480512148800685
+        "prob_model": 51.22503812603945
       },
       {
         "floor": 1.0,
@@ -3000,10 +3169,10 @@
         "n": 978,
         "realised": 6.555510242470264,
         "price_ewma": 8.73738409906017,
-        "price_model": 8.725532096331758,
+        "price_model": 7.896506330756181,
         "hit": 42.12678936605317,
         "prob_ewma": 54.36869204953009,
-        "prob_model": 53.488586519558
+        "prob_model": 49.97847653439654
       },
       {
         "floor": 1.0,
@@ -3011,10 +3180,10 @@
         "n": 916,
         "realised": 6.898663046255919,
         "price_ewma": 10.04341121544732,
-        "price_model": 9.840394555446435,
+        "price_model": 9.042177534878903,
         "hit": 42.685589519650655,
         "prob_ewma": 55.02170560772365,
-        "prob_model": 52.6374147486919
+        "prob_model": 49.49155564161655
       },
       {
         "floor": 0.9,
@@ -3022,10 +3191,10 @@
         "n": 1113,
         "realised": 1.4014302218683954,
         "price_ewma": 1.5679394092145202,
-        "price_model": 1.2443872925446706,
+        "price_model": 1.326367469630785,
         "hit": 15.543575920934412,
         "prob_ewma": 20.067940181918,
-        "prob_model": 18.17193870660652
+        "prob_model": 19.153493950232498
       },
       {
         "floor": 0.9,
@@ -3033,10 +3202,10 @@
         "n": 1032,
         "realised": 2.4242321908495374,
         "price_ewma": 3.103227936027926,
-        "price_model": 2.936831328660379,
+        "price_model": 2.863083973054997,
         "hit": 22.093023255813954,
         "prob_ewma": 28.321053933073788,
-        "prob_model": 28.210783403081304
+        "prob_model": 27.05911434842498
       },
       {
         "floor": 0.9,
@@ -3044,10 +3213,10 @@
         "n": 978,
         "realised": 3.0677740585419477,
         "price_ewma": 4.386179909735054,
-        "price_model": 4.433950015897331,
+        "price_model": 3.898894396690878,
         "hit": 24.130879345603272,
         "prob_ewma": 32.983781886878724,
-        "prob_model": 32.78043613139824
+        "prob_model": 30.37835508374032
       },
       {
         "floor": 0.9,
@@ -3055,10 +3224,10 @@
         "n": 916,
         "realised": 3.345103958338495,
         "price_ewma": 5.491596945150081,
-        "price_model": 5.465263889482464,
+        "price_model": 4.959997573161174,
         "hit": 25.87336244541485,
         "prob_ewma": 36.12768708786463,
-        "prob_model": 35.03624197054108
+        "prob_model": 32.47161322426627
       }
     ],
     "pricing_by_commodity": [
@@ -3067,30 +3236,30 @@
         "n": 1200,
         "realised": 4.136808813946021,
         "price_ewma": 4.967829680316403,
-        "price_model": 5.10585881847392,
+        "price_model": 4.773004938199095,
         "hit": 28.166666666666668,
         "prob_ewma": 34.10090324282347,
-        "prob_model": 35.78795329673327
+        "prob_model": 33.21365113426746
       },
       {
         "commodity": "Green Chilli",
         "n": 1264,
         "realised": 2.5004184527938813,
         "price_ewma": 3.8776789670842664,
-        "price_model": 3.739329511889598,
+        "price_model": 3.283436463258851,
         "hit": 22.54746835443038,
         "prob_ewma": 31.705947788224385,
-        "prob_model": 29.14883331592842
+        "prob_model": 27.976223258604755
       },
       {
         "commodity": "Pumpkin",
         "n": 1575,
         "realised": 1.2706655313788195,
         "price_ewma": 2.161811247708407,
-        "price_model": 1.8443522164419708,
+        "price_model": 1.84733748284002,
         "hit": 15.936507936507937,
         "prob_ewma": 22.80421793241557,
-        "prob_model": 21.397899153360424
+        "prob_model": 21.256219809213935
       }
     ],
     "var_ratio": {
@@ -3103,29 +3272,29 @@
       {
         "all": "all",
         "n": 4697,
-        "mape": 15.358510605441733,
-        "mae": 413.9854075892163,
-        "direction": 43.96423248882265,
+        "mape": 15.252605322538058,
+        "mae": 407.79846999732354,
+        "direction": 46.433893974877584,
         "method": "Global model (P50)",
-        "skill_vs_naive": -0.2236661828492359
+        "skill_vs_naive": 1.274158514680357
       },
       {
         "all": "all",
         "n": 4697,
-        "mape": 15.034440649425093,
-        "mae": 403.5688790941315,
-        "direction": 40.06812859271876,
+        "mape": 14.91387633245837,
+        "mae": 399.4815038297474,
+        "direction": 43.36810730253353,
         "method": "Global model halved (post-hoc check)",
-        "skill_vs_naive": 2.298119985303404
+        "skill_vs_naive": 3.287651805874603
       },
       {
         "all": "all",
         "n": 4697,
-        "mape": 15.216261040742882,
-        "mae": 408.42655667663297,
-        "direction": 40.45135192676177,
+        "mape": 15.104745394647164,
+        "mae": 404.4299850273716,
+        "direction": 42.835852671918246,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 1.1221020689047068
+        "skill_vs_naive": 2.089650817021127
       },
       {
         "all": "all",
@@ -3150,29 +3319,29 @@
       {
         "all": "all",
         "n": 284,
-        "mape": 13.815105904485456,
-        "mae": 505.8697425277181,
-        "direction": 48.59154929577465,
+        "mape": 14.983037020262524,
+        "mae": 539.7836123751496,
+        "direction": 51.76056338028169,
         "method": "Global model (P50)",
-        "skill_vs_naive": 15.477566184514268
+        "skill_vs_naive": 9.811121685811198
       },
       {
         "all": "all",
         "n": 284,
-        "mape": 14.464947941431467,
-        "mae": 540.4344219899416,
-        "direction": 44.014084507042256,
+        "mape": 14.836955666827317,
+        "mae": 542.7249746418976,
+        "direction": 42.6056338028169,
         "method": "Global model halved (post-hoc check)",
-        "skill_vs_naive": 9.702382206122461
+        "skill_vs_naive": 9.319668893485012
       },
       {
         "all": "all",
         "n": 284,
-        "mape": 14.556407141142724,
-        "mae": 557.6111781532301,
-        "direction": 39.436619718309856,
+        "mape": 14.79973223547408,
+        "mae": 554.9382367891616,
+        "direction": 41.54929577464789,
         "method": "Average of global model and Holt-Winters",
-        "skill_vs_naive": 6.832431477854229
+        "skill_vs_naive": 7.2790355945746015
       },
       {
         "all": "all",
@@ -3204,27 +3373,27 @@
         "by_h": {
           "1": {
             "price_ewma_rs": 39.846683994824446,
-            "price_model_rs": 18.31802790578479,
+            "price_model_rs": 31.19227051238113,
             "prob_ewma_pct": 32.507292316338166,
-            "prob_model_pct": 22.947857938130984
+            "prob_model_pct": 31.948155194153227
           },
           "2": {
             "price_ewma_rs": 72.05681037442889,
-            "price_model_rs": 65.30253615141993,
+            "price_model_rs": 67.92327533471206,
             "prob_ewma_pct": 40.01659164509483,
-            "prob_model_pct": 43.41379957094909
+            "prob_model_pct": 49.58789586341114
           },
           "3": {
             "price_ewma_rs": 97.78824010560209,
-            "price_model_rs": 77.69858631332994,
+            "price_model_rs": 97.81546964698595,
             "prob_ewma_pct": 43.992866424656754,
-            "prob_model_pct": 44.275918114497166
+            "prob_model_pct": 51.190174361465836
           },
           "4": {
             "price_ewma_rs": 119.77380438194234,
-            "price_model_rs": 99.223660479974,
+            "price_model_rs": 162.90069075080316,
             "prob_ewma_pct": 46.69417457050592,
-            "prob_model_pct": 49.87455160895991
+            "prob_model_pct": 64.86429437535782
           }
         }
       },
@@ -3238,27 +3407,27 @@
         "by_h": {
           "1": {
             "price_ewma_rs": 202.4555106988273,
-            "price_model_rs": 78.25402221083993,
+            "price_model_rs": 108.08849666595052,
             "prob_ewma_pct": 34.99019906608037,
-            "prob_model_pct": 23.24506188681014
+            "prob_model_pct": 32.52964507125555
           },
           "2": {
             "price_ewma_rs": 355.07464795162286,
-            "price_model_rs": 178.56158013853246,
+            "price_model_rs": 274.19788372195035,
             "prob_ewma_pct": 42.19057573066924,
-            "prob_model_pct": 36.28039021462914
+            "prob_model_pct": 50.879531492941744
           },
           "3": {
             "price_ewma_rs": 475.79227405120423,
-            "price_model_rs": 318.15891783848315,
+            "price_model_rs": 383.4807072470087,
             "prob_ewma_pct": 46.05233077573633,
-            "prob_model_pct": 47.21257810894607
+            "prob_model_pct": 53.13422195354606
           },
           "4": {
             "price_ewma_rs": 578.4561784161867,
-            "price_model_rs": 426.88457417446944,
+            "price_model_rs": 673.8471591889775,
             "prob_ewma_pct": 48.70930952942308,
-            "prob_model_pct": 59.50474087661397
+            "prob_model_pct": 73.79408839753214
           }
         }
       },
@@ -3272,27 +3441,27 @@
         "by_h": {
           "1": {
             "price_ewma_rs": 25.330939022655343,
-            "price_model_rs": 21.35372662950357,
+            "price_model_rs": 49.076861404147394,
             "prob_ewma_pct": 22.449125618090086,
-            "prob_model_pct": 21.94668774898251
+            "prob_model_pct": 38.668600415212175
           },
           "2": {
             "price_ewma_rs": 53.79745496603073,
-            "price_model_rs": 62.85400886341836,
+            "price_model_rs": 101.67243153020672,
             "prob_ewma_pct": 31.20664526416208,
-            "prob_model_pct": 41.30582909084994
+            "prob_model_pct": 53.72741828959897
           },
           "3": {
             "price_ewma_rs": 77.88259761536813,
-            "price_model_rs": 63.16519624901548,
+            "price_model_rs": 87.66769480520202,
             "prob_ewma_pct": 35.82838114054038,
-            "prob_model_pct": 39.580479191617336
+            "prob_model_pct": 52.20710639520587
           },
           "4": {
             "price_ewma_rs": 98.9771963630343,
-            "price_model_rs": 137.0675803929596,
+            "price_model_rs": 179.00767792932197,
             "prob_ewma_pct": 38.88423575453957,
-            "prob_model_pct": 58.004052788158425
+            "prob_model_pct": 67.41620223537815
           }
         }
       }
@@ -3300,7 +3469,7 @@
     "figures": {
       "other_methods": "out/fig/f7_other_methods.png"
     },
-    "runtime_min": 0.5
+    "runtime_min": 0.4
   },
   "extended": {
     "retrieved": "2026-11-25",
@@ -4034,20 +4203,29 @@
         {
           "all": "all",
           "n": 4697,
-          "mape": 15.358510605441733,
-          "mae": 413.9854075892163,
-          "direction": 43.96423248882265,
+          "mape": 15.252605322538058,
+          "mae": 407.79846999732354,
+          "direction": 46.433893974877584,
           "method": "Global model (P50)",
-          "skill_vs_naive": -0.2236661828492359
+          "skill_vs_naive": 1.274158514680357
         },
         {
           "all": "all",
           "n": 4697,
-          "mape": 15.404918484512322,
-          "mae": 416.01359107258344,
-          "direction": 44.21971471151799,
+          "mape": 15.348383540575119,
+          "mae": 410.90344916234983,
+          "direction": 45.83776878858846,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": -0.7146786211336575
+          "skill_vs_naive": 0.5224595667573384
+        },
+        {
+          "all": "all",
+          "n": 4697,
+          "mape": 15.358510605441733,
+          "mae": 413.9854075892163,
+          "direction": 43.96423248882265,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": -0.2236661828492359
         },
         {
           "all": "all",
@@ -4072,20 +4250,29 @@
         {
           "h": 1,
           "n": 1290,
-          "mape": 14.329605224994458,
-          "mae": 288.01288877200443,
-          "direction": 47.286821705426355,
+          "mape": 14.397092581417011,
+          "mae": 294.90766472305427,
+          "direction": 48.68217054263566,
           "method": "Global model (P50)",
-          "skill_vs_naive": 1.3929358876054732
+          "skill_vs_naive": -0.9676307423968744
         },
         {
           "h": 1,
           "n": 1290,
-          "mape": 14.286554747888855,
-          "mae": 290.66477814278517,
-          "direction": 46.51162790697674,
+          "mape": 14.506087379911678,
+          "mae": 295.67899442011543,
+          "direction": 47.82945736434108,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": 0.48500768231407587
+          "skill_vs_naive": -1.231711135514657
+        },
+        {
+          "h": 1,
+          "n": 1290,
+          "mape": 14.329605224994458,
+          "mae": 288.01288877200443,
+          "direction": 47.286821705426355,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": 1.3929358876054732
         },
         {
           "h": 1,
@@ -4108,20 +4295,29 @@
         {
           "h": 2,
           "n": 1201,
-          "mape": 13.194401385338535,
-          "mae": 386.9674932177006,
-          "direction": 41.63197335553705,
+          "mape": 13.15469768579806,
+          "mae": 375.2314654201022,
+          "direction": 44.712739383846795,
           "method": "Global model (P50)",
-          "skill_vs_naive": -0.40138247844163644
+          "skill_vs_naive": 2.643610799640783
         },
         {
           "h": 2,
           "n": 1201,
-          "mape": 13.167753811789435,
-          "mae": 384.3139509566406,
-          "direction": 42.214820982514574,
+          "mape": 13.20304033064737,
+          "mae": 373.41924012802536,
+          "direction": 43.46378018318068,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": 0.28709734517371466
+          "skill_vs_naive": 3.113805138638015
+        },
+        {
+          "h": 2,
+          "n": 1201,
+          "mape": 13.194401385338535,
+          "mae": 386.9674932177006,
+          "direction": 41.63197335553705,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": -0.40138247844163644
         },
         {
           "h": 2,
@@ -4144,20 +4340,29 @@
         {
           "h": 3,
           "n": 1137,
-          "mape": 16.235088529850344,
-          "mae": 474.7078760712801,
-          "direction": 42.21635883905013,
+          "mape": 15.913244222666755,
+          "mae": 455.18965130724075,
+          "direction": 46.877748460861916,
           "method": "Global model (P50)",
-          "skill_vs_naive": -1.1815490201420253
+          "skill_vs_naive": 2.9786604798416216
         },
         {
           "h": 3,
           "n": 1137,
-          "mape": 16.436959395312485,
-          "mae": 481.46053167864164,
-          "direction": 42.83201407211961,
+          "mape": 16.00655875002894,
+          "mae": 462.86144053093597,
+          "direction": 46.262093227792434,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": -2.6208429286546986
+          "skill_vs_naive": 1.3434579552200288
+        },
+        {
+          "h": 3,
+          "n": 1137,
+          "mape": 16.235088529850344,
+          "mae": 474.7078760712801,
+          "direction": 42.21635883905013,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": -1.1815490201420253
         },
         {
           "h": 3,
@@ -4180,20 +4385,29 @@
         {
           "h": 4,
           "n": 1069,
-          "mape": 18.09912240531857,
-          "mae": 531.7698956811593,
-          "direction": 44.43405051449953,
+          "mape": 17.939277051560076,
+          "mae": 530.2103859483751,
+          "direction": 45.182413470533206,
           "method": "Global model (P50)",
-          "skill_vs_naive": -0.25166321005922754
+          "skill_vs_naive": 0.04234261045383825
         },
         {
           "h": 4,
           "n": 1069,
-          "mape": 18.170207050091996,
-          "mae": 533.2802561704309,
-          "direction": 45.182413470533206,
+          "mape": 18.07501967643112,
+          "mae": 536.7985338037191,
+          "direction": 45.650140318054255,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": -0.5364031931345936
+          "skill_vs_naive": -1.1996847877425276
+        },
+        {
+          "h": 4,
+          "n": 1069,
+          "mape": 18.09912240531857,
+          "mae": 531.7698956811593,
+          "direction": 44.43405051449953,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": -0.25166321005922754
         },
         {
           "h": 4,
@@ -4218,20 +4432,29 @@
         {
           "commodity": "Cabbage",
           "n": 1429,
-          "mape": 19.48532593248068,
-          "mae": 257.49638969566047,
-          "direction": 45.76627011896431,
+          "mape": 19.04291652584447,
+          "mae": 249.70135481780804,
+          "direction": 50.174947515745274,
           "method": "Global model (P50)",
-          "skill_vs_naive": 4.147767983875683
+          "skill_vs_naive": 7.049445528049358
         },
         {
           "commodity": "Cabbage",
           "n": 1429,
-          "mape": 19.503529580367346,
-          "mae": 258.0816816161161,
-          "direction": 45.62631210636809,
+          "mape": 19.139215184161483,
+          "mae": 250.7542463148651,
+          "direction": 48.775367389783064,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": 3.9298948827305225
+          "skill_vs_naive": 6.657509935542604
+        },
+        {
+          "commodity": "Cabbage",
+          "n": 1429,
+          "mape": 19.48532593248068,
+          "mae": 257.49638969566047,
+          "direction": 45.76627011896431,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": 4.147767983875683
         },
         {
           "commodity": "Cabbage",
@@ -4254,20 +4477,29 @@
         {
           "commodity": "Green Chilli",
           "n": 1438,
-          "mape": 18.68597859935827,
-          "mae": 891.4704648751167,
-          "direction": 42.767732962447845,
+          "mape": 18.36794377611019,
+          "mae": 870.8816230101442,
+          "direction": 43.671766342141865,
           "method": "Global model (P50)",
-          "skill_vs_naive": -1.621067907301188
+          "skill_vs_naive": 0.7259084421465278
         },
         {
           "commodity": "Green Chilli",
           "n": 1438,
-          "mape": 18.816612706092744,
-          "mae": 897.3325625899271,
-          "direction": 43.184979137691236,
+          "mape": 18.561714602737613,
+          "mae": 879.0017743301717,
+          "direction": 42.767732962447845,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": -2.2893038763295293
+          "skill_vs_naive": -0.19972900881004563
+        },
+        {
+          "commodity": "Green Chilli",
+          "n": 1438,
+          "mape": 18.68597859935827,
+          "mae": 891.4704648751167,
+          "direction": 42.767732962447845,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": -1.621067907301188
         },
         {
           "commodity": "Green Chilli",
@@ -4290,20 +4522,29 @@
         {
           "commodity": "Pumpkin",
           "n": 1830,
-          "mape": 9.521287612222807,
-          "mae": 160.97955742132913,
-          "direction": 43.49726775956284,
+          "mape": 9.844839527039912,
+          "mae": 167.36524789846646,
+          "direction": 45.68306010928962,
           "method": "Global model (P50)",
-          "skill_vs_naive": 0.06357619884920229
+          "skill_vs_naive": -3.900672926994253
         },
         {
           "commodity": "Pumpkin",
           "n": 1830,
-          "mape": 9.52353512570933,
-          "mae": 161.12179739572642,
-          "direction": 43.9344262295082,
+          "mape": 9.863209504468788,
+          "mae": 168.13176570755635,
+          "direction": 45.95628415300547,
           "method": "Global model, LightGBM (P50)",
-          "skill_vs_naive": -0.02472665519348549
+          "skill_vs_naive": -4.376528680652725
+        },
+        {
+          "commodity": "Pumpkin",
+          "n": 1830,
+          "mape": 9.521287612222807,
+          "mae": 160.97955742132913,
+          "direction": 43.49726775956284,
+          "method": "Global model set before testing (P50)",
+          "skill_vs_naive": 0.06357619884920229
         },
         {
           "commodity": "Pumpkin",
@@ -4328,18 +4569,26 @@
         {
           "all": "all",
           "n": 4697,
-          "coverage": 78.4543325526932,
-          "width_pct": 43.49068685775007,
-          "interval_score_pct": 70.81433551536134,
+          "coverage": 79.26335959122845,
+          "width_pct": 44.062820205226885,
+          "interval_score_pct": 69.78111565138242,
           "method": "Global model (P50)"
         },
         {
           "all": "all",
           "n": 4697,
-          "coverage": 78.11368958909942,
-          "width_pct": 43.26648426966989,
-          "interval_score_pct": 71.31138448065632,
+          "coverage": 79.24206940600384,
+          "width_pct": 44.2650102458579,
+          "interval_score_pct": 69.84472811699057,
           "method": "Global model, LightGBM (P50)"
+        },
+        {
+          "all": "all",
+          "n": 4697,
+          "coverage": 78.4543325526932,
+          "width_pct": 43.49068685775007,
+          "interval_score_pct": 70.81433551536134,
+          "method": "Global model set before testing (P50)"
         }
       ]
     },
@@ -5442,7 +5691,7 @@
     "figures": {
       "more_commodities": "out/fig/f8_more_commodities.png"
     },
-    "runtime_min": 5.3
+    "runtime_min": 3.1
   },
-  "rendered_at": "2026-11-25T20:26:34"
+  "rendered_at": "2026-11-25T21:06:32"
 }

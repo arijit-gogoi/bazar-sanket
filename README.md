@@ -8,7 +8,7 @@ The prototype uses only public data: Agmarknet daily mandi prices published on d
 
 1. measures how incomplete the public Assam price record is (gaps, renamed markets, patchy reporting);
 2. selects pilot series with a fixed coverage rule;
-3. trains one **global quantile model** across all markets of Assam and neighbouring States, so that markets with short or gappy histories borrow patterns from comparable markets;
+3. trains one **global quantile model** across all Assam markets of the 11 crops with good data, so that markets with short or gappy histories borrow patterns from other markets and crops (this configuration was chosen after the 12-month test; the one set before testing, the three pilot crops with neighbouring-State markets, is still run and reported beside it);
 4. evaluates it with a 12-month **rolling-origin backtest** against no-change and seasonal-naive benchmarks;
 5. **stress-tests** forecasting when local history is short, gappy or absent;
 6. converts forecast bands into **Hold / Sell / Store** advice and backtests that rule;

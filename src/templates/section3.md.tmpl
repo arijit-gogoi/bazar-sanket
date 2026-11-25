@@ -12,7 +12,7 @@ Assamese and English SMS (with computed SMS-part counts), WhatsApp card, voice s
 Prototype (built and run on real data; PDF, Section D)
 - Fetches Agmarknet prices through the data.gov.in API: ${rows_total} records (all Assam commodities since ${assam_first_year}; the three pilot commodities in ${n_comp_states} neighbouring States).
 - Harmonises ${assam_markets_raw} market names into ${assam_markets_harm} markets, builds weekly series with explicit gaps, and selects pilot series by a fixed coverage rule: ${sel_market} for ${sel_commodities}.
-- Trains one global quantile model across all markets and produces price bands, Hold / Sell / Store signals and seasonal crop profiles.
+- Trains one global quantile model across all Assam markets of ${adv_k} crops with good data and produces price bands, Hold / Sell / Store signals and seasonal crop profiles.
 - One command regenerates every number in this proposal from the data snapshot.
 
 Test results (PDF, Sections E to H)
